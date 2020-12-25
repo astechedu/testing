@@ -1,3 +1,3 @@
 <?php
- echo "This is index controller";
+ echo "This is corephp index controller";
 ?>
