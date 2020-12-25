@@ -5,5 +5,6 @@
  echo "c";
  echo "d";
  echo "new";
+echo "h";
 
 ?>
