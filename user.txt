@@ -1,6 +1,5 @@
 { 
    "user_pass" : "new@gmail.com",
-   "email" : "new132",
-   "new" : "branch"
+   "email" : "new132"
 }
 
