@@ -1,0 +1,187 @@
+>>  SQL Advanced  >>
+
+-----------------------------------------------------------------------
+
+Website: 
+https://www.javatpoint.com/mysql-stored-function
+
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+
+
+MySQL Stored Function: 
+
+
+1. 
+   Syntax: 
+
+    DELIMITER $$  
+       
+    CREATE FUNCTION fun_name(fun_parameter(s))  
+    RETURNS datatype  
+    [NOT] {Characteristics}  
+    fun_body;  
+
+
+
+Example: 
+
+
+DELIMITER $$  
+
+CREATE FUNCTION Customer_Occupation(  
+    age int  
+)   
+RETURNS VARCHAR(20)  
+DETERMINISTIC  
+BEGIN  
+    DECLARE customer_occupation VARCHAR(20);  
+    IF age > 35 THEN  
+        SET customer_occupation = 'Scientist';  
+    ELSEIF (age <= 35 AND   
+            age >= 30) THEN  
+        SET customer_occupation = 'Engineer';  
+    ELSEIF age < 30 THEN  
+        SET customer_occupation = 'Actor';  
+    END IF;  
+    -- return the customer occupation  
+    RETURN (customer_occupation);  
+END$$  
+DELIMITER;
+
+
+
+
+SHOW FUNCTION STATUS WHERE db = 'mysqltestdb';  
+
+
+//Stored Function Call
+
+SELECT name, age, Customer_Occupation(age)  
+FROM customer ORDER BY age; 
+
+
+
+//Stored Function Call in Procedure
+
+    DELIMITER $$  
+    CREATE PROCEDURE GetCustomerDetail()  
+    BEGIN  
+        SELECT name, age, Customer_Occupation(age) FROM customer ORDER BY age;  
+    END$$  
+    DELIMITER ;  
+
+
+CALL GetCustomerDetail();  
+
+
+----x----
+
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+
+2. 
+
+>>MySQL Common Table Expression (CTE)
+
+Scope:   CREATE, INSERT, SELECT, UPDATE, DELETE, etc.
+
+
+
+
+MySQL CTE Syntax:
+
+    WITH cte_name (column_names) AS (query)   
+    SELECT * FROM cte_name;  
+
+
+//MySQL Recursive CTE Syntax
+
+
+    WITH RECURSIVE cte_name (column_names) AS ( subquery )   
+    SELECT * FROM cte_name;  
+
+//MySQL CTE Examples
+
+
+    WITH employees_in_california AS (  
+        SELECT * FROM employees WHERE city = 'California'   
+        )   
+        SELECT emp_name, emp_age, city FROM employees_in_california  
+        WHERE emp_age >= 32 ORDER BY emp_name;  
+
+
+
+//Example using the INNER JOIN clause.
+
+
+    WITH total_customer_2020 AS (  
+        SELECT cust_id, name, occupation FROM customer   
+        INNER JOIN orders USING (cust_id)  
+        ORDER BY age  
+    )  
+    SELECT * FROM orders JOIN total_customer_2020 USING (cust_id);
+
+
+
+//MySQL Recursive CTE Example
+
+The following examples explain the working of the recursive CTE. Consider the below statement which generates a series of first five odd numbers:
+
+    WITH RECURSIVE   
+    odd_num_cte (id, n) AS  
+    (  
+    SELECT 1, 1   
+    union all  
+    SELECT id+1, n+2 from odd_num_cte where id < 5   
+    )  
+    SELECT * FROM odd_num_cte; 
+
+
+
+//The WITH clause uses
+
+    WITH ... SELECT ...  
+    WITH ... UPDATE ...  
+    WITH ... DELETE ...  
+
+
+    SELECT ... WHERE id IN (WITH ... SELECT ...);  
+      
+    SELECT * FROM (WITH ... SELECT ...) AS derived_table;  
+
+
+
+    CREATE TABLE ... WITH ... SELECT ...  
+    CREATE VIEW ... WITH ... SELECT ...  
+    INSERT ... WITH ... SELECT ...  
+    REPLACE ... WITH ... SELECT ...  
+    DECLARE CURSOR ... WITH ... SELECT ...  
+    EXPLAIN ... WITH ... SELECT ...  
+
+
+
+Benefits of using CTE
+
+    It provides better readability of the query.
+    It increases the performance of the query.
+    The CTE allows us to use it as an alternative to the VIEW concept
+    It can also be used as chaining of CTE for simplifying the query.
+    It can also be used to implement recursive queries easily.
+
+
+----x----
+
+-----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+

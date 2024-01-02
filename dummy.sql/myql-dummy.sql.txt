@@ -237,10 +237,187 @@ DELETE FROM products WHERE productID = 1006;
 
 
 
-
+----x----
 
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
+4. 
+
+
+--Natural Join Example--
+
+Table-1: Department 
+
+Create Table department
+(
+   DEPT_NAME Varchar(20),
+   MANAGER_NAME Varchar(255)
+);
+
+INSERT INTO department(DEPT_NAME,MANAGER_NAME) VALUES ( "IT", "ROHAN");
+INSERT INTO department(DEPT_NAME,MANAGER_NAME) VALUES ( "SALES", "RAHUL");
+INSERT INTO department(DEPT_NAME,MANAGER_NAME) VALUES ( "HR", "TANMAY");
+INSERT INTO department(DEPT_NAME,MANAGER_NAME) VALUES ( "FINANCE", "ASHISH");
+INSERT INTO department(DEPT_NAME,MANAGER_NAME) VALUES ("MARKETING", "SAMAY");
+
+
+Table-2: Employee 
+
+Create Table employee
+(
+   EMP_ID int,
+   EMP_NAME Varchar(20),
+   DEPT_NAME Varchar(255)
+);
+
+
+INSERT INTO employee(EMP_ID, EMP_NAME, DEPT_NAME) VALUES (1, "SUMIT", "HR");
+INSERT INTO employee(EMP_ID, EMP_NAME, DEPT_NAME) VALUES (2, "JOEL", "IT");
+INSERT INTO employee(EMP_ID, EMP_NAME, DEPT_NAME) VALUES (3, "BISWA", "MARKETING");
+INSERT INTO employee(EMP_ID, EMP_NAME, DEPT_NAME) VALUES (4, "VAIBHAV", "IT");
+INSERT INTO employee(EMP_ID, EMP_NAME, DEPT_NAME) VALUES (5, "SAGAR", "SALES");
+
+
+----x----
+
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+
+
+5. 
+
+//https://www.javatpoint.com/mysql-natural-join
+
+
+----Natural Join Example---
+
+
+    /* -- Table name: customer -*/  
+
+    CREATE TABLE customer (  
+        id INT AUTO_INCREMENT PRIMARY KEY,  
+        customer_name VARCHAR(55),  
+        account int,  
+        email VARCHAR(55)  
+    );    
+      
+
+
+    /* -- Table name: balance -*/  
+
+    CREATE TABLE balance (  
+        id INT AUTO_INCREMENT PRIMARY KEY,  
+        account int,  
+        balance FLOAT(10, 2)  
+    );  
+
+
+
+    /* -- Data for customer table -*/  
+    INSERT INTO customer(customer_name, account, email)  
+    VALUES('Stephen', 1030, 'stephen@javatpoint.com'),  
+        ('Jenifer', 2035, 'jenifer@javatpoint.com'),  
+        ('Mathew', 5564, 'mathew@javatpoint.com'),  
+        ('Smith', 4534, 'smith@javatpoint.com'),  
+        ('David', 7648, 'david@javatpoint.com');  
+      
+    /* -- Data for balance table -*/  
+    INSERT INTO balance(account, balance)  
+    VALUES(1030, 50000.00),   
+        (2035, 230000.00),   
+        (5564, 125000.00),   
+        (4534, 80000.00),   
+        (7648, 45000.00);  
+
+
+NATURAL JOIN:
+
+mysql> SELECT cust. customer_name, bal.balance   
+       FROM customer AS cust   
+       NATURAL JOIN balance AS bal;  
+
+
+INNER JOIN:
+
+mysql> SELECT cust. customer_name, bal.balance   
+       FROM customer AS cust   
+       INNER JOIN balance AS bal   
+       ON cust.id = bal.id;  
+
+
+mysql> SELECT * FROM customer NATURAL JOIN balance;  
+
+
+Natural Join with WHERE Clause:
+
+mysql> SELECT cust. customer_name, bal.balance   
+       FROM customer AS cust   
+       NATURAL JOIN balance AS bal  
+       WHERE bal.balance > 50000;  
+
+
+
+//Natural Join Using Three Tables: 
+
+
+    SELECT [column_names | *]   
+    FROM table_name1   
+    NATURAL JOIN table_name2  
+    NATURAL JOIN table_name3;  
+
+
+    CREATE TABLE cust_info (  
+        account int,  
+        mobile VARCHAR(15),  
+        address VARCHAR(65)  
+    );  
+
+
+INSERT INTO cust_info(account, mobile, address)  
+VALUES(1030, '598675498654', '777 Brockton Avenue, Abington MA 251'),   
+    (2035, '698853747888', '337 Russell St, Hadley MA 103'),   
+    (5564, '234456977555', '20 Soojian Dr, Leicester MA 154'),   
+    (4534, '987656789666', '780 Lynnway, Lynn MA 19'),   
+    (7648, '756489372222', '700 Oak Street, Brockton MA 23'); 
+
+
+
+    mysql> SELECT C.customer_name, C.account, B.balance, I.mobile   
+    FROM customer AS C  
+    NATURAL JOIN balance AS B  
+    NATURAL JOIN cust_info AS I;  
+
+
+
+//Difference between Natural Join and Inner Join:
+
+SN 	Natural Join 	Inner Join
+1. 	It joins the tables based on the same column names and their data types. 	It joins the tables based on the column name specified in the ON clause explicitly.
+
+2. 	It always returns unique columns in the result set. 	It returns all the attributes of both tables along with duplicate columns that match the ON clause condition.
+
+3. 	If we have not specified any condition in this join, it returns the records based on the common columns. 	It returns only those rows that exist in both tables.
+
+4. 	
+
+The syntax of natural join is given below:
+
+SELECT [column_names | *]
+FROM table_name1
+NATURAL JOIN table_name2; 	
+
+
+The syntax of inner join is given below:
+
+SELECT [column_names | *]
+FROM table_name1
+INNER JOIN table_name2
+ON table_name1.column_name = table_name2.column_name;
+
+
+
+---x----
+
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------

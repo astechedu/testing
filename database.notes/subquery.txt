@@ -1,0 +1,126 @@
+>>> SQL Subquery <<<<
+
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+
+
+Website: 
+https://www.javatpoint.com/mysql-subquery
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+
+MySQL Subquery Syntax:
+
+
+    SELECT column_list (s) FROM  table_name  
+    WHERE  column_name OPERATOR  
+       (SELECT column_list (s)  FROM table_name [WHERE])  
+
+
+MySQL Subquery Example:
+
+    SELECT emp_name, city, income FROM employees   
+       WHERE emp_id IN (SELECT emp_id FROM employees);  
+
+
+
+MySQL Subquery with Comparison Operator:
+
+    SELECT * FROM employees   
+       WHERE emp_id IN (SELECT emp_id FROM employees   
+             WHERE income > 350000);  
+
+
+    SELECT emp_name, city, income FROM employees   
+       WHERE income = (SELECT MAX(income) FROM employees);  
+
+
+
+MySQL Subquery with IN or NOT-IN Operator:
+
+
+    SELECT Name, City FROM student  
+    WHERE City NOT IN (  
+    SELECT City FROM student2 WHERE City='Los Angeles');  
+
+
+MySQL Subquery in the FROM Clause:
+
+
+    SELECT Max(items), MIN(items), FLOOR(AVG(items))  
+    FROM  
+        (SELECT order_id, COUNT(order_id) AS items FROM orders  
+        GROUP BY order_date) AS Student_order_detail;  
+
+---x---
+
+
+
+
+-- MySQL Correlated Subqueries ---
+
+
+    SELECT emp_name, city, income  
+    FROM employees emp WHERE income > (   
+    SELECT AVG(income) FROM employees WHERE city = emp.city);  
+
+
+
+MySQL Subqueries with EXISTS or NOT EXISTS:
+
+
+SELECT name, occupation, age FROM customer C  
+WHERE EXISTS (SELECT * FROM Orders O  
+WHERE C.cust_id = O.cust_id); 
+
+
+
+    SELECT name, occupation, age FROM customer C  
+    WHERE NOT EXISTS (SELECT * FROM Orders O  
+    WHERE C.cust_id = O.cust_id);    
+
+
+
+MySQL ROW Subqueries:
+
+    SELECT * FROM customer C WHERE ROW(cust_id, occupation) = (  
+    SELECT order_id, order_date FROM Orders O WHERE C.cust_id = O.cust_id);  
+
+
+
+MySQL Subqueries with ALL, ANY, and SOME:
+
+
+    operand comparison_operator ANY (subquery)  
+    operand comparison_operator ALL (subquery)  
+    operand comparison_operator SOME (subquery)  
+
+
+
+    SELECT cust_id, name FROM customer WHERE   
+    cust_id > ANY (SELECT cust_id FROM Orders);  
+
+SELECT cust_id, name FROM customer WHERE   
+cust_id > ALL (SELECT cust_id FROM Orders);
+
+
+
+
+
+
+
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+--------------------------------------------------------------
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+
+
+
+
