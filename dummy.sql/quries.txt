@@ -6,6 +6,8 @@
 
 ----------------------------------------------------------------------------------
 
+----------------------------------------------------------------------------------
+
 1. Write a SQL query to display employee name of employees reporting to Employee 8798
 2. Write a SQL query to display maximum salary of employees working in CHICAGO.
 3. Display department name and total amount spent by each department as salary for their employees.
@@ -24,7 +26,11 @@
 ----------------------------------------------------------------------------------
 
 
+*Consider the table employee given below, your job is to determine third highest salary of the given table using correlated query.
 
+SELECT name,salary FROM employees e where 3 = (SELECT COUNT(DISTINCT(f.salary)) FROM employees f WHERE f.salary >= e.salary);
+
+-----------------------------------------------------------------------------------
 
 
 
