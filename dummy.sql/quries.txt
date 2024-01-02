@@ -1,0 +1,40 @@
+--------------------
+
+  Queries
+
+--------------------
+
+----------------------------------------------------------------------------------
+
+1. Write a SQL query to display employee name of employees reporting to Employee 8798
+2. Write a SQL query to display maximum salary of employees working in CHICAGO.
+3. Display department name and total amount spent by each department as salary for their employees.
+4. Write a SQL query to display employee name who were hired before their manages.
+5. Write a SQL query to display employee names and book names for the books which are not returned.
+6. Write a SQL query to display employee name along with the total numbers of books issued by each employee in the year 2022
+7. Write a SQL query to display employee name and location of employees who have issued the book Chanakya Neeti.
+8. Write a SQL query to display all Employee names along with their department name in descending order of the book issue date.
+9. Write a SQL squery to display all book names whicch were issued by at least 1 employee.
+10. Write a SQL query to diplay last 3 letter of employee name, location, book name issued by employee, the author name for employees whose salary is less then 10000 and hired in the year 1981.
+
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
