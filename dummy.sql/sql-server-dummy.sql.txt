@@ -1,0 +1,316 @@
+--------------------
+
+  SQL - SERVER 
+
+--------------------
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+1.
+
+>> The Employee Table
+
+To begin with, first create a dummy employee table and add few rows to it.
+
+CREATE TABLE Employee
+    (EmpID INT NOT NULL , 
+        EmpName VARCHAR(50) NOT NULL, 
+        Designation VARCHAR(50) NULL, 
+        Department VARCHAR(50) NULL, 
+        JoiningDate DATETIME NULL,
+        CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED (EmpID)
+    )
+    
+-- ADD ROWS TO THE TABLE.
+    -- SQL SERVER 2008 AND ABOVE.
+
+INSERT INTO Employee
+    (EmpID, EmpName, Designation, Department, JoiningDate)
+VALUES 
+    (1, 'CHIN YEN', 'LAB ASSISTANT', 'LAB', GETDATE()),
+    (2, 'MIKE PEARL', 'SENIOR ACCOUNTANT', 'ACCOUNTS', GETDATE()),
+    (3, 'GREEN FIELD', 'ACCOUNTANT', 'ACCOUNTS', GETDATE()),
+    (4, 'DEWANE PAUL', 'PROGRAMMER', 'IT', GETDATE()),
+    (5, 'MATTS', 'SR. PROGRAMMER', 'IT', GETDATE()),
+    (6, 'PLANK OTO', 'ACCOUNTANT', 'ACCOUNTS', GETDATE())
+
+
+-- SQL SERVER 2005 AND BEFORE.
+
+INSERT INTO Employee (EmpID, EmpName, Designation, Department, JoiningDate)
+    SELECT 1, 'CHIN YEN', 'LAB ASSISTANT', 'LAB', GETDATE()
+INSERT INTO Employee (EmpID, EmpName, Designation, Department, JoiningDate)
+    SELECT 2, 'MIKE PEARL', 'SENIOR ACCOUNTANT', 'ACCOUNTS', GETDATE()
+INSERT INTO Employee (EmpID, EmpName, Designation, Department, JoiningDate)
+    SELECT 3, 'GREEN FIELD', 'ACCOUNTANT', 'ACCOUNTS', GETDATE()
+INSERT INTO Employee (EmpID, EmpName, Designation, Department, JoiningDate)
+    SELECT 4, 'DEWANE PAUL', 'PROGRAMMER', 'IT', GETDATE()
+INSERT INTO Employee (EmpID, EmpName, Designation, Department, JoiningDate)
+    SELECT 5, 'MATTS', 'SR. PROGRAMMER', 'IT', GETDATE()	
+INSERT INTO Employee (EmpID, EmpName, Designation, Department, JoiningDate)
+    SELECT 6, 'PLANK OTO', 'ACCOUNTANT', 'ACCOUNTS', GETDATE()
+    
+
+
+
+The Employee Detail Table:
+CREATE TABLE [dbo].[EmployeeDetails](
+	[EmpID] [int] NULL,
+	[EmpName] [varchar](50) NULL,
+	[Mobile] [varchar](10) NULL,
+	[PresentAddress] [varchar](100) NULL,
+	[Area] [varchar](50) NULL,
+	[City] [varchar](50) NULL,
+	[Country] [varchar](50) NULL,
+	[Qualification] [varchar](50) NULL,
+	[Email] [varchar](50) NULL
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[EmployeeDetails]  WITH CHECK ADD  CONSTRAINT [FK_EmployeeDetails_Employee]
+    FOREIGN KEY([EmpID])
+REFERENCES [dbo].[Employee] ([EmpID])
+GO
+
+ALTER TABLE [dbo].[EmployeeDetails] CHECK CONSTRAINT [FK_EmployeeDetails_Employee]
+GO
+    
+-- ADD ROWS TO THE TABLE.
+-- SQL SERVER 2008 AND ABOVE.
+	    
+INSERT INTO EmployeeDetails 
+    (EmpID, EmpName, Mobile, PresentAddress, Area, City, Country, Qualification, Email)
+VALUES
+    (1, 'CHIN YEN', '1234567879', '1 MAIN AVE', 'WA', 'TACOCA', 'USA', 'GRADUATE','chinxyz@emp.com'),
+    (2, 'MIKE PEARL', '2152313213', 'B BLOCK NICE STREET', 'WENEN', 'TACOCA', 'SCODD', 'GRADUATE', 'mike230@emample.com'),
+    (3, 'GREEN FIELD', '4517825469', 'UNIVERSAL NEW AVE', 'BOURNNILE', 'BRISDON', 'NEW START', 'MANAGEMENT','greenden3939@emample.com'),
+    (4, 'DEWANE PAUL', '5741115523', 'SPACE, 1 OF 1', 'ANDALUSIAN', 'PARALLEL', 'NEW RIVER', 'MATHEMATICS','dpaul_lime44@emample.com'),
+    (5, 'MATTS', '4755#55522', 'NOT KNOWN', 'WOODOO', 'COMMONS', 'UNITED KINGDOM', 'ADVANCE PHYSICS','matts-ino33@emample.com'),
+    (6, 'PLANK OTO', '5124785452', 'TUCSON, AZ MSA', 'ALPINE', 'ARIZONA', 'USA', 'DIPLOMA IN FINANCE','plaoto_nk984@emample.com')
+
+-- SQL SERVER 2005 AND BEFORE.
+
+INSERT INTO EmployeeDetails (EmpID, EmpName, Mobile, PresentAddress, Area, City,Country, Qualification, Email)
+    SELECT 1, 'CHIN YEN', '1234567879', '1 MAIN AVE', 'WA', 'TACOCA', 'USA', 'GRADUATE','chinxyz@emp.com'
+INSERT INTO EmployeeDetails (EmpID, EmpName, Mobile, PresentAddress, Area, City,Country, Qualification, Email)
+    SELECT 2, 'MIKE PEARL', '2152313213', 'B BLOCK NICE STREET', 'WENEN', 'TACOCA', 'SCODD', 'GRADUATE', 'mike230@emample.com'
+INSERT INTO EmployeeDetails (EmpID, EmpName, Mobile, PresentAddress, Area, City,Country, Qualification, Email)
+    SELECT 3, 'GREEN FIELD', '4517825469', 'UNIVERSAL NEW AVE', 'BOURNNILE', 'BRISDON', 'NEW START', 'MANAGEMENT','greenden3939@emample.com'
+INSERT INTO EmployeeDetails (EmpID, EmpName, Mobile, PresentAddress, Area, City,Country, Qualification, Email)
+    SELECT 4, 'DEWANE PAUL', '5741115523', 'SPACE, 1 OF 1', 'ANDALUSIAN', 'PARALLEL', 'NEW RIVER', 'MATHEMATICS','dpaul_lime44@emample.com'
+INSERT INTO EmployeeDetails (EmpID, EmpName, Mobile, PresentAddress, Area, City,Country, Qualification, Email)
+    SELECT 5, 'MATTS', '4755#55522', 'NOT KNOWN', 'WOODOO', 'COMMONS', 'UNITED KINGDOM', 'ADVANCE PHYSICS','matts-ino33@emample.com'
+INSERT INTO EmployeeDetails (EmpID, EmpName, Mobile, PresentAddress, Area, City,Country, Qualification, Email)
+    SELECT 6, 'PLANK OTO', '5124785452', 'TUCSON, AZ MSA', 'ALPINE', 'ARIZONA', 'USA', 'DIPLOMA IN FINANCE','plaoto_nk984@emample.com'
+    
+
+
+The "Books" table:
+
+CREATE TABLE [dbo].[Books](
+    [BookID] [int] IDENTITY(1,1) NOT NULL,
+    [BookName] [varchar](50) NULL,
+    [Category] [varchar](50) NULL,
+    [Price] [numeric](18, 2) NULL,
+    [Price_Range] [varchar](20) NULL,
+    PRIMARY KEY CLUSTERED ( [BookID] ASC )
+) ON [PRIMARY]
+
+GO
+
+-- ADD FEW ROWS TO THE TABLE.
+-- SQL SERVER 2008 AND ABOVE.
+
+INSERT INTO dbo.Books
+    (BookName, Category, Price, Price_Range)
+VALUES	
+    ('Computer Architecture', 'Computers', 125.6, '100-150'),
+    ('Advanced Composite Materials', 'Science', 172.56, '150-200'),
+    ('Asp.Net 4 Blue Book', 'Programming', 56.00, '50-100'),
+    ('Strategies Unplugged', 'Science', 99.99, '50-100'),
+    ('Teaching Science', 'Science', 164.10, '150-200'),
+    ('Challenging Times', 'Business', 150.70, '150-200'),
+    ('Circuit Bending', 'Science', 112.00, '100-150'),
+    ('Popular Science', 'Science', 210.40, '200-250'),
+    ('ADOBE Premiere', 'Computers', 62.20, '50-100')
+	
+-- SQL SERVER 2005 AND BEFORE.	
+
+INSERT INTO dbo.Books (BookName, Category, Price, Price_Range)
+    SELECT 'Computer Architecture', 'Computers', 125.6, '100-150'
+INSERT INTO dbo.Books (BookName, Category, Price, Price_Range)
+    SELECT 'Advanced Composite Materials', 'Science', 172.56, '150-200'	
+INSERT INTO dbo.Books (BookName, Category, Price, Price_Range)
+    SELECT 'Asp.Net 4 Blue Book', 'Programming', 56.00, '50-100'	
+INSERT INTO dbo.Books (BookName, Category, Price, Price_Range)
+    SELECT 'Strategies Unplugged', 'Science', 99.99, '50-100'
+INSERT INTO dbo.Books (BookName, Category, Price, Price_Range)
+    SELECT 'Teaching Science', 'Science', 164.10, '150-200'
+INSERT INTO dbo.Books (BookName, Category, Price, Price_Range)
+    SELECT 'Challenging Times', 'Business', 150.70, '150-200'
+INSERT INTO dbo.Books (BookName, Category, Price, Price_Range)
+    SELECT 'Circuit Bending', 'Science', 112.00, '100-150'
+INSERT INTO dbo.Books (BookName, Category, Price, Price_Range)
+    SELECT 'Popular Science', 'Science', 210.40, '200-250'
+INSERT INTO dbo.Books (BookName, Category, Price, Price_Range)
+    SELECT 'ADOBE Premiere', 'Computers', 62.20, '50-100'
+
+
+
+The Birds table:
+
+CREATE TABLE [dbo].[Birds](
+    [ID] [int] NOT NULL,
+    [BirdName] [varchar](50) NULL,
+    [TypeOfBird] [varchar](50) NULL,
+    [ScientificName] [varchar](50) NULL,
+    CONSTRAINT [PK_Birds] PRIMARY KEY CLUSTERED 
+    ([ID] ASC)
+) ON [PRIMARY]
+        
+GO
+
+-- ADD FEW ROWS TO THE TABLE.
+-- SQL SERVER 2008 AND ABOVE.
+
+INSERT INTO dbo.Birds (ID, BirdName, TypeOfBird, ScientificName)
+VALUES 
+    (1,	'Eurasian Collared-Dove', 'Dove', 'Streptopelia'),
+    (2,	'Bald Eagle	Hawk', 'Haliaeetus', 'Leucocephalus'),
+    (3,	'Coopers Hawk',	'Hawk',	'Accipiter Cooperii'),
+    (4,	'Bells Sparrow', 'Sparrow', 'Artemisiospiza Belli'),
+    (5,	'Mourning Dove', 'Dove', 'Zenaida Macroura'),
+    (6,	'Rock Pigeon', 'Dove', 'Columba Livia'),
+    (7,	'Aberts Towhee', 'Sparrow', 'Melozone Aberti'),
+    (8,	'Brewers Sparrow', 'Sparrow', 'Spizella Breweri'),
+    (9,	'Canyon Towhee', 'Sparrow', 'Melozone Fusca'),
+    (10, 'Black Vulture', 'Hawk', 'Coragyps Atratus'),
+    (11, 'Gila Woodpecker', 'Woodpecker', 'Melanerpes Uropygialis'),
+    (12, 'Gilded Flicker', 'Woodpecker', 'Colaptes Chrysoides'),
+    (13, 'Cassins Sparrow', 'Sparrow', 'Peucaea Cassinii'),
+    (14, 'American Kestrel', 'Hawk', 'Falco Sparverius'),
+    (15, 'Hairy Woodpecker', 'Woodpecker', 'Picoides villosus'),
+    (16, 'Lewis Woodpecker', 'Woodpecker', 'Melanerpes Lewis'),
+    (17, 'Snail Kite', 'Hawk', 'Rostrhamus Sociabilis'),
+    (18, 'White-tailed Hawk', 'Hawk', 'Geranoaetus Albicaudatus')
+
+----x----
+----------------------------------------------------------------------------------
+
+
+>>EMP and DEPT table script – SQL Server
+
+DROP TABLE EMP
+DROP TABLE DEPT
+DROP TABLE BONUS
+DROP TABLE SALGRADE
+DROP TABLE DUMMY
+
+CREATE TABLE EMP
+(EMPNO NUMERIC(4) NOT NULL,
+ENAME VARCHAR(10),
+JOB VARCHAR(9),
+MGR NUMERIC(4),
+HIREDATE DATETIME,
+SAL NUMERIC(7, 2),
+COMM NUMERIC(7, 2),
+DEPTNO NUMERIC(2))
+
+INSERT INTO EMP VALUES
+(7369, 'SMITH', 'CLERK', 7902, '17-DEC-1980', 800, NULL, 20)
+INSERT INTO EMP VALUES
+(7499, 'ALLEN', 'SALESMAN', 7698, '20-FEB-1981', 1600, 300, 30)
+INSERT INTO EMP VALUES
+(7521, 'WARD', 'SALESMAN', 7698, '22-FEB-1981', 1250, 500, 30)
+INSERT INTO EMP VALUES
+(7566, 'JONES', 'MANAGER', 7839, '2-APR-1981', 2975, NULL, 20)
+INSERT INTO EMP VALUES
+(7654, 'MARTIN', 'SALESMAN', 7698, '28-SEP-1981', 1250, 1400, 30)
+INSERT INTO EMP VALUES
+(7698, 'BLAKE', 'MANAGER', 7839, '1-MAY-1981', 2850, NULL, 30)
+INSERT INTO EMP VALUES
+(7782, 'CLARK', 'MANAGER', 7839, '9-JUN-1981', 2450, NULL, 10)
+INSERT INTO EMP VALUES
+(7788, 'SCOTT', 'ANALYST', 7566, '09-DEC-1982', 3000, NULL, 20)
+INSERT INTO EMP VALUES
+(7839, 'KING', 'PRESIDENT', NULL, '17-NOV-1981', 5000, NULL, 10)
+INSERT INTO EMP VALUES
+(7844, 'TURNER', 'SALESMAN', 7698, '8-SEP-1981', 1500, 0, 30)
+INSERT INTO EMP VALUES
+(7876, 'ADAMS', 'CLERK', 7788, '12-JAN-1983', 1100, NULL, 20)
+INSERT INTO EMP VALUES
+(7900, 'JAMES', 'CLERK', 7698, '3-DEC-1981', 950, NULL, 30)
+INSERT INTO EMP VALUES
+(7902, 'FORD', 'ANALYST', 7566, '3-DEC-1981', 3000, NULL, 20)
+INSERT INTO EMP VALUES
+(7934, 'MILLER', 'CLERK', 7782, '23-JAN-1982', 1300, NULL, 10)
+
+CREATE TABLE DEPT
+(DEPTNO NUMERIC(2),
+DNAME VARCHAR(14),
+LOC VARCHAR(13) )
+
+INSERT INTO DEPT VALUES (10, 'ACCOUNTING', 'NEW YORK')
+INSERT INTO DEPT VALUES (20, 'RESEARCH', 'DALLAS')
+INSERT INTO DEPT VALUES (30, 'SALES', 'CHICAGO')
+INSERT INTO DEPT VALUES (40, 'OPERATIONS', 'BOSTON')
+
+CREATE TABLE BONUS
+(ENAME VARCHAR(10),
+JOB VARCHAR(9),
+SAL NUMERIC,
+COMM NUMERIC)
+
+CREATE TABLE SALGRADE
+(GRADE NUMERIC,
+LOSAL NUMERIC,
+HISAL NUMERIC)
+
+INSERT INTO SALGRADE VALUES (1, 700, 1200)
+INSERT INTO SALGRADE VALUES (2, 1201, 1400)
+INSERT INTO SALGRADE VALUES (3, 1401, 2000)
+INSERT INTO SALGRADE VALUES (4, 2001, 3000)
+INSERT INTO SALGRADE VALUES (5, 3001, 9999)
+
+CREATE TABLE DUMMY
+(DUMMY NUMERIC)
+
+INSERT INTO DUMMY VALUES (0)
+
+
+----x----
+
+
+
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
