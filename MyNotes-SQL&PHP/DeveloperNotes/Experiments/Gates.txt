@@ -1,0 +1,49 @@
+>>>> Gates <<<<
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+Keys: AND Gate, NAND Gate, OR Gate, NOR Gate, XOR Gate, Inverter,  
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+Website: 
+
+//What are Circuit Symbols 
+https://www.edrawsoft.com/circuit-symbols.html
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+
+
+>>> All Gate Names
+
+Website: 
+https://www.edrawsoft.com/circuit-symbols.html
+
+Diode             -> AND Gate	
+Capacitor         -> NAND Gate
+Inductor          -> OR Gate
+Resistor          -> NOR Gate
+DC Voltage Source -> XOR Gate
+AC voltage Source -> Inverter (Not gate)
+
+
+
+
+ List of Circuit Diagram Symbols:
+
+    Wires
+    Switches
+    Power Sources
+    Ground
+    Resistor
+    Variable Resistor
+    Capacitor
+    Inductors
+
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------

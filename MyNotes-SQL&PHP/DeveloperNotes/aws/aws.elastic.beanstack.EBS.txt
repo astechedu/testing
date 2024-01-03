@@ -1,0 +1,80 @@
+>>>>> AWS Elastic Bean Stack Application <<<<<
+
+
+-----------------------------------------------------------
+
+keys: EBS (Elastic Bean Stack)
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+Vdo: What is Elastic Beanstalk in AWS in Hindi | AWS Cloud Computing for Beginners
+https://youtu.be/uRJVpjzFR-Y?t=422
+
+Vdo: What is Elastic Beanstalk in AWS in Hindi | Full DEMO | AWS Cloud Computing for Beginners
+https://youtu.be/_8OwW10jIcE?t=1
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+>> Three Options
+
+1) AWS Instancd 2) Session Manager 3) SSH   4)
+
+
+>> SSH: 
+
+ssh -i test.pem ec2-user@3.16.128.114
+
+-------------------------------------------------------------
+
+>>> To deploy application using EBS (Elastic Bean Stack)   : PaaS - After deploying project check 'CloudFormation' Service
+    and EBS environment, volume, 
+//Application Development
+//Auto Deployment of Application  
+//Copy all project from local computer(from laptop) or S3 to EC2 instanc 
+
+>>EBS work on: 
+Java, .NET, php, node.js, python, ruby, go & docker
+On Familiar Servers such as: Apache,Nginx,Passenger, and IIS
+
+Prerequisite: You must have an application to deploy:
+
+>> EBS Configuration: 
+        Change all services like ELB, Security, AMI ID, etc.
+
+
+
+                     ----
+           Your code |  |        //You or developer wrote, Only deploy code but you can change volume, load balancer, instance type etc.
+                     ----
+                     ----
+         HTTP Server |  |        // By aws
+                     ----
+                     ----
+  Application Server |  |        // By aws
+                     ----
+                     ----
+Language Interpreter |  |        // By aws
+                     ----
+                     ----
+  Operating System   |  |        // By aws
+                     ----
+                     ----
+                Host |  |        // By aws
+                     ----
+
+
+---x---
+
+
+//---> Wthout Using EBS (Elastic Bean Stack) <---
+
+Write code,
+Launch ec2 instancd,
+ELB (Elastic Load Balancer),
+Auto Scaling Set,
+Choose AMI,                  //All are manually 
+
+
+-------------------------------------------------------------

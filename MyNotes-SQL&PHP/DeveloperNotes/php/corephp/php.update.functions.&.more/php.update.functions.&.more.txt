@@ -1,0 +1,39 @@
+<<<<< PHP Update Functions and More <<<<<
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Keys: Named arguments, Constructor property promotion, Match expressions, Nullsafe operator, Read-Only,
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+
+
+PHP 8:
+
+//1. Named arguments:
+
+function multiply($a, $b) 
+{
+    return $a * $b;
+}
+
+$result = multiply(b: 4, a: 3);
+echo $result;
+
+
+
+
+----------------------------------------------------------------------
+
+//2.  Nullsafe operator
+https://php.watch/versions/8.0/null-safe-operator#nullsafe-readonly
+
+Examples; 
+
+$foo?->bar?->baz;
+$country = $customer->getAddress()?->getCountry(); 
+
+------------------------------------------------------------------------------

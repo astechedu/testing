@@ -1,0 +1,508 @@
+>>>> MongoDB <<<<<
+
+
+
+--------------------------------------------------------------
+
+
+Link: 
+
+https://appinventiv.com/blog/top-web-app-database-list/
+
+
+
+Which is best Database for web applications In 2022?
+
+SQL database examples
+
+    Oracle.    //an object-relational DBMS written in the C++; //Oracle has also released an Oracle NoSQL database
+    MySQL.
+    SQLite
+    DynamoDB 
+    MS SQL Server.
+    PostgreSQL.
+    IBM DB2.
+    Redis.         
+    
+    Sybase
+    Firebirdsql
+    Amazon RDS
+    Google Cloud SQL
+    Microsoft Azure    
+
+7 Best NoSQL Databases for Data Science
+
+    MongoDB           //document-oriented database
+    Cassandra         //It can distribute your data across multiple machines
+    Elasticsearch     //document-oriented database
+    Neo4j             //graph-oriented database
+    HBase             //a distributed and column-oriented database
+    CouchDB           //document-oriented database
+    OrientDB          //a multi-model database supporting graph, document, key-value, and object model
+   
+
+
+What are the common types of NoSQL databases?
+
+Types               Performence     Scalability      Flexibility      Complexity
+
+Key-Value Store     High            High             High             None
+Column Store        High            High             Moderate         Low
+Document            High            Variable(High)   High             Low
+Graph Database      Variable        Variable         High             High  
+
+
+
+-------------------------------------------------------------------------
+
+
+
+Connect MongoDB with PHP: 
+
+1. Make a Connection and Select a Database
+
+<?php
+  // connect to mongodb
+  $m = new MongoClient();
+  echo "Connection to database successfully";
+  // select a database
+  $db = $m->examplesdb;
+  echo "Database examplesdb selected";
+?>
+
+
+2. Create a Collection:
+
+
+<?php
+  // connect to mongodb
+  $m = new MongoClient();
+  echo "Connection to database successfully";
+  // select a database
+  $db = $m->examplesdb;
+  echo "Database examplesdb selected";
+  $collection = $db->createCollection("examplescol");
+  echo "Collection created succsessfully";
+?>
+
+
+
+3. Insert a Document
+
+<?php
+  // connect to mongodb
+  $m = new MongoClient();
+  echo "Connection to database successfully";
+  // select a database
+  $db = $m->examplesdb;
+  echo "Database examplesdb selected";
+  $collection = $db->examplescol;
+  echo "Collection selected succsessfully";
+  $document = array( 
+  "title" => "MongoDB", 
+  "description" => "database", 
+  "likes" => 100,
+  "url" => "http://www.data-flair.training/mongodb/",
+  "by" => "data flair"
+ );
+$collection->insert($document);
+echo "Document inserted successfully";
+?>
+
+
+4. Find All Documents:
+
+
+<?php
+  // connect to mongodb
+  $m = new MongoClient();
+  echo "Connection to database successfully";
+  // select a database
+  $db = $m->examplesdb;
+  echo "Database examplesdb selected";
+  $collection = $db->examplescol;
+  echo "Collection selected succsessfully";
+  $cursor = $collection->find();
+  // iterate cursor to display title of documents
+  foreach ($cursor as $document) {
+  echo $document["title"] . "\n";
+ }
+?>
+
+
+After executing the following code you will get this output:
+Connection to database successfully
+Database examplesdb selected
+Collection selected succsessfully {
+"title": "MongoDB"
+}
+
+
+5. Update a Document:
+
+<?php
+   // connect to mongodb
+   $m = new MongoClient();
+   echo "Connection to database successfully";
+
+   // select a database
+   $db = $m->examplesdb;
+   echo "Database examplesdb selected";
+   $collection = $db->examplescol;
+   echo "Collection selected succsessfully";
+
+   // now update the document
+   $collection->update(array("name"=>"MongoDB"), 
+   array('$set'=>array("name"=>"MongoDB Tutorial")));
+   echo "Document updated successfully";
+
+   // now display the updated document
+   $cursor = $collection->find();
+
+   // iterate cursor to display title of documents
+   echo "Updated document";
+
+   foreach ($cursor as $document) {
+   echo $document["name"] . "\n";
+ }
+?>
+
+
+
+6. Delete a Document
+
+
+<?php
+   // connect to mongodb
+   $m = new MongoClient();
+   echo "Connection to database successfully";
+
+   // select a database
+   $db = $m->examplesdb;
+   echo "Database examplesdb selected";
+   $collection = $db->examplescol;
+   echo "Collection selected succsessfully";
+
+   // now remove the document
+   $collection->remove(array("name"=>"MongoDB Tutorial"),false);
+   echo "Documents deleted successfully";
+
+   // now display the available documents
+   $cursor = $collection->find();
+
+   // iterate cursor to display title of documents
+   echo "Updated document";
+
+   foreach ($cursor as $document) {
+   echo $document["name"] . "\n";
+ }
+?>
+
+
+
+After executing the program you will get the following output:
+
+Connection to the database successfully
+
+Database examplesdb selected
+
+Collection selected successfully
+
+Documents deleted successfully
+
+
+
+
+------------------------------------------------------------
+
+Install the MongoDB Node.js Driver:
+
+
+npm install mongodb
+
+Create a free MongoDB Atlas cluster and load the sample data
+
+Connect to your database from a Node.js application
+
+
+Import MongoClient
+
+const {MongoClient} = require('mongodb');
+
+
+Create our main function:
+
+async function main() {
+	// we'll add code here soon
+}
+
+
+
+Note: the username and password you provide in the connection string are NOT the same as your Atlas credentials.
+
+
+/**
+ * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
+ * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
+ */
+
+const uri = "mongodb+srv://<username>:<password>@<your-cluster-url>/test?retryWrites=true&w=majority";
+
+
+Now that we have our URI, we can create an instance of MongoClient.
+
+
+const client = new MongoClient(uri);
+await client.connect();
+await listDatabases(client);
+
+try {
+    await client.connect();
+
+    await listDatabases(client);
+ 
+} catch (e) {
+    console.error(e);
+}
+
+
+finally {
+    await client.close();
+}
+
+
+
+main().catch(console.error);
+
+
+async function main(){
+    /**
+     * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
+     * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
+     */
+    const uri = "mongodb+srv://<username>:<password>@<your-cluster-url>/test?retryWrites=true&w=majority";
+ 
+
+    const client = new MongoClient(uri);
+ 
+    try {
+        // Connect to the MongoDB cluster
+        await client.connect();
+ 
+        // Make the appropriate DB calls
+        await  listDatabases(client);
+ 
+    } catch (e) {
+        console.error(e);
+    } finally {
+        await client.close();
+    }
+}
+
+
+main().catch(console.error);
+
+
+List the databases in our cluster
+
+async function listDatabases(client){
+    databasesList = await client.db().admin().listDatabases();
+ 
+    console.log("Databases:");
+    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+};
+
+
+Save Your File
+Execute Your Node.js Script
+
+
+Databases:
+ - sample_airbnb
+ - sample_geospatial
+ - sample_mflix
+ - sample_supplies
+ - sample_training
+ - sample_weatherdata
+ - admin
+ - local
+
+-------------------------------------------------------------------------------
+
+//Website 
+https://www.mongodb.com/docs/manual/reference/method/db.createCollection/
+
+
+
+//User db: Sellect DB
+
+use test            //user dbName
+
+Ex:
+use CollectionName    //use products
+
+
+//Show Collection (Tables)
+Ex: 
+show collections
+
+
+
+
+//db.createCollection(name, options)
+
+//Create Document
+db.createCollection()
+
+Ex:
+db.createCollection("users")
+
+
+//Insert Data into collections
+db.collection.insert()
+
+
+Ex: 
+db.users.insert({name:"ajay", age: 33})
+
+
+//Select all data  or find all data
+db.collection.find()
+
+
+Ex:
+db.users.find();
+
+
+//Insert Documents (Insert data into users table)
+db.users.insert({"name" : "tutorialspoint"}),
+
+
+
+//Update Data
+db.collection.update(query, update, options)
+
+
+Ex:
+db.users.update({
+
+})
+
+
+
+
+
+db.collection.findOne()
+db.collection.drop()
+db.collection.deleteOne();
+db.collection.drop();
+db.books.remove({});
+
+db.createView()
+
+
+db.students.insertMany([])
+
+--------------------------------------------------------------------------------
+
+
+
+-----------------------------------------------------------------------------
+
+
+Insert Many documents: 
+
+
+db.students.insertMany([
+  { id: 1, name: 'Ryan', gender: 'M' },
+  { id: 2, name: 'Joanna', gender: 'F' }
+]);
+
+db.students.find({ gender: 'F' });
+
+
+
+----------------------------------------------------------------------
+
+
+	
+{
+  "name":"ajay", 
+  "age":"32",
+  "city":"meerut"
+}
+
+
+---------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------

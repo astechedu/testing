@@ -1,0 +1,72 @@
+<<< SQL Variables <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys: Variables In Mysql, Multi Values, 
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Website: 
+
+//Variables in MySql
+https://www.javatpoint.com/mysql-variables
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+>>> Variables In Mysql <<<<
+
+
+>> MySql On Ubuntu
+
+//In Ubuntu mysql shell
+
+mysql[mydb]> set @name = "ajay";     //Set Variable
+mysql[mydb]> select @name;           //Read Variable's value
+
+//Or
+
+mysql[mydb] > delimiter $$
+            ->set @name="ajay";     // Set variable
+            ->$$
+             
+mysql[mydb] > delimiter ;           //Set default delimiter ;
+mysql[mydb] > select @name;         //Read Variable's value
+
+
+//Or
+
+mysql[mydb] > SELECT @var_name := value;     // In single line (set & read) variable's value
+
+---------------------------------------------------------------------------------------------
+
+>> Variable Using Table
+
+mysql[mydb]> SELECT @maxage:= MAX(age) FROM students; 
+
+//Or
+
+mysql[mydb]> SELECT @maxage:= MAX(age) FROM students;  
+mysql[mydb]> SELECT firstname, lastname, age FROM students WHERE age = @maxage;  
+
+---x---
+
+---------------------------------------------------------------------------------------------
+
+>> Multi Values
+
+mysql[mydb]> set @array = '1,2,3,4,5';
+mysql[mydb]> select @array;
+
+---x---
+
+----------------------------------------------------------------------------------------------
+
+
+
+
+

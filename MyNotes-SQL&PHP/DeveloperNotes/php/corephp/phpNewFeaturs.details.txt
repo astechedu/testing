@@ -1,0 +1,63 @@
+>>>> PHP New Features <<<<<<
+
+
+
+
+-----------------------------------------------------------
+Keys: 
+
+------------------------------------------------------------
+------------------------------------------------------------
+
+//PHP All New Featues in short (Website link: php 7.2 - 8.2)
+https://php.watch/versions
+
+------------------------------------------------------------
+
+>> PHP Versions: 
+
+//8.3
+Release Date2023-11-23
+Version StatusUpcoming Release
+
+PHP 8.3 is the active development branch of PHP versions. It's the current target for new RFCs, and is scheduled to be released towards the end of 2023.
+
+
+//8.2
+Release Date2022-12-08
+Version StatusSupported (Latest)
+
+PHP 8.2 is the latest PHP version which brings readonly classes, DNF types, null, false, and true types, sensitive parameter redaction support, a new random extension, and several new features along with a few deprecations.
+
+//8.1
+Release Date2021-11-25
+Version StatusSupported
+
+PHP 8.1, released in 2021, brings major new features such as Enums, Fibers, never return type, Intersection Types, readonly properties, and more, while ironing out some of its undesired legacy features by deprecating them.
+
+//8.0
+Release Date2020-11-26
+Version StatusSecurity-Fixes Only
+
+PHP 8.0, on the 25th year of PHP history, brings several important features such as Union Types, JIT, Constructor Property Promotion, Match Syntax, Named Parameters, and several more performance, syntax, and quality-of-life improvements.
+
+//7.4
+Release Date2019-11-28
+Version StatusUnsupported
+
+PHP 7.4, the final release in the PHP 7.x series. PHP 7.4 brings typed properties, underscore numeric separator, and other minor improvements to PHP.
+
+//7.3
+Release Date2018-12-06
+Version StatusUnsupported
+
+Heredoc/nowdoc syntax improvements and a bunch of legacy code deprecations.
+
+//7.2
+Release Date2017-11-30
+Version StatusUnsupported
+
+Argon2 password hashing support, class constant visibility, object type, and many more.
+
+
+------------------------------------------------------------------------------------------------

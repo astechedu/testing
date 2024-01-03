@@ -1,0 +1,49 @@
+<<< Mysql Views <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys: Views
+
+-------------------------------------------------------------------
+//1. Mysql tricks
+https://www.viget.com/articles/10-sql-tricks-that-i-like/
+
+//2 What is order of execution in sql?
+https://youtu.be/AZzTHWF7tEc?t=279
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+>> View <<
+
+Example 01:
+
+//In Mysql yog
+ 
+ CREATE VIEW myv1 AS
+ SELECT *FROM users;
+
+//Fetch data from table
+select *from myv1;
+
+//Drop View
+Drop myv1;
+
+
+	
+//In Mysql yog
+
+CREATE
+    /*[ALGORITHM = {UNDEFINED | MERGE | TEMPTABLE}]
+    [DEFINER = { user | CURRENT_USER }]
+    [SQL SECURITY { DEFINER | INVOKER }]*/
+    VIEW `test`.`views1` 
+    AS
+(SELECT * FROM ...);
+
+-------------------------------------------------------------------
+--------------------------------------------------------------------

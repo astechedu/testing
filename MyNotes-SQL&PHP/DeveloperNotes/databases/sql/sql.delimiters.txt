@@ -1,0 +1,74 @@
+<<< SQL Delimiters <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys: Delimiter, Default Delimiter, 
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Sql Delimiter Examples
+https://www.geeksforgeeks.org/delimiters-in-sql/
+
+Vdo: Delimiter
+https://youtu.be/49LJDmGBmtc?t=153
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+>>> Delimiter <<<<
+
+Default Delimiter (;)
+Example: select *from users
+
+
+DELIMITER delimiter_character
+Example: // or $$.
+
+
+DELIMITER // 
+SELECT * FROM employees // 
+SELECT * FROM players //
+
+
+//To change the delimiter to the default one
+DELIMITER ;
+
+
+DELIMITER $$ 
+CREATE PROCEDURE customers() 
+BEGIN  -- 
+ statements 
+END $$ 
+DELIMITER ;
+
+
+
+1. 
+Default Delimiter ;
+ SELECT *from users;
+
+2.
+
+DELIMITER //
+SELECT *FROM users//
+
+
+3.
+
+DELIMITER$$
+SELECT *FROM users$$
+
+
+4.
+
+
+
+
+
+
+-------------------------------------------------------------------

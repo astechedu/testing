@@ -1,0 +1,216 @@
+>>  Linux Permissions <<
+
+
+----------------------------------------------------------
+----------------------------------------------------------
+Keys: chown,chmod,chgrp
+
+----------------------------------------------------------
+----------------------------------------------------------
+
+----------------------------------------------------------
+     -- C H O W N --
+----------------------------------------------------------
+
+
+>> CHOWN: 
+   chown: 
+
+Syntax: 
+chown [OPTIONS] [OWNER][:GROUP] file1 file2
+
+
+//To change the owner alone, use:
+chown newowner /TestPermissions
+
+//To change the group alone, use:
+chown :newownergroup /TestPermissions
+
+//To change the owner and group of the directory, use:
+chown newowner:newownergroup /TestPermissions
+
+//For a recursive operation, use the -R flag. Here’s an example:
+chown -R [USER][:GROUP] Directory
+
+//We’ll take the same TestPermissions directory and set newowner as its owner recursively:
+chown -R newowner /home/TestPermissions/
+
+//How to Edit the Owner of a Symbolic Link
+ln -s chownSample.txt mysymlink
+
+
+//The above command will change the ownership for the file chownSample.txt. Now, this will be the ls -l command’s output:
+chown newowner mysymlink
+
+//If you want to change the symbolic link’s ownership, use the -h flag:
+chown -h newowner mysymlink
+
+
+----------------------------------------------------------------------------------------------
+       -- C H M O D --
+----------------------------------------------------------------------------------------------
+>> CHMOD: >>
+   chmod: 
+
+//How to change directory permissions in Linux with chmod
+
+Change Linux file permissions with the Linux chmod command, 
+including chmod +rwx, 
+          chmod +x, 
+          chmod 777, and more.
+
+//How do I change directory permissions in Linux?
+
+To change directory permissions in Linux, use the following:
+
+    chmod +rwx filename to add permissions
+    chmod -rwx directoryname to remove permissions. 
+    chmod +x filename to allow executable permissions.
+    chmod -wx filename to take out write and executable permissions.
+
+//Note that “r” is for read, “w” is for write, and “x” is for execute. 
+//This only changes the permissions for the owner of the file.
+
+-rwxr--r--
+
+-        // "_" indicates a file "d" indictes directory "l" indicates a link
+rwx      // Read, write and execute permissions for the owner of the file
+r--      // Read, write and execute permissions for members of the group owning the file
+r--      // Read, write and execute permissions for other users
+
+--------------------------------------------------------------------------------------------
+
+What are the three permission groups?
+
+There are three options for permission groups available to you in Linux. These are
+
+    owners: these permissions will only apply to owners and will not affect other groups.
+    groups: you can assign a group of users specific permissions, which will only impact users within the group.
+    all users: these permissions will apply to all users, and as a result, they present the greatest security risk and should be assigned with caution.
+
+//
+What are the three kinds of file permissions in Linux?
+
+There are three kinds of file permissions in Linux:
+
+    Read (r): Allows a user or group to view a file.
+    Write (w): Permits the user to write or modify a file or directory.
+    Execute (x): A user or grup with execute permissions can execute a file or view a directory.  
+
+//How to Change Directory Permissions in Linux for the Group Owners and Others 
+
+
+//The command for changing directory permissions for group owners is similar, but add a “g” for group or “o” for users:
+    chmod g+w filename
+
+    chmod g-wx filename
+
+    chmod o+w filename
+
+    chmod o-rwx foldername
+
+//
+
+To change directory permissions for everyone, use “u” for users, “g” for group, “o” for others, and “ugo” or “a” (for all).
+
+    chmod ugo+rwx foldername to give read, write, and execute to everyone.
+
+    chmod a=r foldername to give only read permission for everyone.
+
+--------------------------------------------------------------------------------
+
+----------------------------------------------------------
+     -- C H G R P --
+----------------------------------------------------------
+
+
+>> CHGRP: 
+   chgrp: 
+
+
+chgrp [OPTION] [GROUP_NAME] [DIRECTORY/FILE_NAME]
+
+    [OPTION] - Additional options. You can use the command without them.
+    [GROUP_NAME] - The group you want to assign the file to.
+    [DIRECTORY/FILE_NAME] - The target directory/file.
+
+
+//By issuing these commands, you can change groups of files and directories in Linux. 
+
+    chgrp groupname filename
+    chgrp groupname foldername
+
+
+//Change Directory Group
+chgrp [GROUP_NAME] [DIRECTORY_NAME]
+
+Ex: sudo chgrp phoenixnap example
+
+//Recursively Change Group Ownership
+sudo chgrp -R [GROUP_NAME] [DIRECTORY_NAME]
+Ex: sudo chgrp -R phoenixnap example
+
+
+
+
+//Change Group to Match Reference File
+chgrp [OPTION] --reference=[RFILE_NAME] [FILE_NAME]
+
+Ex: sudo chgrp --reference=test atom_273.snap
+
+
+//Changing Linux permissions in numeric code
+
+You may need to know how to change permissions in numeric code in Linux, so to do this you use numbers instead of “r”, “w”, or “x”.
+
+    0 = No Permission
+    1 = Execute
+    2 = Write
+    4 = Read
+
+
+
+Permission numbers are:
+
+    0 = ---
+
+    1 = --x
+
+    2 = -w-
+
+    3 = -wx
+
+    4 = r-
+
+    5 = r-x
+
+    6 = rw-
+
+    7 = rwx
+
+
+
+//For example:
+
+    chmod 777 foldername will give read, write, and execute permissions for everyone.
+
+    chmod 700 foldername will give read, write, and execute permissions for the user only.
+
+    chmod 327 foldername will give write and execute (3) permission for the user, w (2) for the group, and read, write, and execute for the users.
+
+
+
+--------------------------------------------------------------------------------
+
+
+
+
+
+---------------------------------------------------------------------------------------------
+
+
+
+
+
+
+------------------------------------------------------------------

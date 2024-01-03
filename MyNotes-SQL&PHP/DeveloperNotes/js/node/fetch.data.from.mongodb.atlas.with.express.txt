@@ -1,0 +1,167 @@
+>>>> Mongodb Atlas <<<<<<<<
+
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+Keys: 
+
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+
+
+//mongoDB Atlas Connection with express js 
+//forms and users collections are on mongodb atlas
+//npm i mongoose express ejs body-parser     
+
+Folder Structure:
+
+project
+  models
+    form.js
+    user.js
+
+  views
+    partials
+      header.ejs
+      footer.ejs
+    form.ejs
+  App.js
+  package.json  
+--------------------
+
+//App.js
+
+const express = require('express');
+const app = express();
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+
+// Calling form.js from models
+var Form=require("./models/form");
+var User=require("./models/user");
+
+// Connecting to database 
+let dbUrl = "mongodb+srv://astechutube:ajay123@cluster0.qkx1fxx.mongodb.net/mydb01?retryWrites=true&w=majority";
+
+var options = {
+  useNewUrlParser: true,     
+  useUnifiedTopology: true,  
+};
+
+
+mongoose.connect(dbUrl,options)
+    .then( () => {
+        console.log('Connected to the database ')        
+    })
+    .catch( (err) => {
+        console.error(`Error connecting to the database. n${err}`);
+    })
+
+
+
+//Fetch users data 
+async function users(){
+   let rds = await User.collection.findOne();
+   console.log(rds);
+}
+
+
+//Fetch Data
+async function data(){
+   let rds = await Form.collection.findOne();
+   console.log(rds);
+}
+
+//middlewares
+app.set('view engine','ejs');
+app.use(bodyParser.urlencoded({extended:true}));
+  
+
+//rendering form.ejs
+app.get("/",function(req,res){    
+    res.render("form");
+    data();
+    users();
+});
+  
+
+  
+//creating form
+app.post("/",function(req,res){
+    var username=req.body.username;
+    var email=req.body.email;
+    var f={username: username,email:email};
+    Form.create(f,function(err,newlyCreatedForm){
+        if(err)
+        {
+            console.log(err);
+        }else{
+            res.redirect("/result");
+        }
+    });
+});
+
+// Starting the server at port 3000
+app.listen(3000, function() { 
+    console.log('Server running on port 3000'); 
+});
+
+---------------------------
+
+//models/form.js
+
+//Requiring mongoose package
+var mongoose=require("mongoose");
+
+// Schema
+var formSchema=new mongoose.Schema({
+	username : String,
+	email : String
+});
+
+module.exports=mongoose.model("Form",formSchema);
+-------------------------------
+
+
+//models/user.js
+
+//Requiring mongoose package
+var mongoose=require("mongoose");
+
+// Schema
+var formSchema=new mongoose.Schema({
+	name : String,
+	age : Number,
+	city: String,
+	country: String
+});
+
+module.exports=mongoose.model("User",formSchema);
+
+--------------------
+
+//package.json
+
+{
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongo": "^0.1.0",
+    "mongodb": "^5.7.0",
+    "mongoose": "^7.3.2"
+  }
+}
+
+
+----------------------------------------------------------------------
+
+
+
+
+
+
+

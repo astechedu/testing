@@ -1,0 +1,328 @@
+<<< SQL Group By & Having <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys: Group By, Having Clause, Multiple Groups, 
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+Vdo: Group By and Having Clause in SQL
+https://youtu.be/SvJLXj05cow?t=371
+ 
+Vdo: Group By:                    //Shanu Kuttan CSE Classes
+https://youtu.be/nDWmrlgMe1w?t=95
+
+Vdo: Having Clause               //Shanu Kuttan CSE Classes
+https://youtu.be/u20jUnUtnlU?t=3
+
+Vdo: Group By ( Department max salary or minimum salary)
+https://youtu.be/6gASpEFZ5Is?t=467
+
+Vdo: Group + Having : Find emp name   //Gate Smashers
+
+https://youtu.be/iPEmGpI3OGU?t=464
+
+Vdo: Group By  by greeky shows
+https://youtu.be/64niGTY5sfI?t=240  //Group by
+https://youtu.be/LjEj-8klPdo?t=22   //Having
+
+Vdo: Multiple Group By Used
+https://youtu.be/5hlRdFAFkmo?t=557
+
+Vdo: Multiple Groups Example simply     //Good Video
+https://youtu.be/zQ-gzvwwS4w?t=357
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+Websites: 
+
+//Two Group By Used : country, count(*) -> Count for country 
+//But counry, state, count(*) -> count for state not country
+
+https://learnsql.com/blog/group-by-multiple-columns/           //Multi Groups
+https://www.scaler.com/topics/sql/group-by-multiple-columns/  //Multi Groups
+
+Group Good Examples:
+https://www.programiz.com/sql/group-by
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+
+>>> GROUP BY STATEMENT:
+The GROUP BY statement gorup rows that have the same values into
+summary rows.
+
+It is often used with aggregate function (COUNT(), MAX(), MIN(), SUM(), AVG())
+
+Syntax
+
+   SELECT column_name(s)
+   FROM table_name
+   GROUP BY column_name(s);
+
+Example:
+  
+    SELECT mode, SUM(amount) AS total
+    FROM payment
+    GROUP BY mode;
+
+
+
+
+
+
+--------------------------------------------------------------------
+
+>>> Having Clause: 
+
+The Having clause is used to apply a filter on the result of GROUP BY based on the specified condition.
+
+The WHERE clause places condition on the selected columns, whereas the HAVING clause places conditions on groups created by the GROUP BY clause
+
+Syntax: 
+
+     SELECT column_name(s)
+     FROM table_name
+     WHERE condition(s)
+     GROUP BY column_name(s)
+     HAVING condition(s)
+
+Example:
+ 
+     SELECT mode, COUNT(amount) AS total
+     FROM payment
+     GROUP BY mode
+     HAVING COUNT(amount) >= 3
+     ORDER BY total DESC
+
+------------------------------------------------
+
+
+-- More Example --
+
+//Showing employees names in different departments
+Example: 
+
+    Select emp_name from emp where dept_id IN
+
+    (Select dept_id from emp group by dept_id having count(*) < 3);        //Sub query 
+
+
+Example: 
+
+    Select emp_name from emp where dept_id IN
+
+    (Select dept_id from emp group by dept_id having count(*) > 3);        //Sub query 
+
+
+Example: 
+
+    Select emp_name from emp where dept_id IN
+
+    (Select dept_id from emp group by dept_id having count(*) = 3);        //Sub query 
+
+Example: 
+
+    Select emp_name from emp where dept_id IN
+
+    (Select dept_id from emp group by dept_id having count(*) 5 3);        //Sub query 
+
+---x---
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+--> Multiple Groups <---
+
+//Two Group By Used : country, count(*) -> Count for country 
+//But counry, state, count(*) -> count for state not country
+
+Website2: https://learnsql.com/blog/group-by-multiple-columns/         //V. Good Examples  Multi groups
+
+Website1: https://www.scaler.com/topics/sql/group-by-multiple-columns/   // Multi groups
+
+
+
+
+--> From Website1:
+
+
+Group By One Column
+
+
+Syntax
+
+SELECT column_1, column_2, ..., column_n
+FROM table
+WHERE condition
+GROUP BY column_1, column_2, ..., column_n;
+
+
+Example:
+
+
+employee table:
+
+employee_ID	salary	department_ID
+
+100	        24000	1
+101		17000	1
+103		10000	1
+104		9000	2
+105		11000	2
+
+
+department table:
+
+department_ID	department_name
+
+1		Accounts
+1		Marketing
+2		IT
+
+
+
+Query:
+
+SELECT SUM(salary), department_ID FROM employee 
+GROUP BY department_ID;
+
+
+
+Output:
+
+salary	department_ID
+
+51000	1
+20000	2
+16000	3
+
+
+
+> Group by Multiple Columns:
+
+SELECT column_1, column_2,..., column_n
+FROM table
+WHERE condition
+GROUP BY column_1_criteria, column_2_criteria,..., column_n_criteria;
+
+
+Examples: 
+
+
+   > Group by Two Columns and Find Average
+
+
+employee table:
+
+employee_ID	salary	department_ID
+100		24000	1
+101		17000	1
+103		10000	1
+104		9000	2
+105		11000	2
+106		16000	3
+
+
+
+department table:
+
+department_ID	department_name
+1		Accounts
+1		Marketing
+2		IT
+
+
+
+Query:
+
+SELECT 
+    e.department_ID,
+    department_name,
+    ROUND(AVG(salary), 2) average_salary
+FROM
+    employees e
+        INNER JOIN
+    departments d ON d.department_ID = e.department_ID
+GROUP BY e.department_ID;
+
+
+
+Output:
+
+department_ID	department_name		average_salary
+1		Accounts		17000
+2		Marketing		10000
+3		IT			16000
+
+
+
+  > Group by Two Columns and Find Multiple Stats:
+
+
+employee table:
+
+employee_ID	salary	department_ID	job_id
+100		24000	1		1
+101		17000	1		1
+103		10000	1		1
+104		9000	2		3
+105		11000	2		3
+106		16000	3		2
+
+
+
+department table:
+
+department_ID	department_name
+1		Accounts
+2		IT
+3		Marketing
+
+
+job table:
+
+job_ID	job_title
+1	Accountant
+2	Manager
+3	HR
+
+
+
+Query:
+
+SELECT 
+    e.department_id,
+    d.department_name,
+    e.job_id,
+    COUNT(e.employee_ID)
+FROM
+    employees e
+        INNER JOIN
+    departments d ON d.department_ID = e.department_ID
+        INNER JOIN
+    jobs j ON j.job_ID = e.job_ID
+GROUP BY e.department_ID , e.job_ID;
+
+
+
+
+Output:
+
+department_ID	department_name	job_ID	COUNT(e.employee_ID)
+1		Accounts	1	3
+2		IT		3	2
+3		Marketing	2	1
+
+
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------

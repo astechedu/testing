@@ -1,0 +1,86 @@
+<<< SQL Copy Table Into New Table <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys: Copy Table with data, Copy Table's Structure only, 
+      Copy some fields only,
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+Vdo: Copy table into new table, Or Structure only, Or some columns
+https://youtu.be/9awpzoYeczs?t=256
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+
+>>> Copy Table with data 
+
+  create table newTableName select *from oldTableName;
+  //OR
+  create table newTableName AS select *from oldTableName;
+
+
+  Example:
+
+  create table users2 select *from users;
+  //OR
+  create table users2 as select *from users;
+
+----x----
+
+
+>>> Copy Table's Structure only not data
+
+  create table newTableName select from oldTableName where 1=0;
+  //OR
+  create table newTableName AS select from oldTableName 1=0;
+
+
+  Example:
+
+  create table users2 select from users where 1=0;
+  //OR
+  create table users2 as select from users where 1=0;
+
+
+----x----
+
+
+>>> Copy some fields (columns) only with data
+
+  create table newTableName select id, fname from oldTableName;
+  //OR
+  create table newTableName AS select id, fname from oldTableName;
+
+  Example:
+
+  create table users2 select id, fname from users;
+  //OR
+  create table users2 as select id, fname from users;
+
+
+----x----
+
+
+>>> Copy some fields (columns)'s structure 
+
+  create table newTableName select id, fname from oldTableName where 1=0;
+  //OR
+  create table newTableName AS select id, fname from oldTableName where 1=0;
+
+  Example:
+
+  create table users2 select id, fname from users where 1=0;
+  //OR
+  create table users2 as select id, fname from users where 1=0;
+
+
+----x----
+-----------------------------------------------------------------------

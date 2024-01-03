@@ -1,0 +1,10 @@
+>>>>> Slim MVC <<<<<
+
+
+
+---------------------------------------------------------------------
+
+//Website: MVC Setup
+
+https://steemit.com/utopian-io/@alfarisi94/create-mvc-model-view-controller-structure-in-slim-microframework-part-1
+---------------------------------------------------------------------

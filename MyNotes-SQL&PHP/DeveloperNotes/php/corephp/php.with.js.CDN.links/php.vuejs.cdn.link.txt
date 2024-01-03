@@ -1,0 +1,71 @@
+<<<<< PHP with VueJs CDN Links  >>>>
+
+
+--------------------------------------------------------
+--------------------------------------------------------
+Keys: APIs
+
+--------------------------------------------------------
+--------------------------------------------------------
+Video: 
+https://youtu.be/XnlA8OCW3ec?t=193
+
+
+--------------------------------------------------------
+--------------------------------------------------------
+--------------------------------------------------------
+
+//index.php
+
+
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script>
+     .content{
+        font-size:40px;
+     }
+
+   </script>
+</head>
+<body>
+   <div id="app" class="content">
+     <h1>Hello from php file</h1>
+     <h3>{{ title }}</h3>
+
+     <ul>
+         <li v-for="{name,index} in names" :key="index">
+            {{ name }}
+         </li>
+     </ul>
+   </div>
+
+   <script src="https://unpkg.com/vue@next"></script>
+   <script>
+
+     const TestApp = {
+       data(){
+         return {
+  	   title: "Hellow From Vuewjs 3",
+           names: {
+               'Roger',
+               'Mark',
+               'John'
+           }
+         }
+       }
+     }
+
+
+      Vue.createApp(TestApp).mount('#app')
+   </script>
+</body>
+</html>
+
+
+
+
+
+--------------------------------------------------------

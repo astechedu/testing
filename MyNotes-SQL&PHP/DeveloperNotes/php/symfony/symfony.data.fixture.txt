@@ -1,0 +1,304 @@
+>>>> Symfony Data Fixture <<<<
+
+
+Link: 
+
+--------------------------------------------------------------------
+
+Key: Fixture, Fixture with Faker Settings, 
+
+
+--------------------------------------------------------------------
+
+ACID,
+Simplicity, Technical requirements, Features, Support and Community
+Popularity, Maintainability, 
+--------------------------------------------------------------------
+
+Video: Fixture: Install & Use
+   https://youtu.be/_EUr93OWB68?t=303
+
+Video: What is fixture: 
+   https://youtu.be/g7GWmV1hdLo?t=1
+
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------
+
+Installation:
+-----------------------------------------------------------------------------------
+
+Local Development: 
+  php -S localhost:8000  -t public
+
+-----------------------------------------------------------------------------------
+
+Migrations; 
+
+php bin/console make:entity
+php bin/console make:migration
+
+php bin/console doctrine:database:create
+
+php bin/console doctrine:migrations:migrate
+php bin/console doctrine:migrations:status
+php bin/console doctrine:migrations:list
+php bin/console doctrine:migrations:status
+php bin/console doctrine:migration:current
+php bin/console doctrine:migrations:execute migrationId --down or up
+
+
+--------------------------------------------------------------------------------------------------
+
+
+>>>> Doctrine Fixtures Bundle <<<<<<
+
+https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html
+
+
+//In Symfony 4 or higher applications that use Symfony Flex, open a command 
+//console, enter your project directory and run the following command:
+
+composer require --dev orm-fixtures
+
+
+//In Symfony 3 applications (or when not using Symfony Flex), 
+//run this other command instead:
+
+composer require --dev doctrine/doctrine-fixtures-bundle
+
+
+//Loading Fixtures
+php bin/console doctrine:fixtures:load
+
+------------------------------------------------------------------------------------------------------
+
+
+//Read from here
+//https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html
+
+
+
+>> --- Symfony 6.3 --- <<<
+       -----------
+
+src/DataFixture
+
+
+<?php
+// src/DataFixtures/AppFixtures.php            //Default
+
+namespace App\DataFixtures;
+
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+
+class AppFixtures extends Fixture
+{
+    public function load(ObjectManager $manager)
+    {
+             
+         // $product = new Product();
+         // $manager->persist($product);        
+
+        $manager->flush();
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------
+
+>> UserFixtures 
+
+<?php
+
+namespace App\DataFixtures;
+
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+
+use App\Entity\User;
+
+class UserFixtures extends Fixture
+{
+    public function load(ObjectManager $manager): void
+    {
+
+         $user1 = new User();
+         $user1->setName("sonu");
+         $user1->setPhone("99876799");
+         $user1->setAddress("Raipur Road");
+         $manager->persist($user1); 
+
+         $user2 = new User();
+         $user2->setName("sonu");
+         $user2->setPhone("99876799");
+         $user2->setAddress("Raipur Road");
+         $manager->persist($user2);
+
+         //$manager->flush();
+
+         $user3 = new User();
+         $user3->setName("rahul");
+         $user3->setPhone("76787898");
+         $user3->setAddress("Jaipur Road");
+         $manager->persist($user3);
+
+         $manager->flush();
+
+         //Or
+           for($i=0;$i<10;$i++){
+             $user = new User();
+             $user->setName("rahul").$i;
+             $user->setPhone("76787898").$i;
+             $user->setAddress("Jaipur Road").$i;
+             $manager->persist($user);
+           }
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------
+
+>>PostFixtures
+
+
+<?php
+
+namespace App\DataFixtures;
+
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+
+use App\Entity\Post;
+
+class PostFixtures extends Fixture
+{
+    public function load(ObjectManager $manager): void
+    {
+
+         $post1 = new Post();
+         $post1->setTitle("title1");
+         $post1->setBody("Text1");
+         $manager->persist($post1);
+
+         $post2 = new Post();
+         $post2->setTitle("title2");
+         $post2->setBody("Text2");
+         $manager->persist($post2);
+
+         //$manager->flush();
+
+         $post3 = new Post();
+         $post3->setTitle("title3");
+         $post3->setBody("Text3");
+         $manager->persist($post3);
+
+         $manager->flush();      
+
+
+      //OR
+      
+
+         $post = new Post();
+         $post->setTitle("title").$i;
+         $post->setBody("Text").$i;
+         $manager->persist($post);          
+       }   
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------
+
+>>> Fixture with Faker Settings <<<<<
+
+//https://symfonycasts.com/screencast/symfony4-doctrine/faker-fixtures
+
+//Install
+composer require fzaninotto/faker --dev
+
+
+<?php
+use Faker\Factory;
+
+abstract class BaseFixture extends Fixture
+{
+
+    protected $faker;
+
+    public function load(ObjectManager $manager)
+    {
+        $this->manager = $manager;
+        $this->faker = Factory::create();
+
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+
+
+
+---------------------------------------------------------------------------------------------------------------
+
+
+//Read from here
+//https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html
+
+
+
+//Splitting Fixtures into Separate Files
+//Sharing Objects between Fixtures
+//addReference() method to give a name to any object
+//getReference() method to get the exact same object via its name.
+
+
+// src/DataFixtures/UserFixtures.php
+// ...
+class UserFixtures extends Fixture
+{
+    public const ADMIN_USER_REFERENCE = 'admin-user';
+
+    public function load(ObjectManager $manager)
+    {
+        $userAdmin = new User('admin', 'pass_1234');
+        $manager->persist($userAdmin);
+        $manager->flush();
+
+        // other fixtures can get this object using the UserFixtures::ADMIN_USER_REFERENCE constant
+        $this->addReference(self::ADMIN_USER_REFERENCE, $userAdmin);
+    }
+}
+
+
+--------------------------------------------------------------------------------------------------
+
+//Read from here
+//https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html
+
+
+// src/DataFixtures/UserFixtures.php
+// ...
+class UserFixtures extends Fixture
+{
+    public const ADMIN_USER_REFERENCE = 'admin-user';
+
+    public function load(ObjectManager $manager)
+    {
+        $userAdmin = new User('admin', 'pass_1234');
+        $manager->persist($userAdmin);
+        $manager->flush();
+
+        // other fixtures can get this object using the UserFixtures::ADMIN_USER_REFERENCE constant
+        $this->addReference(self::ADMIN_USER_REFERENCE, $userAdmin);
+    }
+}
+
+---------------------------------------------------------------------------------------------
+
+
+
+
+---------------------------------------------------------------------------------------------
+
+
+
+

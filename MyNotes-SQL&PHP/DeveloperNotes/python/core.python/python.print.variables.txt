@@ -1,0 +1,70 @@
+<<<<< Python Print Variables <<<<<<
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+key: *args, **kwargs
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+1. Print Variables Defferently 
+https://stackoverflow.com/questions/17153779/how-can-i-print-variable-and-string-on-same-line-in-python
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+
+
+
+1.
+>>> --- Print Varibales --- <<<
+
+
+Basic: 
+
+
+Python is a very versatile language. You may print variables by different methods. I have listed below five methods. You may use them according to your convenience.
+
+Example:
+
+a = 1
+b = 'ball'
+
+Method 1:
+
+print('I have %d %s' % (a, b))
+
+Method 2:
+
+print('I have', a, b)
+
+Method 3:
+
+print('I have {} {}'.format(a, b))
+
+Method 4:
+
+print('I have ' + str(a) + ' ' + b)
+
+Method 5:
+
+print(f'I have {a} {b}')
+
+The output would be:
+
+I have 1 ball
+
+
+
+-------------------------------------------------------------------------------
+
+>> *args
+A function takes arguments as tuple
+
+
+>> **kwargs
+A function takes arguments as dictionary
+
+
+--------------------------------------------------------------------------------

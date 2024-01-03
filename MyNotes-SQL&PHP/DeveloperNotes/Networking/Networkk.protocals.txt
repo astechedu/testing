@@ -1,0 +1,87 @@
+>>>> Network Protocols  >>>>
+
+
+--------------------------------------------------------
+--------------------------------------------------------
+Keys:   Protocals, 
+--------------------------------------------------------
+--------------------------------------------------------
+--------------------------------------------------------
+--------------------------------------------------------
+Vdo: Networking Fundamentals
+https://youtu.be/E5bSumTAHZE?t=4
+--------------------------------------------------------
+
+
+---> Network Protocals <-----
+
+//Networking Fundamentals
+
+Four attributes for Internet Connectivity
+
+ DNS, 
+ DHCP, 
+ HTTP, 
+ SSL, 
+ TLS, 
+ HTTPS, 
+ FTP, 
+ SMTP
+
+Module 1:
+How data flows through the Internet
+
+1. Network Devices
+2. OSI Model
+3. Everything Hosts do to spek on the Internet
+4. Everything Switches do to facilitrate communication
+5. Everything Routers do to facilitrate communication
+6. Protocals
+7. Packet Traveling: Host, Switch, Router, Host
+
+----------------------------------------------
+
+Protocals: 
+  .Set of rules and messages that form an Internet standard
+
+ARP   -Address Resolution Protocol
+FTP   -File Transfer Protocal
+SMTP  -Simple Mail Transfer Protocal
+HTTP  -Hypter Text Transfer Protocal
+SSL   -Secure Socket Layer
+TLS   -Tranport Layer Security
+HTTPS -HTTP secured with SSL/TLS
+
+DNS   -Domain Name System           (Converts Domain Names into IP Address)
+DNCP  -Dynamic Host Configuration Protocal
+
+
+                        -   FTP     
+                        -   SMTP
+Client                  -   Web Server
+                        -   DNS Server
+
+
+
+Every hot needs four items for Internet Connectivity
+
+. IP Address       -Host's Identity on the Internet
+. Subnet mask      -Size of Host's network
+. Default Gateway  -Router's IP Address
+. DNS Server IP(s) -Translate domain names to IPs
+
+IP:   9.1.1.11
+SM:   255.255.255.0
+DG:   9.1.1.1
+DNS:  8.8.8.8
+
+--------------------------------------------------
+
+
+
+
+
+ 
+
+
+

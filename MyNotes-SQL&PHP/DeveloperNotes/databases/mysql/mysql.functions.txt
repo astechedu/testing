@@ -1,0 +1,66 @@
+<<< Mysql Functions <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys: Functions
+-------------------------------------------------------------------
+//1. Mysql tricks
+https://www.viget.com/articles/10-sql-tricks-that-i-like/
+
+//2 What is order of execution in sql?
+https://youtu.be/AZzTHWF7tEc?t=279
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+>> Functions <<
+
+//In Mysql yog
+
+1. (Working)
+
+DELIMITER $$
+-- Scalar example
+CREATE FUNCTION NoParameters()
+  RETURNS INT
+  
+    BEGIN 
+       RETURN (SELECT SUM(id) FROM users);
+    END$$
+    
+DELIMITER ;
+
+//Calling this function 
+SELECT NoParameters();
+
+
+
+2. 
+
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    FUNCTION `test`.`fun1`()
+    RETURNS TYPE
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+    BEGIN
+
+    END$$
+
+DELIMITER ;
+
+
+
+-------------------------------------------------------------------
+
+--------------------------------------------------------------------

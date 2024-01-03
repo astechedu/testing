@@ -1,0 +1,34 @@
+<<< SQL Intro <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+Keys: Intro, DDL,DML,DQL,DCL,TCL,
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Sql Intro
+https://www.youtube.com/watch?v=U2T_LCdO14Y&pp=ygUZd2hhdCBpcyBkYXRhYmFzZSBpbiBoaW5kaQ%3D%3D
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+>>> SQL Intro <<<<
+
+SQL stands for Structured Query Language
+Adopted by Orcle, mysql, microsoft etc.
+
+
+DDL(Data Definition Language) - create,drop,truncate,alter,rename
+DML(Data Manipulation Language) - insert, update, delete
+DQL(Data Query/Retrieval Language) - select
+DCL(Data Control Language) - grant, revoke
+TCL(Transaction Control Language ) - commit, rollback, save point,
+
+---------------------------------------------------------------------

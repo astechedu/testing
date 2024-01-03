@@ -1,0 +1,379 @@
+<<< PHP Interview <<<<<
+
+
+-------------------------------------------------------------------------------
+key: 
+      Query Optimization in php, Project Ideas, MySql Interviews, Job Description,
+      How to explain project in interview,  
+
+-------------------------------------------------------------------------------
+//Freasers
+//PHP With code: PHP Important projects Suggestion
+https://www.interviewbit.com/blog/php-projects/
+
+-------------------------------------------------------------------------------
+
+Virtual Real Design Pvt. Ltd.
+Dehradun Uttarakhand
+
+virtualrealdesign.com             phone: 7899365102
+
+Senior php developer:
+
+1. What is PSR Concept?
+2. Usage of Difference between composer.json and composer.lock
+3. Why php not given multiple inheritance?
+4. Why do we need traits Even we can define same methods in parent controller?
+5. Why are usage of cookie in APIs?
+6. What are different methods of HTTP request and explain usage?
+7. While working with Sessions, How server know which user is Session currently?
+8. When we should use Transactions (ACID) or when not?
+9. How to get headers value while working with APIs?
+10. Magic methods and Magic constraints in depth?
+
+---------------------------------------------------------------------------------
+
+
+How to Optimize MySQL Database:
+
+        Understand Your Workload
+        Optimize Queries
+        Don’t Use MySQL as a Queue
+        Monitor the Fundamental Resources
+        Filter Results
+        Optimize Subqueries
+        Recognize Scalability Problems
+        Query the Cache
+        Check Pagination Queries
+        Automate Configuration
+
+--------------------------------------------------------------------------------------
+
+Tips for optimizing PHP scripts:
+
+1. Take advantage of native PHP functions
+2. Use JSON instead of XML
+3. Cash in on caching techniques
+4. Cut out unnecessary calculations
+5. Use isset()
+6. Cut out unnecessary classes
+7. Turn off debugging notifications
+8. Close database connections
+9. Limit your database hits
+10. Use the strongest str functions
+11. Stick with single quotes
+12. Try three equal signs
+
+
+
+Types of bottlenecks that affect PHP performance:
+
+1. The network
+2. The CPU
+3. Shared Memory
+4. The Filesystem
+5. Process Management
+6. Other Servers
+
+
+More tips for improving PHP performance
+
+1. Take advantage of OPcache
+2. Identify database delays
+3. Clean up your filesystem
+4. Carefully monitor your APIs
+5. Profile your PHP
+
+
+
+
+
+----------------------------------------------------------------------------------------
+
+Query Optimization in php:
+
+Q: How to improve the performance of MySQL?
+
+    Optimize your queries.
+    Index your tables.
+    Optimize your database schema.
+    Optimize your server configuration.
+    Upgrade your hardware.
+    Use caching.
+    Use a CDN.
+
+----------------------------------------------------------------------------------------
+
+Responsibility: 
+Conducting analysis of website and application requirements
+Writing back-end code and building efficient PHP modules
+Developing back-end portals with an oprimized database
+Troubleshooting application and code issues.
+Integrating data storage sulutions
+Responsding to integration requests from front-end developers
+Finalizing back-end features and testing web applicatioins
+Updating an altering application features to enhance performance
+
+
+---------------------------------------------------------------------------------------
+
+
+
+//PHP Projects Ideas: Code Available On github
+
+https://www.interviewbit.com/blog/php-projects/
+
+
+Project Ideas:
+
+Table Of Contents
+hide
+
+    Introduction
+    PHP Projects for Beginners
+        1. A Chatbot for Students
+        2. Portal for Doctors
+        3. Clothes Recommendation System
+        4. Product Rating System as per the Consumer Reviews
+        5. Automatic Time Table Creation
+    Intermediate PHP Projects
+        6. Ad Dispenser Server
+        7. Movie Recommendation App
+        8. Predictive Model for Customer Behavior
+        9. Image Processing and Generation
+        10. Facebook Application Development
+    Advanced PHP Projects
+        11. E-Commerce Website
+        12. Online Shopping Project
+        13. Social Networking Website
+        14. Online Blood Bank
+        15. Online Voting System
+        16. WordPress Plugins
+    Conclusion
+    FAQs
+        Q.1: Top PHP Projects Ideas
+        Q.2: What kind of projects is PHP used for?
+        Q.3: Is it difficult to learn PHP?
+        Q.4: How do I start a project in PHP?
+        Q.5: Is PHP worth learning in 2023?
+    Additional Resources
+
+---------------------------------------------------------------------------------------
+
+11. E-Commerce Website: 
+
+
+    Product catalog details
+    Shopping carts
+    User records
+    Admin Panel
+    Manage product details (add or remove product).
+
+
+12. Online Shopping Project
+
+    Management of shopping items
+    The consumer is given their email ID and password to use their account.
+    Customer support via email.
+
+13. Social Networking Website
+
+    User or Admin Login
+    Search Friends
+    Friend or Unfriend
+    Send private messages
+
+14. Online Blood Bank
+
+
+    Donor registration.
+    Inventory management for blood bank storage.
+    Donors who are suitable for donation with their contact information.
+    Transfering blood from one blood bank to another.
+
+15. Online Voting System
+
+Some of the features are:
+
+    Login
+    Manage Administrators
+    Manage Candidates
+    Manage Positions
+    Check Poll Results
+    Update Password
+    Update Profile
+    Logout
+
+Voter or User Features
+
+    Registration
+    Login
+    Update Profile
+    Choose Positions for Voting
+    Give Vote
+    Logout
+    It is the total package.
+
+
+----------------------------------------------------------------------------------------
+
+MySql Interviews:
+
+1. https://youtu.be/aXkaHHW0mYU?t=503      (Basics)
+2. https://youtu.be/GQpO-JXieKs?t=130 
+
+I.
+1. What is MySql?
+2. What are some of the advantages of using MySQL?
+3. What do you mean by 'databases'?
+4. How can you interact with MySql?
+5. How do you create a database in MySql?
+6. How do you create a table using MySql?
+7. How do you Insert Data Into MySql?
+8. What i a SQL join and why do we need it?
+9. How to delete Data From a MySql Table?
+10. What are the types of relationships used in MySql?
+11. How many Triggers are possible in MySQL?
+12. How do you view in database in MySQL?
+
+
+II. 
+1. What is MySql  (RDBMS, based on SQL)
+2. What should we use MySQL?
+3. What tables present in MySQL?   (MyISAM,HEAP,Merge,InnoDB,ISAM)
+4. Order of MySql Query Execution  (From & Joins, Where, Group by, Having, Select, Order By, Limit)
+5. Different types of MySsql Joins (Inner Join, Left Join, Right Join)
+6. Improving the performance of MySql Select Query
+     1. User Indexes 2. Don't use "*". Avoid unnecessary columns, 3. Use Distinct and Union solely if necessary 
+     4. Use short table aliases 5. Avoid wildcard (%) at the start of LIKE pattern
+7. How many triggers are allowed in MySql table?
+8. Different set Operations available in MySql
+9. Test for Null values in database
+10. Blob and Text
+11. Delete vs Truncate
+
+
+
+
+
+
+Execution query Order: 
+
+1. From & Joins - 
+2. Where        - Filters the base data
+3. Group By     - Aggregates
+4. Having       - Filters aggregated data
+5. Select       - Return final data
+6. Order by     - Sorts final data
+7. Limit        - Limits returned data to a row count
+
+
+-----------------------------------------------------------------------------------------
+
+
+Job Description:
+
+We are looking for a PHP Development (3-4 years experience)
+responsible for managing back-end services and the interchange data between the server and the users.
+Your primary focus will be the development of all server-side logic, definition and maintenance of the centeral database,
+adn ensuring high performance and responsiveness to requests from the front-end. You will also be responsible for integrating
+theh fron-end elements built by your co-workers into the application. Therefore, a basic understanding of front-end technologies
+is neccessary as well.
+
+Responsibility
+
+Build efficient, testable, and reusable PHP code.
+Solve complex performance problems and architectural challenges
+Inegration of data storage solutions
+Strong knowledge of one of PHP web frameworks Laravel, Codeigniter and Yii etc.
+Strong knowledge of one of PHP CMS Wordpress, Majento, Drupal etc.
+Understanding of fully synchronous behavior of PHP 
+Understanding of MVC design patterns
+Basic understanding of front-end technologies, such as Javascript, HTML5, and CSS3
+Knowledge of object oriented PHP Programming
+Understanding accessibility and security compliance.
+Strong knowledge of common PHP or web server exploits and their solutions
+Understanding fundamental design principles behind a scalable application
+Use Authentication and authorization between multiple systems, servers, and environments
+Integration of multiple data sources and databases into one system.
+Familiarity with limitation of PHP as a plateform and its workerarounds
+Creating database schemas that represent and support business processes
+Familiarity with SQL/NoSQL databases and their declarative query languages
+Proficient understanding of code versioning tools, such as Git & Composer
+Familiar running a NGINX and Apache web server
+
+Required Skills: 
+
+Minimum 3+ years of Laravel hands-on development experience
+Proficient in the maintenance and administration of Drupal modules and sites
+Experience integrating open source and third-party applications into existing systems.
+Solid understanding of Javascript, Mysql, Ajax, jquery, css and html
+Result-oriented, reliable, able to work under pressure 
+Ability to both collaborate with team mermbers and to work independently
+Eager to embrace current and emerging web technology
+
+
+Qualification: 
+
+A bachelor's degree in Computer Science or a related field (Or combined with related experience)
+Minimum 3 years of PHP  programming experience (Samples of application that you have worked on are required)
+Ability to communicate and work well with others
+Ability to handle a fast-paced work environment, deadlines and new challenges
+Experience that would be a plus 
+Knowlegde of SEO
+
+Candidates should be well versed with the technology, excellent in English communication, Enthusiastic learner, adapt well and
+be a good team player. Candidates with a "Get it Done" attitude.
+
+Secondary Responsibilies:
+Client communication
+Estimation
+RCA analysis
+
+Primary Technical Skills:
+
+PHP
+MySql
+Web Server
+#laravel #php #mysql
+
+
+
+//Roles And Responsibility:
+https://youtu.be/l3ed9pnMviI?t=510
+
+//https://youtu.be/RBam4UxkrXc?t=6
+
+How to explain project in an interview?
+Your Role in Project?
+Challenges faced in projec?
+Technologies used in Project?
+
+
+
+-------------------------------------------------------------------------------------------------
+
+
+//
+https://www.educative.io/blog/what-are-database-schemas-examples
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+

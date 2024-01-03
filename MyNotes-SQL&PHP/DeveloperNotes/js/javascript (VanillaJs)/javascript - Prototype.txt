@@ -1,0 +1,198 @@
+>>>> JavaScript - Prototype >>>>>
+
+
+-----------------------------------------------------
+Keys: Prototypes, Number Object, 
+      
+    
+-----------------------------------------------------
+
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+//   : By Greeky Shows
+//UnderStanding Prototypes (Array and Object Prototype) (V. good Video)
+
+
+//UnderStanding Prototypes (Function Prototype) (V. good Video)
+https://youtu.be/HzK69hfrD54?t=624                              //: By Greeky Shows
+https://youtu.be/r4fVgSxt2Ew?t=295
+
+//Prototype More examples (From Ajay Suneja)
+https://youtu.be/yfYY4ykJgK8?t=1409
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+
+---> Prototypes <----
+
+
+1.                        null 
+                           ^
+                           |
+                      O b j e c t
+                   ^        ^       ^
+                  /         |        \
+               Array     Object       b
+
+
+
+2. 
+
+                         null 
+                           ^
+                           |
+                    Object.prototype
+        
+                   ^                ^
+                  /                  \   
+           Object.prototype/Array.prototype
+
+                    ^           ^
+                     \         /     
+                    Object / Array
+
+
+
+
+
+
+
+
+
+//1. Create Object num
+
+let num = new Number(2,8)             //Creating Object num
+
+num.cost=23                          //Adding property cost
+num.add = function(){}               //Adding property add()
+
+num.__proto__.geeta = 83            //Adding property to num.prototype
+console.log(num)                    
+
+//Create Object num2                 
+let num2 = new Number(1,2,3)       //Creating Object num2 
+console.log(num2)
+
+//Access geeta property from num.prototype (Property geeta available in both num.prototype & num2.prototype)
+console.log(num2.geeta)
+
+
+
+
+//2. 
+
+const arr = new Object()
+
+
+
+
+//3. 
+
+const arr = new Array()
+
+
+
+//4.
+                                
+                                      
+    function Mobile(){                
+      this.a = 10 
+    }
+
+  var m = new Mobile()   
+
+
+
+
+----------------------------------------------------------------------------------------
+
+
+
+
+
+----------------------------------------------------------------------------------------
+
+//Prototypes More Practices:
+//https://youtu.be/r4fVgSxt2Ew?t=1364
+
+
+//Creating Object
+const obj = new Object();
+obj.__proto__.geeta = 33
+console.log(obj)
+
+//Creating Array Object
+const arr = new Array();
+arr.__proto__.arrgeeta = 53                 //Adding prototype property
+console.log(arr)
+
+//Creating Number Object
+const n1 = new Number();
+n1.__proto__.n1geeta = 70                    //Adding prototype property
+console.log(n1)
+
+//Creating Function Object
+function Person(name)                        //Constructor Function 
+{
+	this.name,
+        __proto__: anyFuntionOrBjectName    //Adding prototype property
+}
+Person.prototype.ajay=28    //Adding prototype property
+console.log(Person)
+
+
+//console.log("In All: " + arr.geeta)
+ 
+-----------------------------------------------------------------------------------------
+
+>> Prototype Inheritance:
+   ---------------------                                                               ---------------------------------
+                        //                                              | Object.prototype              |
+                        //                                              |         __proto__  ----> null |
+                        //                                              ---------------------------------
+function Mobile(){      //                                                           ^   ^
+  this.a = 20;          // ---------------      --------------------                 |   |
+}                       //|Mobile Function ---->| Mobile.prototype  |-----------------   |
+                        //|     prototype       |         __proto__ |                    |                                                                       ----------------      ---------------------                    |
+let m = new Mobile()    //                             ^                                 |
+                        //                             |                                 |
+                        //                             |                                 |
+                        // ------------                |                                 |
+                        //|m Object    |----------------                                 |
+                        //|  __proto__ |                                                 |
+                        // ------------                                                  |
+                        //                                                               |
+                        //                                                               |
+                        // ----------------        ---------------------                 |                    
+function samsung(){    // |Samsung Function|-----> | Samsung.prototype |                 |
+  Mobile.call(this);   // |                |       |                   |                 |
+  this.b = 50;         // |       prototype|       |        __proto__  |------------------
+}                      //  -----------------        --------------------
+let s = new Samsung() //                                     ^
+                      //  ------------------                 |
+                      //  | s Object       |                 |
+                      //  |   __proto__    |------------------
+                      //  |                |
+                          ------------------
+
+
+//Now Inheritance 
+//https://youtu.be/r4fVgSxt2Ew?t=1364
+
+Samsung.prototype = Object.create(Mobile.prototype);
+
+
+-------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------
+
+
+
+
+

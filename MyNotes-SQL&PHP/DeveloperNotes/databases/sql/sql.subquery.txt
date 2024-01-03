@@ -1,0 +1,349 @@
+<<< SQL Subquery <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys: Subquery, 
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+Vdo: Sub Query
+https://youtu.be/lERnVmiVBfg?t=551
+
+Vdo: Sub query                    
+https://youtu.be/iPEmGpI3OGU?t=576
+
+vdo: Sub Query with join
+https://youtu.be/mQelRZW_xPg?t=398
+
+Vdo: Subquery? : select,insert,update,delete
+https://youtu.be/JksrTuEVEPk?t=29
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+Website: Subquery examples with conditions
+https://mode.com/sql-tutorial/sql-sub-queries
+
+-------------------------------------------------------------------
+
+>>> Sub Query <<<<
+
+//Diplay the names of employees from specified department
+
+dept_id or dept_name(Groups)       NoOfEmps (NoOfCounts)
+   HR                                2
+   Developer                         5
+   Designer                          3
+//
+
+
+Example: 
+
+   SELECT emp_name from emp where dept_id IN                          //dept_id or dept_name
+   (SELECT dept_id from emp group by dept_id HAVING COUNT(*) = 2);    //Sub Query
+
+Example: 
+
+   SELECT emp_name from emp where dept_id IN
+   (SELECT dept_id from emp group by dept_id HAVING COUNT(*) < 5);    //Sub Query
+
+Example: 
+
+   SELECT emp_name from emp where dept_id IN
+   (SELECT dept_id from emp group by dept_id HAVING COUNT(*) < 3);    //Sub Query
+
+Example: 
+
+   SELECT emp_name from emp where dept_id IN
+   (SELECT dept_id from emp group by dept_id HAVING COUNT(*) = 5);    //Sub Query
+
+
+-------------------------------------------------------------------
+
+
+>> Subquery:
+ 
+//Video: https://youtu.be/JksrTuEVEPk?t=300
+
+What is Subquery?
+Types of Subqueries
+Subqueries with the SELECT Statement
+Subquery with the INSERT Statement
+Subqueries with the UPDATE Statement
+Subqueries with the DELETE Statement
+
+
+--What is Subquery--
+
+A subquery is s select query that is enclosed inside another query 
+The inner select query is usually used to determine the results of the outer select query.
+
+.Write a SQL Query to display department with maximum salary from employees table?
+. Select Dept from employees where
+  salary=(select Max(salary) from employees);
+
+
+Let's how this query works?
+
+.Find the name of the employees with maximum salary int the employees table
+
+    select Emp_name from Employees
+    where salary=(select Max(salary) from employees);
+
+Let's how this query works?
+    
+     First the INNER Query is executed   | select Max(salary) from employees; |
+
+     INNER Query gives following result   Max(salary) -> 11500
+
+     Output of inner query is substituted in outer query : Select Emp_name form employees where salary = 115000
+
+     On execution, the outer query gives following result: Emp_name -> Joseph
+
+
+Select Dept from Employees                           //Outer Query
+where Salary = (Select Max(Salary) from Employees)   //Inner Query
+
+
+--Types of Subqueries--
+
+ Subqueries with the SELECT Statement
+ Subqueries with the UPDATE Statement
+ Subqueries with the DELETE Statement
+ Subqueries with the INSERT Statement
+
+.Subqueries with the SELECT Statement
+   SQL subqueries are majorily used with SELECT statement
+
+Syntax: 
+  SELECT column_name
+  From table_name WHERE
+  column_name OPERATOR
+  (SELECT column_name
+  FROM table [WHERE])
+   
+.Subqueries with the SELECT Statement
+  select emp_name, dept salary from employees 
+  WHERE salary < (SELECT avg(salary) from employees);
+
+
+
+--Subquery with the INSERT Statement--
+      The INSERT statement uses the data returned from the subquery to insert into another table
+
+Sntax: 
+
+  INSERT INTO table_name
+  SELECT *FROM table
+  WHERE VALUE OPERATOR
+  (INNER QUERY)
+
+  INSERT INTO order SELECT product_id, p_name, sell_price FROM products
+  WHERE product_id IN (SELECT product_id FROM products WHERE sell_price > 1000);
+
+
+ --Subqueries with the UPDATE Statement--
+
+    The subquery can be used in conjunction with the UPDATE statement 
+    Either single of multiple columns in a table can be updated when using a 
+    subquery with the UPDATE statement
+
+   Syntax: 
+
+   UPDATE table SET
+   column_name =
+   new_value WHERE
+   OPERATOR
+   VALUE (SELECT COLUMN_NAME FROM TABLE_NAME) WHERE)
+
+   UPDATE EMPLOYEES 
+   SET salary = salary*0.35 
+   WHERE age IN (SELECT age FROM employees_B WHERE age >=27);
+
+
+ --Subqueries with the DELETE Statement--
+
+   The subquery can be used in conjunction with the DELETE statement
+  
+   Syntax:
+
+     DELETE FROM
+     TABLE_NAME VALUE 
+     (INNER QUERY)
+
+
+
+
+ --Subqueries with the INSERT Statement--
+
+  DELETE FROM employees 
+  WHERE age IN 
+  (SELECT age FROM employees WHERE age >=27)
+
+
+
+
+----------------------------------------------------------
+
+
+Website: Subquery Exaples with conditions:
+https://mode.com/sql-tutorial/sql-sub-queries
+
+
+
+    Subquery basics
+    Using subqueries to aggregate in multiple stages
+    Subqueries in conditional logic
+    Joining subqueries
+    Subqueries and UNIONs
+
+
+
+Subquery basics:
+
+SELECT sub.*
+  FROM (
+        SELECT *
+          FROM tutorial.sf_crime_incidents_2014_01
+         WHERE day_of_week = 'Friday'
+       ) sub
+ WHERE sub.resolution = 'NONE'
+
+
+SELECT sub.*
+  FROM (
+       <<results from inner query go here>>
+       ) sub
+ WHERE sub.resolution = 'NONE'
+
+
+
+//Using subqueries to aggregate in multiple stages:
+
+SELECT LEFT(sub.date, 2) AS cleaned_month,
+       sub.day_of_week,
+       AVG(sub.incidents) AS average_incidents
+  FROM (
+        SELECT day_of_week,
+               date,
+               COUNT(incidnt_num) AS incidents
+          FROM tutorial.sf_crime_incidents_2014_01
+         GROUP BY 1,2
+       ) sub
+ GROUP BY 1,2
+ ORDER BY 1,2
+
+
+
+//Subqueries in conditional logic
+
+SELECT *
+  FROM tutorial.sf_crime_incidents_2014_01
+ WHERE Date = (SELECT MIN(date)
+                 FROM tutorial.sf_crime_incidents_2014_01
+              )
+
+
+
+
+SELECT *
+  FROM tutorial.sf_crime_incidents_2014_01
+ WHERE Date IN (SELECT date
+                 FROM tutorial.sf_crime_incidents_2014_01
+                ORDER BY date
+                LIMIT 5
+              )
+
+
+
+//Joining subqueries
+
+SELECT *
+  FROM tutorial.sf_crime_incidents_2014_01 incidents
+  JOIN ( SELECT date
+           FROM tutorial.sf_crime_incidents_2014_01
+          ORDER BY date
+          LIMIT 5
+       ) sub
+    ON incidents.date = sub.date
+
+
+SELECT incidents.*,
+       sub.incidents AS incidents_that_day
+  FROM tutorial.sf_crime_incidents_2014_01 incidents
+  JOIN ( SELECT date,
+          COUNT(incidnt_num) AS incidents
+           FROM tutorial.sf_crime_incidents_2014_01
+          GROUP BY 1
+       ) sub
+    ON incidents.date = sub.date
+ ORDER BY sub.incidents DESC, time
+
+
+
+SELECT COALESCE(acquisitions.acquired_month, investments.funded_month) AS month,
+       COUNT(DISTINCT acquisitions.company_permalink) AS companies_acquired,
+       COUNT(DISTINCT investments.company_permalink) AS investments
+  FROM tutorial.crunchbase_acquisitions acquisitions
+  FULL JOIN tutorial.crunchbase_investments investments
+    ON acquisitions.acquired_month = investments.funded_month
+ GROUP BY 1
+
+
+SELECT COUNT(*) FROM tutorial.crunchbase_acquisitions
+SELECT COUNT(*) FROM tutorial.crunchbase_investments
+
+  SELECT COUNT(*)
+      FROM tutorial.crunchbase_acquisitions acquisitions
+      FULL JOIN tutorial.crunchbase_investments investments
+        ON acquisitions.acquired_month = investments.funded_month
+
+
+
+//Subqueries and UNIONs
+
+
+SELECT *
+  FROM tutorial.crunchbase_investments_part1
+
+ UNION ALL
+
+ SELECT *
+   FROM tutorial.crunchbase_investments_part2
+
+
+
+
+SELECT COUNT(*) AS total_rows
+  FROM (
+        SELECT *
+          FROM tutorial.crunchbase_investments_part1
+
+         UNION ALL
+
+        SELECT *
+          FROM tutorial.crunchbase_investments_part2
+       ) sub
+
+
+-----------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

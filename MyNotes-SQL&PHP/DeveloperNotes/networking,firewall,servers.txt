@@ -1,0 +1,81 @@
+>>> Networking, Firewall, Win10/Linux Servers <<<<<
+
+---------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------
+
+Windows:
+
+//Windows 10 Networking: 
+https://www.newegg.com/insider/tech-basics-how-to-manage-networking-in-windows-10/
+
+//Windows 10 Firewall
+https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-firewall/best-practices-configuring
+
+
+
+
+Linux: 
+
+//Networking:
+https://www.redhat.com/sysadmin/7-great-network-commands
+
+
+
+
+---------------------------------------------------------------------------
+Linux: 
+ip, ifconfig, mtr, tcpdump
+
+
+To show the IP addresses assigned to an interface on your server:
+
+[root@server ~]# ip address show 
+
+To assign an IP to an interface, for example, enps03:
+
+[root@server ~]# ip address add 192.168.1.254/24 dev enps03
+
+To delete an IP on an interface:
+
+[root@server ~]# ip address del 192.168.1.254/24 dev enps03
+
+Alter the status of the interface by bringing the interface eth0 online:
+
+[root@server ~]# ip link set eth0 up
+
+Alter the status of the interface by bringing the interface eth0 offline:
+
+[root@server ~]# ip link set eth0 down
+
+Alter the status of the interface by changing the MTU of eth0:
+
+[root@server ~]# ip link set eth0 mtu 9000
+
+Alter the status of the interface by enabling promiscuous mode for eth0:
+
+[root@server ~]# ip link set eth0 promisc on
+
+Add a default route (for all addresses) via the local gateway 192.168.1.254 that can be reached on device eth0:
+
+[root@server ~]# ip route add default via 192.168.1.254 dev eth0
+
+Add a route to 192.168.1.0/24 via the gateway at 192.168.1.254:
+
+[root@server ~]# ip route add 192.168.1.0/24 via 192.168.1.254
+
+Add a route to 192.168.1.0/24 that can be reached on device eth0:
+
+[root@server ~]# ip route add 192.168.1.0/24 dev eth0
+
+Delete the route for 192.168.1.0/24 via the gateway at 192.168.1.254:
+
+[root@server ~]# ip route delete 192.168.1.0/24 via 192.168.1.254
+
+Display the route taken for IP 10.10.1.4:
+
+[root@server ~]# ip route get 10.10.1.4
+
+-------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------

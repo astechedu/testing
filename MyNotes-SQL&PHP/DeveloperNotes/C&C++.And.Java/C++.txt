@@ -1,0 +1,88 @@
+<<< C++ >>>>>
+
+
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+Linked List: 
+//https://www.geeksforgeeks.org/program-to-implement-singly-linked-list-in-c-using-class/
+
+//Program
+#include <iostream>
+using namespace std;
+
+class node {
+    
+public:
+  int data;
+  node *next;
+  
+ node(){
+     data=0;
+     next=NULL;
+ } 
+ 
+ node(int data){
+     this->data=data;
+     this->next=NULL;
+ }
+};
+
+class Linkedlist {
+  node *head;
+  
+ public: 
+  Linkedlist() { head = NULL;}
+  
+  void insertNode(int);
+  void printList();
+  void deleteNode(int);
+};
+
+void Linkedlist::insertNode(int data){
+    node *newNode = new node(data);
+    if(head == NULL){
+        head = newNode;
+        return;
+    }
+   node *temp = head;
+   while(temp->next != NULL){
+       temp = temp->next;
+   }
+   temp->next=newNode;
+};
+
+void Linkedlist::printList()
+{
+    node* temp = head;
+  
+    // Check for empty list.
+    if (head == NULL) {
+        cout << "List empty" << endl;
+        return;
+    }
+  
+    // Traverse the list.
+    while (temp != NULL) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+};
+
+int main() {
+    
+ Linkedlist list;
+ 
+ list.insertNode(1);
+ list.insertNode(2);
+ list.insertNode(3);
+ list.printList();
+ 
+
+ return 0;
+}
+
+
+
+---------------------------------------------------------------------

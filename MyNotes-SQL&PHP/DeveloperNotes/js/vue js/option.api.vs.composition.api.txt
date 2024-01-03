@@ -1,0 +1,145 @@
+>>> Option api Vs Composition api <<<<<
+
+
+-------------------------------------------------------------------------------
+Keys: 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+//Composition api Vs Options api
+
+//https://vueschool.io/articles/vuejs-tutorials/options-api-vs-composition-api/?utm_source=GoogleAds&utm_medium=SEM&gclid=EAIaIQobChMI0cjR6cflgQMVZKNmAh3k6QxiEAAYAiAAEgLBSfD_BwE
+
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+
+>>> Options API vs Composition API <<<
+//The Options API is the traditional way of building Vue components.
+
+
+--> Options Api <-----
+
+<script>
+export default {
+    data() {
+        return {
+            name: '',
+            age: 0,
+            aboveAge:false
+        }
+    },
+    computed: {
+        displayProfile() {
+         return `My name is ${this.name} and i am ${this.age}`;
+        }
+    },
+    methods: {
+         verifyUser() {
+         if(this.age < 18){
+         this.aboveAge = false
+        } else {
+        this.aboveAge = true    
+           }
+        },   
+    },
+    mounted() {
+        console.log('Application mounted');
+    },
+}
+</script>
+
+
+----------------------------------------------------------------------
+
+>>> Composition Api <<<
+
+
+>>>Composition API is a new way of building components in Vue 3.0 that was introduced to address some of the limitations of the Options API. It allows developers to use a functional, reactive programming style to build components, and it offers a more flexible and expressive way of defining component behavior.
+
+
+<script setup>
+import {ref, reactive, onMounted } from 'vue'
+
+const profile = reactive({name:'', age:''})
+const aboveAge = ref(false)
+
+const verifyUser = () => age.value < 18 ? aboveAge = false : aboveAge = true
+
+const displayProfile = computed(() => {
+  return `My name is ${this.name} and i am ${this.age}`;
+})
+
+onMounted (() => console.log('Application mounted'))
+</script>
+
+
+----------------------------------------------------------------------
+
+>> Reusability
+
+
+var myMixin = {
+  created: function () {
+    this.hello()
+  },
+  methods: {
+    hello: function () {
+      console.log('hello from mixin!')
+    }
+  }
+}
+
+// define a component that uses this mixin
+var Component = Vue.extend({
+  mixins: [myMixin]
+})
+
+var component = new Component() // => "hello from mixin!"
+
+
+-------------------------------------------------------------------------
+
+
+// mouse.js
+import { ref, onMounted, onUnmounted } from 'vue'
+
+export function useMouse() {
+  // state encapsulated and managed by the composable
+  const x = ref(0)
+  const y = ref(0)
+
+  function update(event) {
+    x.value = event.pageX
+    y.value = event.pageY
+  }
+
+  onMounted(() => window.addEventListener('mousemove', update))
+  onUnmounted(() => window.removeEventListener('mousemove', update))
+
+  // expose managed state as return value
+  return { x, y }
+}
+
+//usage in component
+<script setup>
+import { useMouse } from './mouse.js'
+
+const { x, y } = useMouse()
+</script>
+
+-----------------------------------------------------------------------------
+
+
+
+
+
+
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+

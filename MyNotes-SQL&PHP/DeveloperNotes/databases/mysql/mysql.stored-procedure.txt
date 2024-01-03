@@ -1,0 +1,60 @@
+<<< Mysql Stored Procedure <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys: Stored Procedure
+-------------------------------------------------------------------
+//1. Mysql tricks
+https://www.viget.com/articles/10-sql-tricks-that-i-like/
+
+//2 What is order of execution in sql?
+https://youtu.be/AZzTHWF7tEc?t=279
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+>> Stored Procedure <<
+
+
+1. In Mysql yog (Working)
+Example: 
+
+DELIMITER $$
+CREATE PROCEDURE proc1()
+BEGIN
+SELECT *FROM users;
+END$$
+
+//Execute procedure
+CALL proc1();
+
+
+
+//In Mysql yog
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    PROCEDURE `test`.`proc1`()
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+	BEGIN
+
+	END$$
+
+DELIMITER ;
+
+
+
+
+-------------------------------------------------------------------
+
+--------------------------------------------------------------------

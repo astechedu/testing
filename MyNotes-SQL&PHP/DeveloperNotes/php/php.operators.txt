@@ -1,0 +1,114 @@
+>>>> PHP Operators <<<<<
+
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Keys: 
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+PHP Operators Examples:                  //All links, session,cookies, etc
+https://kafle.io/tutorials/php/operator
+
+
+
+-------------------------------------------------------------------------
+
+
+
+>>> PHP Operators >>>
+
+//https://kafle.io/tutorials/php/operator
+
+Operators are used to perform operations on variables and values.
+
+In PHP, we have following operators.
+
+    Arithmetic operators
+    Assignment operators
+    Comparison operators
+    Increment/Decrement operators
+    Logical operators
+    String operators
+---------------------------------------------------------------------
+
+
+1. Arithmetic operators
+
+Operator Name 	Example 	Output
++ 	Addition 	6+5 	11
+- 	Subtraction 	9-6 	3
+* 	Multiplication 	2*5 	10
+/ 	Division 	8/2 	4
+% 	Modulus 	9/2 	1
+** 	Exponentiation 	8**2 	64
+
+
+---------------------------------------------------
+
+2. Assignment operators
+
+Operator Name 	Example 	Output
+x = ? 	Assignment 	$x = 6 	6
+x += ? 	Addition 	$x = 10; $+=2 	12
+X -= ? 	Subtraction 	$x =5; $x-=3 	2
+X *=? 	Multiplication 	$x=2;$x*=5 	10
+X /=? 	Division 	$x=10; $x/=2 	5
+X %=? 	Modulus 	$x=9; $x%=2 	1
+
+-----------------------------------------------------------------
+
+3. Comparison Operators
+
+Operator Name 	Example 	Output
+== 	Equal 	5 = '5' 	True or 1
+=== 	Identical 	5 = '5' 	False or 0
+!= 	Not equal 	5 != 6 	True or 1
+<> 	Not equal 	5 <> 6 	True or 1
+!== 	Not identical 	5 !== '5' 	False or 0
+> 	Greater than 	5 > 6 	False or 0
+< 	Less than 	4 < 5 	True or 1
+>= 	Greater than or equal to 	5 >= 5 	True or 1
+<= 	Less than or equal to 	3 >= 5 	False or 0
+
+---------------------------------------------------------------------
+
+
+4. Increment / Decrement Operators
+
+Operator Name 	Description
+++$x 	Pre-increment 	Increments first x by one and return
+$x++ 	Post-increment 	Return x and increments by one
+--$x 	Pre-decrement 	Decrement first x by one and return
+$x-- 	Post-decrement 	Return x and decrement by one
+
+
+---------------------------------------------------------------------
+
+
+5. Logical operators
+
+$x = 5
+$y = 6
+
+Operator 	Name 	Example 	Result
+and 	And 	if($x == 5 and $y == 7) 	False
+or 	Or 	if($x == 5 or $y == 7) 	True
+&& 	And 	if($x == 5 && $y == 7) 	False
+|| 	Or 	if($x == 5 || $y == 7) 	True
+! 	Not 	if(!x == 5) 	True
+
+
+----------------------------------------------------------------------
+
+6. String Operators
+
+Operator Name 	Example 	Output
+. 	Concatenation 	$txt1 . $txt2 	Concatenation of $txt1 and $txt2
+.= 	Concatenation assignment 	$txt1 .= $txt2 	Appends $txt2 to $txt1
+
+
+
+//https://kafle.io/tutorials/php/operator
+---------------------------------------------------------------------------

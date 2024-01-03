@@ -1,0 +1,456 @@
+>>> Login & Register <<<<<
+
+
+----------------------------------------------------------
+----------------------------------------------------------
+Keys: Login, Register
+----------------------------------------------------------
+----------------------------------------------------------
+
+//Login & Register
+https://www.codeproject.com/Articles/759094/Step-by-Step-PHP-Tutorials-for-Beginners-Creating
+
+
+
+
+----------------------------------------------------------
+
+
+>>> Login & Register
+
+
+-- Database -- 
+
+Tables: 
+
+users table's structure:
+
+For the table's structure, make sure to have the following fields, then click on save:
+
+    Format: Column Name - Type - Length - Null Property - Other Properties
+    id - INT - N/A - Not Null - Auto Increment
+    username - varchar - 50 - Not null
+    password - varchar - 50 - Not null
+
+
+
+Note: You need to scroll right for the auto_increment. I just edited the picture to fit the A_I field.
+Next, create another table named list with 7 columns and for the table's structure:
+
+    id - INT - N/A - Not Null - Auto Increment
+    details - text - Not null
+    date_posted - varchar - 30 - Not null
+    time_posted - Time - Not null
+    date_edited - varchar - 30 - Not null
+    time_edited - Time - Not null
+    public - varchar - 5 - Not null
+
+
+
+-- index.php ---
+
+<html>
+    <head>
+        <title>My first PHP Website</title>
+    </head>
+    <body>
+        <?php
+            echo "<p>Hello World!</p>";
+        ?>
+        <a href="login.php"> Click here to login 
+        <a href="register.php"> Click here to register 
+    </body>
+</html>
+
+
+
+-- register.php --
+
+<html>
+    <head>
+        <title>My first PHP Website</title>
+    </head>
+    <body>
+        <h2>Registration Page</h2>
+        <a href="index.php">Click here to go back<br/><br/>
+        <form action="register.php" method="post">
+           Enter Username: <input type="text" 
+           name="username" required="required" /> <br/>
+           Enter Password: <input type="password" 
+                            name="password" required="required" /> <br/>
+           <input type="submit" value="Register"/>
+        </form>
+    </body>
+</html>
+
+
+<?php
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $username = mysql_real_escape_string($_POST['username']);
+    $password = mysql_real_escape_string($_POST['password']);
+    $bool = true;
+   
+    mysql_connect("localhost", "root","") or die(mysql_error());      //Connect to server
+    mysql_select_db("first_db") or due("Cannot connect to database"); //Connect to database
+    $query = mysql_query("Select * from users"); //Query the users table
+    while($row = mysql_fetch_array($query)) //display all rows from query
+    {
+        $table_users == $row['username']; // the first username row 
+                                          // is passed on to $table_users, 
+                                          // and so on until the query is finished
+        if($username == $table_users)     // checks if there are any matching fields
+        {
+            $bool = false; // sets bool to false
+            Print '<script>alert("Username has been taken!");</script>';     //Prompts the user
+            Print '<script>window.location.assign("register.php");</script>";//redirects to 
+                                                                             //register.php
+        }
+    }
+
+    if($bool) // checks if bool is true
+    {
+        mysql_query("INSERT INTO users (username, password) _
+                     VALUES ('$username', 'password')"); // inserts value into table users
+        Print '<script>alert("Successfully Registered!");</script>';      // Prompts the user
+        Print '<script>window.location.assign("register.php");</script>'; // redirects to 
+                                                                          // register.php
+    }
+}
+?>
+
+
+-- login.php --
+
+<html>
+    <head>
+        <title>My first PHP Website</title>
+    </head>
+    <body>
+        <h2>Login Page</h2>
+        <a href="index.php">Click here to go back<br/><br/>
+        <form action="checklogin.php" method="POST">
+           Enter Username: <input type="text" 
+           name="username" required="required" /> <br/>
+           Enter password: <input type="password" 
+           name="password" required="required" /> <br/>
+           <input type="submit" value="Login"/>
+        </form>
+    </body>
+</html>
+
+
+
+-- checklogon.php --
+//Authenticatio 
+
+<?php
+    session_start();
+    $username = mysql_real_escape_string($_POST['username']);
+    $password = mysql_real_escape_string($_POST['password']);
+    $bool = true;
+
+    mysql_connect("localhost", "root", "") or die (mysql_error());     //Connect to server
+    mysql_select_db("first_db") or die ("Cannot connect to database"); //Connect to database
+    $query = mysql_query("Select * from users WHERE username='$username'"); // Query the 
+                                                                            // users table
+    $exists = mysql_num_rows($query); //Checks if username exists
+    $table_users = "":
+    $table_password = "";
+    if($exists > 0) //IF there are no returning rows or no existing username
+    {
+       while($row = mysql_fetch_assoc($query)) // display all rows from query
+       {
+          $table_users = $row['username'];     // the first username row is 
+                                               // passed on to $table_users, 
+                                               // and so on until the query is finished
+          $table_password = $row['password'];  // the first password row is passed on 
+                                               // to $table_password, and so on 
+                                               // until the query is finished
+       }
+       if(($username == $table_users) && ($password == $table_password)) // checks if there 
+                                                                  // are any matching fields
+       {
+          if($password == $table_password)
+          {
+             $_SESSION['user'] = $username;    // set the username in a session. 
+                                               // This serves as a global variable
+             header("location: home.php");     // redirects the user to the authenticated 
+                                               // home page
+          }
+       }
+       else
+       {
+        Print '<script>alert("Incorrect Password!");</script>';        // Prompts the user
+        Print '<script>window.location.assign("login.php");</script>'; // redirects to login.php
+       }
+    }
+    else
+    {
+        Print '<script>alert("Incorrect username!");</script>';        // Prompts the user
+        Print '<script>window.location.assign("login.php");</script>'; // redirects to login.php
+    }
+?>
+
+
+
+-- home.php --
+
+<html>
+    <head>
+        <title>My first PHP Website</title>
+    </head>
+    <?php
+    session_start();                   //starts the session
+    if($_SESSION['user']){             // checks if the user is logged in  
+    }
+    else{
+        header("location: index.php"); // redirects if user is not logged in
+    }
+    $user = $_SESSION['user'];         //assigns user value
+    ?>
+    <body>
+        <h2>Home Page</h2>
+        <p>Hello <?php Print "$user"?>!</p> <!--Displays user's name-->
+        <a href="logout.php">Click here to go logout</a><br/><br/>
+        <form action="add.php" method="POST">
+            Add more to list: <input type="text" name="details" /> <br/>
+            Public post? <input type="checkbox" name="public[]" value="yes" /> <br/>
+            <input type="submit" value="Add to list"/>
+        </form>
+        <h2 align="center">My list</h2>
+        <table border="1px" width="100%">
+	    	<tr>
+		    	<th>Id</th>
+			    <th>Details</th>
+			    <th>Post Time</th>
+			    <th>Edit Time</th>
+			    <th>Edit</th>
+			    <th>Delete</th>
+			    <th>Public Post</th>
+		    </tr>
+            <?php
+                mysql_connect("localhost", "root","") or 
+                               die(mysql_error()):               //Connect to server
+                mysql_select_db("first_db") or 
+                               die("Cannot connect to databse"); //Connect to database
+                $query = mysql_query("Select * from list");      // SQL Query
+                while($row = mysql_fetch_array($query))
+                {
+                    Print "<tr>";
+                    Print '<td align="center">'. $row['id'] . "</td>";
+                    Print '<td align="center">'. $row['details'] . "</td>";
+                    Print '<td align="center">'. $row['date_posted'] . 
+                          " - " . $row['time_posted'] . "</td>";
+                    Print '<td align="center">'. $row['date_edited'] . 
+                          " - " . $row['time_edited'] ."</td>";
+                    Print '<td align="center"><a href="edit.php?id='. 
+                          $row['id'] .'">edit</a></td>';
+                    Print '<td align="center"><a href="delete.php?id='. 
+                          $row['id'] .'">delete</a></td>';
+                    Print '<td align="center">'. $row['public'] . '</td>';
+                Print "</tr>";
+            }
+        ?>
+    </table>
+    </body>
+</html>
+
+
+-- edit.php --
+
+   if($_SERVER['REQUEST_METHOD'] == "POST")
+   {
+      mysql_connect("localhost", "root", "") or die (mysql_error());    //Connect to server
+      mysql_select_db("first_db") or die ("Cannot connect to database");//Connect to database
+      $details = mysql_real_escape_string($_POST['details']);
+      $public = "no";
+      $id = $_SESSION['id'];
+      $time = strftime("%X"); //time
+      $date = strftime("%B %D, %Y"); //date
+
+      foreach($_POST['public'] as $list)
+      {
+         if($list != null)
+         {
+            $public = "yes";
+         }
+      }
+      mysql_query("UPDATE list SET details='$details',
+      public='$public', date_edited='$date', time_edited='$time' WHERE id='$id'");
+      header("location:home.php");
+   }
+
+<html>
+    <head>
+        <title>My first PHP Website</title>
+    </head>
+    <?php
+    session_start();       //starts the session
+    if($_SESSION['user']){ // checks if the user is logged in  
+    }
+    else{
+        header("location: index.php"); // redirects if user is not logged in
+    }
+    $user = $_SESSION['user']; //assigns user value
+    ?>
+    <body>
+        <h2>Home Page</h2>
+        <p>Hello <?php Print "$user"?>!</p> <!--Display's user name-->
+        <a href="logout.php">Click here to go logout</a><br/><br/>
+        <a href="home.php">Return to home page</a>
+        <h2 align="center">Currently Selected</h2>
+        <table border="1px" width="100%">
+	    	<tr>
+		    	<th>Id</th>
+			    <th>Details</th>
+			    <th>Post Time</th>
+			    <th>Edit Time</th>
+			    <th>Public Post</th>
+		    </tr>
+            <?php
+                if(!empty($def['id']))
+                {
+                    $id = $_GET['id'];
+                    $_SESSION['id'] = $id;
+                    $id_exists = true;
+                    mysql_connect("localhost", "root","") 
+                                   or die(mysql_error()):            //Connect to server
+                    mysql_select_db("first_db") 
+                                or die("Cannot connect to databse"); //Connect to database
+                    $query = mysql_query("Select * from list");      // SQL Query
+                    $count = mysql_num_rows($query);
+                    if($count > 0)
+                    {
+                        while($row = mysql_fetch_array($query))
+                        {
+
+                    $query = mysql_query("Select * from list"); // SQL Query
+
+                    $count = mysql_num_rows($query);
+                    if($count > 0)
+                    {
+                        while($row = mysql_fetch_array($query))
+                        {
+                            Print "<tr>";
+			                    Print '<td align="center">' . $row['id'] . "</td>";
+                                Print '<td align="center">' . $row['details'] . "</td>";
+			                    Print '<td align="center">' . $row['date_posted'] . 
+                                      " - " . $row['time_posted']."</td>";
+			                    Print '<td align="center">' . $row['date_edited'] . 
+                                      " - " . $row['time_edited']."</td>";
+			                    Print '<td align="center">' . $row['public'] . "</td>";
+		                    Print "</tr>";
+                         }
+                     }
+                     else
+                     {
+                         $id_exists = false;
+                     }
+                 }
+             ?>
+         </table>      
+         <br/>
+         <?php
+         if($id_exists)
+         {
+         Print '
+         <form action="edit.php" method="post">
+             Enter new detail: <input type="text" name="details"/><br/> 
+             public post? <input type="checkbox name="public[]" value="yes"/><br/> 
+             <input type="submit" value="Update List"/> 
+         </form> 
+         '; 
+         }
+         else
+         {
+             Print '<h2 align="center">There is not data to be edited.</h2>';
+         } 
+         ?>
+    </body>
+</html>
+
+
+-- logout.php --
+
+
+<?php
+    session_start();
+    session_destroy();
+    header("location:index.php");
+?>
+
+
+-- add.php --
+
+<?php
+    session_start();
+    if($_SESSION['user']){
+    }
+    else{ 
+       header("location:index.php");
+    }
+
+    if($_SERVER['REQUEST_METHOD'] == "POST")
+    {
+       $details = mysql_real_escape_string($_POST['details']);
+       $time = strftime("%X"); //time
+       $date = strftime("%B %d, %Y"); //date
+       $decision = "no";
+   
+       mysql_connect("localhost","root","") or die(mysql_error());       //Connect to server
+       mysql_select_db("first_db") or die("Cannot connect to database"); //Connect to database
+       foreach($_POST['public'] in $each_check)                          //gets the data from
+                                                                         //the checkbox
+       {
+          if($each_check != null){ //checks if checkbox is checked
+             $decision = "yes"; // sets the value
+          }
+       }
+
+       mysql_query("INSERT INTO list(details, date_posted, time_posted, public) _
+                    VALUES ('$details','$date','$time','$decision')"); //SQL query
+       header("location:home.php");
+    }
+    else
+    {
+       header("location:home.php"); //redirects back to home
+    }
+?>
+
+
+-- delete.php --
+
+<?php
+    session_start(); //starts the session
+    if($_SESSION['user']){           //checks if user is logged in
+    }
+    else {
+       header("location:index.php"); //redirects if user is not logged in.
+    }
+
+    if($_SERVER['REQUEST_METHOD'] == "GET")
+    {
+       mysql_connect("localhost", "root", "") or die(mysql_error());     //connect to server
+       mysql_select_db("first_db") or die("cannot connect to database"); //Connect to database
+       $id = $_GET['id'];
+       mysql_query("DELETE FROM list WHERE id='$id'");
+       header("location:home.php");
+    }
+?>
+
+
+Website: 
+//https://www.codeproject.com/Articles/759094/Step-by-Step-PHP-Tutorials-for-Beginners-Creating
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------

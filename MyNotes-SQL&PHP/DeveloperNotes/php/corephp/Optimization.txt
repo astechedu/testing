@@ -1,0 +1,130 @@
+>>>> Optimization <<<<<
+
+
+
+--------------------------------------------------------------------------
+Keys: sql optimization, PHP Uses Basics, 
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+
+// Purpose of SQL Query Optimization
+
+//https://www.analyticsvidhya.com/blog/2021/10/a-detailed-guide-on-sql-query-optimization/
+
+1. Reduce Response Time
+2. Reduced CPU execution time
+3. Improved Throughtput
+//Metrics for analyzing query performance for SQL Optimization
+1. Execution Time: Check execution time 
+   Statistics time on, Parse and Compile, Execution Time, Completion time
+2. Statistics IO: Logical reads, Execution Plan
+    
+
+
+
+// SQL Optimization:
+
+https://youtu.be/LpPo7R8siXA?t=200  //Video
+
+//Sql perfommance tuning & query optimization
+
+1. Use indexes for search or creaate index for comminly used column in where 
+   conditions.
+2. Use numeric fields to store numeric values insteadof character datatypes
+
+3. Replace UNION with UNION ALL where we don't have duplicate results.
+4. Minimum use of DISTINCT keyword
+5. Don't use selec * from employees
+   Use slect * from employees where rownum<2;
+6. Don't use <> != as index will not be used for that and full table scan will be  performed.
+7. Use EXISTS() instead of conut() to discover whether the table has a specific record.
+8. Use varchar / nvarchar instead of char
+
+
+
+1. Use inner join instead of outer join
+2. Use Where instead of Having to define filter
+3.Use Wildcard(%,_) at the end of phase
+4. Replace Subqueries by Joins
+5.
+  Ex:
+  Where purchased_at >='2018-01-01'
+     AND purchased_at <'2019-01-01'
+
+6. Avoid or conditions
+where username='Mark' OR post_time > '2018-01-01'
+Use UNION
+User UNION ALL (if duplicate allowed)
+
+7. Avoid sorting with a mixed order
+ORDER BY username ASC, post_type DESC
+MYSQL can not use indexed when sorting with a mixed order
+
+8. Void LIKE searched with prefix wildcards
+  where username LIKE '%Mar%'
+  Another option will be to use full-text indexes
+
+//Optimize Query By Tools
+
+MySql query analyzer
+Smart Query Optimizer
+Solarwinds Database Performance Analyzer
+Redgte
+Idera
+EverSql
+dbForge Studio
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+
+//PHP Uses Basics
+
+//1.
+echo 1===1 ? "Number is equal" : "Number is not equal";
+echo 1===1 ? "Number is equal" : "Number is not equal";
+
+
+//2.
+$arr = ['manu','roger','mike','ron'];
+
+foreach($arr as $array) {
+  
+   if($arr === 'roger') {
+       continue;
+   }
+   echo $array."<br>";
+}
+
+
+//3.
+
+$value = 12;        // $value=null
+echo $value ?? 13;
+
+//4. Spaceship operator php 7
+
+echo 1<=>2;
+echo 1<=>1;
+
+
+//5.
+
+$number1 = $number2 = $number3 = 45;
+
+//echo $number1,$number2,$number3;
+
+var_dump($number1);
+
+//6.
+
+$num1 = (int)'12';
+$num2 = 12;
+
+echo $num1 === $num2;
+
+
+----------------------------------------------------
+
+

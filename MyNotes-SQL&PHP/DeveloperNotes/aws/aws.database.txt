@@ -1,0 +1,30 @@
+>>>>> AWS Database <<<<<
+
+
+-----------------------------------------------------------
+
+keys: Database, MySql, 
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+Vdo: AWS RDS Introduction | Relational Database Service | Brain Mentors
+https://youtu.be/aWTNGMIb74k?list=PLoTH3bGuyKHejfknWfaO-r5ZpoUOS-72R&t=2
+
+Vdo: MySQL with AWS | Implementing MySQL Using AWS in Hindi | Brain Mentors 
+https://youtu.be/FnIu-SGFw6c?t=62
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+>> SSH: 
+
+ssh -i test.pem ec2-user@3.16.128.114
+
+
+-------------------------------------------------------------
+
+Databases: 
+ 
+  Mysql, SQL Server, Oracle, Postgre SQL, Auraora, Maria DB
+
+

@@ -1,0 +1,484 @@
+>>>> Django <<<<<<
+
+
+
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------
+//Django CRUD
+
+https://studygyaan.com/django/django-crud-create-retrieve-update-delete-function-based-views
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------
+
+//Django CRUD (Create, Retrieve, Update, Delete) Function Based Views
+
+
+CRUD:
+
+Create :- create new entries in your database
+
+Retrieve :- retrieve or fetch all or some data from your database
+
+Update :- update or edit data in your database.
+
+Delete :- delete data from database.
+
+
+-----------------------------------------------------------------
+
+//1. Create a Django project.
+django-admin startproject blog16
+
+//2. Create an app in that django-project
+python manage.py startapp CRUD
+
+
+//3. Add your app name in installed apps.
+
+Settings.py
+
+INSTALLED_APPS = [
+    'blog16',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+
+
+//Step 2. Add files and Folder to the Django Project
+
+Settings.py
+
+import os
+ 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+
+
+
+//Urls.py
+
+from django.contrib import admin
+from django.urls import path,include
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('',include('CRUD.urls'))
+]
+
+
+
+Settings.py
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'blog16',
+        'USER': 'postgres',
+        'PASSWORD': '2320',
+        'HOST': 'localhost'
+    }
+}
+
+
+
+Index.html
+
+<html>
+ 
+<head>
+    <title>C.R.U.D</title>
+    <style>
+        .container {
+            margin-left: 550px;
+            margin-top: 150px;
+            width: 300px;
+            height: 100px;
+            padding: 15px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+ 
+<body>
+    <p style="margin-left:550px;"><a href="retrieve">Check data</a></p>
+    <div class="container">
+        <table>
+            <tbody>
+                <form action="create" method="POST">
+                    {% csrf_token %}
+                    <tr>
+                        <td> Name</td>
+                        <td><input type="text" name="name" required></td>
+                    </tr>
+                    <tr>
+                        <td> Age</td>
+                        <td><input type="text" name="age" required></td>
+                    </tr>
+                    <tr>
+                        <td> Address</td>
+                        <td><textarea name='address' required></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><button>Submit</button></td>
+                    </tr>
+                </form>
+            </tbody>
+        </table>
+    </div>
+</body>
+ 
+</html>
+
+--------------------------------------------------------------
+
+Create a table in models.py
+
+Models.py
+
+from django.db import models
+ 
+# Create your models here.
+class Details(models.Model):
+    name=models.CharField(max_length=100)
+    age=models.IntegerField()
+    address=models.TextField(max_length=255)
+
+Run migrations
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+Now, provide the path for the index page in urls.py of (here, CRUD) app.
+
+Urls.py
+
+from django.urls import path
+from . import views
+from django.conf.urls import url
+ 
+urlpatterns = [
+    path('',views.index,name='index'),
+    path('create',views.create,name="create"), 
+]
+
+At last add the function for creating new entries in views.py.
+
+Views.py
+
+from django.shortcuts import render,redirect
+from .models import Details
+# Create your views here.
+def index(request):
+    return render(request,'index.html')
+ 
+def create(request):
+    if request.method=="POST":
+        name=request.POST['name']
+        age=request.POST['age']
+        address=request.POST['address']
+            obj=Details.objects.create(name=name,age=age,address=address)
+        obj.save()
+        return redirect('/')
+
+
+-----------------------------------------------------------------------------
+
+3.2 Retrieve operation
+
+
+Retrieve.html
+
+<html>
+ 
+<head>
+    <title>C.R.U.D</title>
+    <style>
+        table {
+            margin-left: 550px;
+            margin-top: 150px;
+            column-width: 20px;
+            font-size: 20px;
+            border: 5px solid black;
+            padding: 5px;
+        }
+ 
+        thead {
+            padding: 10px;
+        }
+ 
+        tbody {
+            padding: 10px;
+        }
+    </style>
+</head>
+ 
+<body>
+    <p style="margin-left:550px;"><a href="/">Home</a></p>
+    <div class="container">
+        <table border="5px solid #000;">
+            <tbody>
+ 
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>City</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+ 
+                </thead>
+            <tbody>
+                {% for i in details %}
+                <tr>
+                    <td style="padding:10px;">{{i.name}}</td>
+                    <td style="padding:10px;">{{i.age}}</td>
+                    <td style="padding:10px;">{{i.address}}</td>
+                    <td style="padding:10px;"><a href="#">Edit</a></td>
+                    <td style="padding:10px;"><a href="#">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </tbody>
+        </table>
+    </div>
+</body>
+ 
+</html>
+
+
+
+----------------------------------------------------------------------
+
+Urls.py
+
+from django.urls import path
+from . import views
+from django.conf.urls import url
+ 
+urlpatterns = [
+    path('',views.index,name='index'),
+    path('create',views.create,name="create"),
+    path('retrieve',views.retrieve,name="retrieve"),
+]
+
+
+
+
+Views.py
+
+from django.shortcuts import render,redirect
+from .models import Details
+ 
+def retrieve(request):
+    details=Details.objects.all()
+    return render(request,'retrieve.html',{'details':details})
+
+
+
+
+//3.3 Update operation
+
+
+Retrieve.html
+
+<td style="padding:10px;"><a href="{% url 'edit' i.pk %}">Edit</a></td>
+
+-----------------------------------------------------------------------------
+
+Edit.html
+
+<html>
+ 
+<head>
+    <title>C.R.U.D</title>
+    <style>
+        .container {
+            margin-left: 550px;
+            margin-top: 150px;
+            width: 300px;
+            height: 100px;
+            padding: 15px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+ 
+<body>
+    <h1>Edit</h1>
+    <p style="margin-left:550px;"><a href="retrieve">Check data</a></p>
+    <div class="container">
+        <table>
+            <tbody>
+                <form action="/update/{{object.id}}" method="POST">
+                    {% csrf_token %}
+                    <tr>
+                        <td> Name</td>
+                        <td><input type="text" name="name" value={{object.name}}></td>
+                    </tr>
+                    <tr>
+                        <td> Age</td>
+                        <td><input type="text" name="age" value={{object.age}}></td>
+                    </tr>
+                    <tr>
+                        <td> Address</td>
+                        <td><textarea name='address'>{{object.address}}</textarea></td>
+                    </tr>
+                    <tr>
+                        <td><button>Submit</button></td>
+                    </tr>
+                </form>
+            </tbody>
+        </table>
+    </div>
+</body>
+ 
+</html>
+
+----------------------------------------------------------------------------
+
+Forms.py
+
+from django import forms
+from .models import Details
+ 
+class detailsform(forms.ModelForm):
+    class Meta:
+        model=Details
+        fields="__all__"
+
+
+---------------------------------------------------------
+
+Urls.py
+
+from django.urls import path
+from . import views
+from django.conf.urls import url
+ 
+urlpatterns = [
+    path('',views.index,name='index'),
+    path('create',views.create,name="create"),
+    path('retrieve',views.retrieve,name="retrieve"),
+    path('edit/<int:id>',views.edit,name="edit"),
+    path('update/<int:id>',views.update,name="update"),
+]
+
+------------------------------------------------------------
+
+
+Views.py
+
+from .forms import detailsform
+def edit(request,id):
+    
+    object=Details.objects.get(id=id)
+    return render(request,'edit.html',{'object':object})
+    
+def update(request,id):
+    object=Details.objects.get(id=id)
+    form=detailsform(request.POST,instance=object)
+    if form.is_valid:
+        form.save()
+        object=Details.objects.all()
+        return redirect('retrieve')
+
+
+//3.4 Delete operation
+
+Retrieve.html
+
+<td style="padding:10px;"><a href="{% url 'delete' i.pk %}">Delete</a></td>
+
+Urls.py
+
+from django.urls import path
+from . import views
+from django.conf.urls import url
+ 
+urlpatterns = [
+    path('',views.index,name='index'),
+    path('create',views.create,name="create"),
+    path('retrieve',views.retrieve,name="retrieve"),
+    path('edit/<int:id>',views.edit,name="edit"),
+    path('update/<int:id>',views.update,name="update"),
+    url(r'^delete_product/(?P<pk>[0-9]+)/$', views.delete,name="delete"),  
+]
+
+
+Views.py
+
+def delete(request,pk):   
+        Details.objects.filter(id=pk).delete()
+        return redirect('retrieve')
+
+
+
+---------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

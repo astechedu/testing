@@ -1,0 +1,226 @@
+<<<<< Print Series <<<<
+
+
+-----------------------------------------------------------
+Keys: Convert dollar to rupee, Print Even and Odd numbers,Swapping Using Third Variable,
+
+      
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+1. 
+//To Find the Sum of given series 1+3+6+10+.....+n 
+
+ if(isset($_POST['submit']))
+{
+$n = $_POST['num1'];
+$sum = 0;
+for ($i=1; $i<= $n; $i++)
+{
+$sum += $i*($i+1)/2; // it gives sum of given series
+}
+echo "Sum of given series upto $n numbers is : ".$sum;
+return 0;
+}
+--------------------------------------------------------
+
+
+2. 
+Reversing a number: 
+
+//Using while loop
+$num = 23456;  
+$revnum = 0;  
+for ($num > 1)  
+{  
+$rem = $num % 10;  
+$revnum = ($revnum * 10) + $rem;  
+$num = ($num / 10);   
+}  
+echo "Reverse number of 23456 is: $revnum";  
+
+--OR-- 
+
+//Using for loop
+
+$num = 23456;  
+$revnum = 0;  
+for ($num=23456;$num > 1;$num /=10)  
+{  
+$rem = $num % 10;  
+$revnum = ($revnum * 10) + $rem;  
+//$num = ($num / 10);   
+}  
+echo "Reverse number of 23456 is: $revnum";  
+
+-----------------------------------------------------------
+
+-----------------------------
+Basic Programs:
+
+Website: 
+https://www.skillpundit.com/php/php-convert-dollars-rupees.php
+--------------------------
+
+1.
+//Convert dollar to rupees: 
+
+if(isset($_POST['submit']))
+{
+$a = $_POST['num'];
+$amount = $a * 71.16;
+echo " Total amount $amount in Rupees from $a Dollars ";
+return 0;
+}
+
+-----------------------------------------------------------------
+
+2.
+
+//To read the marks of three subjects and display the Total, Avg and Class
+
+https://www.skillpundit.com/php/php-read-three-marks-total-avg-class.php
+
+
+if(isset($_POST['submit']))
+{
+$english = $_POST['num1'];
+$maths = $_POST['num2'];
+$science = $_POST['num3'];
+$precision = 4;
+$total = ($english + $maths + $science); // Compute total marks
+$average = number_format($total/3, $precision); //compute the average of total marks
+echo " Total marks of three subjects = ".$total ."";
+echo " Average marks of three subjects = ".$average ."";
+if($total<35 || $english<35 || $maths<35 || $science<35)
+{
+echo "Fail";
+}
+else
+if($average>=60 && $average<70)
+{
+echo "Third Class";
+}
+else
+if($average>=70 && $average<80)
+{
+echo "Second Class";
+}
+else
+if($average>=80 && $average<95)
+{
+echo "First Class";
+}
+else
+{
+echo "Distinction";
+}
+return 0;
+}
+
+-------------------------------------------------------------------------------
+
+
+>> Print Even and Odd numbers: 
+
+Even Odd Program:
+
+Even numbers are those which are divisible by 2. Numbers like 2,4,6,8,10, etc are even.
+Odd numbers are those which are not divisible by 2. Numbers Like 1, 3, 5, 7, 9, 11, etc are odd.
+
+Logic:
+
+    Take a number.
+    Divide it by 2.
+    If the remainder is 0, print number is even.
+
+
+
+>>Even Odd Program in PHP:
+
+A program to check 1233456 is odd or even is shown.
+
+Example:
+
+<?php  
+    $number=1233456;  
+    if($number%2==0)  
+    {  
+     echo "$number is Even Number";   
+    }  
+    else  
+    {  
+     echo "$number is Odd Number";  
+    }   
+?>  
+-------------------------------------------------------------------
+
+>> Swapping Using Third Variable:
+
+Swap two numbers 45 and 78 using a third variable.
+
+Example:
+
+    <?php  
+    $a = 45;  
+    $b = 78;  
+    // Swapping Logic  
+    $third = $a;  
+    $a = $b;  
+    $b = $third;  
+    echo "After swapping:<br><br>";  
+    echo "a =".$a."  b=".$b;  
+    ?>
+----------------------------------------
+
+https://www.javatpoint.com/php-swapping-two-numbers
+
+>> Swapping Without using Third Variable
+
+Swap two numbers without using a third variable is done in two ways:
+
+    Using arithmetic operation + and ?
+    Using arithmetic operation * and /
+
+Example for (+ and -):
+
+<?php  
+$a=234;  
+$b=345;  
+//using arithmetic operation  
+$a=$a+$b;  
+$b=$a-$b;  
+$a=$a-$b;  
+echo "Value of a: $a</br>";  
+echo "Value of b: $b</br>";  
+?> 
+
+
+Example for (* and /):
+
+    <?php  
+    $a=234;  
+    $b=345;  
+    // using arithmetic operation  
+    $a=$a*$b;  
+    $b=$a/$b;  
+    $a=$a/$b;  
+    echo "Value of a: $a</br>";  
+    echo "Value of b: $b</br>";  
+    ?>  
+-----------------------------------------------------
+
+
+
+
+
+
+
+
+	
+
+

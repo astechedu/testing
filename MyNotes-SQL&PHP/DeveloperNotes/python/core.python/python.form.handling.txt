@@ -1,0 +1,121 @@
+<<<<< Python Form Handling <<<<<<
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+Key: 1. tkinger, 2. Form with CSS
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+
+
+1. 
+>>Form Handling Using tk or tkinter
+
+#import tkinter as tk
+from tkinter import *
+#tk._test()
+
+
+
+root=Tk()
+root.geometry("500x300")
+
+# giving title to the main window
+root.title("First_Program")
+
+def getvals():
+	print("Form Submited")
+
+
+# Label is what output will be 
+# Heading or show on the window
+Label(root, text ="Hello World !")
+
+#Field Name
+name = Label(root, text="name")
+phone = Label(root, text="phone")
+
+#Packing Fields
+name.grid(row=1,column=3)
+phone.grid(row=2,column=3)
+
+#Varible for storing data
+namevalue = StringVar
+phonevalue = StringVar
+
+#Creating entry fields
+nameentry = Entry(root, textvariable=namevalue)
+phoneentry = Entry(root, textvariable=phonevalue)
+
+#Pacing entry fields
+nameentry.grid(row=1,column=4)
+phoneentry.grid(row=2,column=4)
+
+
+#create Checkbox
+checkbtn = Checkbutton(text="remember me?")
+checkbtn.grid(row=6,column=3)
+
+#Submit Button
+Button(text="Submit", command=getvals).grid(row=9,column=3)
+
+root.mainloop()
+
+
+
+
+#Form
+#https://youtu.be/95JrLWKy6-I?t=360
+#https://www.geeksforgeeks.org/how-to-install-tkinter-in-windows/
+#https://www.geeksforgeeks.org/introduction-to-tkinter/
+#https://realpython.com/python-gui-tkinter/
+--------------------------------------------------------------------
+
+
+2. 
+>> Form with CSS <<
+
+//https://youtu.be/Nc5AIJJ2ARA?t=207
+
+
+from tkinter import *
+from tkinter import messagebox
+import ast
+
+window=Tk()
+window.title("SingUp")
+window>geometry('925x500+300+200')
+window.configure(bg='#fff')
+window.resizable(False,False)
+
+img = PhotoImage(file='login.png')
+Lable(window,image=img,border=0,bg='white').place(x=50,y=90)
+
+frame=Frame(window,width=350,height=390,bg='#fff')
+frame.place(x=480,y=50)
+
+heading=Label(frame,text="Sign up',fg=#57a1f8',bg='white',font=('Microsoft Yahei UI Light',23,'bold'))
+
+
+
+window.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

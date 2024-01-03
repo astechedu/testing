@@ -1,0 +1,205 @@
+<<<<< PHP with Angular CDN Links  >>>>
+
+
+--------------------------------------------------------
+--------------------------------------------------------
+Keys: APIs
+
+--------------------------------------------------------
+--------------------------------------------------------
+Website: 
+https://www.ngdevelop.tech/loading-external-libraries-from-cdn-in-angular-application/
+
+https://www.webslesson.info/2018/05/angularjs-php-mysql-crud.html
+--------------------------------------------------------
+--------------------------------------------------------
+--------------------------------------------------------
+
+//index.php
+
+
+<!doctype html>
+<html ng-app>
+  <head>
+    <title> AngularJS CDN Integration </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  </head>
+  <body>
+  </body>
+</html>
+
+------------------------------------------------------------------------------------------------
+
+<!doctype html>
+<html lang="en">
+ 
+<head>
+  <!-- ... -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/pdfmake.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.59/vfs_fonts.js'></script>
+</head>
+ 
+<body>
+  <app-root> </app-root>
+</body>
+ 
+</html>
+
+-----------------------------------------------------------------------------------------------
+
+
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>AngularJS PHP CRUD (Create, Read, Update, Delete) using Bootstrap Modal</title>
+  <script src="jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  <script src="jquery.dataTables.min.js"></script>
+  <script src="angular-datatables.min.js"></script>
+  <script src="bootstrap.min.js"></script>
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link rel="stylesheet" href="datatables.bootstrap.css">
+ </head>
+        <body ng-app="crudApp" ng-controller="crudController">
+        </body>
+</html>
+
+
+----
+
+
+    <div class="table-responsive" style="overflow-x: unset;">
+    <table datatable="ng" dt-options="vm.dtOptions" class="table table-bordered table-striped">
+     <thead>
+      <tr>
+       <th>First Name</th>
+       <th>Last Name</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr ng-repeat="name in namesData">
+       <td>{{name.first_name}}</td>
+       <td>{{name.last_name}}</td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+
+-----
+
+
+
+var app = angular.module('crudApp', ['datatables']);
+app.controller('crudController', function($scope, $http){
+
+
+ $scope.fetchData = function(){
+  $http.get('fetch_data.php').success(function(data){
+   $scope.namesData = data;
+  });
+ };
+
+
+
+ $scope.success = false;
+ $scope.error = false;
+
+
+$scope.openModal = function(){
+  var modal_popup = angular.element('#crudmodal');
+  modal_popup.modal('show');
+ };
+
+ $scope.closeModal = function(){
+  var modal_popup = angular.element('#crudmodal');
+  modal_popup.modal('hide');
+ };
+
+
+
+
+   <div align="right">
+    <button type="button" name="add_button" ng-click="addData()" class="btn btn-success">Add</button>
+   </div>
+
+ $scope.addData = function(){
+  $scope.modalTitle = 'Add Data';
+  $scope.submit_button = 'Insert';
+  $scope.openModal();
+ };
+
+
+
+
+
+ $scope.submitForm = function(){
+  $http({
+   method:"POST",
+   url:"insert.php",
+   data:{'first_name':$scope.first_name, 'last_name':$scope.last_name, 'action':$scope.submit_button, 'id':$scope.hidden_id}
+  }).success(function(data){
+   if(data.error != '')
+   {
+    $scope.success = false;
+    $scope.error = true;
+    $scope.errorMessage = data.error;
+   }
+   else
+   {
+    $scope.success = true;
+    $scope.error = false;
+    $scope.successMessage = data.message;
+    $scope.form_data = {};
+    $scope.closeModal();
+    $scope.fetchData();
+   }
+  });
+ };
+
+
+
+
+<?php
+
+//fetch_data.php
+
+include('database_connection.php');
+
+$query = "SELECT * FROM tbl_sample ORDER BY id";
+
+$statement = $connect->prepare($query);
+
+if($statement->execute())
+{
+ while($row = $statement->fetch(PDO::FETCH_ASSOC))
+ {
+  $data[] = $row;
+ }
+
+ echo json_encode($data);
+}
+
+?>
+
+
+
+
+   <div class="alert alert-success alert-dismissible" ng-show="success" >
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    {{successMessage}}
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------

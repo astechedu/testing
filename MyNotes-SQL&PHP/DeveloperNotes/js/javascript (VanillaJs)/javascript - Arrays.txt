@@ -1,0 +1,203 @@
+>>>> JavaScript - Arrays >>>>>
+
+
+-----------------------------------------------------
+Keys: Arrays, Rest Operator (ES5), Spread Opeartor (ES6) , 
+      
+    
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+//Rest & Spreat Operator or more examples:
+https://youtu.be/8TT2gK0u2QQ?t=993
+
+//   : By Greeky Shows
+//UnderStanding Prototypes (Array and Object Prototype) (V. good Video)
+
+
+//UnderStanding Prototypes (Function Prototype) (V. good Video)
+https://youtu.be/HzK69hfrD54?t=624                              //: By Greeky Shows
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+>> Arrays: 
+
+//array()
+
+const myArr = [0,1,2,3,4,5,6]
+const myHeros = ["sanjay","ajay"]
+
+const myArr2 = new Array(1,2,3,4,5)
+console.log(myarr[0])
+
+//Array methods
+
+myArr.push(6)
+myArr.push(7)
+myArr.pop()
+
+
+myArr.unshift(0)
+myArr.shift()
+
+console.log(myArr.includes(9))
+console.log(myArr.indexof(3))
+
+
+const newArr = myArr.join()
+
+console.log(myArr)
+console.log(newArr)
+
+console.log(typeof newArr)
+
+
+
+//slice, splice
+
+console.log("A ", myArr)
+
+const myn1 = myArr.slice(1, 3)
+
+console.log(myn1)
+console.log("B ", myArr)
+
+
+const myn2 = myArr.splice(1, 3)
+
+console.log("C ", myArr)        //Original Array
+
+console.log(myn2)
+
+
+//Examples: 
+
+const marvel_heros = ["thor", "Ironman", "spiderman"]
+const dc_heros = ["superman", "flash", "batman"]
+
+marvel_heros.push(dc_heros)
+//console.log(marvel_heros)
+//console.log(marvel_heros[3][1])
+
+//marvel_heros.concat(de_heros)
+console.log(marvel_heros)
+
+//const allHeros = marvel_heros.concat(de_heros)
+//console.log(allHeros)
+
+const all_new_heros = [...marvel_heros, ...dc_heros]      //Spread Operator
+console.log(all_new_heros)
+
+
+const another_array = [1,2,3, [4,5,6], 7, [4,5]]]
+
+const real_another_array = another_array.flat(Infinity)
+console.log(real_another_array)
+
+//isArray(), Array.from()
+console.log(Array.isArray("Ajay"))
+console.log(Array.from("Ajay"))
+console.log(Array.from({name: "ajay"}))   //Ineresting
+
+let score1 = 100
+let score2 = 200
+let score3 = 300
+
+console.log(Array.of(score1,score2,score3))
+
+
+-------------------------------------------------------------
+-------------------------------------------------------------
+
+
+
+//Spread Operator (ES6) (Adding arrays):
+//Example: 
+
+let array1 = [1,2,3];
+let array2 = [4,5,6];
+let array3 = [...array1,...array2,7,8,9,10];   //Adding two or more arrays
+
+console.log(array3);
+
+//Now,
+    array3 = [1,2,3,4,5,6,7,8,9,10]
+
+//Or
+
+let array3 = [...array1,7,8,9,10,...array2];   //Adding two or more arrays
+
+console.log(array3);
+
+//Now, 
+    array3 = [1,2,3,7,8,9,10,4,5,6]
+
+//Or
+
+let array3 = [7,8,9,10,...array1,...array2];   //Adding two or more arrays
+
+//Now, 
+    array3 = [7,8,9,10,1,2,3,4,5,6]
+
+
+console.log(array3);
+
+--------------------------------------------
+
+//Spread Operator Exmple with Array: 
+
+const names = ["ajay","sonu","geeta","ram"]
+
+function getNames(name1,name2,name3,name4){
+  console.log(name1,name2,name3,name4);
+}
+
+getNames(...names);
+
+----------------------------------------------
+
+//Spread (Overwrite value)
+
+var newStudent={
+   ...students,
+   age:"29"
+}
+
+console.log(newStudent)
+
+--------------------------------------------------
+
+
+------------------------------------------------------------------------------------
+
+//Rest Operator (ES5):
+
+function addNumbers(a,b,c,...others){
+  console.log(arguments)
+  return a+b+c;
+}
+
+const res=addNumbers(2,5,6,8,9)
+console.log(res)
+
+--------------------------------------------
+
+//Rest Operator with Object
+
+var students={
+    name:"Ajay",
+    age:"25",
+    hobbies: ["Cricket","Singing"]
+}
+
+//const age=students.age;
+//const {age,name}=students;       //Array Destructuring
+  const {age,...rest}=students;       //Array Destructuring
+  const {...rest}=students;       //Array Destructuring
+
+  console.log(rest)
+//console.log(name)
+
+
+-------------------------------------------------------------------
+

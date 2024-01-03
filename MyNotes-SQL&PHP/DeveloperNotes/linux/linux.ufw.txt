@@ -1,0 +1,67 @@
+>>>>> Linux UFW (Uncomplecated Fire Wall) <<<<<<
+
+----------------------------------------------------------------------
+
+key: UFW,
+
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+
+>>UFW (Uncomplecated Fire Wall)
+
+//Watch Video: https://youtu.be/gvI_bnxeFPQ?t=912
+
+sudo apt install ufw
+sudo ufw satus
+sudo ufw enable
+sudo ufw disable
+
+//Allow Port
+
+sudo ufw allow 80
+sudo ufw allow 443
+sudo ufw allow 3000
+
+sudo ufw disable 80
+sudo ufw disable 443
+sudo ufw disable 3000
+
+sudo ufw deny 80
+sudo ufw deny 443
+sudo ufw deny 3000
+
+//Delete rule
+sudo ufw delete allow 80
+sudo ufw delete allow 443
+duso ufw delete allow 3000
+
+sudo ufw delete deny 80
+sudo ufw delete deny 443
+duso ufw delete deny 3000
+
+
+//Allow ip address
+
+sudo ufw allow 192.168.100.150      (My ip address)
+sudo ufw deny from 192.168.100.150  
+sudo ufw delete deny from 192.168.100.150
+
+
+
+//Show interfaces
+ip link show
+
+sudo ufw allow in on eth0 from 192.168.100.150
+sudo ufw allow http
+sudo ufw allow https
+
+sudo ufw allow 2815/udp
+sudo ufw allow 2815/tcp
+
+//Subnet
+sudo ufw allow 192.168.100.0/24
+sudo ufw allow from 192.168.100.0/24 proto tcp to any port 22
+
+//Watch Video: https://youtu.be/gvI_bnxeFPQ?t=912
+-------------------------------------------------------------------------------

@@ -1,0 +1,339 @@
+>>>> $wpdb Database Class <<<<<<
+
+
+----------------------------------------------------------------
+
+
+
+How to use $wpdb:
+
+https://developer.wordpress.org/reference/classes/wpdb/
+
+//Use this any where in function or out of function
+
+global $wpdb
+
+$wpdb->get_results, 
+
+----------------------------------------------------------
+Clearing the Cache:
+
+<?php $wpdb->flush(); ?>
+
+----------------------------------------------------------
+
+Users: 
+
+1.
+<?php
+// 1st Method - Declaring $wpdb as global and using it to execute an SQL query statement that returns a PHP object
+global $wpdb;
+$results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}options WHERE option_id = 1", OBJECT );
+
+
+Alternatively: 
+
+<?php
+// 2nd Method - Utilizing the $GLOBALS superglobal. Does not require global keyword ( but may not be best practice )
+$results = $GLOBALS['wpdb']->get_results( "SELECT * FROM {$wpdb->prefix}options WHERE option_id = 1", OBJECT );
+
+
+2.
+Protect Queries Against SQL Injection Attacks
+
+<?php
+$sql = $wpdb->prepare( 'query' , value_parameter[, value_parameter ... ] );
+
+Placeholders: 
+
+    %s (string)
+    %d (integer)
+    %f (float)
+
+----------------------------------------------------------------------------
+
+<?php
+$metakey   = 'Funny Phrases';
+$metavalue = "WordPress' database interface is like Sunday Morning: Easy.";
+
+$wpdb->query(
+   $wpdb->prepare(
+      "INSERT INTO $wpdb->postmeta
+      ( post_id, meta_key, meta_value )
+      VALUES ( %d, %s, %s )",
+      10,
+      $metakey,
+      $metavalue
+   )
+);
+
+----------------------------------------------------------------------------
+
+<?php
+$metakey   = 'Funny Phrases';
+$metavalue = "WordPress' database interface is like Sunday Morning: Easy.";
+
+$wpdb->query(
+   $wpdb->prepare(
+   "INSERT INTO $wpdb->postmeta
+   ( post_id, meta_key, meta_value )
+   VALUES ( %d, %s, %s )",
+   array(
+         10,
+         $metakey,
+         $metavalue,
+      )
+   )
+);
+
+---------------------------------------------------------------------------
+
+SELECT a Variable:
+
+ <?php $wpdb->get_var( 'query', column_offset, row_offset ); ?>
+
+
+Example: 
+
+<?php
+$user_count = $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->users" );
+echo "<p>User count is {$user_count}</p>";
+?>
+
+------------------------------------------------------------------------
+
+//Retrieve and display the sum of a Custom Field value
+
+<?php
+// set the meta_key to the appropriate custom field meta key
+$meta_key = 'miles';
+$allmiles = $wpdb->get_var(
+	$wpdb->prepare(
+		"
+			SELECT sum(meta_value)
+			FROM $wpdb->postmeta
+			WHERE meta_key = %s
+		",
+		$meta_key
+	)
+);
+echo "<p>Total miles is {$allmiles}</p>";
+?>
+
+-----------------------------------------------------------
+
+SELECT a Row:
+
+<?php $wpdb->get_row('query', output_type, row_offset); ?>
+
+Ex:
+
+$mylink = $wpdb->get_row( "SELECT * FROM $wpdb->links WHERE link_id = 10" );
+
+echo $mylink->link_id; // prints "10"
+
+
+$mylink = $wpdb->get_row( "SELECT * FROM $wpdb->links WHERE link_id = 10", ARRAY_A );
+
+
+//would result in an associative array:
+
+echo $mylink['link_id']; // prints "10"
+
+
+And: 
+
+$mylink = $wpdb->get_row( "SELECT * FROM $wpdb->links WHERE link_id = 10", ARRAY_N );
+
+Would result in a numerically indexed array:
+
+echo $mylink[1]; // prints "10"
+
+
+If there is no record with ID 10 in the links table, null will be returned. The following would then be false:
+
+if ( null !== $mylink ) {
+  // do something with the link
+  return true;
+} else {
+  // no link found
+  return false;
+}
+
+
+------------------------------------------------------
+
+SELECT a Column:
+
+get_col( 'query', column_offset ); ?>
+
+
+----------------------------------------------------
+
+Insert Row:
+
+$wpdb->insert(
+	'table',
+	array(
+		'column1' => 'value1',
+		'column2' => 123,
+	),
+	array(
+		'%s',
+		'%d',
+	)
+);
+
+
+Replace Row: 
+
+replace( $table, $data, $format );
+
+Ex: 
+$wpdb->replace(
+	'table',
+	array(
+                'indexed_id' => 1,
+		'column1' => 'value1',
+		'column2' => 123,
+	),
+	array(
+                '%d',
+		'%s',
+		'%d',
+	)
+);
+-------------------------------------------------------
+
+
+Update Rows: 
+
+update( $table, $data, $where, $format = null, $where_format = null );
+
+Ex:
+
+$wpdb->update(
+	'table',
+	array(
+		'column1' => 'value1',	// string
+		'column2' => 'value2'	// integer (number)
+	),
+	array( 'ID' => 1 ),
+	array(
+		'%s',	// value1
+		'%d'	// value2
+	),
+	array( '%d' )
+);
+--------------------------------------------------------------------
+
+Delete Row:
+
+delete( $table, $where, $where_format = null );
+
+Ex:
+
+// Default usage.
+$wpdb->delete( 'table', array( 'ID' => 1 ) );
+
+// Using where formatting.
+$wpdb->delete( 'table', array( 'ID' => 1 ), array( '%d' ) );
+
+---
+-------------------------------------------------------------
+Running General Queries:
+
+query('query');
+
+$wpdb->query(
+	$wpdb->prepare(
+		"
+                	DELETE FROM $wpdb->postmeta
+			WHERE post_id = %d
+			AND meta_key = %s
+		",
+	        13, 'gargle'
+        )
+);
+
+
+Update Query:
+------------
+
+$wpdb->query( $wpdb->prepare(
+	"
+		UPDATE $wpdb->posts
+		SET post_parent = %d
+		WHERE ID = %d
+		AND post_status = %s
+	",
+        7, 15, 'static'
+) );
+-----------------------------------------------------------------
+
+Show and Hide SQL Errors:
+
+<?php $wpdb->show_errors(); ?>
+<?php $wpdb->hide_errors(); ?>
+
+
+<?php $wpdb->print_error(); ?>
+
+
+<?php define( 'DIEONDBERROR', true ); ?>
+
+---------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

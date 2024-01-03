@@ -1,0 +1,37 @@
+<<< SQL techtfq.com Interview Questions <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys:  NATURAL JOIN , SELF JOIN, CROSS JOIN, FULL JOIN, RIGHT JOIN, LEFT JOIN, INNER JOIN,
+
+       GROUP BY clause, HAVING clause, DISTINCT clause, 
+       Subquery,  
+       RANK(), DENSE_RANK(), ROW_NUMBER(),CUME_DIST(), NTILE(), NTH_VALUE(), PERCENT_RANK(), FRAME Clause,
+  
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Website: 
+
+
+
+//Top 25 SQL Interview Questions and Answers
+
+https://techtfq.com/
+https://techtfq.com/blog/how-to-learn-sql-for-free-roadmap-to-learning-sql
+
+https://techtfq.com/
+https://techtfq.com/blog/top-20-sql-interview-questions
+
+Queries:
+https://techtfq.com/blog/learn-how-to-write-sql-queries-practice-complex-sql-queries
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+Top 25 SQL Interview Questions and Answers

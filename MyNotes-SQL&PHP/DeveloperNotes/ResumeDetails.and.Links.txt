@@ -1,0 +1,280 @@
+>>>> Resume Details & Sample <<<<<<<<<
+
+
+
+----------------------------------------------------------------------------
+key: How to mail to company?, Add This Line On Linkedin, Want Job On Linkedin,
+     On Linkedin(about), 
+----------------------------------------------------------------------------
+
+1. Sample Resume: 
+
+https://www.trainwithshubham.com/blog/fresher-resume-for-devops
+
+
+2. Sample Resume (On Google) Good Origaina Resume 
+
+https://www.livecareer.com/resume/examples/web-development/php-developer
+
+
+3. PHP Ddeveloper roles and responsibility
+
+https://www.simplilearn.com/how-to-become-a-php-developer-article
+
+-----------------------------------------------------------------------------
+
+
+
+Technical Skills: 
+----------------
+
+AWS
+Jenkins
+Docker
+Kubernetes
+YAML 
+Ansible
+Terraform
+Bash Scripting
+Python and BOTOS3
+Grafana
+Datree
+Lens
+ValidKube
+Portainer
+ValidIAC
+Kubescape
+Monokle
+Jira
+Nexus
+SQL WorkBench
+Git and GitHub
+Maven and SonarQube
+Helm Charts
+Cpanel and WHM
+Plesk
+Linux and Windows
+RHEL, UBUNTU, CENTOS
+
+Achievements:
+------------
+
+University Topper
+Digital GTR Inventor
+Won Three Consecutive National Level
+Envents
+Speak Deutsch at Base Level
+
+Education:
+---------
+
+AIKTC, Navi Mumbai- B.E (MECHANICAL)
+(2016-2020) - 71.08 %
+
+----------------------------------------------------------------------
+
+
+
+
+
+
+Resume Details:
+
+Experienced PHP Developer with a demonstrated history of working in the information technology and 
+services industry. Skilled in PHP, Opencart, API Development,Javascript, jQuery, and MySQLi.
+
+
+
+Objective:
+
+Motivated PHP Developer seeks employment as part of a dynamic software development
+
+
+
+----------------------------------------------------------------------
+Jenkins;
+
+Intergrate github project to jenkins using Webhook
+
+Creating a pipeline build -> test-deploy -> prod-deploy 
+                        
+ (continuous- mannual intervantion ata hahi, continuous-deployment mein auto staging to prod env mein code deploy hota hai)
+
+Creating a pipeline to build a project
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+
+PHP Developer Roles and Responsibilities:
+
+
+
+Identify and fix compatibility issues involving CSS, HTML, and scripting, often between a series of different platforms and browsers.
+
+Test websites on all sorts of browsers (mobile, notebook, tablet), and address issues identified by customer feedback.
+
+Communicate with and work alongside other development teams and company management to solve conflicts, establish priorities, select the best solutions, or develop criteria for new content.
+
+
+
+
+
+Web Development Tools:
+
+
+    TypeScript
+    CodeKit
+    WebStorm
+    Creative Tim
+    Angular JS
+
+
+
+
+Skills Required to Become a PHP Developer:
+
+
+PHP
+Ajax, jQuery, and MySQL
+
+JavaScript, CSS, and HTML (Require to full stack developer)
+
+APIs, Unix/Linux, and MVC Framework Architecture.
+
+Understanding CakePHP- an open-source web framework, and PHPUnit- a unit testing framework.
+
+Photoshop or a similar design tool
+
+Good communication skills
+
+A knack for problem-solving
+
+The ability to think critically
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+How to mail to company?
+
+https://youtu.be/2aHnI2171l0?t=538
+
+
+1.
+
+
+Passion for Building & Enginnering - Software Engineer Application 
+
+
+Hey Piyush,
+Hope you are doing well. Aerotime is doing a greate job because productivity is seeking in their lives. I would absolutely love to work with
+Aerotime. I can assure it won't bea waste of your time. My experience includes working as Assistant System Engineer at TCS and I want to take up work as a
+Software Developer at Aerotime. Please let me know if there is any opportunity for the same.
+
+Attaching my resume for your reference.
+
+Hope to hear from your soon.
+
+Thanks and Regards
+
+
+
+
+
+2. 
+
+Passion for Building & Enginnering - Software Engineer Application 
+
+Hey Piyush,
+
+Hope you are doing well. I am looing for Software Engineer role at Dukaan. I have 1.6 years of experience and have worked in React, Node.js and MySQL
+Would love to know if there is any opportunity. Sharing my resume for your reference.
+
+Context: - I'm sure my resume might not be the best resume you well come accross but I can assure that my skills and passion is not something you will come
+accross easily. I met you at the Truecaller event where you came as speaker, highly inspired by your experience and perspectives with data. And would be happy
+to work with Dukaan.
+
+Hoping to hear from you soon!
+
+Thanks and regards
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+	
+Add This Line On Linkedin:
+
+About: 
+       Do reach out if you have a passion for building and engineering - Suhash@mydukaan.io
+
+
+------------------------------------------------------------------------------------------------------
+
+Want Job on Linkedin: 
+//https://youtu.be/qGOwC7_OBWg?t=325
+
+On Linkedin: 
+
+
+In your job announcement post ot LinkedIn, here's what you might
+include:
+
+1. Why you are looking for a new job
+   (If relevant, such as moving to a new location, switching fields, or after a period of not working).Through, it might be 
+    relevant to omit this information if you were laid off - no need to call any attention to that
+
+2. Recent project or campaign:
+
+   Mention a specific accomplishment form your resume and use numbers to show your significance. This is called quantifying your
+   achievement and it's effective on both your Linkedin profile and your resume.
+
+3. Relevant skills and expertise:
+   
+   Include keywords and skills highlighting your experience. If you're changing careers into a new industry, remember to highlight
+   transferrable skills that are relevant to the new role or industry you're moving into.
+
+4. Call-to-action
+
+5. Highlight a recent project:
+
+-----------------------------------------------------------------------------
+
+
+On Linkedin (about):
+
+	PHP Web Developer:
+           -: PHP and Codeigniter based Web Development
+           -: JavaScript, Jquery, Ajax, HTML, CSS and Bootstrap
+           -: Relational Database Management System (RDMS) and MYSQL
+      
+        Able to graps concepts quickly with minimal supervision,
+        take ownership of problems and follow them through to completion
+
+------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+

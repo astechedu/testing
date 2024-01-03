@@ -1,0 +1,87 @@
+<<< SQL CTE <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys: CTE, Average Salary,
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Sql Programming Examples
+https://www.w3schools.com/sql/sql_examples.asp
+
+vdo: Simple CTE Example
+https://youtu.be/IerMjQZ87os?t=163
+
+vdo: CTE
+https://youtu.be/WHBH0yz35_8?t=645
+
+Vdo: CTE, Find AVG salary
+https://youtu.be/Z6x-HaV-SVM?t=406
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+>>> CTE (Common Table Expression) <<<<
+
+CTE is like View in sql but not permanent, It is available on run time. View is physically store.
+Vdo: https://youtu.be/IerMjQZ87os?t=163
+
+Syntax: 
+   
+  with cte_name AS (Query)          //Define CTE
+  select *from cte_name;           //Use CTE
+
+
+Example: 
+
+1.
+  with mycte1 AS (select emp_id, emp_fname from employees)      //Define CTE
+  select *from mycte1;                                          //Using CTE
+
+2.
+  //Maximum average salary in department
+    select dept_ID, AVG(sales) AS AVG_SAL from employees group by dept_id
+
+  with mycte2 AS (select dept_ID, AVG(sales) AS AVG_SAL from employees group by dept_id)
+  select MAX(AVG_SAL) from mycte2
+
+
+-------------------------------------------------------------------
+
+
+
+>>> Average Salary 
+
+1.
+
+select avgSal as (select avg(sal) sal from emp)
+select *from emp,avgsal;
+
+
+select avgSal as (select avg(sal) sal from emp)
+select *from emp,avgsal where sal > avgsal.sal;
+
+
+2.
+select *from emp;
+
+select ename, sal, avg(sal) form emp where sal >
+(select avg(sal) from emp);
+
+//In ETC
+
+WITh avgSal AS (select avg(sal) sal from emp)
+select *from emp, avgsal;
+
+WITh avgSal AS (select avg(sal) sal from emp)
+select *from emp, avgsal sal > avgsal.sal;
+
+ 
+
+
+--------------------------------------------------------------------
+

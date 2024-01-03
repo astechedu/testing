@@ -1,0 +1,24 @@
+<<<<< PHP Exceptions  >>>>
+
+
+--------------------------------------------------------
+--------------------------------------------------------
+Keys: 
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+
+>>Exception Handling in PHP:
+
+Exception handling is a powerful mechanism of PHP, which is used to handle runtime errors (runtime errors are called exceptions). So that the normal flow of the application can be maintained.
+
+What is an Exception?
+An exception is an unexcepted outcome of a program, which can be handled by the program itself
+

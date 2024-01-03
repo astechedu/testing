@@ -1,0 +1,149 @@
+>>>> Full Stack >>>>>
+
+
+
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+
+
+
+
+-------------------------------------------------------------------------------
+
+
+Javascript: 
+
+//Full Stack RoadMap:
+
+
+Html, CSS,Javascript, React, Express            //NO
+Javascript, Async Closure, Dbouncd, Promise     //No
+
+
+Yes: 
+
+Javascript: 
+  1. 
+   Basics, Loops, Functions, Array, Objects, I/O   //EmployManagement App, Cli Apps
+
+  2. 
+   Making CLI Apps: I/O, Array Functions: find(), filter(), reduce(), map(),  //Employee list, Enventory Management (5-100)lines, (5-7)days
+
+
+  3. Html, Css
+      Html: tags, div, h1,h2,h3,form,header,footer
+      CSS: class,selector,css define, color, fonts, padding, margin,border,shadow
+      (5-10)daya
+
+
+  4. Vanilla Javascript: 
+       Above all, DOM manipulation, create new tags, generate new tag dynamically, onclick events etc.
+         (Stating frontend developer journey) (15-20)days
+           practice, input, output, listing, property, css, bootstrap 
+
+  5. Reac App:
+        Router: Making pages(home,about,porduct, product page)
+           Jsx: Data Listing
+           state changes: 
+           API,s calls (use effect,events)
+                                                      //Apps: Zomato, ecommerce, tripodiser (Category pages, products in cats)
+
+           (1 months)  (3-5)apps
+
+  6. Backend: 
+       Database: mysql/mongodb
+       Wrappers (ORM/ODM)
+       Express (DB Connection)
+          Apis: /product,            //Zomato,tipodiser             (1-1 1/2)months
+                                     //Postman (publish Collections)
+
+
+  7. React Advanced
+        Use Effects, use Reducer, use Context     
+        Use Memos, use ref, use callback, Custom hooks        //Theoritical only
+
+
+  8. Advanced JavaScript
+        Call Stack, Async.js, Promises, Funtional Programming (Memoisation, Curring, Composition) //Theoritical
+        Closer, Performance, GSS, SSR, Next js (What?)
+
+
+  9. Advanced: 
+       Authentication: JWT | Backend | Redirect | Auth Context      //Projects
+
+  10. TypeScripts: 
+          Use Reducer, use Context   //Functioins in typescript, Basic Types
+
+  11. Redux: 
+        use Reducer, use Context   //Api action , Redux Toolkit     (1-2)weeks
+
+  12. Testing | Jest: 
+         Projects | Utils | Reducers    : Basics, Baking, Utils
+
+
+  13. Build Tools: 
+        Webpacks 
+        NodeJs            //npm run production, npm run test    (1-2)Weeks
+
+
+  14. Advanced CSS: 
+        Component, Library : Positioning, Translate | Transitions, Responsiveness, Box Model, em/rem/px/%
+          
+  (Full Stack Journey)
+
+--------------------------------------------------------------------------------------------------------------       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------
+

@@ -1,0 +1,22 @@
+<<< Redis <<<<<
+
+
+
+------------------------------------------------------------------
+
+Install on linux: 
+
+sudo apt update
+sudo apt install redis
+sudo systemctl enable redis
+sudo systemclt restart redis.service
+redis server
+ 
+apt install redis commander  //For GUI Details
+redis cli
+
+set fname codeimprove
+get fname
+
+
+-------------------------------------------------------------------

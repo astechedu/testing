@@ -1,0 +1,56 @@
+>>>> Core PHP Projects Details <<<<<<
+
+
+--------------------------------------------------------
+--------------------------------------------------------
+Keys: Shopping Cart Details, Top 8 PHP Projects, 
+--------------------------------------------------------
+--------------------------------------------------------
+--------------------------------------------------------
+--------------------------------------------------------
+
+Shopping Cart Details:
+
+Back-end: 
+
+ Dashboard
+ Customer
+ Categories
+ Products
+ Invoices
+ Order
+ User
+
+
+Front-end: 
+
+
+
+
+-------------------------------------------------
+
+Top 8 PHP Projects
+//https://youtu.be/6ZLuN8RRyCU?t=76    //Details
+
+Self-Destruct chat application with AES Encryption  (Text Chat)
+Smart Health Prediction Using Data Mining
+Customer Relationship Management for Internet service providers
+Online Furniture shop
+Student Information chat bot
+Online Bakery shop
+Detecting E Banking Phishing Website
+Online Private Tutor Finder
+
+
+
+Others:
+
+Project of Library Management System
+Project of School Management System
+
+
+
+
+
+
+-------------------------------------------------

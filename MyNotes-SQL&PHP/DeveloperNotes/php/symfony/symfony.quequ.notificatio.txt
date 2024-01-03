@@ -1,0 +1,65 @@
+>>>> Symfony Queue, Notification <<<<
+
+
+Link: 
+
+--------------------------------------------------------------------
+
+Key: Message Queue, Notification
+
+
+--------------------------------------------------------------------
+
+ACID,
+Simplicity, Technical requirements, Features, Support and Community
+Popularity, Maintainability, 
+--------------------------------------------------------------------
+
+Video: Queue, Notification Details
+ https://youtu.be/yXPKB7fHxfo?t=514
+-------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------
+
+Installation:
+-----------------------------------------------------------------------------------
+
+Local Development: 
+  php -S localhost:8000  -t public
+
+-----------------------------------------------------------------------------------
+
+Migrations; 
+
+php bin/console make:entity
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+
+
+
+//Example: 
+
+php bin/console make:entity
+
+
+
+
+
+--------------------------------------------------
+
+> Queue, Notification
+
+https://youtu.be/yXPKB7fHxfo?t=514
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------
+
+
+
+
+

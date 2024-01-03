@@ -1,0 +1,74 @@
+>>>> Yii2 <<<<
+
+
+Link: 
+
+--------------------------------------------------------------------
+
+Key: 
+
+
+--------------------------------------------------------------------
+
+ACID,
+Simplicity, Technical requirements, Features, Support and Community
+Popularity, Maintainability, 
+--------------------------------------------------------------------
+
+
+Laravel, Yii, CodeIgniter, Phalcon, CakePHP, CodeIgniter, Symfony, 
+Laminas, FuelPHP, Fat-Free Framework (F3), Slim
+
+----------------------------------------------------------------------------------
+
+Installation:
+composer create-project --prefer-dist yiisoft/yii2-app-basic basic
+composer create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
+-----------------------------------------------------------------------------------
+
+Yii CMDs:
+php yii serve
+php yii serve --port=8888
+
+
+
+Migration Cli CMDS: 
+
+yii migrate --help
+yii migrate/create users
+yii migrate
+yii migrate/create create_post_table
+yii migrate/fresh
+
+
+SUB-COMMANDS
+
+- migrate/create        Creates a new migration.
+- migrate/down          Downgrades the application by reverting old migrations.
+- migrate/fresh         Drops all tables and related constraints. Starts the migration from the beginning.
+- migrate/history       Displays the migration history.
+- migrate/mark          Modifies the migration history to the specified version.
+- migrate/new           Displays the un-applied new migrations.
+- migrate/redo          Redoes the last few migrations.
+- migrate/to            Upgrades or downgrades till the specified version.
+- migrate/up (default)  Upgrades the application by applying new migrations.
+
+To see the detailed information about individual sub-commands, enter:
+
+  yii help <sub-command>
+
+-------------------------------------------------------------------
+
+----------------------------------------------------------
+
+-----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+>>>>> PHP Built In Functions <<<<
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+Website: 
+
+1. https://vegibit.com/most-useful-php-array-functions/
+
+
+-----------------------------------------------------------
+
+1. Array Functions With Examples: 
+
+    1. is_array()
+    2. in_array()
+    3. array_unique()
+    4. array_search()
+    5. array_reverse()
+    6. array_map()
+    7. array_diff()
+    8. count()
+    9.  max()
+    10. min()
+    11. array_rand()
+    12. array_count_values()
+    13. sort()
+    14. asort()
+    15. rsort()
+    16. arsort()
+    17. implode()
+    18. explode()
+    19. array_key_exists()
+    20. array_keys()
+    21. array_values()
+    22. array_push()
+    23. array_pop()
+    24. array_unshift()
+    25. array_shift()
+    26. array_splice()
+    27. array_merge()
+
+----------------------------------------------------------
+
+

@@ -1,0 +1,234 @@
+>>>> Python Django Shell <<<<<
+
+
+-----------------------------------------------------
+Keys: 
+
+-----------------------------------------------------
+
+
+
+#Python Shell
+#https://www.nickmccullum.com/useful-features-django-shell/
+
+#python manage.py makemigrations
+#python manage.py migrte
+#python manage.py shell
+#from user.models import UserModel
+#user=UserModel.objects.first()
+#print(user.username)	
+#UserModel.objects.all()
+#UserModel.objects.all().values()
+#UserModel.objects.all().filter(id=1)
+#UserModel.objects.all().values().filter(id=1)
+#UserModel.objects.all().values().filter(name='amit')
+#user = UserModel.objects.values().get(id=1)
+#print(user)
+
+
+
+----------------------------------------------------------
+
+
+Python Shell On Windows 10: 
+
+//https://www.tutorialspoint.com/django/django_models.htm
+
+
+//Creating a Model
+
+
+from django.db import models
+
+class Dreamreal(models.Model):
+
+   website = models.CharField(max_length = 50)
+   mail = models.CharField(max_length = 50)
+   name = models.CharField(max_length = 50)
+   phonenumber = models.IntegerField()
+
+   class Meta:
+      db_table = "dreamreal"
+
+
+//CMD
+$python manage.py syncdb
+
+
+
+
+//Manipulating Data (CRUD)
+
+myapp/views.py:
+
+
+from myapp.models import Dreamreal
+from django.http import HttpResponse
+
+def crudops(request):
+   #Creating an entry
+   
+   dreamreal = Dreamreal(
+      website = "www.polo.com", mail = "sorex@polo.com", 
+      name = "sorex", phonenumber = "002376970"
+   )
+   
+   dreamreal.save()
+   
+   #Read ALL entries
+   objects = Dreamreal.objects.all()
+   res ='Printing all Dreamreal entries in the DB : <br>'
+   
+   for elt in objects:
+      res += elt.name+"<br>"
+   
+   #Read a specific entry:
+   sorex = Dreamreal.objects.get(name = "sorex")
+   res += 'Printing One entry <br>'
+   res += sorex.name
+   
+   #Delete an entry
+   res += '<br> Deleting an entry <br>'
+   sorex.delete()
+   
+   #Update
+   dreamreal = Dreamreal(
+      website = "www.polo.com", mail = "sorex@polo.com", 
+      name = "sorex", phonenumber = "002376970"
+   )
+   
+   dreamreal.save()
+   res += 'Updating entry<br>'
+   
+   dreamreal = Dreamreal.objects.get(name = 'sorex')
+   dreamreal.name = 'thierry'
+   dreamreal.save()
+   
+   return HttpResponse(res)
+
+
+
+//Other Data Manipulation:
+
+Let's explore other manipulations we can do on Models. 
+Note that the CRUD operations were done on instances of our model, 
+now we will be working directly with the class representing our model.
+Let's create a 'datamanipulation' 
+
+view in myapp/views.py
+
+
+from myapp.models import Dreamreal
+from django.http import HttpResponse
+
+def datamanipulation(request):
+   res = ''
+   
+   #Filtering data:
+   qs = Dreamreal.objects.filter(name = "paul")
+   res += "Found : %s results<br>"%len(qs)
+   
+   #Ordering results
+   qs = Dreamreal.objects.order_by("name")
+   
+   for elt in qs:
+      res += elt.name + '<br>'
+   
+   return HttpResponse(res)
+
+
+
+//Linking Models
+
+Django ORM offers 3 ways to link models −
+One of the first case we will see here is the one-to-many relationships. 
+As you can see in the above example, 
+Dreamreal company can have multiple online websites. 
+Defining that relation is done by using django.db.models.ForeignKey −
+
+myapp/models.py
+
+from django.db import models
+
+class Dreamreal(models.Model):
+   website = models.CharField(max_length = 50)
+   mail = models.CharField(max_length = 50)
+   name = models.CharField(max_length = 50)
+   phonenumber = models.IntegerField()
+   online = models.ForeignKey('Online', default = 1)
+   
+   class Meta:
+      db_table = "dreamreal"
+
+class Online(models.Model):
+      domain = models.CharField(max_length = 30)
+   
+   class Meta:
+      db_table = "online"
+
+----------------------------------------------------------------------------
+
+
+
+
+
+
+
+//In CMD
+
+python manage.py shell
+py manage.py shell
+
+//Dreamreas & Online are tow Models in Django
+
+//Saving data using Django Shell
+
+>>> from myapp.models import Dreamreal, Online
+>>> dr1 = Dreamreal()
+>>> dr1.website = 'company1.com'
+>>> dr1.name = 'company1'
+>>> dr1.mail = 'contact@company1'
+>>> dr1.phonenumber = '12345'
+>>> dr1.save()
+>>> dr2 = Dreamreal()
+>>> dr1.website = 'company2.com'
+>>> dr2.website = 'company2.com'
+>>> dr2.name = 'company2'
+>>> dr2.mail = 'contact@company2'
+>>> dr2.phonenumber = '56789'
+>>> dr2.save()
+
+
+//Now some hosted domains −
+
+>>> on1 = Online()
+>>> on1.company = dr1
+>>> on1.domain = "site1.com"
+>>> on2 = Online()
+>>> on2.company = dr1
+>>> on2.domain = "site2.com"
+>>> on3 = Online()
+>>> on3.domain = "site3.com"
+>>> dr2 = Dreamreal.objects.all()[2]
+>>> on3.company = dr2
+>>> on1.save()
+>>> on2.save()
+>>> on3.save()
+
+
+//Accessing attribute of the hosting company (Dreamreal entry) from an online domain is simple −
+
+>>> on1.company.name
+>>> dr1.online_set.all()
+>>> Online.objects.filter(company__name__contains = 'company'
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------

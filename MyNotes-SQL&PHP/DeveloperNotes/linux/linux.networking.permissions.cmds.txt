@@ -1,0 +1,296 @@
+>>>>> Linux CMDS <<<<<<
+
+
+
+--------------------------------------------------------
+
+Keys: Ubuntu Networking, Kali Networking, netstat, lsof, nmap, ssh, ip, ping, traceroute,
+      Linux Monitoring, df,du,free, permissions, 
+ 
+
+--------------------------------------------------------
+
+
+>>Networking 
+//Daigrams(Pictures) ( https://www.nakivo.com/blog/virtualbox-network-setting-guide/ )
+
+
+Video: 
+https://youtu.be/xzGeiguILy8?t=178
+
+What is computer networking?         //Communication between two systems
+How it works?                        //
+What are the types of Networks?      //Local Area Network(LAN), Metropolitan Area Network(MAN), Wide Area Network(WAN)
+What is IP Address and these types?  //Public(Show on WAN:All over world), Private(On LAN), Static(Fixed ip), Dynamic(Not fixed)
+Role of parts in Networking?         //Protocals(upd,tcp etc.) Total:65536 ports
+
+
+Communication             // Communiction between two devices
+Sharing Software          //
+Sharing Files             //
+Sharing Info              //
+Information Preservation  //
+Security                  // Securily trnasfer data or file or any
+Sharing Hardware          //
+Sharing Data              //
+
+
+Network Basics: Subnet, Switch, Router, Gateway, F, D
+
+
+IPV4 Vs IPV6
+
+IPV4: 
+Address Size: 32-bit number
+Dotted Decimal Notation: 192.159.0.0/24
+Prefix Notation:
+192.149.0.0/24
+Number of Address: (2^32)4.7 billion Address
+IPV6:
+Address Size: 128-bit number
+Hexadecimal Notation: 23:567:8901:abcd
+
+------------------------------------------------------------------------------------------------------------------
+
+------------------------------------
+Internet Provide public ip to router
+             |
+             |                        |--------->Users Access this ip 82.10.250.19 (On Browsers: google.com, facebook.com etc.)
+             V                        |
+         |public id: 82.10.250.19(any)|    |----->Computer(192.168.0.2)  
+----      -----------------------------    |-----> Mobile(192.168.0.3)  
+ ISP --> |          Router            |    |-----> Laptop(192.168.0.4)  
+----      -----------------------------    |-----> Printer(192.168.0.5)
+            |private ip:192.168.0.1|  -----|   (Local Area Network(Personal Network or My Network Or User Network)
+                 ^
+                 |
+                 |
+              Already have
+
+
+------------------------------------------------------------------------------------
+
+> ufw:
+
+1. Ubuntu Networking cmds:
+
+Video: https://youtu.be/gvI_bnxeFPQ?t=451
+
+CMDs: ifconfig, ufw,
+
+Firewall is block (Defalut) in linux.
+
+
+ufw: Uncomplecated firewall (Ubuntu firewall, Universal Firewall)
+
+ifconfig not found: sudo apt install net-tools
+sudo apt install ufw (If not available)
+
+Allow Port: 
+
+sudo ufw status
+sudo ufw enable
+sudo ufw allow 80
+sudo ufw allow 443
+sudo ufw allow 3000
+sudo ufw deny 3306
+sudo ufw disable
+sudo ufw status
+
+Delete Rule:
+ 
+sudo ufw status
+sudo ufw delete allow 3306
+sudo ufw delete deny 3306
+
+Allow IP Address:
+
+sudo ufw allow from 192.168.100.150
+sudo ufw status
+sudo ufw deny from 192.168.100.150
+sudo ufw status
+sudo ufw delete deny from 192.168.100.150
+
+Interfaces show:
+ip link show
+
+Allow on IP Address:
+sudo ufw allow in on eth0 from 192.168.100.150
+sudo ufw status
+
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw status
+
+
+sudo ufw allow 2815/udp
+sudo ufw allow 2815/tcp
+
+
+IP Address ke Subnet:
+sudo ufw allow from 192.168.100.0/24
+sudo ufw status
+sudo ufw allow from 192.168.100.0/24 proto tcp to any port 22
+
+-------------------------------------------------------------
+
+
+
+
+https://youtu.be/hibnsk5EdFY?t=451
+
+> Tracerout: 
+
+traceroute www.google.com
+traceroute google.com 100                 //Default packet length is 60 byte to change it
+traceroute -q 1 google.com                //Default no. of packet per hop is 3, to change it
+traceroute -p 21101 google.com            //Default port is 33434,to change it
+traceroute -4/6 google.co                //To use IPV6 or 4
+traceroute -g 191.168.42.45 google.com  // To route through gate
+
+--------------------------------------------------------
+Video:
+https://youtu.be/YuTfG-mVRlA?t=18
+
+> NetStat: 
+
+Netstat is a command-line network utility that displays:
+
+Network connetions for TCP, UDP
+Routing tables
+A number of network interface
+Network protocol statistics
+
+netstat -an | grep 1234
+TCP 127.0.0.1:12345     127.0.0.1:10004   ESTABLISHED  39056
+
+netstat -putan | grep <PORT/IP>    //To identify no. of connection on a given port or IP.
+netstat -putan | grep :22
+
+Netstat Commnds: 
+(t-tcp, u-udp, n-numerical addr, l-listening port, p-PID programname)
+
+netstat -a       //To see all the sockets
+netstate -at     //List all the TCP ports
+netstat -6at     //List all the TCP v6 ports
+netstat -au      //List all the UDP ports
+netstat -l       //List all listening ports
+
+netstat -i       //To get the lsit of the interface 
+netstat -ap | gerp <process_name>  //Which port a process is using?
+netstat -s      //How to see statistics by protocol?
+
+netstate -at | more
+netstate -au | more
+netstate -au6 | more
+netstate -al | more
+netstate -aln | more
+netstat -r
+
+
+--------------------------------------------------------
+
+Video: 
+https://youtu.be/7FSRZc_76Ys?t=13
+
+> Linux Monitoring cmds: 
+  (df, du, free)
+
+
+df commands
+Show information about the file system
+
+df -h            // -h -> Human Readable, -BM or -BG -> scale sizes by size
+
+df -h -BK        // In Kilo byte
+df -h -BG       // In mega byte
+
+
+du -h
+du -h File/Path
+du-hc File/Path for total volume
+
+
+
+du command
+   Summarize disk usage of the set of Files, recorsively for directories.
+
+
+If you want to see even size of file then use a 
+
+du -ahc File/Path for total volume
+   -BM or -BG scale sizes by size
+
+du -h /home/paul/script                //Path
+du -h /home/paul/tutorial/archive/     //Path
+du -ah /home/paul/tutorial/archive/
+du -ahc /home/paul/tutorial/archive/
+du -ahc -BK /home/paul/tutorial/archive/
+
+
+
+free command:
+free
+free -h 
+free -s N (Keep refreshing memory after N sec)
+free -c N (Exit after repeating N times)
+
+free -h -c 4
+
+--------------------------------------------------------
+
+
+
+>> Clear RAM In Linux:
+
+Clear Memory In Linux
+
+To clear pagecache only:
+
+sync; echo 1 > /proc/sys/vm/drop_caches
+
+To clear dentries and inodes:
+
+sync; echo 2 > /proc/sys/vm/drop_caches
+
+To clear pagecache, dentries and inodes:
+
+sync; echo 3 > /proc/sys/vm/drop_caches
+
+You can also use the following chain of commands to empty buffer and cache:
+
+free && sync && echo 3 > /proc/sys/vm/drop_caches && free
+
+Note:
+use echo 1 to free page cache:
+use echo 2 to free dentries and inodes:
+use echo 3 to free page cache, dentries, and inodes:
+
+
+
+sudo sync; echo 3 > /proc/sys/vm/drop_caches
+
+sudo apt-get clean
+sudo apt-get autoclean
+sudo apt-get autoremove
+
+
+
+Clear Swap Memory In Linux:
+
+swapoff -a && swapon -a
+
+
+------------------------------------------------------------------------
+
+
+>> Permissions
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------

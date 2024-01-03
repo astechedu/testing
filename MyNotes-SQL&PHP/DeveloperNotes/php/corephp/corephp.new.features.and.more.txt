@@ -1,0 +1,1626 @@
+
+>>>> Core PHP New Features Details & More <<<<
+
+
+--------------------------------------------------------------------------------------------------------
+
+Keys: psr-4, overloading, overiding, database, interface, new features php 8
+      star patterns, mysqli new queries, core function like factorial, logical Interview, 
+      Diagonals Of Matrix, Router .htaccess, PHP Topics, diff between dates, Date & Time Basics, Tracker, 
+      PHP Project Names, Create Capcha Code Image, 
+---------------------------------------------------------------------------------------------------------
+
+PHP 8.0 New Features: 
+
+https://www.atatus.com/blog/features-in-php-8/
+
+ Union Types, Just In Time Compilation, Named Arguments, Match Expressions, Attributes
+ Constructor Property Promotion, Nullsafe Operator, Weak Maps, Saner string to number comparisons,
+ Consistent type errors for internal functions
+
+
+
+//PHP Interview ques/ans (As array_merge() or array_combine())
+
+https://www.onlineinterviewquestions.com/php-array-interview-questions/
+
+//Freasers
+//PHP With code: PHP Important projects Suggestion
+https://www.interviewbit.com/blog/php-projects/
+
+
+---------------------------------------------------------------------------------------------------
+
+PHP 8.1 New Features: 
+
+Enums
+New in initializers of a class
+Read-only propertes
+fsync() function
+Final class constants
+array_is_list() function
+
+-----------------------------------------------------------------------------
+
+Read-only class
+
+
+------------------------------------------------------------------------------
+
+PHP 8.2 New Features: 
+
+----------------------------------------------------------------------------
+
+
+
+Link: 
+
+//Basic php 8 peatures explained
+https://php.watch/versions/8.0
+https://www.atatus.com/blog/features-in-php-8/
+
+--------------------------------------------------------------------
+
+//One Year Interview Q/Ans:
+http://phpgurukul.com/how-to-create-a-shopping-cart-in-php/
+
+//All More Projects Code Like Cookies, Date Pagination, Management Projects etc: 
+https://phpgurukul.com/
+
+
+//Pagination: 
+https://www.javatpoint.com/php-pagination
+
+//Files Upload
+https://www.tutorialrepublic.com/php-tutorial/php-file-upload.php
+Or
+https://www.positronx.io/laravel-file-upload-with-validation/
+
+//Download Files
+https://www.tutorialrepublic.com/php-tutorial/php-file-download.php
+
+//Authentication
+https://alexwebdevelop.com/user-authentication/
+
+//Read PDF
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition
+https://www.holisticseo.digital/technical-seo/web-accessibility/http-header/content-disposition
+
+//Download File
+https://www.javatpoint.com/php-download-file
+
+
+//Core php apis, folder structures
+https://code.tutsplus.com/tutorials/how-to-build-a-simple-rest-api-in-php--cms-37000
+
+
+//Shopping Cart  (Simple Example & More)
+https://www.allphptricks.com/simple-shopping-cart-using-php-and-mysql/
+http://phpgurukul.com/how-to-create-a-shopping-cart-in-php/
+
+--------------------------------------------------------------------
+
+Design Patterns: 
+Link Details: 
+https://www.freecodecamp.org/news/the-basic-design-patterns-all-developers-need-to-know/
+ 
+Singleton, Iterator, Factory, Abstract Factory, Repository, 
+Chain of Responsibility etc.
+
+Laravel: Builder Design Pattern, Factory, Strategy, Provider, Repository, Facade
+
+--------------------------------------------------------------------
+
+ACID,
+Simplicity, Technical requirements, Features, Support and Community
+Popularity, Maintainability, 
+--------------------------------------------------------------------
+
+
+Laravel, Yii, CodeIgniter, Phalcon, CakePHP, CodeIgniter, Symfony, 
+Laminas, FuelPHP, Fat-Free Framework (F3), Slim
+
+--------------------------------------------------------------------
+
+Magic Methods:
+
+__construct(), __destruct(), __get(), __set(), __isset(), __unset(), 
+__autoload(), __clone(), __sleep(), __wakeup(), __call(), __callStatic(),
+__toString(), __invoke()
+
+-------------------------------------------------------------------
+$args = func_get_args();
+
+
+----------------------------------------------------------
+
+echo __LINE__;
+echo __FILE__;
+echo __DIR__;
+echo __FUNCTION__;
+echo __CLASS__;
+echo __METHOD__;
+echo __NAMESPACE__;
+
+---------------------------------------------------------
+
+FILTER_VALIDATE_INT
+FILTER_VALIDATE_IP, FILTER_FLAG_IPV6
+
+PHP_AUTH_USER
+PHP_AUTH_PW
+
+----------------------------------------------------------
+
+password_hash($passowr, PASSWORD_DEFAULT);
+password_identify($password,PASSWORD_HASHED)
+
+----------------------------------------------------------
+
+print_r(get_loaded_extensions());
+print_r(get_extension_funcs("xml"));
+echo "<pre>";print_r(get_resources());
+
+----------------------------------------------------------
+---------------------------------------------------------
+asort()
+array_merge()
+array_combine()
+array_reverse()
+array_replace()
+array_search()
+array_count_values()
+array_key_exists('key', arry)
+
+-----------------------------------------------------------
+
+ ord()
+ chr() 
+ md5()
+ chop()
+ strcmp()
+ strrev() 
+ ucfirst() & ucwords()
+ bin2hex() & hex2bin() 
+ implode() 
+ 
+-----------------------------------------------------------
+
+$route = array_shift($args);
+__invoke($services)
+__call()
+fun_get_args()
+
+
+----------------------------------------------------------
+//
+ob_start()
+password_hash()
+mb_strlen()
+isNameValid()
+isPasswdValid()
+isIdValid()
+
+----------------------------------------------------------
+
+
+----------------------------------------------------------
+Path Info:
+echo $currentPath = $_SERVER['PHP_SELF']; 
+echo "<pre>";print_r($pathInfo = pathinfo($currentPath));
+
+----------------------------------------------------------
+----------------------------------------------------------
+----------------------------------------------------------
+----------------------------------------------------------
+
+Working with date: 
+
+//Adding 7 days to today's date
+
+$dt = date("Y-m-d");
+
+echo $startDate = date( "Y-m-d", strtotime( "$dt +0 day" ) ); // PHP:  2009-03-04
+
+echo $endDate = date( "Y-m-d", strtotime( "$dt +7 day" ) ); // PHP:  2009-03-31
+
+
+
+//Diff two dates
+function dateDiffInDays($date1, $date2) 
+  {
+      // Calculating the difference in timestamps
+      $diff = strtotime($date2) - strtotime($date1);
+  
+      // 1 day = 24 hours
+      // 24 * 60 * 60 = 86400 seconds
+      return abs(round($diff / 86400));
+  }
+  
+  // Start date
+  $date1 = "17-09-2018";	
+  
+  // End date
+  $date2 = "31-09-2018";
+  
+  // Function call to find date difference
+  $dateDiff = dateDiffInDays($date1, $date2);
+  
+  // Display the result
+  printf("Difference between two dates: "
+     . $dateDiff . " Days ");
+
+
+Output: 
+Difference between two dates: 14 Days
+
+---------------------------------------------------------------------
+
+ // Creates DateTime objects
+  $datetime1 = date_create('17-09-2018');
+  $datetime2 = date_create('25-09-2018');
+  
+  // Calculates the difference between DateTime objects
+  $interval = date_diff($datetime1, $datetime2);
+  
+  // Display the result
+  echo $interval->format('Difference between two dates: %R%a days');
+
+
+Output: 
+Difference between two dates: +8 days
+
+-----------------------------------------------------------------------
+
+PHP Form: 
+
+                <form action="" method="post">
+                    <h3>Login</h3>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" name="email_signin" id="email_signin" />
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" name="password_signin" id="password_signin" />
+                    </div>
+                    <button type="submit" name="login" id="sign_in"
+                        class="btn btn-outline-primary btn-lg btn-block">Sign
+                        in</button>
+                </form>
+
+
+-------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------
+
+PHP Read & Download PDF:
+
+header("Content-type:application/pdf");
+
+// It will be called downloaded.pdf
+header("Content-Disposition:attachment;filename=\"downloaded.pdf\"");
+
+// The PDF source is in original.pdf
+readfile("original.pdf");
+
+-------------------------------------------------------------------------------
+
+PHP Read PDF: 
+
+$name = 'sample.pdf';
+//file_get_contents is standard function
+$content = file_get_contents($name);
+header('Content-Type: application/pdf');
+header('Content-Length: '.strlen( $content ));
+header('Content-disposition: inline; filename="' . $name . '"');
+header('Cache-Control: public, must-revalidate, max-age=0');
+header('Pragma: public');
+header('Expires: Sat, 26 April 2023 05:00:00 GMT');
+header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+echo $content;
+
+-------------------------------------------------------------------------------
+
+PHP: Download File
+
+//$file_url = 'http://www.javatpoint.com/f.txt';
+OR
+$file_url = 'db.php';  
+header('Content-Type: application/octet-stream');  
+header("Content-Transfer-Encoding: utf-8");   
+header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\"");   
+readfile($file_url);  
+
+-------------------------------------------------------------------------------
+
+
+PHP Download File Example: Binary File
+
+$file_url = 'http://www.myremoteserver.com/file.exe';  
+OR
+
+$file_url = 'db.exe'; 
+
+header('Content-Type: application/octet-stream');  
+header("Content-Transfer-Encoding: Binary");   
+header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\"");   
+readfile($file_url);  
+
+----------------------------------------------------------------------------------------
+
+PHP Date Diff : 
+
+//Find diff of Days
+
+$todate= strtotime('May 3, 2012 10:38:22 GMT');
+$fromdate= strtotime('06 Apr 2012 07:22:21 GMT');
+$calculate_seconds = $todate- $fromdate; // Number of seconds between the two dates
+$days = floor($calculate_seconds / (24 * 60 * 60 )); // convert to days
+echo($days);
+
+OR
+
+$datetime1 = strtotime(date('Y-m-d', strtotime('May 3, 2012 10:38:22 GMT')));
+$datetime2 = strtotime(date('Y-m-d', strtotime('06 Apr 2012 07:22:21 GMT')));
+
+$secs = $datetime1 - $datetime2;// == <seconds between the two times>
+$days = $secs / 86400;
+
+echo $days;
+
+
+----------------------------------------------------------------------------------------
+
+
+Pagination: 
+
+<?php
+        include 'db.php';
+        if (isset($_GET['pageno'])) {
+            $pageno = $_GET['pageno'];
+        } else {
+            $pageno = 1;
+        }
+
+        $no_of_records_per_page = 2;
+        $offset = ($pageno-1) * $no_of_records_per_page;
+
+        $conn=mysqli_connect("localhost","root","","php");
+        
+        if (mysqli_connect_errno()){
+            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+            die();
+        }
+        $i=0;
+        $total_pages_sql = "SELECT COUNT(*) FROM categories";
+        $result = mysqli_query($conn,$total_pages_sql);
+        $total_rows = mysqli_fetch_array($result)[0];
+
+        $total_pages = ceil($total_rows / $no_of_records_per_page);
+        $sql = "SELECT * FROM categories LIMIT $offset, $no_of_records_per_page";
+        $res_data = mysqli_query($conn,$sql);?>
+
+        
+       <?php while($row = mysqli_fetch_array($res_data)){ 
+        
+           echo $row['category_name']."<br>";
+
+        }
+          
+
+        //mysqli_close($conn);
+       ?>
+
+    <ul class="pagination">
+        <li><a href="?pageno=1">First</a></li>
+
+        <li class="<?php if($pageno <= 1){ echo 'disabled'; } ?>">
+            <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>">Prev</a>
+        </li>
+        &nbsp; &nbsp;
+        <?php
+
+            $sql = "SELECT * FROM categories";
+            $res_data = mysqli_query($conn,$sql);      
+            while($row = mysqli_fetch_array($res_data)){?>
+            
+               <a href="index.php?pageno=<?= $row['id'] ?>"><?= $row['id'] ?></a>
+        <?php }
+
+         mysqli_close($conn);
+        ?>
+        &nbsp; &nbsp;
+        <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
+            <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>">Next</a>
+        </li>
+
+
+        <li><a href="?pageno=<?php echo $total_pages; ?>">Last</a></li>
+    </ul>
+
+--------------------------------------------------------------------------------------------------------------------------
+
+//PHP PDF: 
+
+//Document to pdf all cmds
+https://mpdf.github.io/getting-started/creating-your-first-file.html
+
+PHP PDF: 
+
+composer require mpdf/mpdf
+
+//index.php file
+
+<?php
+
+ require_once __DIR__ . '/vendor/autoload.php';
+
+    include 'dbcon.php';   
+    
+    //Object create_function(args, code)
+    $db_conn = new dbcon();    
+    
+    $mpdf = new \Mpdf\Mpdf();
+
+
+    foreach($db_conn->fetchall() as $user) { 
+
+     $html = '';
+     $html .= "<table class='table table-striped'>
+                    <thead>
+                        <tr><th>ID</th><th>Name</th><th>Salary</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                           <td>{$user['id']}</td><td>{$user['name']}</td><td>{$user['salary']}</td>
+                        </tr>
+                    </body>
+                </table>";  
+
+   
+    $mpdf->WriteHTML($html); }
+
+    $mpdf->Output();
+
+-------------------------------------------------------------------------------------------------------------------------
+
+//Star Pattern using single loop:
+
+$n=5;
+$curr_star=0;
+$line_no=1;
+
+for($line_no=1; $line_no <= $n;){
+
+   if( $curr_star < $line_no ){      //$line_no = 1,2,3,4,5
+      
+      echo "*";                  
+      $curr_star++;  
+      continue;
+   }
+   
+   if($curr_star == $line_no){
+       echo "<br>";
+       $line_no++;
+       $curr_star=0;
+   }
+
+}
+
+----------------------------------------------------------------
+
+//1. Null coalescing operator:
+
+Null coalescing operator (??) work as an if statement it takes two values if first is null then it is replaced by second.
+
+$a = null;
+$b = $a ?? 'B';
+
+Ans: B
+
+----------------
+
+//2. In PHP8, NullSafe Operator (?->)
+was introduced will gives option of chaining the call from one function to other. 
+
+
+$country =  null;
+
+if ($session !== null) {
+  $user = $session->user;
+
+  if ($user !== null) {
+    $address = $user->getAddress();
+ 
+    if ($address !== null) {
+      $country = $address->country;
+    }
+  }
+}
+
+
+OR (New)
+
+
+$country = $session?->user?->getAddress()?->country;
+
+---------------------------
+
+//3. Spaceship operator 
+
+
+The <=> ("Spaceship") operator will offer combined comparison in that it will :
+
+Return 0 if values on either side are equal
+Return 1 if the value on the left is greater
+Return -1 if the value on the right is greater
+
+
+   //Comparing Integers
+
+    echo 1 <=> 1; //output  0
+    echo 3 <=> 4; //output -1
+    echo 4 <=> 3; //output  1
+
+    //String Comparison
+
+    echo "x" <=> "x"; //output  0
+    echo "x" <=> "y"; //output -1
+    echo "y" <=> "x"; //output  1
+
+
+
+$a <=> $b
+
+    0 if $a == $b
+    -1 if $a < $b
+    1 if $a > $b
+
+
+
+-----------------------------------------------------------------
+
+
+//PDO Exception Handling:
+
+try{
+	
+
+}catch(Exception $e){
+	$e->getLine();
+	$e->getCode();
+	$e->getFile();
+	$e->getMessage();
+
+}
+
+
+try{
+  PDO:
+$error = $sql->errorInfo();
+
+echo "<pre>"; print_r($error);
+
+}Catch(PDOException $e){
+
+
+}
+-----------------------------------------------------------
+
+
+Ultimate PHP Security Best Practices:
+
+https://www.cloudways.com/blog/php-security/
+
+    Update PHP Regularly
+    Cross site scripting (XSS)
+    SQL Injection Attacks
+    Cross site request forgery XSRF/CSRF
+    Session Hijacking
+    Hide Files from the Browser
+    Securely Upload Files
+    Use SSL Certificates For HTTPs
+    Deploy PHP Apps on Clouds
+
+
+
+
+
+
+------------------------------------------------------------------
+
+PHP Overloading: 
+
+Example: 01
+
+//Overloding in php
+class overload {
+    public $name;
+    public function __construct($agr) {
+        $this->name = $agr;
+    }
+    public function __call($methodname, $agrument) {
+         if($methodname == 'sum2') {
+
+          if(count($agrument) == 2) {
+              $this->sum($agrument[0], $agrument[1]);
+          }
+          if(count($agrument) == 3) {
+
+              echo $this->sum1($agrument[0], $agrument[1], $agrument[2]);
+          }
+        }
+    }
+    public function sum($a, $b) {
+        return $a + $b;
+    }
+    public function sum1($a,$b,$c) {
+
+        return $a + $b + $c;
+    }
+}
+$object = new overload('Sum');
+echo $object->sum2(1,2,3);
+
+-------------------------------------
+
+
+Example: 02
+
+Example of Overloading:
+
+class Shape {
+   const Pi = 3.142 ;  // constant value
+  function __call($functionname, $argument){
+    if($functionname == 'area')
+    switch(count($argument)){
+        case 0 : return 0 ;
+        case 1 : return self::Pi * $argument[0] ; // 3.14 * 5
+        case 2 : return $argument[0] * $argument[1];  // 5 * 10
+    }
+
+  }
+
+ }
+ $circle = new Shape();`enter code here`
+ echo "Area of circle:".$circle->area()."</br>"; // display the area of circle Output 0
+ echo "Area of circle:".$circle->area(5)."</br>"; // display the area of circle
+ $rect = new Shape();
+ echo "Area of rectangle:".$rect->area(5,10); // display area of rectangle
+
+
+------------------------------------------------------------------
+
+--------------------------------------------
+
+
+How implement Polymorphism in PHP:
+
+https://kafle.io/tutorials/php/oop
+
+
+Database: 
+
+
+<?php
+interface DatabaseInterface
+{
+    public function db_connect();
+    public function add($data);
+    public function get($where);
+    public function update($where);
+    public function remove($where);
+}
+?>
+
+
+<?php
+abstract class DatabaseMethods
+{
+    private $host;
+    private $db;
+    private $uid;
+    private $password;
+    public function __construct($host, $db, $uid, $password)
+    {
+        $this->host     = $host;
+        $this->db       = $db;
+        $this->uid      = $uid;
+        $this->password = $password;
+    }
+}
+?>
+
+MySQLDriver.php:
+
+<?php class MySQLDriver extends DatabaseMethods implements DatabaseInterface { 
+
+    public function __construct($host, $db, $uid, $password) 
+    { 
+        parent::__construct($host, $db, $uid, $password); 
+    } 
+
+    public function db_connect() 
+    { 
+
+    } 
+    public function remove($where) 
+    { 
+    } 
+    public function add($data) 
+    { 
+
+    } 
+    public function get($where) { 
+
+    } 
+    public function update($where) {
+        
+    } 
+} 
+?>
+
+
+SQLServerDriver.php:
+
+
+<?php class SQLServerDriver extends 
+DatabaseMethods implements DatabaseInterface { 
+    public function __construct($host, $db, $uid, $password) 
+    { 
+        parent::__construct($host, $db, $uid, $password); 
+    } 
+
+    public function db_connect() 
+    { 
+
+    } 
+    public function remove($where) 
+    { 
+    } 
+    public function add($data) 
+    { 
+
+    } 
+    public function get($where) { 
+
+    } 
+    public function update($where) {
+        
+    } 
+}
+ ?>
+
+Example:
+
+<?php 
+    $db = new SQLServerDriver($host,$db,$uid,$password); 
+    $db->db_connect();
+    $db->add($data);
+?>
+
+-------------------------------------------------------------------------------------
+
+//New features php 8
+
+Functions
+
+    Weak Map class
+    Stringable interface
+    str_contains(), str_starts_with(), str_ends_with()
+    fdiv()
+    get_debug_type()
+    get_resource_id()
+    token_get_all() object implementation
+    New DOM Traversal and Manipulation APIs
+
+
+
+
+--------------------------------------------------------------------------------------
+
+star patterns:
+
+ 1. Square Star Pattern
+
+https://www.javatpoint.com/star-program-in-c
+
+
+ $n=5;   
+    
+    for($i=0;$i< $n;$i++)  
+    {  
+        for($j=0;$j<$n;$j++)  
+        {  
+            echo ("*");  
+        }  
+        echo ("<br>");  
+    }  
+      
+
+*****
+*****
+*****
+*****
+*****
+
+-------------------
+
+2. Hollow Square Star Pattern (Not Work)
+
+
+  $n=5;   
+    
+    for($i=1; $i<=$n; $i++)  
+    {  
+        for($j=1; $j<=$n; $j++)  
+        {  
+            if($i==1 || $i==$n || $j==1 || $j==n)  
+            {  
+              echo("*");  
+            }else{
+              echo(" ");  
+            }
+        }  
+                  
+        echo ("<br>");  
+    }  
+       
+
+
+*****
+*   *
+*   *
+*   *
+*****
+
+----------------------
+
+3. Rhombus Star Pattern
+
+  $n=5;   
+    
+    for($i=$n;$i>=1;$i--)  
+    {  
+        for($j=1;$j<=$i-1;$j++)  
+        {  
+            echo("&nbsp");  
+        }  
+        for($k=1;$k<=$n;$k++)  
+        {  
+            echo("*");  
+        }  
+        echo("<br>");  
+    }   
+
+
+
+    *****
+   *****
+  *****
+ *****
+*****
+
+----------------------
+
+4. Hollow Rhombus Star Pattern
+
+
+
+
+---------------------------
+5. 
+
+ $n=5;
+ 
+  for($i=0;$i<$n;$i++){  
+ 
+   for($j=0;$j<$n;$j++){
+     if($i==0 || $i==$n-1 || $j==1 || $j==$n-1){
+        echo "*";
+     }else{echo "&nbsp;";}
+   }
+     echo "<br>";
+}
+
+*****
+* *
+* *
+* *
+*****
+
+
+
+--------------------------------------
+
+6. Pyramid
+
+$n=4;
+for($i=1;$i<=$n;$i++) {
+
+  for($j=1;$j<=(2*$n)-1;$j++) {
+     
+     if($j>=$n-($i-1) && $j<=$n+($i-1)) {
+       
+        echo "*";
+
+     }else{
+    	echo "&nbsp;$nbsp";
+     }
+
+  }
+  echo "<br/>";
+}
+
+--------------------------------------
+
+
+
+$n=4
+
+11, 12, 13, 14, 15, 16, 17
+
+
+21, 22, 23, 24, 25, 26, 27
+
+---------------------------------------------------------
+
+
+<?php
+for($i=0;$i<=5;$i++){
+for($j=5-$i;$j>=1;$j--){
+echo "*&nbsp;";
+}
+echo "<br>";
+}
+?>
+
+
+* * * * * 
+* * * * 
+* * * 
+* * 
+*
+
+---------------------------------
+
+
+<?php
+for($i=0;$i<=5;$i++){
+for($j=1;$j<=$i;$j++){
+echo "*&nbsp;";
+}
+echo "<br>";
+}
+?>
+
+
+*
+* *
+* * *
+* * * *
+* * * * *
+
+-----------------------------------
+
+
+
+<?php
+for($i=0;$i<=6;$i++){
+for($k=6;$k>=$i;$k--){
+echo " &nbsp;";
+}
+for($j=1;$j<=$i;$j++){
+echo "* &nbsp;";
+}
+echo "<br>";
+}
+for($i=5;$i>=1;$i--){
+for($k=6;$k>=$i;$k--){
+echo " &nbsp;";
+}
+for($j=1;$j<=$i;$j++){
+echo "* &nbsp;";
+}
+echo "<br>";
+}
+?>
+
+
+
+*
+*  *
+*  *  *
+*  *  *  *
+*  *  *  *  *
+*  *  *  *  *  *
+*  *  *  *  *
+*  *  *  *
+*  *  *
+*  *
+*
+
+
+----------------------------------------------------------------------------------
+
+Core Function Like Factorial:
+
+https://www.etutorialspoint.com/index.php/php-exercises/recursion-function-in-php
+
+1. By Recurstion
+ 
+function fact($n) {
+   
+    if($n <= 1 ){
+      return 1;
+    }
+   
+    return $n * fact($n-1);      
+}
+
+echo fact(4);
+
+
+2. By Loop
+
+$num = 4;  
+$factorial = 1; 
+
+for ($x=$num; $x>=1; $x--)   
+{  
+  $factorial = $factorial * $x;  
+}  
+echo "Factorial of $num is $factorial";  
+
+
+
+-----------------------------------------------------------------------------------
+
+2. 10,9...1
+
+function nums($n) {
+   
+   if($n <= 0) { 
+     return 1;
+   }  
+   
+   echo $n."<br>";
+   nums($n-1);
+   
+}
+
+echo nums(10);
+
+---------------------------
+
+3. 1,2.....10
+
+function nums($n) {
+   
+   if($n > 10) { 
+     return 1;
+   }
+   
+   
+   echo $n."<br>";
+   nums($n+1);
+   
+}
+
+echo nums(1);
+
+
+
+-----------------------------------------------------------------------------------
+
+
+factorial : 
+
+
+ $number = $_POST['num'];     /*number to get factorial */
+ $fact   = 1;
+ for($k=1;$k<=$number;++$k)
+ {
+ $fact =  $fact*$k;
+ }
+ echo "Factorial of $number is ".$fact;
+
+
+-------------------------------------
+
+
+Number Prime or not ? : 
+
+$check=0;
+$num=$_POST['num'];
+
+for($i=2;$i<=($num/2);$i++)
+{
+if($num%$i==0)
+{
+$check++;
+if($check==1)
+{
+ break ;
+}
+}
+}
+if($check==0)
+{
+echo "It is a Prime Number";
+}
+else
+{
+echo "It is not a Prime Number";
+}
+
+-------------------------------------
+
+
+Number Armstrong : 
+
+$number = $_POST['num'];      // get the number entered by user
+$temp = $number;
+$sum  = 0;
+while($temp != 0 )
+{
+$remainder   = $temp % 10; //find reminder
+$sum         = $sum + ( $remainder * $remainder * $remainder );
+$temp        = $temp / 10;
+}
+if( $number == $sum )
+{
+echo "$number is an Armstrong Number";
+}else
+{
+echo "$number is not an Armstrong Number";
+}
+
+
+
+
+-----------------------------------------------
+
+A year leap year or not ?
+
+
+$year=$_POST['year'];
+if($year%4==0)
+{
+echo "It is a leap year";
+}
+else
+ {
+   echo "It is not a leap year";
+ }
+
+
+-----------------------------------------------------------
+
+
+A number reverse ?
+
+         $rev=0;
+         $num=$_POST['num'];
+          while($num>=1)
+                {
+                  $re=$num%10;
+                  $rev=$rev*10+$re;
+                  $num=$num/10;
+                 }
+                   echo "Reverse number of is " .$rev;
+
+-----------------------------------------------------------
+ 
+ Swap two values without third variable ?
+
+
+$value1=$_POST['num1'];
+$value2=$_POST['num2'];
+$value1=$value1+$value2;
+$value2=$value1-$value2;
+$value1=$value1-$value2;
+        echo "Value of first variable after swapping" .$value1."<br />";
+        echo "Value of second variable after swapping"  .$value2;
+
+
+--------------------------------------------------------------
+
+//Create the PHP Project Skeleton for Your REST API
+
+
+composer.json
+
+{
+    "require": {
+        "vlucas/phpdotenv": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    }
+}
+
+-------------------------------------------------------------
+
+New Features php 8.2: 
+---------------------
+Without the mysqli_execute_query function, a parameterized query is executed with a lot of boilerplate code like this:
+
+$query = 'SELECT uid, username FROM users WHERE uid = ?';
+$statement = $connection->prepare($query);
+$statement->bind_param('s', $uid);
+$statement->execute();
+$result = $statement->get_result();
+
+With the addition of mysqli_execute_query, the snippet above could be greatly simplified:
+
+Or (New 8.2)
+
+$query = 'SELECT uid, username FROM users WHERE uid = ?';
+$result = $mysqli->execute_query($sql, [$uid]);
+
+-------------------------------------------------------------
+
+
+Logical Interview: 
+
+https://www.toptal.com/php/interview-questions
+
+
+1. What are the differences between echo and print in PHP?
+
+diff echo and print
+
+
+2. What will this code output and why?
+
+$x = true and false;       
+var_dump($x);
+
+Ans: No Result
+Ans: $x = (true and false) is false.        
+       (true and true) is true or (true * true), 
+       (false and false) is false or (false * false),       
+      But (false and true) is false Or (false * true) , (true and false) is false or (true * false)
+    
+
+
+3. What will be the output of the code below and why?
+
+
+$x = 5;
+echo $x;
+echo "<br />";
+echo $x+++$x++;
+echo "<br />";
+echo $x;
+echo "<br />";
+echo $x---$x--;
+echo "<br />";
+echo $x;
+
+
+Ans: 
+
+5
+11
+7
+1
+5
+
+
+
+4. What will be the values of $a and $b after the code below is executed? Explain your answer.
+
+
+$a = '1';
+$b = &$a;
+$b = "2$b";
+
+Ans:  $a and $b  same answer -> string "21"
+
+5. What will be the output of each of the statements below and why?
+
+What will be the output of each of the statements below and why?
+
+var_dump(0123 == 123);
+var_dump('0123' == 123);
+var_dump('0123' === 123);
+
+-----------------------------------------------------------------
+
+
+
+6. What is the problem with the code below? What will it output? How can it be fixed?
+
+
+7.What will $x be equal to after the statement 
+
+
+8. After the code below is executed, what will be the value of $text and what will strlen($text) return? Explain your answer.
+
+
+
+---------------------------------------------------------------
+
+
+
+Diagonals Of Matrix:
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<?php
+//Initialize A matrix
+$a = array
+(
+array( 1, 2, 3, 4 ),
+array( 2, 3, 4, 1 ),
+array( 3, 4, 2, 1 ),
+array( 4, 3, 2, 1 )
+);
+
+$m = count ($a);
+$n = count ($a);
+//If rows and columns are equal then print Diagonal elements else it returns to else statement
+if($m==$n)
+{
+echo("Original matrix is: <br>"); // to print Original matrix
+for($i = 0; $i < $m; $i++) {
+for($j = 0; $j < $n; $j++) {
+echo ($a[$i][$j] . " ");
+}
+echo("<br>");
+}
+
+echo ("Diagonal Elements are: </br>"); //to print Diagonal Elements
+
+for ($i = 0; $i < $m; $i++)
+{
+echo $a[$i][$i], $a[$i][$n-$i-1];
+echo "<br>";
+}
+}else
+echo "The given matrix is not a square matrix";
+return 0;
+
+
+
+?>
+
+</body>
+</html>
+
+
+=========================================================
+
+//PHP Router
+
+Router .htaccess:
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)$ index.php?url=$1(QSA,L)
+
+
+..........
+//index.php
+
+$request=$_SERVER['REQUEST_URI'];
+$router=sr_replace('/php/routing','',$request);
+
+$arr=explode('/',$router);
+$id='';
+if(isset($arr[2])){
+  $id=$arr[2];
+}
+
+if($router =='/' || $router=='/home') {
+   include('home.php');
+}elseif($router=='/about.php') {
+   include('about.php);
+}elseif($router=='/product.php' || preg_match("/product\/[0-9]/i",$router)){
+   include('product.php);
+}elseif($router=='/services.php'){
+   include('services.php);
+}else{
+   include('404.php);
+}
+
+
+//navbar (in header.php file or in any file)
+
+<a href="http://127.0.0.1/php/routing/home">Home</a>$nbsp;
+<a href="http://127.0.0.1/php/routing/about">About</a>$nbsp;
+<a href="http://127.0.0.1/php/routing/services">Services</a>$nbsp;
+<a href="http://127.0.0.1/php/routing/product">Product</a>$nbsp;
+
+OR
+
+$baseUrl = "http://127.0.0.1/php/routing/";
+
+<a href=$baseUrl."home">Home</a>$nbsp;
+<a href="$baseUrl.about">About</a>$nbsp;
+<a href="$baseUrl.services">Services</a>$nbsp;
+<a href="$baseUrl.product">Product</a>$nbsp;
+
+
+------------------------------------------------------------
+
+PHP Topics: 
+
+1. How to track website visitors in php
+2. PHP Visitor counter script with pdo connectivity
+3. How to create simple api in php
+4. 
+
+-------------------------------------------------------------------
+
+Date & Time Basics: 
+
+strtotime: 
+
+//A day is 86400 seconds:
+
+$tomorrow = date('y:m:d', time() + 86400);
+
+//10 years:
+
+  date('Y-m-d',time()+ (10 * 365 * 24 * 60 * 60));
+
+
+//The simplest way to add x no. of days
+echo date('Y-m-d',strtotime('+1 day'));    //+1 day from today
+OR
+echo date('Y-m-d',strtotime('+1 day', strtotime('2007-02-28')));
+
+
+
+
+$Today=date('y:m:d');
+
+// add 3 days to date
+$NewDate=Date('y:m:d', strtotime('+3 days'));
+
+// subtract 3 days from date
+$NewDate=Date('y:m:d', strtotime('-3 days'));
+
+// PHP returns last sunday's date
+$NewDate=Date('y:m:d', strtotime('Last Sunday'));
+
+// One week from last sunday
+$NewDate=Date('y:m:d', strtotime('+7 days Last Sunday'));
+
+or 
+
+<select id="date_list" class="form-control" style="width:100%;">
+<?php
+$max_dates = 15;
+$countDates = 0;
+while ($countDates < $max_dates) {
+    $NewDate=Date('F d, Y', strtotime("+".$countDates." days"));
+    echo "<option>" . $NewDate . "</option>";
+    $countDates += 1;
+}
+?>
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+//Date Time Exmple:
+https://stackoverflow.com/questions/277247/increase-days-to-php-current-date
+
+//Create Function 
+
+function add_days( $days, $from_date = null ) {
+    if ( is_numeric( $from_date ) ) { 
+        $new_date = $from_date; 
+    } else { 
+        $new_date = time();
+    }
+
+    // Timestamp is the number of seconds since an event in the past
+    // To increate the value by one day we have to add 86400 seconds to the value
+    // 86400 = 24h * 60m * 60s
+    $new_date += $days * 86400;
+
+    return $new_date;
+}
+
+
+//Passing diff values:
+
+$today       = add_days( 0 );
+$tomorrow    = add_days( 1 );
+$yesterday   = add_days( -1 );
+$in_36_hours = add_days( 1.5 );
+
+$first_reminder  = add_days( 10 );
+$second_reminder = add_days( 5, $first_reminder );
+$last_reminder   = add_days( 3, $second_reminder );
+
+-------------------------------------------------------------------------------
+
+//PHP Project Names: 
+
+https://phpgurukul.com/
+
+1. Online Railway Catering Management System using php and mysql
+2.Maid Hiring Mamangement System using php and mysql
+3. Rail Pass Management System using php and mysql
+4. Pre-School Enrollment System using PHP and MySql
+5. Society Management System using PHP and MySQL
+6. Bus Pass Management System Using PHP and MySQL
+7. Yoga Classes Registration System using PHP and MySQL
+8. Theme Park Management System Using PHP and MYSQL
+9. Crime Record Management System Using PHP and MySQL
+10. Online Shopping Portal Pro Version using PHP and MySQL
+11. Online Diagnostic Lab Management System using PHP and MySQL
+12. Inventory Management System Using PHP and MySQL
+13. Online Railway Catering Management System using PHP and MySQL
+14. Online Banquet Booking System using PHP and MySQL
+
+Categories and Tags
+How to add Featured Image
+
+----------------------------------------------------------------------------------
+
+//Create Capcha Code Image
+
+https://phpgurukul.com/captcha-image-verification/
+
+//Captcha.php
+
+<?php
+session_start();
+$text = rand(10000,99999);
+$_SESSION["vercode"] = $text;
+$height = 25;
+$width = 65;
+$image_p = imagecreate($width, $height);
+$black = imagecolorallocate($image_p, 0, 0, 0);
+$white = imagecolorallocate($image_p, 255, 255, 255);
+$font_size = 14;
+imagestring($image_p, $font_size, 5, 5, $text, $white);
+imagejpeg($image_p, null, 80);
+?>
+
+
+//Form
+<form name="captcha" method="post">
+Name :<input type="text" name="name" required="required" />
+Email :<input type="email" name="email" required="required" />
+Verification code :<input type="text" name="vercode" size="10" required="required" />&nbsp;<img src="captcha.php">
+<input type="submit" name="submit" value="Submit" />
+
+
+//PHP script for submitting the form
+
+<?php
+session_start();
+if ($_POST["vercode"] != $_SESSION["vercode"] OR $_SESSION["vercode"]=='')  {
+     echo  '<strong>Incorrect verification code.</strong>';
+} else {
+     // add form data processing code here
+     echo  '<strong>Verification successful.</strong>';
+};
+?>
+
+----------------------------------------------------------------------------
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------
+
+
+

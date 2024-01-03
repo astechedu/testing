@@ -1,0 +1,81 @@
+>>>> Node Js <<<
+
+
+-----------------------------------------------------------------------------
+Keys: 
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+
+>> Node js conf with TypeScript
+>>How to setup Node.js project with Typescript
+
+//Video: https://youtu.be/RMrSx-aQDiY?t=1395
+//Download: https://github.com/ishwar-panchariya/how-to-setup-nodejs-project-with-typescript
+
+
+>>Step: 1
+  Create a new project folder (nodets), text editor any (or VS Code)
+
+>>Step: 2
+  npm init
+
+>>Step: 3
+  npm i -g typescript
+  npm i -D typescript ts-node nodemon
+  npm i express --save
+
+>>Step: 4
+  tsc --init        //If typescript is globally installed.
+  npx tsc --init    //If typescript is installed locally.
+
+>>Step: 5            //In package.json 
+  "scripts" :{
+      "dev" :"nodemon ./src/app.ts",
+      "start": "node ./dist/app.js"
+}
+
+>>Step: 6
+  npm i -D @types/express @types/node  
+
+>>Step: 7        //tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES6",                              
+    "module": "commonjs",                         
+    "rootDir": "./src",                           
+    "moduleResolution": "node",                   
+    "outDir": "./dist",                           
+    "esModuleInterop": true,                      
+    "forceConsistentCasingInFileNames": true,     
+    "strict": true,                               
+    "skipLibCheck": true                          
+  },
+  "include": ["./src/**/*"]
+}
+
+>>Step: 8     //in app.ts
+
+import express from 'express';
+
+const app = express();
+
+app.get('/', (req, res) => { 
+    res.send('listening');
+})
+
+app.listen(3000, () => {
+    console.log('listening on port 3000');
+})
+
+
+>>Step: 9
+
+ npm run dev
+
+//URL http://localhost:3000/
+
+-----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
+
+

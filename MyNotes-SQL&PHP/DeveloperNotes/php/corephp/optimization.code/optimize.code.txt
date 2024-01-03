@@ -1,0 +1,131 @@
+<<<<< PHP Optimization  >>>>
+
+
+--------------------------------------------------------
+--------------------------------------------------------
+Keys: 
+--------------------------------------------------------
+--------------------------------------------------------
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+Vdo: How to optimize your PHP code || 3 Useful Tips
+https://youtu.be/TgrpEb-8qSY?t=625
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+>>> Optimization Tips
+
+ProjectFolder(dir)
+
+ Controller(dir)
+   logic(dir)
+      aboutLogic.php
+      indexLogic.php
+      loginLogic.php
+
+   functions.php
+   includes.php 
+   retrieve.php
+
+  Model(dir)
+     db.php
+
+  css(dir>s
+  html(dir)
+    header.php
+    footer.php
+
+  js(dir)
+ 
+
+  View(dir)
+     about.php
+     login.php
+
+index.php
+
+---x---
+
+
+Model/db.php
+  return db connection only
+
+
+//View/login.php
+
+<?php 'html/header.php';
+
+?>
+
+<!-- Login login -->
+<?php 'html/footer.php';
+
+?>
+---x---
+
+
+In root:
+//index.php
+
+<?php 
+
+include 'html/header.php';
+include 'Controller/includes.php'
+
+?>
+
+<div>
+  <div class="container">
+     <h1>Just a dummy heading</h1>
+  </div>
+</div>
+
+<?php 
+
+      include 'html/footer.php';
+
+?>
+
+---x---
+
+//Controller/includes.php
+
+<?php
+
+include 'Controller/functions.php'
+include 'Controller/retrieve.php'
+include 'Controller/logic/indexLogic.php'
+
+---x--
+
+
+//Controller/loginLogic.php
+
+if(isset($username)) {
+   
+  //Call function to retrieve user data
+  $userData = retrieveUser($username);
+
+  //Logic
+     .....
+}
+---x---
+
+
+//Controller/functions.php
+
+function retrieveUser($username){
+
+   //Logic
+
+}
+
+
+---x---
+
+
+---------------------------------------------------------
+--------------------------------------------------------

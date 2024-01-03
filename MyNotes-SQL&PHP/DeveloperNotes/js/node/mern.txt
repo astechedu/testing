@@ -1,0 +1,252 @@
+>>>>  PostgreSql  <<<<<
+
+
+
+--------------------------------------------------------------
+
+Link: 
+
+https://appinventiv.com/blog/top-web-app-database-list/
+
+
+
+Which is best Database for web applications In 2022?
+SQL database examples
+
+    Oracle.
+    MySQL.
+    SQLite
+    DynamoDB 
+    MS SQL Server.
+    PostgreSQL.
+    IBM DB2.
+    Redis.         
+    
+    Sybase
+    Firebirdsql
+    Amazon RDS
+    Google Cloud SQL
+    Microsoft Azure    
+
+7 Best NoSQL Databases for Data Science
+
+    MongoDB           //document-oriented database
+    Cassandra         //It can distribute your data across multiple machines
+    Elasticsearch     //document-oriented database
+    Neo4j             //graph-oriented database
+    HBase             //a distributed and column-oriented database
+    CouchDB           //document-oriented database
+    OrientDB          //a multi-model database supporting graph, document, key-value, and object model
+
+
+
+
+What are the common types of NoSQL databases?
+
+Types               Performence     Scalability      Flexibility      Complexity
+
+Key-Value Store     High            High             High             None
+Column Store        High            High             Moderate         Low
+Document            High            Variable(High)   High             Low
+Graph Database      Variable        Variable         High             High  
+
+
+ 
+----------------------------------------------------------
+
+
+Connecting to PostgreSQL using native functions:
+
+<?php
+    $db_connection = pg_connect("host=localhost dbname=dbname user=username password=password");
+?>
+
+
+<?php
+    $result = pg_query($db_connection, "SELECT lastname FROM employees");
+?>
+
+------------------------------------------------------------------------------
+
+Connecting to PostgreSQL using PDO (PHP Data Objects):
+
+
+<?php
+    $myPDO = new PDO('pgsql:host=localhost;dbname=dbname', 'username', 'password');
+?>
+
+
+<?php
+    $result = $myPDO->query("SELECT lastname FROM employees");
+?>
+
+
+-------------------------------------------------------------------------------------------------------
+
+
+
+How to Connect to a PostgreSQL Database Using Node.js:
+
+
+Create a Node Application:
+
+mkdir postgres-node
+cd postgres-node
+npm init -y
+
+
+Install node-postgres 
+
+npm install pg
+npm install pg=8.7.3
+
+
+Connecting to PostgreSQL:
+
+
+PGUSER=<PGUSER>
+PGHOST=<PGHOST>
+PGPASSWORD=<PGPASSWORD>
+PGDATABASE=<PGDATABASE>
+PGPORT=<PGPORT>
+
+npm install dotenv
+
+In index.js, import and configure dotenv.
+
+
+
+const dotenv = require("dotenv")
+dotenv.config()
+
+
+Connect to a PostgreSQL Database Using a Single Client
+
+const { Client } = require("pg")
+const dotenv = require("dotenv")
+dotenv.config()
+ 
+const connectDb = async () => {
+    try {
+        const client = new Client({
+            user: process.env.PGUSER,
+            host: process.env.PGHOST,
+            database: process.env.PGDATABASE,
+            password: process.env.PGPASSWORD,
+            port: process.env.PGPORT
+        })
+ 
+        await client.connect()
+        const res = await client.query('SELECT * FROM some_table')
+        console.log(res)
+        await client.end()
+    } catch (error) {
+        console.log(error)
+    }
+}
+ 
+connectDb()
+
+
+
+Using a Connection Pool
+
+
+const { Pool } = require("pg");
+const dotenv = require("dotenv");
+dotenv.config();
+ 
+const connectDb = async () => {
+    try {
+        const pool = new Pool({
+            user: process.env.PGUSER,
+            host: process.env.PGHOST,
+            database: process.env.PGDATABASE,
+            password: process.env.PGPASSWORD,
+            port: process.env.PGPORT,
+        });
+ 
+        await pool.connect()
+        const res = await pool.query('SELECT * FROM clients')
+        console.log(res)
+        await pool.end()
+    } catch (error) {
+        console.log(error)
+    }
+}
+ 
+connectDb()
+
+
+Consider the following connection code.
+
+ 
+const connectDb = async () => {
+    try {
+        const pool = new Pool();
+        const res = await pool.query('SELECT * FROM clients')
+        console.log(res)
+        await pool.end()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+PGUSER=<PGUSER> \
+PGHOST=<PGHOST> \
+PGPASSWORD=<PGPASSWORD> \
+PGDATABASE=<PGDATABASE> \
+PGPORT=<PGPORT> \
+node index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+>>>> Laravel Roles <<<<<
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+Key: Role, Admin, Subadmin, Domain
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+
+//Roles
+https://youtu.be/sYqbaOL6b0A?t=469
+
+Roles: SuperAdmin(1), SubAdmin(2), Admin(3), User(0)
+
+Tables: users, roles
+Models: User, Role
+Controllers: AuthController, SuperAdminController, SubAdminController, UserController
+
+Middlewares: 
+         SuperAdminAuthenticate.php, 
+         SubAdminAuthenticate.php,
+         AdminAuthenticate.php,
+         UserAdminAuthenticate.php,
+
+---------------------------------------------------------------------------------------

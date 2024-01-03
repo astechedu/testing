@@ -1,0 +1,832 @@
+>>>>> Shell Script <<<<<<
+
+----------------------------------------------------------------------
+
+Reference Website: 
+https://www.freecodecamp.org/news/bash-scripting-tutorial-linux-shell-script-and-command-line-for-beginners/
+
+
+//React (frontend) + express (backend) 
+https://www.freecodecamp.org/news/how-to-create-a-react-app-with-a-node-backend-the-complete-guide/
+
+
+
+Next Js: 
+
+//Next js & Express Js
+https://dev.to/alexeydc/express-nextjs-sample-tutorial-integration-485f
+
+------------------------------------------------------------------------------
+
+
+//Single Page App (React) :
+
+
+https://upmostly.com/tutorials/react-ajax-requests-fetch-data
+https://soshace.com/react-and-ajax-the-art-of-fetching-data-in-react/
+https://www.pluralsight.com/guides/how-to-send-data-via-ajax-in-react
+
+
+-----------------------------------------------------------------
+
+Basic Bash commands (echo, read, etc.)
+
+Here is a list of some of the most commonly used bash commands:
+
+    cd:    	Change the directory to a different location.
+    ls:   	 List the contents of the current directory.
+    mkdir: 	Create a new directory.
+    touch: 	Create a new file.
+    rm: 	Remove a file or directory.
+    cp: 	Copy a file or directory.
+    mv: 	Move or rename a file or directory.
+    echo: 	Print text to the terminal.
+    cat: 	Concatenate and print the contents of a file.
+    grep: 	Search for a pattern in a file.
+    chmod: 	Change the permissions of a file or directory.
+    sudo: 	Run a command with administrative privileges.
+    df: 	Display the amount of disk space available.
+    history: 	Show a list of previously executed commands.
+    ps: 	Display information about running processes.
+
+-----------------------------------------------------------------
+
+Shebang or header
+#!/bin/bash
+
+
+//CMDS
+which bash
+vi run_all.sh
+
+
+//Running Script
+
+   1. sh run_all.sh
+   2. bash run_all.sh
+   3. ./run_all.sh
+
+-----------------------------------------------------------------
+
+Displaying output: 
+
+//1. Printing to the terminal:
+
+echo "Hello, World!"    
+
+------------------------------------------------------------------
+//2.  Writing to a file:
+
+echo "This is some text." > output.txt
+
+------------------------------------------------------------------
+//3.  Appending to a file:
+
+echo "More text." >> output.txt
+
+------------------------------------------------------------------
+//4.  Redirecting output:
+
+ls > files.txt
+
+------------------------------------------------------------------
+//Comparisons
+
+AND -a and OR -o
+
+------------------------------------------------------------------
+
+//Script Example:
+
+#!/bin/bash
+echo "Today is " `date`
+
+echo -e "\nenter the path to directory"
+read the_path
+
+echo -e "\n you path has the following files and folders: "
+ls $the_path
+----------------------------------------------------------------
+Permmission: 
+chmod u+x run_all.sh
+------------------------------------------------------------------
+
+
+//Conditional statements (if/else): if, if-else, if-elif-else
+
+if [[ condition ]];
+then
+	statement
+elif [[ condition ]]; then
+	statement 
+else
+	do this by default
+fi
+--------------------------------------------------------------
+
+//While Loops: 
+
+while read line
+do
+  echo $line
+done < input.txt
+
+--------------------------------------------------------------
+
+//Comparisons
+
+AND -a and OR -o
+
+--------------------------------------------------------------
+
+//Script to determine if a number is positive, negative, or zero
+
+#!/bin/bash
+
+echo "Please enter a number: "
+read num
+
+if [ $num -gt 0 ]; then
+  echo "$num is positive"
+elif [ $num -lt 0 ]; then
+  echo "$num is negative"
+else
+  echo "$num is zero"
+fi
+
+--------------------------------------------------------------
+//Looping and Branching in Bash
+
+While loop:
+
+
+//While loop that iterates 10 times.
+
+#!/bin/bash
+i=1
+while [[ $i -le 10 ]] ; do
+   echo "$i"
+  (( i += 1 ))
+done
+
+-----------------------------------------------------------------
+
+
+//For loop that iterates 5 times.
+
+For loop:
+
+
+#!/bin/bash
+
+for i in {1..5}
+do
+    echo $i
+done
+
+
+---------------------------------------------------------------
+//Case statements
+//Case statements syntax
+
+case expression in
+    pattern1)
+        # code to execute if expression matches pattern1
+        ;;
+    pattern2)
+        # code to execute if expression matches pattern2
+        ;;
+    pattern3)
+        # code to execute if expression matches pattern3
+        ;;
+    *)
+        # code to execute if none of the above patterns match expression
+        ;;
+esac
+
+
+--------------------------------------------------------------
+
+//Example: 
+//Example of case statement
+
+fruit="apple"
+
+case $fruit in
+    "apple")
+        echo "This is a red fruit."
+        ;;
+    "banana")
+        echo "This is a yellow fruit."
+        ;;
+    "orange")
+        echo "This is an orange fruit."
+        ;;
+    *)
+        echo "Unknown fruit."
+        ;;
+esac
+
+----------------------------------------------------------------
+
+
+//How to Schedule Scripts using cron
+
+Below is the syntax to schedule crons:
+
+# Cron job example
+* * * * * sh /path/to/script.sh
+
+
+
+-------------------------------------------------------------------------------------------------------
+//Below are some examples of scheduling cron jobs.
+
+Schedule 	Description 	                                       Example
+0 0 * * * 	Run a script at midnight every day 	               0 0 * * * /path/to/script.sh
+*/5 * * * * 	Run a script every 5 minutes 	                       */5 * * * * /path/to/script.sh
+0 6 * * 1-5 	Run a script at 6 am from Monday to Friday 	        0 6 * * 1-5 /path/to/script.sh
+0 0 1-7 * * 	Run a script on the first 7 days of every month 	0 0 1-7 * * /path/to/script.sh
+0 12 1 * * 	Run a script on the first day of every month at noon 	0 12 1 * * /path/to/script.sh
+
+--------------------------------------------------------------------------------------------------------
+
+// This option enables debugging mode
+
+Set the set -x option
+
+
+#!/bin/bash
+
+set -x
+
+# Your script goes here
+
+------------------------------------------------------------------
+
+//Check the exit code
+
+#!/bin/bash
+
+# Your script goes here
+
+if [ $? -ne 0 ]; then
+    echo "Error occurred."
+fi
+
+--------------------------------------------------------------
+
+Use echo statements
+
+
+#!/bin/bash
+
+# Your script goes here
+
+echo "Value of variable x is: $x"
+
+# More code goes here
+
+--------------------------------------------
+
+//This option will cause Bash to exit with an error if any command in the script fails
+
+Use the set -e option
+
+#!/bin/bash
+
+set -e
+
+# Your script goes here
+
+---------------------------------------------
+
+//Troubleshooting crons by verifying logs
+
+//For Ubuntu/Debian, you can find cronlogs at:
+
+/var/log/syslog
+
+---------------------------------------------------
+
+Reference Website: 
+
+https://www.freecodecamp.org/news/bash-scripting-tutorial-linux-shell-script-and-command-line-for-beginners/
+
+---------------------------------------------------
+
+
+
+
+
+
+
+
+
+<<<< Vue Js <<<<
+
+
+--------------------------------------------
+Ref Website: 
+
+//Vue Store
+//Guide to Vuex - Centralized State Management for Vue Applications
+https://stackabuse.com/guide-to-vuex-centralized-state-management-for-vue-applications/
+--------------------------------------------
+----------------------------------------------------------------------------------------
+
+vue create project-name
+$ npm install vuex --save
+# Or yarn
+$ yarn add vuex
+
+
+//Vuex Configuration
+
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+new Vue({...})
+--------------------------------------
+
+//Centralized State Management with Vuex
+
+
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+  state: {},
+  mutations: {},
+  actions: {},
+  getters: {}
+});
+
+
+
+
+new Vue({
+  el: '#app',
+  store: store,
+})
+
+
+//Vue State
+
+const store = new Vuex.Store({
+  state: {
+    name: "John Doe",
+    age: 12,
+    details: {
+      city: "San Fransisco",
+      country: "USA",
+    },
+  },
+});
+
+
+computed: {
+  name() {
+      return this.$store.state.name;
+    },
+  age() {
+     return this.$store.state.age;
+    },
+}
+
+
+<template>
+  <div id="app">
+    <p>Name: {{ name }}</p>
+    <p>Age: {{ age }}</p>
+  </div>
+</template>
+
+
+
+//The mapState() Helper
+
+
+// First - import mapState
+import { mapState } from "vuex";
+
+export default {
+  name: "ComponentName",
+  computed: mapState({
+    name: (state) => state.name,
+    age: (state) => state.age,
+  }),
+};
+
+
+
+//Getter Functions
+
+const store = new Vuex.Store({
+  state: {
+    myNumbers: [11, 3, 5, 1, 54, 56, ...],
+  },
+  getters: {
+    firstFiveSorted: (state) => {
+      return state.myNumbers.sort().slice;
+    },
+  },
+});
+
+
+//...
+computed: {
+  firstFiveSorted () {
+    return this.$store.getters.firstFiveSorted
+  }
+}
+
+
+import { mapGetters } from "vuex";
+
+export default {
+  computed: {
+    ...mapGetters({
+      // this example will map `myNumbers` to `this.$store.getters.firstFiveSorted`
+      myNumbers: "firstFiveSorted",
+    }),
+  },
+};
+
+
+
+//Vuex Mutations
+
+
+const store = new Vuex.Store({
+  state: {
+    myNumbers: [11, 3, 5, 1, 54, 56]
+  },
+  mutations: {
+    ADD_NUMBER(state, numberToAdd) {
+      state.myNumbers.push(numberToAdd);
+    },
+  }
+})
+
+
+
+this.$store.commit('ADD_NUMBER', 75);
+
+
+//Actions
+
+
+const store = new Vuex.Store({
+  state: {
+    myNumbers: [11, 3, 5, 1, 54, 56, "..."],
+  },
+  mutations: {
+    ADD_RANDOM_NUMBER(state) {
+      // Push a random number to `myNumbers` array
+      state.myNumbers.push(Math.floor(Math.random() * 10));
+    },
+  },
+  actions: {
+    // Using destructuring to extract only `commit()` from the `context` object
+    addNumber({ commit }, time) {
+      setInterval(() => {
+        commit("ADD_RANDOM_NUMBER");
+      }, time * 1000);
+    },
+  },
+});
+
+
+store.dispatch('ADD_RANDOM_NUMBER', 10);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>> React <<<<<
+
+
+----------------------------------------------------
+
+Ref Website: 
+
+https://www.loginradius.com/blog/engineering/react-state-management/
+
+--------------------------------------------------------------------
+
+//React state management: What is it and why to use it?
+
+//Actions in Redux
+
+{ 
+  type: "ADD_TODO", 
+  payload: {text:"Hello Foo"}
+ }
+
+
+//Here is an example of its action creator:
+
+ocnst addTodo = (text) => {
+  return {
+     type: "ADD_TODO",
+     text
+  };
+}
+
+
+//Reducers in Redux
+
+const TODOReducer= (state = {}, action) => {
+  switch (action.type) {
+    case "ADD_TODO":
+      return {
+        ...state,
+        ...action.payload
+      };
+    default:
+      return state;
+  }
+};
+
+
+
+//Store in Redux
+
+const store = createStore(TODOReducer);
+
+
+//React Hook Rules
+//What is useState and how to use it
+
+class Example extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+  }
+
+
+function Example() {
+    const [count, setCount] = useState(0);
+}
+
+
+
+//what is useReducer and how to use it
+//Use Redusers
+
+const todoReducer = (state, action) => {
+      switch (action.type) {
+        case "ADD_TODO":
+          return state.map(todo => {
+            if (todo.id === action.id) {
+              return { ...todo, complete: true };
+            } else {
+              return todo;
+            }
+          });
+        case "REMOVE_TODO":
+          return state.map(todo => {
+            if (todo.id === action.id) {
+              return { ...todo, complete: false };
+            } else {
+              return todo;
+            }
+          });
+        default:
+          return state;
+      }
+    };
+
+
+//The state which is managed in this reducer is an array of items:
+
+const initialTodos = [
+      {
+        id: "t1",
+        task: "Add Task 1",
+        complete: false
+      },
+      {
+        id: "t2",
+        task: "Add Task 2",
+        complete: false
+      }
+    ];
+
+
+const [todos, dispatch] = React.useReducer(
+    todoReducer,
+    initialTodos
+  );
+
+------------------------------------------------------
+
+//Complete file:
+
+import React from "react";
+
+const initialTodos = [
+  {
+    id: "t1",
+    task: "Add Task 1",
+    complete: false
+  },
+  {
+    id: "t2",
+    task: "Add Task 2",
+    complete: false
+  }
+];
+const todoReducer = (state, action) => {
+  switch (action.type) {
+    case "ADD_TODO":
+      return state.map(todo => {
+        if (todo.id === action.id) {
+          return { ...todo, complete: true };
+        } else {
+          return todo;
+        }
+      });
+    case "REMOVE_TODO":
+      return state.map(todo => {
+        if (todo.id === action.id) {
+          return { ...todo, complete: false };
+        } else {
+          return todo;
+        }
+      });
+    default:
+      return state;
+  }
+};
+const App = () => {
+  const [todos, dispatch] = React.useReducer(todoReducer, initialTodos);
+
+  const handleChange = todo => {
+    dispatch({
+      type: todo.complete ? "REMOVE_TODO" : "ADD_TODO",
+      id: todo.id
+    });
+  };
+  return (
+    <ul>
+      {todos.map(todo => (
+        <li key={todo.id}>
+          <label>
+            <input
+              type="checkbox"
+              checked={todo.complete}
+              onChange={() => handleChange(todo)}
+            />
+            {todo.task}
+          </label>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+export default App;
+
+-------------------------------------------------------
+
+//Store in App.js.
+
+import React from "react";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import rootReducer from "./reducers";
+import Todo from "./Components/TODO";
+const store = createStore(rootReducer);
+
+function App() {
+  return (
+    <div className="App">
+      <Provider store={store}>
+        <Todo />
+      </Provider>
+    </div>
+  );
+}
+
+export default App;
+
+----------------------------------------------
+
+//Actions in actions/index.js.
+
+export const addTodo = id => ({
+  type: "ADD_TODO",
+  id
+});
+
+export const removeTodo = id => ({
+  type: "REMOVE_TODO",
+  id
+});
+
+
+//Reducers in reducers/index.js.
+
+const initialTodos = [
+  {
+    id: "t1",
+    task: "Add Task 1",
+    complete: false
+  },
+  {
+    id: "t2",
+    task: "Add Task 2",
+    complete: false
+  }
+];
+const todos = (state = initialTodos, action) => {
+  switch (action.type) {
+    case "ADD_TODO":
+      return state.map(todo => {
+        if (todo.id === action.id) {
+          return { ...todo, complete: true };
+        } else {
+          return todo;
+        }
+      });
+    case "REMOVE_TODO":
+      return state.map(todo => {
+        if (todo.id === action.id) {
+          return { ...todo, complete: false };
+        } else {
+          return todo;
+        }
+      });
+    default:
+      return state;
+  }
+};
+
+export default todos;
+
+//FIle components/Todo.js
+
+import React from "react";
+import { connect } from "react-redux";
+import { addTodo, removeTodo } from "../../redux/actions/authActions";
+
+const Todo = ({ todos, addTodo, removeTodo }) => {
+  const handleChange = todo => {
+    if (todo.complete) {
+      removeTodo(todo.id);
+    } else {
+      addTodo(todo.id);
+    }
+  };
+
+  return (
+    <ul>
+      {todos.map(todo => (
+        <li key={todo.id}>
+          <label>
+            <input
+              type="checkbox"
+              checked={todo.complete}
+              onChange={() => handleChange(todo)}
+            />
+            {todo.task}
+          </label>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+const mapStateToProps = state => ({ todos: state.auth.todos });
+const mapDispatchToProps = dispatch => {
+  return {
+    addTodo: id => dispatch(addTodo(id)),
+    removeTodo: id => dispatch(removeTodo(id))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Todo);
+
+-----------------------------------------------------

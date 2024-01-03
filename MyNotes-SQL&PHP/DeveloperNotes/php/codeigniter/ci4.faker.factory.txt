@@ -1,0 +1,118 @@
+>>> Codeigniter 4 Faker Factory <<<<<
+
+
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+Keys: faker factory  
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+
+>>>> Faker Facroy <<<<
+     faker factory
+
+
+use Faker\Factory;
+$faker = Factory::create();
+//.. then use the instance of $faker
+
+
+php spark db:seed UserSeeder
+php spark db:seed ProductSeeder
+
+
+
+Example 01:
+
+Seeder File: UserSeeder.php
+
+
+
+<?php
+
+namespace App\Database\Seeds;
+
+use CodeIgniter\Database\Seeder;
+use Faker\Factory;
+
+class UserSeeder extends Seeder
+{
+    public function run()
+    {
+        for ($i = 0; $i < 10; $i++) { 
+			//to add 10 users. Change limit as desired
+            $this->db->table('users')->insert($this->generateUsers());
+        }
+    }
+
+    private function generateUsers(): array
+    {
+        $faker = Factory::create();
+        return [
+            'name' => $faker->name(),
+            'email' => $faker->email
+        ];
+    }
+}
+
+
+-------------------------------------------------------------------------------------
+
+
+Example 02: 
+
+<?php
+
+namespace App\Database\Seeds;
+
+use CodeIgniter\Database\Seeder;
+use Faker\Factory;
+
+class ProductSeeder extends Seeder
+{
+    public function run()
+    {
+        for ($i = 0; $i < 10; $i++) { 
+			//to add 10 products. Change limit as desired
+            $this->db->table('products')->insert($this->generateProducts());
+        }
+    }
+
+    private function generateProducts(): array
+    {
+        $faker = Factory::create();
+        return [
+            'name' => $faker->name,
+			'description' => $faker->sentence(6),
+			'amount' => $faker->numberBetween(50, 200),
+			'status' => $faker->randomElement([1, 0])
+        ];
+    }
+}
+
+
+
+---------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+

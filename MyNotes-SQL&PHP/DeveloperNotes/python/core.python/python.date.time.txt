@@ -1,0 +1,51 @@
+<<<<< Python Date & Time <<<<<<
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+1. Python Date & Time Examples
+https://stackoverflow.com/questions/17153779/how-can-i-print-variable-and-string-on-same-line-in-python
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+
+
+
+1.
+>>> --- Date & Time Examples --- <<<
+
+
+Basic: 
+
+currentPop = 312032486
+oneYear = 365           //In a year
+hours = 24              //In a day
+minutes = 60            //In an hour
+seconds = 60            //In an minute
+
+
+
+#Seconds in a single day
+secondsInDay = hours * minutes * seconds
+
+#Seconds in a year
+secondsInYear = secondsInDay * oneYear
+
+#Seconds in 5 years
+fiveYears = secondsInDay * 5
+
+# fiveYears in seconds, divided by 7 seconds
+births = fiveYears // 7
+
+
+print "If there was a birth every 7 seconds, there would be: " births "births"
+
+
+-------------------------------------------------------------------------------
+

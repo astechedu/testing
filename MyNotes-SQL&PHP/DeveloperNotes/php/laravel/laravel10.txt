@@ -1,0 +1,1237 @@
+
+>>>> Laravel 10 <<<<<
+
+
+---------------------------------------------------------------------------------------------------------
+
+key: tinker, Git Ignore In Laravel, image upload, Users,Orders,Orders_items,Products,Scemas
+     Pivot tables, laravel relationship, category, laravel 10 passport api, Vue 3 Store, Ajax Post To Controller,
+     validation, Admin Panel, nuxt js, 
+
+     Invoices (L10 + Vuejs3)
+     Ecommerce 	(L10 )
+---------------------------------------------------------------------------------------------------------
+
+Ajay Yadav Shopping Cart Dwonload from GitHub: 
+
+https://github.com/AjayYadavAi/add-to-cart-project
+
+//Laravel 09 + Vue js 3 (Single Page Application):
+https://youtu.be/2oTiHICozTk?list=PLKGOLyLuuwj5wEZm45UFla_67G8UnRHrM&t=214
+
+//Laravel 09 + breeze + React 
+https://youtu.be/vvuM2y2T97s?list=PLz_YkiqIHestzvFI9hnyL1pvpaGQkOSaI&t=421
+https://www.youtube.com/watch?v=4FLKeV0oaUI&list=PLz_YkiqIHestzvFI9hnyL1pvpaGQkOSaI   // PlayList
+
+//Laravel + Nuxt Js (Crud)
+https://youtu.be/9Sv276s7lwc?t=250
+
+
+//Custom Auth
+https://youtu.be/bWb0qsx29Sc?t=846
+https://www.itsolutionstuff.com/post/laravel-custom-login-and-registration-exampleexample.html
+https://www.positronx.io/laravel-custom-authentication-login-and-registration-tutorial/
+https://github.com/AjayYadavAi/custom-auth/
+
+//
+----------------------------------------------------------------------------------------------------------
+
+Laravel: 
+Event Broadcasting and WebSockets,
+API Development
+Queues and Workers
+Package Development
+Eloquent Relationship
+Service Provider
+Multi-Tenancy
+Horizon
+Task Scheduling
+Caching
+
+----------------------------------------------------------------------------------------------------------
+Laravel 10 API Using Passport: 
+
+
+Link: 
+https://www.itsolutionstuff.com/post/laravel-10-rest-api-with-passport-authentication-tutorialexample.html
+
+
+
+//Laravel Livewire Shopping Cart Step by Step Example
+https://larainfo.com/blogs/laravel-livewire-shopping-cart-step-by-step-example#google_vignette
+
+
+Laravel 09, 10 Limks:  (Contact From with email)
+https://www.nicesnippets.com/blog/laravel-9-contact-form-with-send-mail-example
+
+
+Laravel 10 Notification:
+https://www.tutsmake.com/laravel-10-push-notification-to-android-and-ios-tutorial/
+
+
+Laravel 10 Livewire Database Table: 
+https://www.tutsmake.com/laravel-10-livewire-datatables-tutorial-example/
+
+
+//Sanctum Api
+https://codebriefly.com/laravel-sanctum-restful-api-authentication/
+
+//Passport API Laravel 10 Easy Settings
+https://youtu.be/TNKn-4zA8Hg?t=170
+
+//Sanctum API Laravel 10
+https://youtu.be/KGVWpgApru8?t=23
+
+//Passport Api
+https://www.positronx.io/laravel-rest-api-with-passport-authentication-tutorial/
+
+//Laravel Notifications
+https://www.positronx.io/laravel-notification-example-create-notification-in-laravel/
+https://www.cloudways.com/blog/laravel-notification-system-on-slack-and-email/
+
+//laravel UserNotFoundException, ModelNotFoundException 
+https://laraveldaily.com/post/how-to-catch-handle-create-laravel-exceptions
+
+//Laravel 10 Custom Auth 
+https://www.tutsmake.com/laravel-custom-authentication-login-and-registration-2/
+
+//Laravel 09 Cart
+https://larainfo.com/blogs/laravel-9-shopping-add-to-cart-tutorial-example
+
+//Laravel Notifications
+https://www.positronx.io/laravel-notification-example-create-notification-in-laravel/
+
+
+
+SPA (Single Page Application);
+
+//Single Page App Vue-laravel 2022
+https://blog.logrocket.com/create-single-page-app-laravel-and-vue/
+
+//Single Page App (React js) 2021, laravel/ui
+https://www.binaryboxtuts.com/php-tutorials/how-develop-a-react-single-page-application-spa-in-laravel-8/
+
+//Factory, facker (Inster data into table)
+https://www.tutsmake.com/laravel-10-factory-generate-dummy-data-tutorial/
+	
+
+//Category Example on StackOverflow: news(), author(), category(), belongsTo
+https://stackoverflow.com/questions/66185760/attempt-to-read-property-name-on-null
+
+
+Vue 3 Laravel:   Part 5   By ajay yadav
+//Laravel 9 Vue 3, Vuex , Store
+https://youtu.be/dqQSJ49dTds?t=165
+
+
+Ajax Call 
+
+//Laravel 10 Ajax Call
+https://programmingfields.com/how-to-create-a-crud-application-using-ajax-in-laravel-10/
+
+
+Vue3 Laravel 9: 
+https://larainfo.com/blogs/laravel-9-inertia-vue-3-crud-tutorial-example
+
+-------------------------------------------------------------------------------------------------------
+
+//Many To Many Relationship
+https://www.itsolutionstuff.com/post/laravel-10-many-to-many-eloquent-relationship-tutorialexample.html
+
+
+--------------------------------------------------------------------------------------------------------
+
+Laravel 9 HMVC Or Modules Config: 
+
+app/
+bootstrap/
+Modules/
+
+>= Modules --> User, Admin, Shop etc
+
+//Laravel package which created to manage your large Laravel app using modules.
+
+nwidart/laravel-modules
+
+
+composer require nwidart/laravel-modules
+php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider"
+php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider" --tag="stubs"
+
+
+{
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/",
+      "Modules\\": "Modules/",
+      "Database\\Factories\\": "database/factories/",
+      "Database\\Seeders\\": "database/seeders/"
+    }
+  }
+}
+
+----------------------------------------------------------------------------------------------------------
+
+
+
+-----------------------------------------------------------------------------------------------------------
+
+
+Laravel 10 Upload Files: 
+
+    public function store(Request $request): RedirectResponse
+    {
+
+        $request->validate([
+
+            'file' => 'required|mimes:pdf,xlx,csv|max:2048',
+
+        ]);      
+
+        $fileName = time().'.'.$request->file->extension(); 
+       
+
+        $request->file->move(public_path('uploads'), $fileName);     
+
+        /*  
+            Write Code Here for
+
+            Store $fileName name in DATABASE from HERE 
+        */       
+
+        return back()
+
+            ->with('success','You have successfully upload file.')
+
+            ->with('file', $fileName);   
+    }
+
+
+//Store File in Storage Folder:
+$request->file->storeAs('uploads', $fileName);  
+// storage/app/uploads/file.png
+
+
+//Store File in Public Folder
+$request->file->move(public_path('uploads'), $fileName);
+// public/uploads/file.png
+
+//Store File in S3
+$request->file->storeAs('uploads', $fileName, 's3');
+
+//web.php
+Route::get('file-upload', [FileController::class, 'index']);
+Route::post('file-upload', [FileController::class, 'store'])->name('file.store');
+
+
+//Form:
+
+        <form action="{{ route('file.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf  
+
+            <div class="mb-3">
+                <label class="form-label" for="inputFile">File:</label>
+                <input 
+                    type="file" 
+                    name="file" 
+                    id="inputFile"
+                    class="form-control @error('file') is-invalid @enderror">  
+
+                @error('file')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>  
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success">Upload</button>
+            </div>       
+        </form>
+
+
+
+
+//Multi Image Upload: 
+    public function store(Request $request): RedirectRespons
+    {
+        $request->validate([
+            'files' => 'required',
+            'files.*' => 'required|mimes:pdf,xlx,csv|max:2048',
+        ]);        
+
+        $files = [];
+        if ($request->file('files')){
+            foreach($request->file('files') as $key => $file)
+            {
+                $fileName = time().rand(1,99).'.'.$file->extension();
+                $file->move(public_path('uploads'), $fileName);
+                $files[]['name'] = $fileName;
+            }
+        }    
+
+        foreach ($files as $key => $file) {
+            File::create($file);
+        }       
+
+        return back()
+
+                ->with('success','You have successfully upload file.');     
+
+    }
+
+
+
+//web.php
+
+Route::controller(FileController::class)->group(function(){
+    Route::get('file-upload', 'index');
+    Route::post('file-upload', 'store')->name('file.store');
+});
+
+-------------------------------------------------------------------------
+
+
+
+1. Custom Helper Functions: app/helpers.php
+
+<?php
+
+if (! function_exists('fn1')) {
+    function fn1() {
+    	echo "<br>";
+        echo "Helper Function: fn1()";
+        echo "<br>";
+    }
+}
+?>
+
+
+2. Custom Libraries:  app/Libraries
+
+
+<?php
+
+use App\Http\livewire\Counter;
+
+<?php
+class My {
+
+	public function __construct() {
+		//echo "Libraries: My Class";
+	}
+
+	public function mylib() {
+		echo "<br>";
+		echo "My Lib";
+		echo "<br>";
+	}
+?>
+
+
+
+//User Helper Function & Libray class in view file
+
+    <?php
+       //From helper function
+       fn1();
+
+       //From Libraries Class
+       $classObject = new My();
+
+       $classObject->mylib2();
+    ?>
+
+
+
+
+    "autoload": {
+        "files": [
+            "app/helpers.php"
+        ],    
+
+        "classmap": [
+            "app/Libraries"
+        ],     
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+
+
+
+------------------------------------------------------------------------
+
+
+//Laravel Notifications: 
+
+php artisan notifications:table
+
+
+public function up()
+{
+    Schema::create('notifications', function (Blueprint $table) {
+        $table->uuid('id')->primary();
+        $table->string('type');
+        $table->morphs('notifiable');
+        $table->text('data');
+        $table->timestamp('read_at')->nullable();
+        $table->timestamps();
+    });
+}
+
+php artisan make:notification OffersNotification
+
+
+<?php
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NotificationController;
+
+Route::get('/send-notification', [NotificationController::class, 'sendOfferNotification']);
+
+php artisan make:controller NotificationController
+
+
+
+use App\Notifications\OffersNotification;
+
+$userSchema->notify(new OffersNotification($offerData));
+
+----------------------------------------------------------------------------
+
+Tinker laravel: 
+
+//Tinker commands in cmd (To save date into db) :
+
+$user = new User()
+$user->name = "ajay"
+$user->city = "meerut"
+$user->created_at = now()
+$user->updated_at = now()
+$user->save()
+=true
+
+
+----------------------------------------------------------------------------
+
+
+Git Ignore In Laravel:
+
+
+
+/.phpunit.cache
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.env.production
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+/.fleet
+/.idea
+/.vscode
+
+
+
+-----------------------------------------------------------------------------
+
+
+Website LaraCast : https://laracasts.com/discuss/channels/eloquent/eloquent-relationship-for-order-order-items-and-products
+
+// Users,Orders,Orders_items,Products
+
+
+
+Schema::create('orders', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->string('status');
+            $table->timestamps();
+        });
+
+public function customer()
+    {
+        return $this->hasOne('App\Customer','id');
+    }
+
+-----------------------------------------------------------------------------
+
+Schema::create('customers', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('street');
+            $table->string('city');
+            $table->string('psc');
+            $table->string('email');
+            $table->string('phone');
+            $table->timestamps();
+        });
+
+
+-------------------------------------------------------------------------------
+Website LaraCast : https://laracasts.com/discuss/channels/eloquent/eloquent-relationship-for-order-order-items-and-products
+
+
+
+Schema::create('order_items', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('order_id');
+            $table->integer('product_id');
+            $table->integer('quantity');
+            $table->decimal('price',10,2);
+            $table->timestamps();
+        });
+
+public function product()
+    {
+        return $this->hasOne('App\Product','id');
+    }
+}
+
+
+--------------------------------------------------------------------------------
+Website LaraCast : https://laracasts.com/discuss/channels/eloquent/eloquent-relationship-for-order-order-items-and-products
+
+
+Schema::create('products', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->text('description');
+            $table->string('slug')->unique;
+            $table->decimal('price',10,2);
+            $table->timestamps();
+        });
+
+----------------------------------------------------------------------------------
+
+        Schema::create('todos', function (Blueprint $table) {
+            $table->id();
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
+            $table->boolean('is_completed')->default(false);
+            $table->boolean('is_deleted')->default(false);
+            $table->timestamps();
+        });
+
+----------------------------------------------------------------------------------
+
+        Schema::create('blogs', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->text('content');
+            $table->timestamps();
+        });
+
+----------------------------------------------------------------------------------
+
+
+public function detail($id)
+    {
+        $order = Order::find($id);
+
+        return view('admin.detail', ['order' => $order]);
+
+    }
+
+
+
+
+
+
+-------------------------------------------------------------------------------------
+
+Read More: https://laraveldaily.com/post/pivot-tables-and-many-to-many-relationships
+
+
+Pivot tables and many-to-many relationships :
+
+So here's a potential database structure:
+
+shops
+
+    - id
+    - name
+
+products
+
+    - id
+    - name
+
+product_shop
+
+    - product_id
+    - shop_id
+
+
+
+The final table in the list - product_shop is called a "pivot" table, as mentioned 
+in the topic title. Now, there are several things to mention here. 
+
+Name of the pivot table should consist of singular names of both tables, separated by 
+undescore symbol and these names should be arranged in alphabetical order, so we have to
+have product_shop, not shop_product.
+
+
+
+
+//Many To Many And Pivot table (Diff Here Table Names are Plural): 
+
+
+app/Models/Shop.php:
+
+
+class Shop extends Model
+{
+    /**
+     * The products that belong to the shop.
+     */
+    public function products()                     //Here products(): plural
+    {
+        return $this->belongsToMany(Product::class);
+    }
+}
+
+
+
+
+
+Or option 2: app/Models/Product.php:
+
+class Product extends Model
+{
+    /**
+     * The shops that belong to the product.
+     */
+    public function shops()                        //Here shops(): plural
+    {
+        return $this->belongsToMany(Shop::class);
+    }
+}
+
+Pivot Table Should be : ( product_shop )  BUT Name are plural of both functions
+
+
+
+
+Laravel "assumes" that pivot table name obeys the rules and is product_shop. 
+But, if it's actually different (for example, it's plural), you can provide it as a second parameter: 
+
+
+
+
+public function products()
+{
+    return $this->belongsToMany(Product::class, 'products_shops');     //This is ...
+}
+
+
+
+public function products()
+{
+    return $this->belongsToMany(Product::class, 'products_shops',
+      'shops_id', 'products_id');
+}
+
+
+
+
+Managing Many-to-Many Relationships: attach-detach-sync:
+
+
+$shop = Shop::find($shop_id);
+$shop->products()->attach($product_id);
+
+$shop->products()->detach($product_id);
+
+
+Remove all products:
+ 
+$shop->products()->detach();
+
+OR
+
+$shop->products()->attach([123, 456, 789]);
+$shop->products()->detach([321, 654, 987]);
+
+
+
+
+---------------------------------------------------------------------------------------------------
+
+Laravel Relationship: 
+
+
+1.
+
+Tables:
+
+//Example 01:
+
+
+>>> --> One to One <-- <<<
+
+user
+contact
+
+
+posts
+categories
+
+user <-> contact  (One to one)
+
+user <=> posts (One to many)
+
+
+//Example 02:
+
+Tables: members, groups
+Models: Member, Group
+
+Foreign Key: 
+    member (fk: group_id), group (pk: group_id)
+
+members: member_id, name, email, contact, group_id, created_at, updated_at
+groups: group_id, name, description, created_at, updated_at
+
+..............................................................................
+
+>>> --> Many to Many <-- <<<<
+
+posts
+categories
+category_post
+posts <=> categories 
+
+
+2. 
+
+Tables: Relationship
+
+Posts: 
+
+   belongsTo (user)
+   belongsToMany (Tags)
+   morphMany (Comments)
+   morphManhy (Links)
+
+Users: 
+
+   belongsToMany (likes)
+   hasMany (Posts)
+
+Tags: 
+
+   belongsToMany (Posts)   
+
+Likes: 
+
+   belongsTo (User)
+   belongsTo (Post)
+   belongsTo (Comment)
+
+Comments:
+
+   belongsTo (User)
+   hasMany (Replies)
+   morphMany (likes)
+
+
+
+Final Requirement: 
+
+
+Posts
+ User
+ Tags
+ Likes
+     .User
+ Comments
+     .User
+     .Likes
+     ->Replies
+          .likes
+
+-------------------------------------------------
+
+Example: 
+https://stackoverflow.com/questions/66185760/attempt-to-read-property-name-on-null
+
+Category: 
+
+
+In New Model:
+
+public function category()
+{
+    return $this->belongsTo(Category::class, 'cat_id');
+}
+
+
+----------------------------------------------------------------------------------------------------
+
+
+laravel 10 Passport API: 
+
+//Very easy video
+https://youtu.be/TNKn-4zA8Hg?t=1075
+
+//Laravel 10 Document
+https://laravel.com/docs/10.x/passport
+
+
+Installation:
+
+
+
+Steps:
+
+composer --create-project larave/laravel
+
+composer require laravel/passport
+php artisan migrate
+php artisan passport:install
+
+
+//User Model
+
+<?php
+ 
+namespace App\Models;
+ 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
+ 
+class User extends Authenticatable
+{
+    use HasApiTokens, HasFactory, Notifiable;
+}
+
+
+
+//config/auth.php 
+
+'guards' => [
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
+    ],
+ 
+    'api' => [
+        'driver' => 'passport',
+        'provider' => 'users',
+    ],
+],
+
+
+//API/UserController   (using api option)
+use App\Models\User
+use Auth
+class UserController extends Controller
+{
+ public function loginUser(Request $request): Response
+ {
+   $input = $request->all();
+   Auth::attempt($input);
+   
+   $user = Auth::user();
+
+   $token = $user->createToken('sample')->accessToken;
+   return response(['status' => 200, 'token' => $token], 200);
+
+   //dd(Auth::use());
+
+ }
+
+ public function getUserDetails(): Response
+ {
+   //$user = Auth::guard('api')->user();
+
+  //We can check
+  //dd(Auth::guard('api')->check));
+
+  //Final 
+   if(Auth::guard('api')->check){
+     $user = Auth::guard('api')->user();
+     return Response(['data' => $user, 200]);
+   }
+
+
+   return Response(['data' => 'Unauthorized', 401]);
+ }
+
+ public function userLogout(): Response
+ {
+   if(Auth::guard('api')->check()){
+   $accessToken = Auth::guard('api')->user()->token();
+      \DB::table('oauth_refresh_tokens')
+          ->where('access_token_id', $accessToken->id)
+          ->updated([
+             'revoked' => true
+           ])
+        $accessToken->revoke();
+        return Response(['data' => 'Unauthorized','message' => 'User Logout Successfully.', 401]);
+     }
+        return Response(['data' => 'Unauthorized'], 401);
+  }
+
+
+
+
+}
+
+//routes/api.php
+use App\Http\Controllers\API\UserController
+
+Route::middleware('auth:sanctum')->get('/user', function() {
+   return $request->user();
+});
+
+Route::controller(UserController::class)->group({
+Route::post('login','loginUser');
+});
+
+
+Route::controller(UserController::class)->group({
+Route::post('user',getUserDetail');
+Route::post('logout','userLogout');
+})->middleware('auth.api');
+
+
+//DatabaseSeeder   (Data insert through this using PostMan)
+
+public function run(): void
+{
+   \App\Models\User::factory()->create({
+      'name' => 'Admin User',
+      'email' => 'admin@gmail.com',
+      'password' => bcrypt(12345),
+    });
+}
+
+php artisan db:seed
+php artisan serve
+
+
+//Testing API using postman
+
+POST localhost:8000/api/login
+form-data
+
+KEY           VALUE
+email         admin@gmail.com
+password      123456
+
+
+GET  localhost:8000/api/user
+Type  Bearer Token     Token    jsfjmxjdkjldfjxljdll
+
+
+
+----------------------------------------------------------------------------------------------------
+
+//https://youtu.be/dqQSJ49dTds?t=896
+
+// Laravel 9 Vue 3, Vuex Store: 
+
+resource / js / store       //Create a folder store
+
+store / index.js
+
+
+import {createStore } from 'vuex'
+
+const store = createStore({
+
+ state: {
+   //define variables
+   token: localStorage.getItem('token') || 0
+ },
+ mutation: {
+   //update variable value
+     UPDATE_TOKEN(state,payLoad)
+        state.token = payload
+ },
+ actions: {
+   //action to be performed
+    setToken(context,payload)
+       localStorage.setItem('token',payload)
+       context.commit('UPDATE_TOKEN',payload)
+
+     removeToken(context){                     //Use it in logout function
+        localStorage = removeItem('token');
+        context.commit('UPDATE_TOKEN',0);
+     }
+ },
+ getters: {
+   //get state variable value
+
+     getToken: function(state){
+        retrun state.token;
+   }
+ }
+
+})
+export default store;
+
+
+
+//resources/js/app.js
+
+import './bootstarp';
+
+import {createApp } from 'vue';
+import router from './router.js';
+import store from './store/index.js'
+import App from './layouts/App.vue';
+
+createApp(App)
+  .use(router)
+  .use(store)
+  .mount("#app")
+
+
+//resources/js/Layouts/App.vue    //User token
+
+   {{ $store.state.token }}
+
+  OR
+
+   {{ $store.getters.getToken }}
+
+
+//On Login Page:
+ 
+import {useStore } from 'vuex'
+ setup(){
+
+  const router = useRouter()
+  const store = useStore()
+
+  }
+
+
+In login function 
+sote.dispatch('setToken', res.data.data.token);
+
+-----------------------------------------------------------------------------------------------------------
+
+Ajax Post To Controller:
+
+POST Data To Insert into database:
+
+//Web.php
+
+Route::get('/', [AjaxController::class,'index'])->name('ajax.index');
+
+Route::get('/ajaxlists', [AjaxController::class,'test'])->name('ajax.lists');
+
+Route::post('/testpost', [AjaxController::class,'testpost'])->name('ajax.testpost');
+
+
+//AjaxController: 
+
+
+    public function testpost(Request $request)    
+    {
+        $product['id'] = $request->input('id');
+        $product['name'] = $request->input('name');
+        $product['price'] = $request->input('price');
+        $product['quantity'] = $request->input('quantity');
+        $product['status'] = "Success";
+        
+        return response()->json(['product' => $product]);
+        exit;       
+        
+    }   
+
+
+//Index.php (View)
+
+
+
+<script>
+    $(function(){
+
+	$.ajaxSetup({
+
+	    headers: {
+	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});	     
+
+        $('button').on('click', function(){        	
+           let product = [];
+           let id = $('#id').val();
+           let name = $('#name').val();
+           let quantity = $('#quantity').val();
+           let price = $('#price').val();
+
+           let url = '{{route("ajax.testpost")}}';
+
+               productData = {"id":id, "name":name, "price":price, "quantity":quantity};
+ 
+           $.ajax({
+           	 url: url,
+           	 type:'POST',
+           	 dateType:'json',  
+           	 data: productData,      
+           	 success: function (response) {           	  
+                //console.log('ok');
+                alert('ok');	
+           	 },
+           	 error: function (response) {
+           	 	alert('fail');
+           	 }           	 
+           });
+        });      
+    });
+</script>
+
+
+
+//Ajax GET Call to controller for listing data
+
+//Web.php
+Route::get('/', [AjaxController::class,'index'])->name('ajax.index');
+
+Route::get('/ajaxlists', [AjaxController::class,'test'])->name('ajax.lists');
+
+Route::post('/testpost', [AjaxController::class,'testpost'])->name('ajax.testpost');
+
+
+
+//Ajax Controller 
+
+    public function test()
+    {
+        $products = Ajax::all();      
+        
+        return response()->json(['products' => $products]);
+        exit;        
+    }  
+
+
+//Index.php (view)
+
+<script>
+    $(function(){
+
+	$.ajaxSetup({
+	    headers: {
+	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});	                
+        //$('button').on('click', function(){        	
+
+           let url = '{{route("ajax.lists")}}';
+ 
+           $.ajax({
+           	 url: url,
+           	 type:'GET',
+           	 dateType:'json',
+
+           	 success: function (response) {   
+          	  
+                console.log(response)	 	
+
+           	 },
+           	 error: function (response) {
+           	 	alert('fail');
+           	 }           	 
+           });
+        //});      
+    });
+</script>
+
+
+
+
+
+---------------------------------------------------------------------------------------------------
+
+Validation: 
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'content' => 'required',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        ]);
+
+
+
+------------------------------------------------------------------------------------------------------------
+
+
+Admin Panel in Laravel: 
+
+   https://youtu.be/vPqud-uWW5o?t=1153
+
+   //Install Admin LTE Template From Github
+   https://github.com/phptechlife/laravel_10_ecomm_templates
+         
+
+   //AdminLte Template Dir Structures
+   https://youtu.be/eaXKtIjzO2U?t=102
+
+   public/admin
+   Copy all plugins folder to public/admin/plugins
+
+   Copy all files from dist foleder to public/admin/css
+   Copy all css files from dist foleder to public/admin/css
+   Copy all js files from dist foleder to public/admin/js
+   Copy all images from dist foleder to public/admin/images
+
+ Create Files: header.blade.php, footer.blade.php, 
+               sidebar.blade.php, layout.blade.php, dashboard.blade.php
+
+ Create folder: views/admin
+                views/admin/layout
+                views/admin/layout --> layout.blade.php, header.blade.php, footer.blade.php, sidebar.blade.php
+                views/admin/dashboard.blade.php
+ 
+ Http/Controllers/admin/adminController.php
+
+web.php: 
+ Route::prefix('/admin')->namespace('/App/Http/Controllers/Admin')->group(function(){
+  Route::get('dashboard',['AdminController::class','dashboard']);
+ });
+--------------------------------------------------------------------------------------------------------------
+
+>> Nuxt Js: 
+
+
+
+--------------------------------------------------------------------------------------------------------------
+
+>>  Invoices (L10 + Vuejs3)
+
+>> Laravel 10 + Vuejs 3 (setup: composition api)
+
+//Videos: https://youtu.be/NCNhm1pfkQI?t=368
+
+
+
+--------------------------------------------------------------------------------------------------------------
+
+>>Ecommerce (L10 )
+
+//https://www.youtube.com/@PHPTechLife
+
+
+
+
+--------------------------------------------------------------------------------------------------------------
+

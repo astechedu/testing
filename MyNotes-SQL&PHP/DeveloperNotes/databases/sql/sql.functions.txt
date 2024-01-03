@@ -1,0 +1,255 @@
+<<< SQL Stored Functions <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys: Delimiter, Default Delimiter, Functions, Function in phpmyadmin,
+      Function ON Ubuntu, While Loop in function, 
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Sql Functions Examples
+
+
+Vdo: Functions
+https://youtu.be/55_UN5gVARs?t=42
+
+vdo: User defined function
+https://youtu.be/XmNDQod-KNg?t=953
+
+-------------------------------------------------------------------
+
+Websites: 
+
+Fuction Examples:
+https://www.javatpoint.com/sql-server-functions
+
+Function & Procedure
+https://www.a2hosting.com/kb/developer-corner/mysql/mysql-stored-functions-and-procedures/
+
+-------------------------------------------------------------------
+
+SQL Server Functions: 
+
+Here is the list of some system functions used in the SQL Server:
+
+    String Functions (LEN, SUBSTRING, REPLACE, CONCAT, TRIM)
+    Date and Time Functions (datetime, datetime2, smalldatetime)
+    Aggregate Functions (COUNT, MAX, MIN, SUM, AVG)
+    Mathematical Functions (ABS, POWER, PI, EXP, LOG)
+    Ranking Functions (RANK, DENSE_RANK, ROW_NUMBER, NTILE)
+
+-------------------------------------------------------------------
+
+>>> Functions <<<<
+
+String Functions: 
+upper(),lower(),length(),substring(),now(),format(),concat(),replace(),trim()..
+
+
+
+Types of Functions:
+
+1. System Defined
+   Example: rand(), round(), upper(), lower(), count(), sum(), max(), min(), etc.
+
+SELECT id,NAME,CONCAT(NAME,id) AS Combined FROM users;
+SELECT CURDATE();
+SELECT CURRENT_DATE();
+
+SELECT DAY(CURRENT_DATE());
+SELECT MONTH(CURRENT_DATE());
+SELECT YEAR(CURRENT_DATE());
+
+SELECT DAYNAME(CURRENT_DATE());
+SELECT SYSDATE();
+SELECT NOW();
+
+
+2. User-Defined Function
+   i> Scalar Functions           ii> Table Valued Functions  
+      (Return Single Value)          (Return a table as a result)
+                                        1. Inlined Table Valued Function 
+                                        2. Multi Statement Table Valued Function)
+
+
+i> Scalar Functions Examples:
+
+DELIMITER $$
+-- Scalar example:
+CREATE FUNCTION NoParameters()
+  RETURNS INT
+  
+    BEGIN 
+       RETURN (SELECT SUM(id) FROM users);
+    END$$
+    
+DELIMITER ;
+
+//Calling this function
+SELECT NoParameters();
+
+---x---
+
+>> Function ON Ubuntu
+
+DELIMITER $$
+create function fn1(id int) returns int
+begin
+ return id;
+end $$
+DELIMITER ;
+
+
+select id,name, fn1(id) from users;
+
+//Or
+
+DELIMITER $$
+create function fn1() returns int
+begin
+ return 100;
+end $$
+DELIMITER ;
+
+
+select id,name, fn1() from users;
+
+//Or
+
+DELIMITER $$
+create function fn1() returns int
+begin
+ declare id int;
+ set id = 13;
+ return id;
+end $$
+DELIMITER ;
+
+
+
+//Or
+
+DELIMITER $$
+create function fn1() returns int
+begin
+ declare n1 int;
+ declare n2 int;
+ set n1 = 10;
+ set n2 = 5;
+ return n1+n2;
+end $$
+DELIMITER ;
+
+
+>>While Loop in function
+
+DELIMITER $$
+create function fn1() returns int
+begin
+ declare counter int;
+ set counter = 0;
+ label:
+  while counter < 10 do
+    set counter = counter + 1;
+  end  
+  while label;
+  return counter;
+ end $$
+DELIMITER ;
+
+
+
+
+---x---
+--------------------------------------------------------------
+
+
+Syntax: 
+
+CREATE FUNCTION schema_name.function_name (parameter_list)  
+RETURNS data_type AS  
+BEGIN  
+    statements  
+    RETURN value  
+END 
+
+---x---
+
+//Calculate the net sales 
+
+DELIMITER $$
+
+    CREATE FUNCTION udfNet_Sales(  
+        @quantity INT,  
+        @price DEC(10,2),  
+        @discount DEC(3,2)  
+    )  
+    RETURNS DEC(10,2)  
+    AS   
+    BEGIN  
+        RETURN @quantity * @price * (1 - @discount);  
+    END $$   
+
+DELIMITER ;
+
+//Use this function in select query:
+
+SELECT dbo.udfNet_Sales(25, 500, 0.2) AS net_sales; 
+
+---x---
+
+--------------------------------------------------------
+
+ii>> Table-Valued Functions
+
+1. Inline Table-Values Functions
+
+Example 01: 
+
+    --It creates a table-valued function to get employees  
+    CREATE FUNCTION fudf_GetEmployee()  
+    RETURNS TABLE  
+    AS  
+     RETURN (SELECT * FROM Employee)  
+
+
+
+//
+SELECT * FROM udf_GetEmployee(); 
+ 
+---x---
+
+-------------------------------------------------------------------
+
+
+
+>>> Function in phpmyadmin (Working)
+
+DELIMITER $$
+CREATE FUNCTION calcProfit(cost FLOAT, price FLOAT) RETURNS DECIMAL(9,2)
+BEGIN
+  DECLARE profit DECIMAL(9,2);
+  SET profit = price-cost;
+  RETURN profit;
+END$$
+DELIMITER ;
+
+---------------------------------------------------------------------------
+//
+
+>>> Function in phpmyadmin (Working)
+
+DELIMITER $$
+CREATE FUNCTION totalprice(quantity INT, price INT) RETURNS DECIMAL(9,2)
+BEGIN
+  DECLARE total DECIMAL(9,2);
+  SET total = quantity*price;
+  RETURN total;
+END $$
+DELIMITER ;
+
+------------------------------------------------------------------------------

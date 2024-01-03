@@ -1,0 +1,26 @@
+>>>> HTML5 & CSS3 <<<<<
+
+
+-----------------------------------------------------------------------
+
+//Free Websites Links
+https://www.free-css.com/free-css-templates
+
+//Free Websites Links
+https://bootstrapmade.com/bootstrap-5-templates/
+
+//Free Website Links
+https://www.templatemonster.com/free-templates.php
+
+
+//Sidebar links: 
+https://dev.to/codeply/bootstrap-5-sidebar-examples-38pb
+https://bbbootstrap.com/snippets/bootstrap-5-sidebar-menu-toggle-button-34132202
+
+
+//One page html template free (Many Single Page Templates)   //Good 
+https://templates.webtoolhub.com/tpl-a1634-stampa-like.aspx
+
+//Nice Admin Free  (Blog, Read State Resume etc.)
+https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+-----------------------------------------------------------------------

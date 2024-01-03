@@ -1,0 +1,66 @@
+<<<< Data Structue: Linked List >>>>
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+Keys: Singly Linked List, Stack
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+Linked List: 
+
+//* Adding node to linked list Graphically : Single Linked List
+https://youtu.be/jgqg6Qw68_Q?t=321
+
+//Inserting node at a certain position : Single Linked List
+https://youtu.be/0hGxILnKvJk?t=26
+https://youtu.be/5ZvTMs10xjw?t=728      //At nth position: Greeky shows
+
+//1. Classification of Data Structure
+https://www.geeksforgeeks.org/data-structures/
+
+//2. Linked List
+https://www.geeksforgeeks.org/identical-linked-lists/
+
+
+Stack: 
+
+Stack using array: program:
+https://youtu.be/j3URyQFJnU8?t=617   //Greeky shows
+
+Stack using linked list: program
+https://youtu.be/RlYwmQSoTUo?t=3     //Greeky shows
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+
+1. Classification of Data Structure:
+
+
+                        Data Structure
+                              |
+               __________________________________
+               |                                |
+          Linear Data                     Non-Linear Data 
+           Structure                        Structure
+         ______________________               ___________ 
+         |                    |               |         |
+    Static Data          Dynamic Data       Tree      Graph
+     Structure           Structure
+       __               _________________
+       |                |      |        |
+      Array           Queue   Stack  Linked List
+
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+2. Linked List
+
+
+
+
+
+
+
+

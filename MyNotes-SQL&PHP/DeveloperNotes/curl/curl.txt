@@ -1,0 +1,187 @@
+>>>> CURL in PHP <<<<<<
+
+
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+Keys: Web Scraping,
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+
+CMDS: 
+https://youtu.be/mR5GLQWx8DY?t=603
+
+curl www.google.com                        //Sendig request to google.com
+curl -o https://www.google.com
+curl -o "google" https://www.google.com   //File Name, Saved in file "google"
+cat google                                //Print
+
+curl --request GET https://www.google.com  //Sent GET Request
+curl --request POST https://www.google.com  //Sent POST Request
+curl --request PUT https://www.google.com  //Sent PUT Request
+curl --request DELETE https://www.google.com  //Sent DELETE Request
+
+curl --request POST --data "name age, address" https://www.google.com  //With Data
+
+curl -o file1 https://www.google.com \     //Multi Request
+>    -o file2 https://www.yahoo.com
+
+$ ls
+$ cat file1
+$ cat file2
+
+curl -o https://releases.ubuntu.com/groovy/ubuntu-20.10-destop-amd64.iso
+
+//-C: Continue
+curl -C -o https://releases.ubuntu.com/groovy/ubuntu-20.10-destop-amd64.iso
+
+//Calculate data and download, Jintna download hua tha wahi se download hoga
+curl -C - -o https://releases.ubuntu.com/groovy/ubuntu-20.10-destop-amd64.iso
+
+
+//Debug on Server
+
+curl -I https://www.google.com
+
+//Adding headers
+curl -A "Mozilla/5.0 .....) https://www.google.com | more
+
+curl google.com      //By default not support
+
+curl -L google.com   //Wroking with multi redirections
+
+//
+curl --limit-rate 20k -o https://releases.ubuntu.com/groovy/ubuntu-20.10-destop-amd64.iso
+
+
+//After request complete do some changes there
+curl -x 192.168.1.1:888 https://www.google.com
+
+//
+curl -U username:password -x 192.168.1.1:888 https://www.google.com
+
+//Curl not download cookies, but needs cookie
+curl --cookie "Name=value" https://www.google.com
+
+//File download from ftp server
+curl -U userame:password ftp://ftp.example.com/abc.zip
+
+//Upload file on server
+curl -T newfile.zip -u username:password ftp://ftp.example.com
+
+Video: https://youtu.be/mR5GLQWx8DY?t=1175
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+
+>> How to call APIs from php: file_get_contents, cURL, and Guzzle and SDKs
+Video: https://youtu.be/wMyP-q3nPd4?t=81
+
+1.
+$data = file_get_contents("https://jsonplaceholder.typicode.com/albums/1");
+var_dump($data)
+
+2.
+$payload = json_encode([
+  "title" => "Upload title"
+]);
+
+$options = [
+  "http" => [
+    "method" => "PATCH",
+    "header" => "content-type: application/json; charset=UTF-8",
+    "content" => $payload
+  ]
+];
+
+$context = stream_context_create($options);
+
+$data = file_get_contents("https://jsonplaceholder.typicode.com/albums/1", false, $context);
+var_dump($data)
+
+print_r($http_response_header);
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+
+>> Web Scraping (PHP Image Scraping)
+
+
+<?php
+//https://youtu.be/-o9s_EsV9oU?t=3
+//PHP Image scraping (Web Scraping)
+
+
+$ch=curl_init();
+curl_setopt($ch,CURLOPT_URL, 'https://www.bigbasket.com/cl/fruits-vegetables/#!page=4');
+curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+
+$result = curl_exec($ch);
+//echo $result;
+curl_close($ch);
+
+preg_match_all('!//www.bigbasket.com/media/uploads/p/s/(.*).jpg!',$result,$data);
+
+$findArr=array_unique($data[0]);
+
+
+foreach($findArr as $list){
+   echo "<img src='$list' />";
+}
+
+
+//OR
+
+/*
+echo "<ul>";
+foreach($findArr as $list){
+   //echo "<img src='$list' />";
+   echo "<li>"."<img src='".$list."'>"."</li>";
+}
+echo "</ul>";
+*/
+
+?>
+
+
+
+
+
+
+?>
+
+
+
+
+
+--------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

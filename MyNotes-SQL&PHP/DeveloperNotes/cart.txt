@@ -1,0 +1,215 @@
+>>>> Cart <<<<<<
+
+
+
+-------------------------------------------------------------------------------------------
+eCOMMERCE Websites: 
+https://www.wix.com/blog/ecommerce/2017/10/9-ecommerce-templates-thatll-make-your-customers-buy?psafe_param=1&utm_source=google&utm_medium=cpc&utm_campaign=9653627270^101840975426&experiment_id=^^440359935590^^_DSA&gclid=EAIaIQobChMI1Knvit6g_gIVl5NmAh0uwwH4EAAYAyAAEgIZw_D_BwE
+Accessories Store , Plant Boutique, T-Shirt Store, Home Tech Store, Home Accessories Store
+Kids Clothing Store, Sporting Goods Store, Backpack Store, Beauty Store, Home Goods Store,
+Arts & Crafts Store, Toy Store, Electronics Store, Pet Supply Store, Product Landing Page,
+Shoe Store, Jewelry Store, Clothing Store, Stationery Store, Cookie Shop, Ceramic Studio, 
+Sportswear Store, Gaming Store, Bookstore, Subscription Box Company, CBD Wellness Store
+ 
+-------------------------------------------------------------------------------------------
+
+
+Example 01: 
+
+Better way to make the shopping cart table with MySQL?
+
+the best ways to manage carts, customers and your products on your cart.
+
+
+So you will need something like 5 tables. The first table is your customer table:
+
+customerID | customerName | customerEmail | ....
+-------------------------------------------------
+INT (INCR) | VARCHAR(200) | VARCHAR (200) | ....
+
+Second you have the shop table with your shops:
+
+shopID    | shopName | etc....
+----------------------------
+INT (INCR)| VARCHAR  | etc ....
+
+Then you have the products table with all the products you have available:
+
+productID | productName | ProductDescription | etc....
+------------------------------------------------------
+INT (INCR)| VARCHAR .   | TEXT               | etc...
+
+The cart table is very short, but can be expanded very easily till it fits your needs:
+
+cartID    | customerID              | DatePlaced
+------------------------------------------------
+INT (INCR)| INT (From customerTable)| DATETIME
+
+So now you are not really addding the products to the cart table directly, you will need a table with the products of the cart. The CartDetail table:
+
+cartDetailID   | cartID | shopID | productID | Quantity | dateAdd
+----------------------------------------------------------------
+INT (INCREMENT)| INT    | INT    | INT       | INT      | DATETIME
+
+
+The cartID here can be repeated and your table will look like this:
+
+ cartDetailID   | cartID | shopID | productID | Quantity | dateAdd
+ ----------------------------------------------------------------
+ 0              | 15     | 1      | 253       | 3        | 2018-08-03 09:43:17
+ 1              | 15     | 1      | 255       | 1        | 2018-08-03 09:43:17
+
+
+
+
+
+An easier (yet sort of complex) way to approach this in order to lessen your records on your cart table is readjusting the structure to the below:
+
+cartID | memberID | cartDetail
+---------------------------------------------------
+1      | 1        | 1-1-13-Size: XS, 1-2-2-Size: XL
+
+
+
+
+Now you only have 1 cartID and the items and item details (shopID, itemID, cartQuant, cartDetail) all 
+belong to that memberID. All you would need to do is try exploding all the contents of the cartDetail with the explode() method in php.
+
+
+
+$SQL = "SELECT * FROM cart WHERE memberID = '$memberID'";
+$result = mysqli_query($connect, $SQL);
+$field = mysqli_fetch_assoc($result);
+$cartID = $field['cartID'];
+$cartDetail = $field['cartDetail'];
+// check that cart and explode its contents to retrieve cart items based on ','
+if($cartDetail != null || $cartDetail != "") {
+    // if cart contains ','
+    if(strpos($cartDetail, ',')) {
+        $cartArray = explode(',', $cartDetail);
+        $cartitems = sizeof($cartArray);
+    }
+    else {
+        $cartArray = array();
+        $cartArray[0] = $cartDetail;
+        $cartitems = 1;
+    }
+}
+else { $cartitems = 0; }
+
+
+
+
+The exploded array would print out as of follows:
+
+echo cartArray[0]; // 1-1-13-Size: XS
+echo cartArray[1]; // 1-2-2-Size: XL
+
+
+
+But then, you'd want to work with the individual values of each element in the array.
+Use a loop to print out the exploded contents of the smaller array for this.
+
+// for loop here to go through every single element with i as counting
+    $currentItem = explode('-', $cartArray[$i]);
+    // 0 = shopID, 1 = itemID, 2 = cartQuant, 3 = cartDetail
+    $shopID = $currentItem[0];
+    $itemID = $currentItem[1];
+    $cartQuant = $currentItem[2];
+    $cartDetail = $currentItem[3];
+
+
+
+You'd want to display this right away since it is in a loop for that index.
+
+To display the contents of a cart, use the explode() function to print out. In case you are trying to 
+add a new item to the shopping cart, you will not need the function and all you need is retrieve the value 
+from MySQL with an SQL statement and query, fetch the "cartDetail" and save it to a temporary string like $tempStr. 
+Then you can add the new elements into it with $tempStr = $tempStr."1-3-8-Size: M";.
+
+Also, I erased your "added" field so that you can use reverse array using array_reverse() to display 
+the newest items appended to the existing cart (this you have to use explode() again).
+
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+
+Example 02:
+
+
+File Structure: 
+
+
+\-- shoppingcart
+  |-- functions.php
+  |-- index.php
+  |-- home.php
+  |-- products.php
+  |-- product.php
+  |-- cart.php
+  |-- placeorder.php
+  |-- style.css
+  \-- imgs
+    |-- featured-image.jpg
+    |-- camera.jpg
+    |-- headphones.jpg
+    |-- wallet.jpg
+    |-- watch.jpg
+
+
+
+
+
+Contents
+
+    Getting Started
+        Demos
+        Requirements
+        What You Will Learn in this Tutorial
+        File Structure & Setup
+    Creating the Database and setting-up Tables
+    Designing the Shopping Cart System with CSS
+    Creating the Functions File
+    Creating the Index File
+        Connect to MySQL Database
+        Basic Routing
+    Creating the Home Page
+        Get 4 Products from Database
+        Create Home Template
+    Creating the Products Page
+        Get Products from Database with Pagination
+        Get the Total Number of Products
+        Create Products Template
+    Creating the Product Page
+        Get Product from Database with GET Request
+        Create Product Template
+    Creating the Shopping Cart Page
+        Adding a Product to Cart
+        Removing a Product from Cart
+        Updating Product Quantites
+        Handling the Place Order
+        Get Products in Cart and Select from Database
+        Create Shopping Cart Template
+    Creating the Place Order Page
+        Create Place Order Template
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+

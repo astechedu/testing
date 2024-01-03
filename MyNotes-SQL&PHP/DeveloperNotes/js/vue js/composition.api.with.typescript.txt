@@ -1,0 +1,87 @@
+>>> Vue js Composition Api With TypeScript <<<<<
+
+
+-------------------------------------------------------------------------------
+Keys: 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+//Composition api Vs Options api
+
+//https://vueschool.io/articles/vuejs-tutorials/options-api-vs-composition-api/?utm_source=GoogleAds&utm_medium=SEM&gclid=EAIaIQobChMI0cjR6cflgQMVZKNmAh3k6QxiEAAYAiAAEgLBSfD_BwE
+
+
+-------------------------------------------------------------------------------
+
+TypeScript with Composition API:
+
+    Typing Component Props
+    Typing Component Emits
+    Typing ref()
+    Typing reactive()
+    Typing computed()
+    Typing Event Handlers
+    Typing Provide / Inject
+    Typing Template Refs
+    Typing Component Template Refs
+
+//https://vuejs.org/guide/typescript/composition-api.html
+
+
+--------------------------------------------------------------------------------
+
+Typing Component Props:
+
+//Using <script setup>
+//When using <script setup>, the defineProps() macro supports inferring the props types based on its argument:
+
+
+<script setup lang="ts">
+const props = defineProps({
+  foo: { type: String, required: true },
+  bar: Number
+})
+
+props.foo // string
+props.bar // number | undefined
+</script>
+
+
+-----------------------------------------------------
+
+<script setup lang="ts">
+const props = defineProps<{
+  foo: string
+  bar?: number
+}>()
+</script>
+
+-----------------------------------------------------
+
+>>> We can also move the props types into a separate interface:
+
+<script setup lang="ts">
+interface Props {
+  foo: string
+  bar?: number
+}
+
+const props = defineProps<Props>()
+</script>
+--------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------
+

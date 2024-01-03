@@ -1,0 +1,120 @@
+>>>> Linux <<<<<<
+
+
+
+--------------------------------------------------------------
+
+Keys: 
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+//
+
+
+---------------------------------------------------------------------
+
+
+Sudo Chmod:
+
+sudo chmod g-x myfile.sh
+sudo chmod g+x myfile.sh
+sudo chmod ugo+r myfile.sh
+sudo chmod ugo-r myfile.sh
+sudo chmod o+w myfile.sh
+sudo chmod o-w myfile.sh
+
+Sudo Chown:
+----------
+sudo chown aryan myfile.sh      //Changing user (aryan is user)
+sudo chown :aryan myfile.sh     //Changing group (aryan is group)
+
+
+
+Sudo Chgrp:
+----------
+sudo chgrp ajay myfile.sh
+
+
+Sudo UserMod: 
+------------
+
+
+sudo usermod: 
+------------
+sudo usermod -a -G aryan ajay   //Adding User to group; GroupName: aryan, Username: ajay
+
+Looking Belw:
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+//https://linuxize.com/post/how-to-add-user-to-group-in-linux/
+
+How to Add User to Group in Linux
+
+
+Linux Groups
+
+  The Primary group
+  Secondary or supplementary group
+
+
+Permissions:
+
+
+User: 
+
+
+
+Group:
+
+
+//How to Add an Existing User to a Group 
+sudo usermod -a -G groupname username
+sudo usermod -a -G sudo linuxize
+
+//How to Add an Existing User to Multiple Groups in One Command
+
+sudo usermod -a -G group1,group2 username
+
+//How to Remove a User From a Group
+sudo gpasswd -d username groupname
+
+
+//How to Create a Group
+sudo groupadd groupname
+
+//How to Delete a Group
+sudo groupdel groupname
+
+//How to Change a User’s Primary Group 
+sudo usermod -g groupname username
+sudo usermod -g developers linuxize
+
+//How to Create a New User and Assign Groups in One Command
+sudo useradd -g users -G wheel,developers nathan
+
+//Display User Groups 
+id username
+id linuxize
+groups linuxize
+
+
+-------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------

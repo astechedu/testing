@@ -1,0 +1,75 @@
+<<< What is Database? <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+VDO: Database Model?  - in hindi
+https://youtu.be/a_W55A8vb6A?t=25
+
+
+VDO: Database, What?
+https://youtu.be/er3KZYgovhY?t=3
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+>>> Data Model <<<<
+
+
+
+1. Hierarchical Database Model  (Tree Structure)  //Structure like a tree
+   
+ 
+
+2. Network Data Model                             //More Node and table connected to each other
+
+
+
+3. Relational Database Model  ( Table Structue )   //Structue like a table
+
+
+-------------------------------------------------------------------
+
+1. Hierarchical Database Model 
+   A child has only one parent.
+ 
+                         Root
+                          |
+          --------------------------------------
+          |               |                    |
+       level 1          level 1             level 1
+        child            child               child
+      |     |                                  |
+ level 2    level 2                         level 2
+ child      child                           child    
+
+
+
+
+2. Network Data Model           
+   A child has multiple parents.
+   A parent has multiple childs
+                                        
+              
+          A
+       /     \                                 
+      B1     B2                        
+     /  \  /  \
+    C1   C2  C3        
+
+
+
+
+
+3. Relational Database Model  
+
+
+
+
+
+-------------------------------------------------------------------------

@@ -1,0 +1,180 @@
+<<< SQL Some Importants <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys: CHARINDEX,Replace,Left, Right, Difference, Format, Len, DataLength,Replicate, Reverse,  
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+SQL Server LEN() Function: Like: charindex,replace,left,len etc.
+https://www.w3schools.com/sql/func_sqlserver_len.asp
+
+
+Vdo: SQL Query | Split Concatenated String into Columns | CharIndex
+https://youtu.be/pngBhMrGAsU?t=235
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+>>>> CHARINDEX
+
+SELECT Name, CHARINDEX(',',Name) from dbo.employee                                           //Find position of ,
+SELECT Name, LEFT(NAME, CHARINDEX(',',Name)) from dbo.employee                              //list LastName with comma
+SELECT Name, LEFT(NAME, CHARINDEX(',',Name) -1) AS LAST_NAME from dbo.employee             //Remove comma
+SELECT Name, RIGHT(NAME, LEN(NAME) - CHARINDEX(',',NAME)) AS FIRST_NAME from dbo.employee
+
+Select CharIndex('@',email), email form dbo.DimCustomer          //Found position of @
+SELECT Name, RIGHT(email, LEN(email) - CHARINDEX('@',email)) from dbo.DimCustomer  //Chars form @
+
+SELECT Name, RIGHT(email, LEN(email) - CHARINDEX('@',email)) from dbo.DimCustomer
+Group by Right(email,len(email) - CharIndex('@',email))
+
+
+
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+
+
+>> SQL Server REPLACE() Function:
+       //https://www.w3schools.com/sql/func_sqlserver_len.asp
+
+SELECT REPLACE('SQL Tutorial', 'T', 'M'); 
+
+Syntax
+REPLACE(string, old_string, new_string)
+
+
+Example:
+
+Replace "a" with "c":
+SELECT REPLACE('ABC ABC ABC', 'a', 'c'); 
+
+----------------------------------------------------------------------------------------
+
+>>> SQL Server FORMAT() Function
+
+Syntax
+FORMAT(value, format, culture)
+
+
+Example:
+
+Format a number:
+SELECT FORMAT(123456789, '##-##-#####'); 
+
+
+-----------------------------------------------------------------------------------------
+
+>>> SQL Server LEFT() Function
+
+
+SELECT LEFT('SQL Tutorial', 3) AS ExtractString;
+
+Syntax
+LEFT(string, number_of_chars)
+
+
+Example
+
+Extract 5 characters from the text in the "CustomerName" column (starting from left):
+SELECT LEFT(CustomerName, 5) AS ExtractString
+FROM Customers; 
+
+
+
+--------------------------------------------------------------------------------------------
+
+>>>> SQL Server LEN() Function
+
+Syntax
+LEN(string)
+
+Example:
+Return the length of a string (counts leading spaces, but not trailing spaces):
+
+SELECT LEN(' W3Schools.com ');
+
+
+Return the length of a string
+
+SELECT LEN('2017-08'); 
+
+---------------------------------------------------------------------------------------------
+
+>>> SQL Server DATALENGTH() Function
+
+
+Syntax
+DATALENGTH(expression)
+
+Example:
+Return the length of an expression (in bytes) (counts both leading and trailing spaces):
+
+SELECT DATALENGTH('   W3Schools.com   '); 
+
+
+Return the length of an expression (in bytes):
+SELECT DATALENGTH('2017-08'); 
+
+----------------------------------------------------------------------------------------------
+
+>>>> SQL Server DIFFERENCE() Function
+
+Example:
+Get your own SQL Server
+
+Compares two SOUNDEX values, and return an integer:
+SELECT DIFFERENCE('Juice', 'Jucy'); 
+
+Syntax:
+DIFFERENCE(expression, expression)
+
+
+Example:
+
+Compares two SOUNDEX values, and return an integer:
+SELECT DIFFERENCE('Juice', 'Banana'); 
+
+----------------------------------------------------------------------------------------------
+
+>>> SQL Server REPLICATE() Function
+
+Syntax:
+REPLICATE(string, integer)
+
+Example:
+
+Repeat a string:
+SELECT REPLICATE('SQL Tutorial', 5); 
+
+Example:
+Repeat the text in CustomerName two times:
+SELECT REPLICATE(CustomerName, 2)
+FROM Customers; 
+
+
+---------------------------------------------------------------------------------------------
+
+>>> SQL Server SUBSTRING() Function
+
+Syntax:
+
+Example:
+
+Extract 5 characters from the "CustomerName" column, starting in position 1:
+SELECT SUBSTRING(CustomerName, 1, 5) AS ExtractString
+FROM Customers; 
+
+
+Example:
+
+Extract 100 characters from a string, starting in position 1:
+SELECT SUBSTRING('SQL Tutorial', 1, 100) AS ExtractString; 
+
+SUBSTRING(string, start, length)
+
+-----------------------------------------------------------------------------------------------

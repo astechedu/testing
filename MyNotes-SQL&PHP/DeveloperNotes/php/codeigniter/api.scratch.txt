@@ -1,0 +1,109 @@
+>>> Codeigniter 4 <<<<<
+
+
+
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+Keys: 
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+
+//CI4 Api from Scratch
+//https://youtu.be/cn9FtJNDBDM?t=1195
+
+
+Model:
+
+
+public fucntion updateValue($table, $where, $data){
+  $builder = $this->db->table($table);
+  $builder->where($where);
+  $builder->udate($data);
+  return true;
+}
+
+public fucntion deleteValue($table, $where){
+  $builder = $this->db->table($table);
+  $builder->where($where);
+  $builder->delete($data);
+  return true;
+}
+
+public fucntion selectRecod($table, $where = array()){
+  $builder = $this->db->table($table);
+  $builder->where($where);
+  $resullt = $builder->get();
+  return $result->getResult();
+}
+
+public fucntion selectRow($table, $where){
+  $builder = $this->db->table($table);
+  $builder->where($where);
+  $result = $builder->get();
+  return $result->getRow();
+}
+
+
+
+
+Controller: 
+
+use App\Models\CommonModel;
+use CodeIgniter\API\ResponseTrait;
+
+class Home extends BaseController
+{
+  use ResponseTraits;
+  private $model;
+
+ function __construct()
+ {
+   $this->model = new CommonModel();
+ }
+
+ public function index($id = null){
+   if($id == null){
+     $fetchRecord = $this->model->selectRecord("user");
+     $result = [
+       "status" = 201,
+       "data" = $fetchRecord,
+     ];
+    }else {
+      $fetchRecord = $this->model->selectRow("user", ['id' => $id]);
+      
+      if(!empty($fetchRecord)){
+
+        $result = [
+          "status" => 201,
+          "data" => $fetchRecord,
+        ];
+       }else {
+        $result = [
+          "status" => 404,
+          "data" => "No Recod Found",
+        ];
+       }
+    };
+
+   return $this->respond($result);
+ }
+
+  public function delete($id){
+    
+  }
+}
+
+
+
+//Routes: 
+
+$routes->get('/', 'Home::index');
+$routes->get('/(:num)', 'Home::index/$1');
+$routes->get('delete/(:num)', 'Home::delete/$1');
+
+
+
+-----------------------------------------------------------------

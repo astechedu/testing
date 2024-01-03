@@ -1,0 +1,18 @@
+>>> Windows Clear Cache <<<<
+
+
+---------------------------------------------------------------
+Vdo: 
+https://youtu.be/xAE8qYlnVAM?t=206
+
+------------------------------------------------------------------------------
+1. type 'prefetch' in run window (win+R) and delete all file in this folder
+2. type 'recent' in run window (win+R) and delete all file in this folder
+3. type %temp%....
+4. type cleanmgr
+5. Internet Properties, delete all temporary files etc...
+6. settings -> system -> storage, click on button Storage sense
+7. In powershell type 'ipconfig /flushdns' + enter
+8. In run window type 'wsreset.exe'
+9. Settings -> Privvacy & Security -> Location History -> clear
+10. Click on foler icon, -> Quick Access -> Views -> Options -> clear 

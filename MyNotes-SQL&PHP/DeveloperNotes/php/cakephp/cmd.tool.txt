@@ -1,0 +1,203 @@
+>>> CakePHP 4 <<<<<
+
+
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+Keys: migrations, 
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+
+//https://book.cakephp.org/migrations/3/en/index.html
+
+Development Server: 
+
+
+
+# run server shell
+  bin/cake server
+  bin/cake server -p 8765
+
+
+--------------------------------------------------------------------------------------------
+
+Migrations:
+
+# run migrations shell
+  bin/cake migrations -h
+
+# run bake (with plugin prefix)
+  bin/cake bake.bake -h
+
+
+//Create Migrations
+
+bin/cake migrations dump
+bin/cake bake migration
+bin/cake migrations create MyCustomMigration
+
+
+bin/cake plugin load Migrations
+bin/cake migrations migrate
+bin/cake migrations rollback
+
+----------------------------------------------------------------------------------------
+//status : Migrations Status
+
+bin/cake migrations status
+bin/cake migrations status --format json
+
+----------------------------------------------------------------------------------------
+
+Creating Table:
+//You can use bake to create a table
+bin/cake bake migration CreateProducts name:string description:text created modified
+
+//Adding columns to an existing table
+bin/cake bake migration AddPriceToProducts price:decimal[5,2]
+
+//Adding a column as index to a table
+bin/cake bake migration AddNameIndexToProducts name:string:index
+
+//Alter a column from a table
+bin/cake bake migration AlterPriceOnProducts name:float
+
+
+----------------------------------------------------------------------
+//rollback : Reverting Migrations
+
+# You can rollback to the previous migration by using the
+# ``rollback`` command::
+bin/cake migrations rollback
+
+# You can also pass a migration version number to rollback
+# to a specific version::
+bin/cake migrations rollback -t 20150103081132
+
+----------------------------------------------------------------------
+
+//mark_migrated : Marking a migration as migrated
+
+bin/cake migrations mark_migrated
+bin/cake migrations mark_migrated --target=20151016204000
+bin/cake migrations mark_migrated --target=20151016204000 --exclude
+bin/cake migrations mark_migrated --target=20151016204000 --only
+bin/cake migrations mark_migrated 20150420082532
+
+---------------------------------------------------------------------------------------------
+
+//seed : Seeding your database
+
+# This will create a ArticlesSeed.php file in the directory config/Seeds of your application
+# By default, the table the seed will try to alter is the "tableized" version of the seed filename
+bin/cake bake seed Articles
+
+# You specify the name of the table the seed files will alter by using the ``--table`` option
+bin/cake bake seed Articles --table my_articles_table
+
+# You can specify a plugin to bake into
+bin/cake bake seed Articles --plugin PluginName
+
+# You can specify an alternative connection when generating a seeder.
+bin/cake bake seed Articles --connection connection
+
+
+
+bin/cake bake seed --data Articles
+# Will only export the first 10 rows found
+bin/cake bake seed --data --limit 10 Articles
+# Will only export the fields `id`, `title` and `excerpt`
+bin/cake bake seed --data --fields id,title,excerpt Articles
+
+
+# Without parameters, the seed subcommand will run all available seeders
+# in the target directory, in alphabetical order.
+bin/cake migrations seed
+
+# You can specify only one seeder to be run using the `--seed` option
+bin/cake migrations seed --seed ArticlesSeed
+
+# You can run seeders from an alternative directory, relative to config
+bin/cake migrations seed --source AlternativeSeeds
+
+# You can run seeders from a plugin
+bin/cake migrations seed --plugin PluginName
+
+# You can run seeders from a specific connection
+bin/cake migrations seed --connection connection
+
+
+
+----------------------------------------------------------------------------------------------
+
+
+
+------------------------------------------------------------------------------------------------
+//Using Migrations In Plugins
+
+bin/cake migrations status -p PluginName
+
+bin/cake migrations migrate -p PluginName
+
+
+Exmples: 
+
+bin/cake migrations create Students 
+//OR bin/cake bake migration CreateProducts
+
+bin/cake migrations migrate
+bin/cake migrations status
+bin/cake migrations rollback
+
+bin/cake bake seed Students 
+//OR bin/cake bake seed Products
+
+bin/cake migrations seed                         //Run all seed files
+bin/cake migrations seed --seed StudentsSeed     //Run single seed file
+
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+
+
+Faker: 
+
+//composer require fzaninotto/faker
+
+
+<?php
+
+declare(strict_types=1);
+
+use Migrations\AbstractSeed;
+
+class ProductsSeed extends AbstractSeed
+{
+   
+    public function run()
+    {
+        $faker = Faker\Factory::create();
+        $data = [];
+        for ($i = 0; $i < 100; $i++) {
+            $data[] = [
+                'name'      => $faker->name(),
+                'cost'      => $faker->numberBetween(100, 1000),
+                'product_image' => $faker->imageUrl(),
+                'description'   => $faker->sentence(6),
+                'status'    => $faker->randomElement([1, 0])
+            ];
+        }
+
+        $table = $this->table('products');
+        $table->insert($data)->save();
+    }
+}
+
+
+bin/cake migrations seed
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+ 

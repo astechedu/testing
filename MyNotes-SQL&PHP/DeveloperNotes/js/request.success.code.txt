@@ -1,0 +1,24 @@
+>>> HTTP Response Status <<<
+
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+Keys: 
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+>>HTTP Response Status:
+
+//Video: https://youtu.be/sfMNI0yLZII?list=PL2PkZdv6p7Zmu51_FBoNDcv8Bk8bXODvH&t=759
+
+2xx   200:ok   201:Created   202: Accepted       //Success
+
+3xx   301: Moved Permanantly   302:Found         //Redirections
+
+4xx   400:Bad Request   401: Unauthorised        //Client Error
+      403:Forbidden     404: Not Found   
+      405:Method Not Allowed  
+
+5xx   500:Internal Server Error  502:Bad Gateway  //Server Error
+      
+

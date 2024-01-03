@@ -1,0 +1,46 @@
+>>> SQL Loops <<<<
+
+
+-------------------------------------------------------------------------------
+
+Keys: While Loop,
+
+--------------------------------------------------------------------------------
+
+Website: 
+
+//Sql loops Examples
+https://www.sqlshack.com/sql-while-loop-understanding-while-loops-in-sql-server/
+
+--------------------------------------------------------------------------------
+
+
+>>> SQL While loop syntax:
+
+
+WHILE condition
+BEGIN
+   //SQL Statements
+END;
+
+---x---
+
+
+//A simple example: Printing numbers with SQL While loop:
+
+
+DECLARE @count INT;
+SET @count = 1;
+    
+WHILE @count<= 5
+BEGIN
+   PRINT @count
+   SET @count = @count + 1;
+END;
+
+
+
+
+
+
+

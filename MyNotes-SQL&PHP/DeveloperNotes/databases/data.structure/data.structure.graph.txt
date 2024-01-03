@@ -1,0 +1,44 @@
+<<<< Data Structure Graph >>>>
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+//1. Classification of Data Structure
+https://www.geeksforgeeks.org/data-structures/
+
+//Graph Representation (Details with diagrams) V. Good
+https://youtu.be/1n5XPFcvxds?t=52
+
+
+//Graph Representation: Undirected, Directed, Weighted graphs etc.
+https://youtu.be/1h2BoCtobXw?t=385            
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+-------------------------------------------------------------------
+
+
+1. Classification of Data Structure:
+
+
+                        Data Structure
+                              |
+               __________________________________
+               |                                |
+          Linear Data                     Non-Linear Data 
+           Structure                        Structure
+         ______________________               ___________ 
+         |                    |               |         |
+    Static Data          Dynamic Data       Tree      Graph
+     Structure           Structure
+       __               _________________
+       |                |      |        |
+      Array           Queue   Stack  Linked List
+
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+

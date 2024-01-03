@@ -1,0 +1,123 @@
+<<<< SQL Query Otimization <<<<
+
+
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+Vdo: Sql Obtimization 
+https://youtu.be/GA8SaXDLdsY?t=107
+
+Vdo: Sql Obtimization
+https://youtu.be/mBijCScMFhc?t=524
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+Some genaral optimization tips
+. Select only the columns you need.
+. Use limit to preview query results.
+. Use wildcards only at the end of a phrase.
+. Avoid select distinct if possible.
+. Run large queries during off-peak hours.
+
+
+>> Optimization Query <<<<
+
+//Use limit to preview query results.
+
+1. select top 50 name from customers;     //Correct
+   select name from customers limit 50;   //Wrong
+
+2. select name, age, city from customers; //correct
+   select *from customers;                //wrong query
+
+
+//Use wildcards only at the end of a phrase.
+
+3. select name from customers where state = 'A%';  //Correct query
+  select name from customers where state = '%A%'   //Wrong query
+
+//Avoid select distinct, if possible.
+
+4. select name, age, gender, city, state, zip from cutomers;   //Correct
+   select distinct name, age from customers;
+
+
+-- Run large queries during off-peak hours.
+
+  2:00 - 5:00 AM
+
+Select only the columns you need
+Use limit to preview query results.
+Use wildcards only at the end of a phrase.
+Avoid select distinct if possible.
+Run large queries during off-peak hours.
+
+
+--------------------------------------------------------------------
+
+2. Optimization
+
+Vdo: https://youtu.be/mBijCScMFhc?t=524
+
+//Some Important tips for Query Obtimization: 
+
+Use Common Table Expresstion(CTEs) instead of Temp table
+Use UNION ALL instead of UNION
+Use Stored Procedure
+Use Between instead of In
+Use Try-Catch
+Practice using schema Name: Select EMPID from dbo.employee,
+    Exex dbo.UpdateTable_UsingFile
+Try to Avoid Cursors - use while loop
+SET NOCOUNT NO
+Never use "Sp_" for User Define Stored Procedure
+Remove Unused index
+Always crete an index on the tabe
+Use Alias Name
+Use Transaction Management
+Use the correct Index Name format while creating and index
+Drop index before Bulk Insertion of Data
+Avoid Loops in coding
+Avoid Correlated sub-query or sub queries, use join instead of subquery 
+Minimize the number of join
+
+Select EMPID
+From table a
+Join TableB b on join a.EMPID = b.EMPID
+
+Table k on m.empId = j.empID
+
+Optimize
+select EMPID into #Test
+From tableA a
+join TableB b on join a.EMPID = b.EMPID
+
+join TableF f on.empID = e.empID
+
+Select EMPID
+From #Test t
+join TableG g on g.Empid = t.empId
+
+
+
+---------------------------------------------------------
+
+-->Obtimization: 
+
+    To start out, I thought it would be good to look up the order in which SQL directives get executed as this will change the way I can optimize:
+
+FROM clause
+WHERE clause
+GROUP BY clause
+HAVING clause
+SELECT clause
+ORDER BY clause
+
+Using this order you will apply the filter in the WHERE prior to a GROUP BY. The WHERE is used to limit the number of records.
+
+Think of it this way, if you were applying the WHERE after then you would return more records then you would want to group on. Applying it first, reduces the recordset then applies the grouping.
+------------------------------------------------------------------------------------------------------------
+
+

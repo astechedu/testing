@@ -1,0 +1,368 @@
+<<<< Data Structure IN C Lang Sortings >>>>
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+Keys: Bubble Sort, Selection Sort, Quick Sort, Merge Sort, Heapsort, Insertion Sort
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+Websites: 
+
+Bubble sort:
+https://www.educba.com/sorting-in-c/
+
+
+Vdo: Selection Sort: With Code
+https://youtu.be/dQa4A2Z0_Ro?t=509
+
+Vdo: Bubble Sort with code: 
+https://youtu.be/xcPFUCh0jT0?t=25
+
+Vdo: Merge Sort
+https://youtu.be/4z9I6ZmeLOQ?t=3
+
+Vdo: Merge Sort
+https://youtu.be/aDX3MFL0tYs?t=306
+
+Vdo: Quick Sort 
+https://youtu.be/Dl6HT-NM_q4?t=17
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+1. 
+//Bubble Sort - In C Language
+
+#include <stdio.h>
+int main()
+{
+int total_count, counter, counter1, swap_var;
+int array[20];
+printf("How many number you want to input?\n");
+scanf("%d", &total_count);
+printf("Please enter %d integers that has to be sorted\n", total_count);
+for (counter = 0; counter < total_count; counter++)
+scanf("%d", &array[counter]);
+for (counter = 0 ; counter < total_count - 1; counter++)
+{
+for (counter1 = 0 ; counter1 < total_count - counter - 1; counter1++)
+{
+if (array[counter1] > array[counter1+1]) /* For decreasing order use < */
+{
+swap_var        = array[counter1];
+array[counter1]   = array[counter1+1];
+array[counter1+1] = swap_var;
+}
+}
+}
+printf("Below is the list of elements sorted in ascending order:\n");
+for (counter = 0; counter < total_count; counter++)
+printf("%d\n", array[counter]);
+return 0;
+}
+---x---
+
+
+//Bubble Sort - In PHP
+
+<?php
+
+$arr = [30,10,40,60,80,90,20,100];
+
+function beforesort($arr){
+  for($i=0;$i<sizeof($arr);$i++){
+     echo $arr[$i]." ";
+
+  }
+}
+beforesort($arr);
+ echo "<br>";
+ 
+//Array Sorting
+function aftersort($arr){
+  for($i=0;$i<sizeof($arr)-1;$i++){
+     for($j=0;$j<sizeof($arr)-$i-1;$j++){
+        if($arr[$j] > $arr[$j+1]){
+          $temp = $arr[$j];
+          $arr[$j] = $arr[$j+1];
+          $arr[$j+1] = $temp;
+        }      
+     }
+     //echo $arr[$j]." ";       //Array showing in descending order
+  }
+};
+aftersort($arr);
+ echo "<br>";
+ 
+
+//Array sorted in ascending order
+function aftersortascendingorder($arr){
+  for($i=0;$i<sizeof($arr);$i++){
+     echo $arr[$i]." ";
+  }
+}
+ aftersortascendingorder($arr);
+ echo "<br>";
+
+
+?>
+---x---
+
+----------------------------------------------------------------------
+
+2. Selection Sort - In C Language
+
+
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+int total_count,counter1,counter2,minimum,temp_value;
+int a[20];
+printf("\n Enter the Number of Elements: ");
+scanf("%d",&total_count);
+printf("\n Enter %d Elements: ",total_count);
+for(counter1=0;counter1<total_count;counter1++)
+{
+scanf("%d",&a[counter1]);
+}
+for(counter1=0;counter1<total_count-1;counter1++)
+{
+minimum=counter1;
+for(counter2=counter1+1;counter2<total_count;counter2++)
+{
+if(a[minimum]>a[counter2])
+minimum=counter2;
+}
+if(minimum!=counter1)
+{
+temp_value=a[counter1];
+a[counter1]=a[minimum];
+a[minimum]=temp_value;
+}
+}
+printf("\n The Sorted array in ascending order: ");
+for(counter1=0;counter1<total_count;counter1++)
+{
+printf("%d ",a[counter1]);
+}
+getch();
+}
+
+---x---
+----------------------------------------------------------------------
+
+3. Quick Sort
+
+
+#include <stdio.h>
+void quicksort_method (int [], int, int);
+int main()
+{
+int element_list[50],count, counter;
+printf("Please enter the total count of the elements that you want to sort: ");
+scanf("%d", &count);
+printf("Please input the elements that has to be sorted:\n");
+for (counter = 0; counter < count; counter++)
+{
+scanf("%d", &element_list[counter]);
+}
+quicksort_method(element_list, 0, count - 1);
+printf("Output generated after using quick sort\n");
+for (counter = 0; counter < count; counter++)
+{
+printf("%d ", element_list[counter]);
+}
+printf("\n");
+return 0;
+}
+void quicksort_method(int element_list[], int low, int high)
+{
+int pivot, value1, value2, temp;
+if (low < high)
+{
+pivot = low;
+value1 = low;
+value2 = high;
+while (value1 < value2)
+{
+while (element_list[value1] <= element_list[pivot] && value1 <= high)
+{
+value1++;
+}
+while (element_list[value2] > element_list[pivot] && value2 >= low)
+{
+value2--;
+}
+if (value1 < value2)
+{
+temp = element_list[value1];
+element_list[value1] = element_list[value2];
+element_list[value2] = temp;
+}
+}
+temp = element_list[value2];
+element_list[value2] = element_list[pivot];
+element_list[pivot] = temp;
+quicksort_method(element_list, low, value2 - 1);
+quicksort_method(element_list, value2 + 1, high);
+}
+}
+---x---
+-------------------------------------------------------------------------------
+
+4. Merge Sort
+
+#include<stdio.h>
+void algo_merge_sort(int val[],int counter1,int counter2);
+void perfrom_merge(int val[],int counter11,int counter12,int counter22,int counter21);
+int main()
+{
+int val[100],chk,counter1;
+printf("Please enter the total count of the elements that you want to sort: \n");
+scanf("%d",&chk);
+printf("Please input the elements that has to be sorted:\n");
+for(counter1=0;counter1<chk;counter1++)
+scanf("%d",&val[counter1]);
+algo_merge_sort(val,0,chk-1);
+printf("\n Output generated after using quick sort \n");
+for(counter1=0;counter1<chk;counter1++)
+printf("%d ",val[counter1]);
+return 0;
+}
+void algo_merge_sort(int val[],int counter1,int counter2)
+{
+int mid;
+if(counter1<counter2)
+{
+mid=(counter1+counter2)/2;
+algo_merge_sort(val,counter1,mid);
+algo_merge_sort(val,mid+1,counter2);
+perfrom_merge(val,counter1,mid,mid+1,counter2);
+}
+}
+void perfrom_merge(int val[],int counter11,int counter12,int counter22,int counter21)
+{
+int temp_val[50];
+int c1,c2,c3;
+c1=counter11;
+c2=counter22;
+c3=0;
+while(c1<=counter12 && c2<=counter21)
+{
+if(val[c1]<val[c2])
+temp_val[c3++]=val[c1++];
+else
+temp_val[c3++]=val[c2++];
+}
+while(c1<=counter12)
+temp_val[c3++]=val[c1++];
+while(c2<=counter21)
+temp_val[c3++]=val[c2++];
+for(c1=counter11,c2=0;c1<=counter21;c1++,c2++)
+val[c1]=temp_val[c2];
+}
+---x---
+--------------------------------------------------------------------------------
+
+
+5. Heapsort
+
+#include<stdio.h>
+void form(int []);
+void set_down(int [],int);
+int main()
+{
+int val[100],chk,counter,end,temp_val;
+printf("Please enter the total count of the elements that you want to sort: \n");
+scanf("%d",&chk);
+printf("Please input the elements that has to be sorted:\n");
+for(counter=1;counter<=chk;counter++)
+scanf("%d",&val[counter]);
+val[0]=chk;
+form(val);
+while(val[0] > 1)
+{
+end=val[0];
+temp_val=val[1];
+val[1]=val[end];
+val[end]=temp_val;
+val[0]--;
+set_down(val,1);
+}
+printf("\n Output generated after using heap sort \n");
+for(counter=1;counter<=chk;counter++)
+printf("%d ",val[counter]);
+}
+void form(int val[])
+{
+int counter,chk;
+chk=val[0];
+for(counter=chk/2;counter>=1;counter--)
+set_down(val,counter);
+}
+void set_down(int val[],int counter)
+{
+int counter2,temp_val,chk,flag=1;
+chk=val[0];
+while(2*counter<=chk && flag==1)
+{
+counter2=2*counter;
+if(counter2+1<=chk && val[counter2+1] > val[counter2])
+counter2=counter2+1;
+if(val[counter] > val[counter2])
+flag=0;
+else
+{
+temp_val=val[counter];
+val[counter]=val[counter2];
+val[counter2]=temp_val;
+counter=counter2;
+}
+}
+}
+---x---
+-------------------------------------------------------------------------------
+
+6. Insertion Sort
+
+#include<stdio.h>
+int main()
+{
+int counter1,counter2,chk,temp_val,val[100];
+printf("Please enter the total count of the elements that you want to sort: \n");
+scanf("%d",&chk);
+printf("Please input the elements that has to be sorted:\n");
+for(counter1=0;counter1<chk;counter1++)
+{
+scanf("%d",&val[counter1]);
+}
+for(counter1=1;counter1<=chk-1;counter1++)
+{
+temp_val=val[counter1];
+counter2=counter1-1;
+while((temp_val<val[counter2])&&(counter2>=0))
+{
+val[counter2+1]=val[counter2];
+counter2=counter2-1;
+}
+val[counter2+1]=temp_val;
+}
+printf("\n Output generated after using insertion sort \n");
+for(counter1=0;counter1<chk;counter1++)
+{
+printf("%d ",val[counter1]);
+}
+return 0;
+}
+
+---x---
+-------------------------------------------------------------------------------
+
+
+
+---x---
+-------------------------------------------------------------------------------
+
+
+

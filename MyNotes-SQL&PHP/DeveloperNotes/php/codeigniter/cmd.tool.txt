@@ -1,0 +1,50 @@
+>>> Codeigniter 4 <<<<<
+
+
+
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+Keys: spark cmds, Api JWT, Query Builder Class, getResult, get(), Join, 
+      migrations, Ajax Post, Response Ajax Data In Controller, Admin AdminLte, 
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+
+
+Codeigniter 4 CMDs: 
+
+//Development Server
+php spark serve
+
+
+
+Migrations: 
+
+php spark migrate
+
+php spark make:seeder SeederName
+php spark make:migration MigrationName
+php spark db:seed SeederName
+php spark db:table [tablename]
+
+For Unix:
+php spark migrate -g test -n Acme\\Blog
+
+For Windows:
+php spark migrate -g test -n Acme\Blog
+php spark migrate:rollback               // -g -b -f
+php spark migrate:refresh               // -g -n --all -f
+php spark migrate:status
+php spark make:migration <class> [options]    // --session  --table   --dbgroup  --namespace  --suffix
+
+php spark make:model ModelName
+php spark make:controller ControllerName 
+
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+

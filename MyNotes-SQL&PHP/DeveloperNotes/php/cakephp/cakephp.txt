@@ -1,0 +1,145 @@
+
+Cakephp3:
+
+
+
+Cart Controller Logics:
+
+https://startutorial.com/view/build-a-shopping-cart-with-cakephp-and-jquery-part-2
+
+Rest Api: 
+https://www.positronx.io/codeigniter-rest-api-tutorial-with-example/
+
+Online Api Testing: 
+https://extendsclass.com/rest-client-online.html
+
+
+CRUD With validation Good Example: 
+https://www.studentstutorial.com/codeigniter/codeigniter-insert_4.php
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------
+
+//Cakephp 4
+https://makitweb.com/how-to-create-model-and-fetch-records-in-cakephp/
+
+
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+
+>>>> Cakephp 4: >>>>
+
+
+
+
+--------------------------------------------------------------------------------------------
+
+Key: 
+      Ajax Call To Controller, 
+
+---------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------
+
+
+
+
+Development Server: 
+
+$ bin/cake server -p 8765
+---------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+ 
+
+ <a class="nav-link" href="<?php echo $this->Url->webroot.'/product/index'; ?>">Shopping</a>
+       
+----------------------------------------------------------------------------------------------
+
+CRUD: 
+//Good Eamples
+https://onlinewebtutorblog.com/cakephp-4-crud-tutorial-with-mysql/
+
+
+
+//Anchor or link             
+<?= $this->html->link('view', ['action' => 'view', $article->id], ['class' => 'btn']) ?>   
+
+--------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------
+
+
+Ajax Call To Controller: 
+
+//ProductsController:
+
+    public function test(){  
+      //$id= $this->request->getData('id');
+
+      echo json_encode(['id' => 12]);
+
+      //If template not render use exit
+      exit; 
+      
+    } 
+
+
+
+
+
+//templates/products/index.php
+
+
+<script type="text/javascript">  
+
+$(function(){ 
+    // Fetch single record
+     $('button').on('click',function(){
+           //var userid = $('#search').val();
+
+        let id = 1;
+        let url = "<?php echo $this->Url->build(['controller' => 'Products','action' => 'test']) ?>";
+          //let url = "<?php echo $this->Url->webroot ?>/ProductsController/test";
+           // AJAX request
+           $.ajax({
+               url: url,
+               type: "POST",
+               data: {"id": id},
+               //dataType: 'json',
+               cache: false,  
+                             
+               headers:{
+                    'X-CSRF-Token': $('meta[name="csrfToken"]').attr('content')
+               },  
+
+               success: function(response){
+                    
+                    alert("Ok");
+               },
+               error: function(response){
+                   
+                    alert("error");
+               }               
+           });
+     });
+});
+    
+  
+</script>
+
+
+
+------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+

@@ -1,0 +1,153 @@
+>>> PHP Built-In_Functions <<<
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+
+https://www.onlineinterviewquestions.com/php-string-interview-questions/
+
+--------------------------------------------------------------------------
+
+//Made videos On These Functions:
+Done: intdiv(),pow(),pi(),max(),min(),sqrt(),round(),ceil(),floor(),abs();
+
+--------------------------------------------------------------------------
+
+//Some important in-built functions
+https://vegibit.com/php-array-functions/
+--------------------------------------------------------------------------
+
+//Pending:
+//https://vegibit.com/php-array-functions/
+
+array(),is_array(),in_array(),array_merge(),array_keys(),array_key_exists(),array_shift(),array_push(),array_unshift(),
+array_pop(),array_values(),array_map(),array_unique(),array_slice(),array_diff(),array_search(),array_reverse(),
+-----------------------------------------------------------------------------------------------------------------------
+
+String In-Built function:
+
+    ucfirst() - converts the first character of a string to uppercase
+    lcfirst() - converts the first character of a string to lowercase
+    strtoupper() - converts a string to uppercase
+    strtolower() - converts a string to lowercases
+
+count(), sizeof(arr,mode), count(arr,mode)
+
+strlen()
+str_word_count()
+strrev()
+strpos()
+str_replace()
+str_repeat($str, $counter)
+
+ctype_upper()    //find capital letter (if found return true)
+mb_strtolower()   // to convert uppercase character into lowercase in the string
+
+$str = "Τάχιστη ηξ βαφής ψημένη γη, δρασκελίζει κυνός";
+$str = mb_strtolower($str, 'UTF-8');
+echo $str;
+
+    Strlen()
+    Strcpy()
+    Strcat()
+    Strcmp()
+    Strwr()
+    Strupr()
+
+
+// comparing str1 and str2
+echo strcmp($str1, $str2);
+
+// comparing str2 and str1
+echo strcmp($str2, $str1);
+
+// comparing str1 with str1
+echo strcmp($str1, $str1);
+
+substr($str, $start, $length)
+trim($str, charlist)
+explode(separator, $str, $limit)
+
+implode(separator, $arr)
+
+nl2br($str)
+str_split($str1,5)
+
+ json_encode()
+
+strops()    
+striops()   //Case sensitive
+strrev()
+
+An example is below ("", “) :-
+
+$str8 = " need to read data where has to go ";
+echo $str 8
+output: double quotes in the string
+
+echo “ PHP work $str8
+output: PHP work need to read data where has to go
+
+
+
+Heredoc in PHP ( multi-line string inside PHP): 
+<<<  Write here
+     write here
+<<< or >>>
+
+
+to add line break in PHP string:
+echo nl2br( “ creative writing \n sensitive reading”);
+
+
+----------------------------------------------------------------------------
+
+
+Functions: 
+floor(),ceil(),
+
+rand(),srand(),
+mt_rand(),mt_srand(),log(),log10(),log1p(),is_nan(),is_finite(),is_infinite()
+hypot(),abs(), 
+
+
+>>intdiv():
+
+intdiv(dividend, divisor);
+echo intdiv(8, 4);
+echo intdiv(-5, -2);
+
+>>pow():
+
+The pow() function returns x raised to the power of y.
+pow(x,y);
+echo(pow(2,4) . "<br>");
+echo(pow(-2,4) . "<br>");
+echo(pow(-2,-4) . "<br>");
+echo(pow(-2,-3.2));
+
+>>pi():
+
+The pi() function returns the value of PI.
+echo(pi());
+
+
+
+//Some Important in-built Functions:
+array(),is_array(),in_array(),array_merge(),array_keys(),array_key_exists(),array_shift(),array_push(),array_unshift(),
+array_pop(),array_values(),array_map(),array_unique(),array_slice(),array_diff(),array_search(),array_reverse(),
+
+
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+
+
+
+
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------
+
+

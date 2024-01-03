@@ -1,0 +1,97 @@
+<<< SQL/MySql Problem Solving <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Sql Problem Solving: 
+Vdos:
+https://youtu.be/OIRy7ZFSudA?t=128     //Vdo 01
+https://youtu.be/h8Zbw3hRphE?t=86      //Vdo 02
+
+//Simple interview of basics        // Vdo 03
+https://youtu.be/RZc4QSRRk98?t=14
+https://youtu.be/s1QkS4PfiFg?t=111  // Vdo 04
+
+
+Websites: 
+
+SQL Challenges-1: Exercises, Practice, Solution
+https://www.w3resource.com/sql-exercises/challenges-1/index.php
+
+https://www.codecademy.com/resources/blog/sql-code-challenges-for-beginners/
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+Vdo: 01
+
+1. Increase income of all employees by 5% in a table.
+Ans. UPDATE employees SET income = income + (income*5.0/100.0)
+
+2. Find names of employee starting with 'A'.
+Ans. SELECT firstname FROM employees where first-name LIKE 'A%'.
+
+3. Find number of employees working in department 'ABC'
+Ans: SELECT count(*) from employees where department-name='ABC'
+
+4. Print details of employees whose first-name ends with 'A' and contains 6 alphabets.
+Ans: 	
+
+-----------------------------------------------------------------------------------------
+
+Vdo: 02
+
+1. Fetch only the first name from full name column.
+
+Ans: 
+     SELECT substring(fullname, o, chorinder (' ', fullname)) from employees;
+
+2. Fetch duplicate records from a table.
+
+3. Remove duplicates
+
+4. Create empty table with same structure as some other table.
+
+5. Fetch common records between two tables.
+
+---------------------------------------------------------------------------
+
+Vdo: 03
+
+Difference Between 
+
+1. where  v/s having
+2. union v/s uninon all
+3. in v/s exists
+4. group by v/s order by
+5. join v/s subquery
+6. join v/s union
+
+
+Where: Filter rows, works on row's data, not on attregated data.
+       Ex: select *from empoyees where score >= 40
+
+Having: Works on aggregated data
+
+Union: Removes duplicate records
+Union All: Does not remove duplicate
+
+------------------------------------------------------
+
+The following is the breakdown of SQL skills tested in every question:
+
+    Q1 Average Salary: CTE, Aggregates in Window functions, CASE WHEN, Date functions such as DATE_PART, INNER JOIN
+    Q2 Find Quiet students in results— Subqueries, MIN, MAX, Window functions, Window Alias, INNER JOIN, ALL keyword
+    Q3 Human Traffic of Stadium — LEFT JOIN with Subqueries, CTE, ROW_NUMBER
+    Q4 Number of Transactions per Visit —RECURSIVE CTE, COALESCE, COUNT
+    Q5 Report contiguous dates (MySQL)— Date_sub, ROW_NUMBER
+    Q6 Sales by Day of the week — Pivot table, CASE WHEN
+    Q7 Department Top 3 Salaries— DENSE_RANK
+    Q8 Restaurant Growth — PRECEDING for moving average, OFFSET
+    Q9 Shortest distance in a Plane — CROSS JOIN, SQRT, POW
+    Q10 Consecutive Numbers —LAG, LEAD
+
+------------------------------------------------------------------------------	

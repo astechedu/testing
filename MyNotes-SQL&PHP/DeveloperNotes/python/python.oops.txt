@@ -1,0 +1,218 @@
+>>>> Python Oops <<<<<<
+
+
+
+---------------------------------------------------------------------
+
+Key: Oops, 
+
+---------------------------------------------------------------------
+
+Types of inheritance Python:
+
+Single Inheritance
+Multiple Inheritance
+Multilevel inheritance
+Hierarchical Inheritance
+Hybrid Inheritance
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+OOPs Exmple: 
+
+ 
+
+class Child1:  
+
+    def __init__(self, name):  
+        self.name = name  
+
+    def getName1(self):  
+        return self.name 
+
+    def isStudent1(self):  
+        return False  
+
+
+#Derived class or the Child class 
+
+class Student1(Child1):  
+    def isStudent1(self):  
+        return True  
+
+
+# An Object of Child  
+
+std = Child1("Jackie")  
+print(std.getName1(), std.isStudent1()) 
+ 
+
+# An Object of Student  
+
+std = Student1("johnny")  
+print(std.getName1(), std.isStudent1())  
+
+
+
+---------------------------------------------------------------------
+
+1. Single Inheritance:
+
+# Here, we will create the base class or the Parent class  
+class Parent1:  
+    def func_1(self):  
+        print ("This function is defined inside the parent class.")  
+  
+# now, we will create the Derived class  
+class Child1(Parent1):  
+    def func_2(self):  
+        print ("This function is defined inside the child class.")  
+  
+# Driver's code  
+object = Child1()  
+object.func_1()  
+object.func_2()  
+
+
+--------------------------------------------------------------------
+
+2. Multiple Inheritance
+
+
+# Here, we will create the Base class 1  
+class Mother1:  
+    mothername1 = ""  
+    def mother1(self):  
+        print(self.mothername1)  
+  
+# Here, we will create the Base class 2  
+class Father1:  
+    fathername1 = ""  
+    def father1(self):  
+        print(self.fathername1)  
+  
+# now, we will create the Derived class  
+class Son1(Mother1, Father1):  
+    def parents1(self):  
+        print ("Father name is :", self.fathername1)  
+        print ("Mother name is :", self.mothername1)  
+  
+# Driver's code  
+s1 = Son1()  
+s1.fathername1 = "Rajesh"  
+s1.mothername1 = "Shreya"  
+s1.parents1()  
+
+
+--------------------------------------------------------------------
+
+
+3. Multilevel inheritance
+
+# Here, we will create the Base class   
+class Grandfather1:  
+  
+    def __init__(self, grandfathername1):  
+        self.grandfathername1 = grandfathername1  
+  
+# here, we will create the Intermediate class  
+class Father1(Grandfather1):  
+    def __init__(self, fathername1, grandfathername1):  
+        self.fathername1 = fathername1  
+  
+        # here, we will invoke the constructor of Grandfather class  
+        Grandfather1.__init__(self, grandfathername1)  
+  
+# here, we will create the Derived class  
+class Son1(Father1):  
+    def __init__(self,sonname1, fathername1, grandfathername1):  
+        self.sonname1 = sonname1  
+  
+        # here, we will invoke the constructor of Father class  
+        Father1.__init__(self, fathername1, grandfathername1)  
+  
+    def print_name(self):  
+        print('Grandfather name is :', self.grandfathername1)  
+        print("Father name is :", self.fathername1)  
+        print("Son name is :", self.sonname1)  
+  
+# Driver code  
+s1 = Son1('John', 'John Jr', 'John Jr Jr')  
+print (s1.grandfathername1)  
+s1.print_name()  
+
+----------------------------------------------------------------------------------
+
+4. Hierarchical Inheritance
+
+
+# Here, we will create the Base class   
+class Parent1:  
+    def func_1(self):  
+        print ("This function is defined inside the parent class.")  
+  
+# Derived class1  
+class Child_1(Parent1):  
+    def func_2(self):  
+        print ("This function is defined inside the child 1.")  
+  
+# Derivied class2  
+class Child_2(Parent1):  
+    def func_3(self):  
+        print ("This function is defined inside the child 2.")  
+  
+# Driver's code  
+object1 = Child_1()  
+object2 = Child_2()  
+object1.func_1()  
+object1.func_2()  
+object2.func_1()  
+object2.func_3()  
+
+----------------------------------------------------------------------------------
+
+5. Hybrid Inheritance:
+
+https://www.educative.io/answers/what-is-hybrid-inheritance-in-python
+
+---------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

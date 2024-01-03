@@ -1,0 +1,118 @@
+
+>>>> Laravel Relationship <<<<<
+
+
+---------------------------------------------------------------------------------------------------------
+
+key: 
+---------------------------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------------------------
+
+Laravel: 
+Event Broadcasting and WebSockets,
+API Development
+Queues and Workers
+Package Development
+Eloquent Relationship
+Service Provider
+Multi-Tenancy
+Horizon
+Task Scheduling
+Caching
+
+----------------------------------------------------------------------------------------------------------
+
+
+>> Relationship <<
+
+
+1. One to one
+2. One to many
+3. Many to many 
+
+
+
+-----------------------------------------------------------------------
+1. One To One
+
+
+
+-----------------------------------------------------------------------
+2. One To Many 
+
+
+
+-----------------------------------------------------------------------
+3. Many To Many
+
+Models: Post, Category
+Table: posts, categories, category_post
+
+Notes: 1. A Post Belongs to Many Categories 
+       2. A Category belongs to many Posts	
+
+
+Migrations: 
+  post:      $table->sring('title'),('description')
+  category:  $table->sring('name')
+  category_post:    $table->sring('post_id'),$table->sring('category_id')->constrained->onDelete('cascade');
+
+
+Post: 
+
+public function categories(){
+  return $this->belongsToMany(Category::class);
+}
+
+Category: 
+
+public function posts(){
+  return $this->belongsToMany(Post::class);
+}
+
+
+//attach(), detach(), sync()
+
+       $categories = Category::all();
+
+       $post = Post::with('categories')->first();
+       $post->categories()->attach($categories);
+       //$post->categories()->attach([1,2]);
+       //$post->categories()->sync([1,2,3,4,5]);
+       //$post->categories()->detach([1,2]);
+       //echo "<pre>"; print_r($post->toArray());
+       $post = Post::with('categories')->get();
+       dd($post->toArray());
+
+//OR
+
+       $post = Post::find(2)->categories;
+       dd($post->toArray());
+
+//OR 
+
+       $cat = Category::find(2)->posts;
+       dd($cat->toArray());
+
+
+-----------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

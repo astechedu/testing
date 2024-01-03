@@ -1,0 +1,96 @@
+>>>>> AWS App Deployment <<<<<
+
+
+-----------------------------------------------------------
+
+keys: 
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+//All in one: EC2, S3, EI (Elastic IP) - Frontend  + Backend on AWS
+Vdo: AWS Web App Deployment in Hindi | Node and React App Deployment on AWS | Brain Mentors 
+
+https://youtu.be/LdHePO9xLtk?list=PLoTH3bGuyKHejfknWfaO-r5ZpoUOS-72R&t=62   
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+>> SSH: 
+
+ssh -i test.pem ec2-user@3.16.128.114
+
+
+-------------------------------------------------------------
+
+>> App Deployment : Node (backend) + React(frontend)
+
+Machine: Ubuntu
+
+
+Steps: 
+
+
+//update os
+sudo apt-get update
+//Install node version manager (NVM)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh/bash
+
+//active NVM
+.~/.nvm/nvm.sh
+//install node
+nvm install --lts
+
+
+aws --version
+
+//Install unzip
+sudo apt-get install -y unzip
+
+
+//Check buckets available in S3
+aws s3 ls
+
+//To copy and paste in from S3 to EC2 current directory
+Syntax: 
+aws s3 cp s3://bucketName/projectZipName.zip .         //. -> current (ec2)
+
+aws s3 cp s3://app-bucket-bmpl/pizza-backend-v5.zip   //Backend zip file
+aws s3 cp s3://app-bucket-bmpl/today-codes.zip        //Frontend zip file
+
+//Unzip project code zip
+unzip pizza-backend-v5.zip   //Backend
+unzip today-codes.zip        //Frontend
+
+	
+//Remove unnecessary files
+sudo rm -rf __MACOSX pizza-backend-v5.zip todya-codes.zip
+
+//Change directory 
+cd pizz-backend
+
+//Deployment: 
+Backend: 
+
+cd backend  
+npm i           //Install packages
+node app.js     //Run app, paste public id address on browser
+
+//Install pm2 package   
+npm install npm2 -g    //App running after closing server
+pm2 start app.js       //Start app
+
+Frontend: 
+cd frontend
+npm i            //Install dependencies
+
+npm install npm2 -g 
+npm install serve -g 
+
+npm run build
+
+pm2 serve build 3000 --spa  // React Start
+
+
+----------------------------------------------------------------

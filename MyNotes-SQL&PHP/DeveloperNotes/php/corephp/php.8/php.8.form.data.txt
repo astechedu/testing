@@ -1,0 +1,159 @@
+>>>>> PHP 8 <<<<
+
+
+---------------------------------------------------------------
+Keys: 
+
+--------------------------------------------------------------
+
+Form Data: 
+//Video: https://youtu.be/IagGGcC95Ig?t=718
+
+
+>>Insert Data
+
+//dbh.inc.php
+
+$dsn = "mysql:host=localhost;dbname=myfirstdatabase";
+$dbusername = "root";
+$dbpassword = "";
+
+try{
+  $pdo = new PDO($dsn, $dbusername, $dbpassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}catch(PDOException $e){
+  echo "Connection failed: " . $e->getMessage();
+}
+-------------------------------------------------------------------
+
+//formhandler.ini.php
+
+if($_SERVER["REQUEST_METHOD"] === 'POST'){
+   $username = $_POST["username"];
+   $pwd = $_POST["pwd"];
+   $email = $_POST["email"];
+
+   try{
+      require_once("dbh.ini.php");
+
+      $query = "insert into users (username, pwd, email) values (?, ?, ?)";
+      $stmt = $pdo->prepare($query);
+      $stmt->execute([$username, $pwd, $email]);
+
+      $pdo = null;
+      $stmt = null;
+
+      header("Location: ../index.php");
+      die();
+
+   }catch(PDOException $e){
+      die("Query failed: " . $e->getMessage());
+   }
+
+}else{
+   header("Location: ../index.php);
+}
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+//formhandler.ini.php
+
+if($_SERVER["REQUEST_METHOD"] === 'POST'){
+   $username = $_POST["username"];
+   $pwd = $_POST["pwd"];
+   $email = $_POST["email"];
+
+   try{
+      require_once("dbh.ini.php");
+      $query = "insert into users (username, pwd, email) values (:username, pwd, email);";
+      $stmt = $pdo->prepare($query);
+
+      $stmt->bindPram(":username", $username);
+      $stmt->bindPram(":pwd", $pwd);
+      $stmt->bindPram(":email", $email);
+
+      $stmt->execute();
+
+      $pdo = null;
+      $stml = null;
+      header("Location: ../index.php");
+      die();
+
+   }catch(PDOException $e){
+      die("Query failed: " . $e->getMessage());
+   }
+
+}else{
+   header("Location: ../index.php);
+}
+
+
+------------------------------------------------------------
+
+
+>> Delete & Update data
+
+//Video: https://youtu.be/9Mkd4ig3yjE?t=13
+
+<h3>Change account</h3>
+<form action="includes/userupdate.inc.php" method="post">
+    <input type="text" name="username" placeholder="Username">
+    <input type="password" name="pwd" placeholder="Password">
+    <input type="text" name="email" placeholder="E-Mail">
+</form>
+
+<h3>Delete account</h3>
+<form action="includes/userdelete.inc.php" method="post">
+    <input type="text" name="username" placeholder="Username">
+    <input type="password" name="pwd" placeholder="Password">
+    <button>Delete</button>
+</form>
+
+
+>> User Update
+
+//formupdate.ini.php
+
+if($_SERVER["REQUEST_METHOD"] === 'POST'){
+   $username = $_POST["username"];
+   $pwd = $_POST["pwd"];
+   $email = $_POST["email"];
+
+   try{
+      require_once("dbh.ini.php");
+      $query = "UPDATE users SET username = ':username', pwd =':pwd', email = ':email';";
+
+      $stmt = $pdo->prepare($query);
+
+      $stmt->bindPram(":username", $username);
+      $stmt->bindPram(":pwd", $pwd);
+      $stmt->bindPram(":email", $email);
+
+      $stmt->execute();
+
+      $pdo = null;
+      $stml = null;
+      header("Location: ../index.php");
+      die();
+
+   }catch(PDOException $e){
+      die("Query failed: " . $e->getMessage());
+   }
+
+}else{
+   header("Location: ../index.php);
+}
+
+
+
+
+
+
+
+------------------------------------------------------------
+
+
+
+

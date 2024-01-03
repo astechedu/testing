@@ -1,0 +1,257 @@
+>>>> React >>>>>
+
+
+--------------------------------------------------------------------------
+
+Keys: Prop Drilling, useEffetc(), useState(), useReducer(), useContext(), 
+      useSlector(), useCallback, useMemo, useRef(), Context Api, 
+      React Reducer, Post Request, React Redux Action,useLayoutEffect, 
+      useImperativeHandle, componentDidMount, useEffectEvent, componentWillUnmount, 
+      forwardRef, useNavigate, useParams, React Form,
+
+    
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+Online React Testing with Vite Js: 
+https://stackblitz.com/edit/vitejs-vite-mnywif?file=src%2FApp.jsx,src%2Fcomponents%2FHome.jxs&terminal=dev
+---------------------------------------------------------------------------
+
+
+React Router V6: 
+
+
+
+//index.js:
+
+import { BrowserRouter } from "react-router-dom"
+import App from './App'
+
+
+  <browserRouter>
+    <App />
+  </browserRouter>
+
+
+//App.js:
+
+
+imort { Link } from 'react-router-dom'
+
+function App() {
+  return (
+   <Routes>
+     <Route path='/' element={ <Home />} />
+     <Route path='about' element={ <About />} />
+     <Route path='contact' element={ <Contact />} />
+   </Routes>
+  )
+}
+
+
+//Home.js
+imort { Link } from 'react-router-dom'
+<>
+  <div>Home Page</div>
+  <Link to="/home" />Home</Link><br />
+  <Link to="/about" />About</Link><br />
+  <Link to="/contact" />Contact Us</Link>
+</>
+
+
+//About.js
+imort { Link } from 'react-router-dom'
+<>
+  <div>Home Page</div>
+  <Link to="/home" />Home</Link><br />  
+  <Link to="/contact" />Contact Us</Link>
+</>
+
+
+//Contact.js
+imort { Link } from 'react-router-dom'
+<>
+  <div>Home Page</div>
+  <Link to="/home" />Home</Link><br />  
+  <Link to="/about" />Contact Us</Link>
+</>
+
+
+------------------------------------------------------------------
+
+//Navigate
+
+imort { Link, useNavigate} from 'react-router-dom'
+
+
+const navigate = useNavigate()
+
+function goToHome(){
+  navigate("/home")
+}
+
+<button onClick={goToHome}></button>
+
+------------------------------------------------------------------
+//How to pass data with useNavigate() hook
+
+//Home or any component
+const id = 5; 
+
+const navigate = useNavigate()
+
+function goToHome(){
+  navigate("/home", {state: {id: id}})
+  //Or navigate("/home", {state: {car: id}})
+}
+
+
+//Get data from above: in any component
+
+imort { Link, useLocation} from 'react-router-dom'
+
+const location = useLocation()
+//console.log(location.state)
+
+<>
+   <div>Hi, Iam About or any Page Id: {location.state.id} </div>
+</>
+
+----------------------------------------------------------------------
+
+
+//useState
+
+import { useState } from 'react'
+
+function changeState(e) {
+  e.preventDefault()
+  setCount(count+1)
+}
+
+
+function App() {
+
+  const [ count, setCount] = useState(0)
+
+}
+
+<>
+<h1>Count: {count}</h1>
+<button onClick={changeState}></button>
+</>
+
+-----------------------------------------------------------------------
+
+React Form:
+
+import { useState } from "react"
+
+const Form = () => {    
+    const data = {fname:"Ajay", lname:"Sisaudiya"}
+    const [vals,setVals] = useState(data)
+
+const handleData= (e) => {
+   e.preventDefault()     
+   setVals({...vals,[e.target.name]:e.target.value})
+} 
+
+    return(
+        <>
+         <h1>User Form</h1>
+         { vals.fname + " " + vals.lname }
+         <form>
+            <input type="text" name="fname" onChange={ handleData} value={vals.fname} />
+            <input type="text" name="lname" onChange={ handleData} value={vals.lname} />
+        </form>        
+        
+        </>
+    )
+}
+
+export default Form
+
+
+---------------------------------------------------------------------
+
+
+> Redux : 
+
+//Folder structue
+ReduxConainer
+   BookAction.js
+   BookType.js
+   BookReducer.js
+   Store.js
+
+
+1. BookAction.js
+
+import {buyBook} from './BookTypes'
+
+const purchase_book = () => {
+   return {
+      type: buyBook
+   }
+}
+
+
+2. BookReducer.js
+
+import {buy_book} from './BookTypes'
+
+const initialState = {
+  NumberOfBooks : 20
+}
+
+
+const BookReader = (state=initialState, action) => {
+    switch(action.type){
+      case buy_book: return{
+         ...state, NumberOfBooks : state.initialState -1
+      }
+    }
+}
+
+export default BookReducer
+
+
+
+3. BookType.js
+
+export const buy_book = 'buy_book'
+
+
+4. Store.js
+
+import {createStore} form 'redux'
+import {BookReducer} form './BookReducer'
+
+const store = createStore(BookReducer)
+
+export default store;
+
+
+
+
+//In App.js (Connect Store)
+
+import {Provider} from 'react-redux'
+import {store} form './reduxContainer/store'
+
+return {
+   <Provider store={store} >
+    //Other parts
+   <Provider>
+}
+
+
+
+
+
+
+------------------------------------------------------------------------
+
+
+
+
+

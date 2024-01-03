@@ -1,0 +1,341 @@
+>>>> Python Basics <<<<
+
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+Keys: List, Tuple, Set, Dictionalry, Control Statements, 
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+
+1. List: 
+
+Ordered, mutable, hetrogeneous data structure
+
+Ex: 
+    x = ["ajay", 27, 60.6]
+
+Packing and unpacking:
+
+ a,b,c = [25,66,200]
+ a=50, b=66, c=200
+
+Accessing
+Changing
+Deleting
+Adding
+
+
+Nested List: 
+
+x=[3,5,5,[]]
+
+
+
+
+>>> x=[22, 52, 82.82, "ajay"]
+>>> x[2]
+>>> x[3] ="pratpa"
+>>> x
+>>> del x[1]
+>>> x
+>>> 
+
+Slicing Operation:
+
+variable[start:end:step]
+
+s[1], s[3:6], s[2:6:2], s[-4], s[:8:4], s[-4:-8:-2]
+s[:6], s[::-1], s[3:], s[3::2]
+
+>>> x=[1,2,3,4,5,6,7,8,9,10]
+>>> x[3:]
+>>> x[3::3]
+>>> x[::-1]
+>>> x[-6]
+>>> x[3:8]
+>>> 
+
+List Methods: 
+
+append(), extend(), count(), index(), insert(), remove(),
+pop(), reverse()
+
+
+List Function:
+len(), max(), min(), sorted(), list()
+
+>>> x=[1,2,3,4,5]
+>>> x.append("ajay")
+>>> x
+>>> y=[6,7,8,10]
+>>> x
+>>> x.append(y)
+>>> x
+>>> x.count(5)
+>>> x.index(5)
+>>> x.insert()
+>>> 
+>>> x.insert(0,"maths")
+>>> x
+>>> x.remove("ajay")
+>>> x.pop()
+>>> x
+>>> x.pop(2)
+>>> x.reverse()
+>>> len(x)
+>>> max(x)
+>>> min(x)
+>>> x.pop()
+>>> max(x)
+>>> sorted(x)
+>>> list(x)
+
+Program in file:
+
+p=[]
+a=(int)(input ("Enter number of element"))
+
+n=1;
+
+while n<=a:
+	x=input("Enter the element")
+	p.append(x)
+    n=n+1
+
+
+print(p)
+
+>>>
+
+
+
+
+---------------------------------------------------------------------
+
+
+
+2. Tuple: 
+
+Ordered, immutable, hetrogeneous data structure
+
+Ex:
+    x=("ajay",25,25.22)
+
+Packing and unpacking: 
+
+a,b,c = (25,55,300)
+
+ a=25, b=55,c=300
+
+Operations on Tuple: 
+
+Accessing
+Adding
+Changing
+Deleting
+
+
+
+Slicing Operation:
+
+variable[start:end:step]
+
+s[1], s[3:6], s[2:6:2], s[-4], s[:8:4], s[-4:-8:-2]
+s[:6], s[::-1], s[3:], s[3::2]
+
+>>> x=[1,2,3,4,5,6,7,8,9,10]
+>>> x[3:]
+>>> x[3::3]
+>>> x[::-1]
+>>> x[-6]
+>>> x[3:8]
+
+>>> x=(3,4,5,6,7,8,9,13)
+>>> x[3]=800             //Error
+
+>>> x[:6]
+>>> x[1:9:3]
+>>> x[::-1]
+
+Tuple method:
+
+  count(), index()
+
+
+
+Tuple Function:
+
+  len(), max(), min(), sorted()
+
+
+Nested Tuple: 
+
+x=(4,6,7,(66,54),[10,53,55])
+
+
+>>> x.count(4)
+>>> x.index(4)
+>>> x.len(x)
+>>> x.max(x)
+>>> x.min(x)
+>>> sorted(x)
+>>> del x
+>>> x
+
+
+
+
+
+---------------------------------------------------------------------
+
+
+
+3. Set: 
+
+>>> x={23, 34, 45, 67, 89, 90}     //x[2] Not access in set
+>>> x
+>>> del x
+
+Set methods:
+  update(), remove(), discard(), symmketric_difference(), union(), intersection(),
+  difference(), clear(), pop()
+
+Set Function:
+   len(), max(), min(), sorted, set()
+
+
+Packing and unpacking:  
+
+a,b,c = x={23, 34, 45}
+
+a=23, b=35, c=45
+ 
+>>> x={23, 34, 45, 67, 89, 90}
+>>> y={900,100,300}
+>>> x.update(y)
+>>> x
+>>> y
+>>> y.add(8976)
+>>> y
+>>> y.remove(300)
+>>> y
+>>> y.pop()
+>>> y
+>>> y.discard(900)
+>>> y
+>>> y.clear()
+>>> y
+
+>>> y={1,2,3,4,45}
+>>> x.union(y)
+>>> x.intersection(y)
+>>> x.difference(y)
+>>> y.difference(x)
+>>> x.symmetric_difference(y)
+>>> len(x)
+>>> max(x)
+>>> min(x)
+>>> sorted(x)
+>>> set(x)
+
+
+---------------------------------------------------------------------
+
+
+5. Dictionary:
+ 
+Unordered, Mutable
+
+https://youtu.be/g5-Xa44EK4A?t=553
+
+Dictionalry Slicing Opertions
+Dictionary methods and functions
+
+
+Ex: 
+    x={"name":"ajay", "age":34, 5.10:"height"}
+
+
+Packing and unpacking: 
+
+  a,b,c ={"name":"ajay", "age":34, 5.10:"height"}
+
+  a=name, b=age, c=5.10
+
+
+Operations:
+
+  Accessing
+  Adding
+  Changing
+  Deleting
+
+>>> x={"name","ajay","Age":26, 5.10:"height"}
+>>> x["name"]
+>>> x["Age"]
+>>> x["name"] = "Ajay Sisaudiya"
+>>> x
+>>> x["marks"] = 450
+>>> x
+>>> del x
+>>>
+>>>
+
+Dictionary method: 
+
+ copy(), get(), setdefault(), keys(), values(), update()
+ items(), clear()
+
+Tuple Fuction:
+ len(), max(), min(), str(), dict()
+
+>>> y=x.copy()
+>>> y
+>>> z=x
+>>> id(x)
+>>> id(y)
+>>> id(z)
+>>> x.get("name")
+>>> x.get("xyz","Unknown key")      //Adding key in dictinary
+>>> x.setdefault("xyz","Unknown")
+>>> x
+>>> x.keys()
+>>> x.values()
+>>> x.items()
+>>> s={"city":"dhanput"}
+>>> x.update(s)
+>>> s.["name":"meerut"]
+>>> s["name"]="nurput"
+>>> s
+>>> x.update(s)
+>>> x
+>>> x.clear()
+>>> x
+>>> len(x)
+>>> str(x)
+>>> dict()
+
+
+---------------------------------------------------------------------
+
+
+Control Statements:
+
+A Statement that control flow of the progrm.
+
+ .Decision or Selection Control Statement
+
+  -> if
+  -> if else
+  -> elif
+
+  .Loop or Iteration Control Statement
+  -> for
+  -> while
+  
+
+----------------------------------------------------------------------

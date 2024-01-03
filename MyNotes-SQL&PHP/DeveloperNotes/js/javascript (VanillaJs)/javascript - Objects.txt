@@ -1,0 +1,170 @@
+>>>> JavaScript - Objects >>>>>
+
+
+-----------------------------------------------------
+Keys: Objects, Events, Symbol,
+    
+-----------------------------------------------------
+
+-----------------------------------------------------
+
+//   : By Greeky Shows
+//UnderStanding Prototypes (Array and Object Prototype) (V. good Video)
+
+
+//UnderStanding Prototypes (Function Prototype) (V. good Video)
+https://youtu.be/HzK69hfrD54?t=624                              //: By Greeky Shows
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+
+Objects : - 
+--------
+
+//1. Singleton (Using Cunstrector)
+//Object.create
+
+
+
+
+
+
+
+
+//2. Object Literals
+
+const JsUser = {}      //Object
+
+
+//Example:
+
+const mySym = Symbol("key1")
+
+const JsUser = {
+  [mySym] = "mykey1",
+  name: "Ajay"
+}
+
+
+console.log(JsUser.email)
+console.log(JsUser["email"])
+connsole.log(JsUser["full name"])
+console.log(JsUser[mySym])
+
+//Change email
+JsUser.email = "newemail@gmail.com"
+
+//Object freeze
+//Object.freezze(JsUser)
+JsUser.email = "newemail@gmail.com"
+console.log(JsUser)
+
+//Adding function in Object
+
+JsUser.greeting = function(){
+   console.log("Hello, JS User")
+}
+
+JsUser.greetingTwo = function(){
+   console.log(`Hello, JS User, ${this.name}`)   // `Back Ticks`
+}
+
+console.log(JsUser.greeting())
+console.log(JsUser.greetingTwo())
+
+
+Exmple 02: 
+
+//const tinderUser = new Object()    //Singleton Object
+const tinderUser = {}              //Non Singleton Object
+
+tinderUser.id = "123abc"
+tinderUser.name = "Ajay"
+tinderUser.isLoggedIn = false
+//console.log(tinderUser)
+
+cosnt regularUser = {
+  email: "some@gmail.com",
+  fullname: {
+    userfullname: {
+       firstname: "ajay",
+       lastname: "sisaudiya"
+    }
+  }
+}
+
+console.log(regularUser.fullname)
+//console.log(regularUser.fullname?.userfullname.firstname) //if fullnme not exists
+
+cosnt obj1 = {1: "a", 2: "b"}
+cosnt obj2 = {3: "a", 4: "b"}
+cosnt obj3 = {3: "a", 4: "b"}
+cosnt obj4 = {5: "a", 6: "b"}
+
+//const obj3 = {obj1, obj2}                      //Not convenient
+//cont obj3 = Object.assign({}, obj1,obj2,obj4)   //Object.assign(target,source)
+
+const obj3 = {...obj1,...obj2}                   //Latest (spread Operator)
+
+console.log(obj3)
+
+//From database
+const users = [
+ {
+   id: 1,
+   email: "xyz@gmail.com"
+ },
+ {...
+ },
+ {...
+ }
+]
+
+
+users[1].email
+console.log(tinderUser)
+
+console.log(Object.keys(tinerUser))
+console.log(Object.values(tinerUser))
+console.log(Object.entries(tinerUser))
+
+console.log(tinderUser.hasOwnProperty('isLoggedIn'))
+
+
+//Destructure
+
+const course = {
+  coursename: "js in hindi",
+  price: "999",
+  courseInstructor: "ajay"
+}
+
+//course.courseInstructor
+
+const {courseInstructor} = course 
+console.log(courseInstructor)
+
+' OR '
+
+//course.courseInstructor
+
+const {courseIstructor: instructor} = course
+console.log(instructor)
+
+
+//Apis : Json Object
+
+[
+  {},
+  {},
+  {}
+]
+
+
+------------------------------------------------------------------
+
+Events: 
+
+-------------------------------------------------------------------
+

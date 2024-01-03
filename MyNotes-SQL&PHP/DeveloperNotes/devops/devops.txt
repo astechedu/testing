@@ -1,0 +1,481 @@
+Build vs Patch vs Hotfix vs Coldfix
+
+
+>>> Kubernetes <<<<<<
+
+
+Screen Recording Water Mark:
+etc. devops,web development,virtual machines.mongodb,postgress,sqlite,mysql,rails,ruby,python frameworks,python,php frameworks,php,js frameworks,angularjs,reactjs,vuejs,jquery,javascript,html,css
+X: -135.33
+Y: 95.33
+Scrolling: 80
+
+Kubernetes Features:
+-------------------
+Automated rollouts and rollbacks
+Storage orchestration
+Service discovery and load balancing
+Self-healing
+Secret and configuration management
+Automatic bin packing
+Automatic bin packing
+Horizontal scaling
+IPv4/IPv6 dual-stack
+Designed for extensibility
+
+
+API Server: For all communications
+Scheduler: Schedules pods on neodes
+Controller manager: Runs controllers
+Etcd: open source, distributed key-value database from coreOS
+
+
+
+
+cluster:
+
+a group of people, plants or things that stand or grow close together
+(व्‍यक्तियों, पौधों या वस्‍तुओं का) झुंड, समूह, गुच्‍छा
+
+
+
+
+Computer cluster:
+A computer cluster is a set of computers that work together so that they can be viewed as a single system.
+
+
+
+
+Kubernetes cluster:
+
+A Kubernetes cluster is a set of nodes that run containerized applications. 
+Containerizing applications packages an app with its dependences and some necessary services. 
+They are more lightweight and flexible than virtual machines.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Kube api-server:
+
+The Kubernetes API is the front end of the Kubernetes control plane and is how users interact with their Kubernetes cluster. 
+The API (application programming interface) server determines if a request is valid and then processes it.
+
+
+Kube controller manager: 
+
+The Kubernetes controller manager is a daemon that embeds the core control loops shipped with Kubernetes.
+In applications of robotics and automation, a control loop is a non-terminating loop that regulates the state of the system.
+
+
+Kube Scheduler: 
+
+The Kubernetes scheduler is a control plane process which assigns Pods to Nodes.
+The scheduler determines which Nodes are valid placements for each Pod in the scheduling queue according to constraints and available resources. 
+The scheduler then ranks each valid Node and binds the Pod to a suitable Node.
+
+
+etcd: 
+
+etcd is a consistent and highly-available key value store used as Kubernetes' backing store for all cluster data.
+If your Kubernetes cluster uses etcd as its backing store, make sure you have a back up plan for those data. 
+You can find in-depth information about etcd in the official documentation.
+
+
+kubectl & kubelet: 
+
+What is Kubelet and kubectl in Kubernetes?
+kubectl is the command-line interface (CLI) tool for working with a Kubernetes cluster. 
+Kubelet is the technology that applies, creates, updates, and destroys containers on a Kubernetes node.
+
+
+Pod: 
+Pods are the smallest, most basic deployable objects in Kubernetes. A Pod represents a single instance of a running process in your cluster. 
+Pods contain one or more containers, such as Docker containers. 
+When a Pod runs multiple containers, the containers are managed as a single entity and share the Pod's resources.
+
+
+kube-proxy:
+
+kube-proxy is a network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept. 
+kube-proxy maintains network rules on nodes. These network rules allow network communication to your Pods from network sessions inside or outside of your cluster.
+
+
+
+
+
+Permisions in Linux: 
+
+File permissions:
+
+ls -l
+
+
+Let’s change the permissions using the chmod command.
+chmod o+w section.txt
+
+
+Now let’s add the execute permission to the user with:
+chmod u+x section.txt
+
+to remove the permission
+chmod u-x section.txt
+
+For example, let’s give every permission for all with:
+chmod 777 section.txt
+
+
+Let’s remove the execute from the group and the write from other by:
+chmod 765 section.txt
+
+
+User accounts:
+
+Create a user:
+
+We can create a new user account by issuing the following command:
+sudo useradd testuser
+
+
+id testuser
+
+To create a new user with its directories, we can issue:
+sudo useradd -m -s /bin/bash testuser
+
+
+Afterwards, you need to set a new password to the testuser by:
+sudo passwd testuser
+
+sudo adduser testuser
+
+
+
+Delete a user: 
+sudo userdel testuser
+
+You can use this automated command to do everything for you:
+sudo deluser --remove-home testuser
+
+
+User groups: 
+
+Create a group:
+
+You can see all of the groups you have by opening the following file:
+cat /etc/group
+
+Let’s create a group with the name of section by:
+sudo groupadd section
+
+Add user to a group:
+We will add the testuser user to the section group by:
+
+sudo usermod -aG section testuser
+
+
+Delete user from a group:
+You can delete the testuser from the group with:
+
+sudo gpasswd -d testuser section
+
+
+
+Delete a group:
+Let’s delete the previous group by:
+
+sudo groupdel section
+
+
+
+
+-----------------------------------------------------
+
+Centos8.1 on Virtual Box Yum Install Error:
+
+
+
+
+CentOS-8 - AppStream     0.0 B/s | 0 B 00:00
+Failed to download metadata for repo 'AppStream'
+Error: Failed to download metadata for repo 'AppStream'
+
+
+
+
+
+
+login as root
+
+cd /etc/sysconfig/network-scripts
+vim ifcfg-enp0s3
+
+
+
+ONBOOT=yes
+
+:wq
+reboot
+
+
+
+
+
+
+
+
+
+
+
+We can't install yum update on centOS:
+
+
+Step 1: Go to the /etc/yum.repos.d/ directory.
+
+Step 2: Run the below commands
+
+sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+
+Step 3: To clean all cached information, use the following command
+
+yum clean all
+
+Step 4: Now run the yum update
+
+yum update -y
+
+
+
+
+
+It might be because of the BaseOS broken repository.
+
+# vim /etc/yum.repos.d/CentOS-Linux-BaseOS.repo
+
+change enabled=1 to enabled=0
+
+or
+
+remove the file /etc/yum.repos.d/CentOS-Linux-BaseOS.repo
+
+
+
+
+
+---------------------------------------
+
+
+
+
+
+Fix Failed to download metadata for repo:
+
+Step 1: Go to the /etc/yum.repos.d/ directory.
+
+[root@autocontroller ~]# cd /etc/yum.repos.d/
+
+
+Step 2: Run the below commands
+
+[root@autocontroller ~]# sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+
+[root@autocontroller ~]# sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+
+Step 3: Now run the yum update
+
+[root@autocontroller ~]# yum update -y
+
+
+
+
+
+
+
+
+NOT Working This Settings: 
+
+
+cat /etc/centos-release
+dnf list all
+
+Now fixing this error by updating the location of source 
+
+cat /etc/yum.repos.d/CentOS-Linux-BaseOS.repo
+
+sed -i -e 's/mirrorlist/#mirrorlist|g' /etc/yum.repos.d/CentOS-Linux-*.repo
+
+cat /etc/yum.repos.d/CentOS-Linux-BaseOS.repo
+
+sed -i -e 's|#baseurl=http://mirror.centos.org/|baseurl=http://vault.centos.org/|g' /etc/yum.repos.d/CentOS-Linux-*.repo
+
+cat /etc/yum.repos.d/CentOS-Linux-BaseOS.repo
+
+dnf list all
+
+
+
+------------------------
+
+Working This settings: 
+
+
+VirtualBox 7 In Windows 10 64-bit (CentOS 8 Stream)
+
+This is used for CentOS Linux, but in the case of centos appstream use the following trick
+
+Go to /etc/yum.repos.d.
+
+Add in CentOS-Stream-AppStream.repo
+baseurl=http://mirror.centos.org/centos/8-stream/AppStream/x86_64/os/
+
+Add in CentOS-Stream-BaseOS.repo
+baseurl=http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/
+
+Add in CentOS-Stream-Extras.repo
+baseurl=http://mirror.centos.org/centos/8-stream/extras/x86_64/os/
+
+CentOS-Stream-Extras-common.repo
+baseurl=https://vault.centos.org/centos/8-stream/extras/Source/extras-common/
+
+-----------------------------------------------------------------------------------------------
+
+
+
+
+Change Date & Time using the Terminal:
+
+
+ timedatectl status
+ timedatectl
+ timedatectl list-timezones
+ timedatectl set-time 16:19:00
+ timedatectl
+ timedatectl set-time 2019-12-12
+ timedatectl
+ timedatectl set-time '2019-12-12 16:18:45'
+ timedatectl
+
+--------------------------------------------------------
+
+
+
+
+Ansible :
+
+ Opensource, Configuration tools. 
+
+1. Manual 
+
+2. Two types of automation
+
+ a) Scripted Languages
+ b) Tool (Ansible:Automation)
+
+
+Management: 
+  
+ Server Changes
+ Device Changes
+ Cloud
+ Virtualization Host
+ 
+
+Working: 
+
+Ansible is is an agent less configuration tool
+It works of Push System.
+It works an forks and serial mode. Default It comes width forks style (forks5)
+
+
+Architecture: 
+
+ 1. Control Node
+ 2. Manage Node
+ 3. Connection plugin
+ 4. Inventory System
+ 5. Modules
+ 6. Ad Hoc
+ 7. Playbooks
+
+
+
+
+				 __________________
+				|Control Node     |
+				|                 |
+				|_________________| 
+
+				 __________________
+				|Control Node     |
+				|                 |
+				|_________________| 
+ __________________
+|Control Node     |
+|                 |
+|_________________| 
+
+				 __________________
+				|Control Node     |
+				|                 |
+				|_________________| 
+
+				 __________________
+				|Control Node     |
+				|                 |
+				|_________________| 
+
+
+
+-------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

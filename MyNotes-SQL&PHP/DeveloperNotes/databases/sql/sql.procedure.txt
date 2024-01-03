@@ -1,0 +1,59 @@
+<<< SQL Procedures <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys: Delimiter, Default Delimiter, Functions, Function in phpmyadmin, Procedures, 
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Sql Procedures Examples
+
+
+-------------------------------------------------------------------
+
+Websites: 
+
+Procedure Examples:
+https://copyprogramming.com/howto/sql-how-to-add-procedures-in-mysq-ubuntu
+
+Procedure & function Exmples: 
+https://www.a2hosting.com/kb/developer-corner/mysql/mysql-stored-functions-and-procedures/
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+>>> Procedures <<<<
+
+DELIMITER &&
+create procedure proc1()
+begin 
+ select *from users;
+end &&
+DELIMITER ;
+
+---x---
+
+
+
+
+
+    DELIMITER //  
+    Create Procedure Test()  
+        BEGIN  
+            DECLARE A INT DEFAULT 100;  
+            DECLARE B INT;  
+            DECLARE C INT;  
+            DECLARE D INT;  
+            SET B = 90;  
+            SET C = 45;  
+            SET D = A + B - C;  
+            SELECT A, B, C, D;  
+        END //  
+    DELIMITER ;  
+
+
+-------------------------------------------------------------------

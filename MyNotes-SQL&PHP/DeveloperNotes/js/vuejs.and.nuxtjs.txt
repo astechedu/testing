@@ -1,0 +1,637 @@
+<<<< Vue Js <<<<
+
+
+------------------------------------------------------------------------------------------------------------
+
+Keys: Optionals Apis, Composition Api, mapState, mapGetters, mapActions, mapMutations,setup(), 
+      Modules in Vuex, namespaced,
+
+      Lifecycles Hooks: 
+
+          1. Options Apis  : beforeCreate, created, beforeMount, mounted, 
+                             beforeUpdate, updated,beforeUnmount,unmounted
+
+          2. Composition Apis(setup()) : onBeforeMount(),onMounted(),onBeforeUpdate(),onUpdated(),
+                                         onBeforeUnmount(),onUnmounted(),onErrorCaptured(),onRenderTracked() ​
+
+          3. New Features in Vue js 3 : Teleport, Suspense, Multiple root elements per template 
+
+
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+//Vue + vite js (Install vue router)
+//Video: https://youtu.be/PciUq6HcUNc?t=780
+
+
+Vue js 3 : 
+//Diff ref() vs reactive() and more (Diff Options api vs composition api)
+https://www.koderhq.com/tutorial/vue/composition-api/
+
+Module Vue js 3:
+//Video: https://youtu.be/UEmkULpC0Qs?t=333
+-----------------------------------------------------------------------
+Vue js 3 (Store):
+https://youtu.be/MbR1L2_90Ws?t=1570
+-----------------------------------------------------------------------
+Ref Website: 
+
+//Vue Store
+//Guide to Vuex - Centralized State Management for Vue Applications
+https://stackabuse.com/guide-to-vuex-centralized-state-management-for-vue-applications/
+
+//vue js api (frontend) + express js (backend) : Setting to production
+https://levelup.gitconnected.com/vue-node-web-application-59d3376e403e
+
+//Vue js 3 Vuex Modules (Good Details)
+https://www.koderhq.com/tutorial/vue/vuex-module/
+
+
+Nuxt Js: 
+
+//Nuxt js + Express js
+https://blowstack.com/blog/how-to-integrate-express_js-with-nuxt-app/
+
+
+
+--------------------------------------------
+
+Links: 
+
+//Vue js Ajax Call Using async/await (Fetch Data From jsonplaceholder api)
+https://stackabuse.com/sending-ajax-requests-in-vue-js/
+----------------------------------------------------------------------------------------
+
+vue create project-name
+$ npm install vuex --save
+# Or yarn
+$ yarn add vuex
+
+
+//Vuex Configuration
+
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+new Vue({...})
+--------------------------------------
+
+//Centralized State Management with Vuex
+
+
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+const store = new Vuex.Store({
+  state: {},
+  mutations: {},
+  actions: {},
+  getters: {}
+});
+
+
+
+
+new Vue({
+  el: '#app',
+  store: store,
+})
+
+
+//Vue State
+
+const store = new Vuex.Store({
+  state: {
+    name: "John Doe",
+    age: 12,
+    details: {
+      city: "San Fransisco",
+      country: "USA",
+    },
+  },
+});
+
+
+computed: {
+  name() {
+      return this.$store.state.name;
+    },
+  age() {
+     return this.$store.state.age;
+    },
+}
+
+
+<template>
+  <div id="app">
+    <p>Name: {{ name }}</p>
+    <p>Age: {{ age }}</p>
+  </div>
+</template>
+
+
+
+//The mapState() Helper
+
+
+// First - import mapState
+import { mapState } from "vuex";
+
+export default {
+  name: "ComponentName",
+  computed: mapState({
+    name: (state) => state.name,
+    age: (state) => state.age,
+  }),
+};
+
+
+
+//Getter Functions
+
+const store = new Vuex.Store({
+  state: {
+    myNumbers: [11, 3, 5, 1, 54, 56, ...],
+  },
+  getters: {
+    firstFiveSorted: (state) => {
+      return state.myNumbers.sort().slice;
+    },
+  },
+});
+
+
+//...
+computed: {
+  firstFiveSorted () {
+    return this.$store.getters.firstFiveSorted
+  }
+}
+
+
+import { mapGetters } from "vuex";
+
+export default {
+  computed: {
+    ...mapGetters({
+      // this example will map `myNumbers` to `this.$store.getters.firstFiveSorted`
+      myNumbers: "firstFiveSorted",
+    }),
+  },
+};
+
+
+
+//Vuex Mutations
+
+
+const store = new Vuex.Store({
+  state: {
+    myNumbers: [11, 3, 5, 1, 54, 56]
+  },
+  mutations: {
+    ADD_NUMBER(state, numberToAdd) {
+      state.myNumbers.push(numberToAdd);
+    },
+  }
+})
+
+
+
+this.$store.commit('ADD_NUMBER', 75);
+
+
+//Actions
+
+
+const store = new Vuex.Store({
+  state: {
+    myNumbers: [11, 3, 5, 1, 54, 56, "..."],
+  },
+  mutations: {
+    ADD_RANDOM_NUMBER(state) {
+      // Push a random number to `myNumbers` array
+      state.myNumbers.push(Math.floor(Math.random() * 10));
+    },
+  },
+  actions: {
+    // Using destructuring to extract only `commit()` from the `context` object
+    addNumber({ commit }, time) {
+      setInterval(() => {
+        commit("ADD_RANDOM_NUMBER");
+      }, time * 1000);
+    },
+  },
+});
+
+
+store.dispatch('ADD_RANDOM_NUMBER', 10);
+
+
+---------------------------------------------------------------------------------------
+
+//Vue Store Example:
+
+https://vuex.vuejs.org/guide/#the-simplest-store
+
+
+The Simplest Store :
+
+
+import { createApp } from 'vue'
+import { createStore } from 'vuex'
+
+// Create a new store instance.
+const store = createStore({
+  state () {
+    return {
+      count: 0
+    }
+  },
+  mutations: {
+    increment (state) {
+      state.count++
+    }
+  }
+})
+
+const app = createApp({ /* your root component */ })
+
+// Install the store instance as a plugin
+app.use(store)
+
+------------------------------------------------------------
+
+store.commit('increment')
+
+console.log(store.state.count) // -> 1
+
+
+
+
+methods: {
+  increment() {
+    this.$store.commit('increment')
+    console.log(this.$store.state.count)
+  }
+}
+
+
+---------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+
+1. Optinal Apis Example:
+
+
+<template>
+
+</tempate>
+
+<script>
+export default {
+
+//data
+data() {},
+
+//mouted
+mounted(){},
+
+//methods
+methods:{},
+
+//computed
+computed:{},
+	
+watch:{}
+
+}
+</script>
+
+----------------------------------
+
+2. Composition Apis Example: 
+
+<template>
+<div>
+   {{counter}}
+   {{user.name}}
+   {{user.age}}
+</div>
+</tempate>
+
+<script>
+import { ref, reactive, toRefs, watch, computed } from 'vue';
+
+export default {
+
+setup(){
+  //data
+  const counter = ref(0)
+
+  //Best way 
+  const data = ref({
+    name: 'ajay',
+    age: 24
+  })
+
+  const dataProp = toRef(data)
+
+  //Or
+  const user = ref({
+    name: 'ajay',
+    age: 24
+  })
+
+  //Or
+  const persons = reactive({
+    name: 'amit',
+    age: 23
+  })
+
+
+
+
+//Simple functions are available in setup()
+
+function datafn1(){}
+const datafn2 = () => {}
+const datafn3 = function(){}
+	
+//computed
+
+const doublecounter = computed() => {
+   return data.counter = 2;
+}
+
+//watch
+watch(data.counter, (oldValue,newValue) => {
+   console.log('old value', oldValue)
+   console.log('new value', newValue)
+   if(newValue === 5){
+      data.counter = 0
+   }
+})
+
+
+//All must be retuned
+
+ return{
+   counrter,
+   user,
+   ...toRefs(person),
+   ...dataProp,
+   datafn1,
+   datafn2, 
+   datafn3
+
+ }
+
+//end of setup()
+ }
+
+//End of component
+}
+</script>
+
+
+
+
+---------------------------------------------------------------------------------------
+
+> Modules in Vuex:
+
+//Video: https://youtu.be/UEmkULpC0Qs?t=333
+//Websites: (Vuex Modules Good Examples):
+https://www.koderhq.com/tutorial/vue/vuex-module/
+https://vuex.vuejs.org/guide/modules.html
+
+
+
+//Folder Structure:
+
+  /store/counter/getters.js
+  /store/counter/actions.js
+  /store/counter/mutations.js
+
+
+//Example: store/counter/getters.js
+
+const counterGetters = {
+  getCounter(state) { return state.counter }
+}
+
+export default counterGetters
+
+
+
+//Example: store/counter/mutations.js
+
+const counterMutations = {
+  increment(state, payload) {
+    state.counter = state.counter + payload
+  }
+}
+
+export default counterMutations
+
+
+
+//Example: store/counter/actions.js
+
+const counterActions = {
+  increment(context, payload) {
+    context.commit('increment', payload);
+  }
+}
+
+export default counterActions
+
+
+
+
+//Combined
+
+
+//Example: store/counter/index.js
+
+// import getters, actions & mutations
+import counterGetters   from './getters'
+import counterActions   from './actions'
+import counterMutations from './mutations'
+
+const counterModule = {
+  namespaced: true,
+  state() {
+    return {
+      counter: 0
+    }
+  },
+  getters:   counterGetters,
+  actions:   counterActions,
+  mutations: counterMutations
+}
+
+export default counterModule
+
+
+
+//Example: src/main.js
+
+import { createApp   } from 'vue'
+import App from './App.vue'
+
+// import counterModule
+import store from './store/index'
+
+const app = createApp(App)
+
+// use imported store
+app.use(store)
+app.mount('#app')
+
+---------------------------------------------------------------------------------------
+
+
+
+---> Modules <---
+
+//Video: https://youtu.be/UEmkULpC0Qs?t=333
+
+https://vuex.vuejs.org/guide/modules.html
+
+
+Example 02: 
+
+//Modules:
+
+const moduleA = {
+  state: () => ({ ... }),
+  mutations: { ... },
+  actions: { ... },
+  getters: { ... }
+}
+
+const moduleB = {
+  state: () => ({ ... }),
+  mutations: { ... },
+  actions: { ... }
+}
+
+const store = createStore({
+  modules: {
+    a: moduleA,
+    b: moduleB
+  }
+})
+
+store.state.a // -> `moduleA`'s state
+store.state.b // -> `moduleB`'s state
+
+
+
+//Module Local State
+
+
+const moduleA = {
+  state: () => ({
+    count: 0
+  }),
+  mutations: {
+    increment (state) {
+      // `state` is the local module state
+      state.count++
+    }
+  },
+  getters: {
+    doubleCount (state) {
+      return state.count * 2
+    }
+  }
+}
+
+
+
+----------------------------------------------------------------------------------------
+
+
+
+>> Pages: [id].vue
+
+Video: https://youtu.be/QS8MwC8S4o8?t=252
+       https://youtu.be/X9ta1grG1j0?t=227   //Pages links in index.vue
+Pages
+  products/[id].vue
+  products/index.vue
+
+
+products/[id].vue
+
+<template>
+ <div>
+  <p>Product details for {{ id }}</p>
+  <p>Any text.....Lorem ipsum</p>
+ </div>
+</template>
+<script setup>
+  const { id } = useRoute().params
+</script>
+
+<style scoped>
+</style>
+
+----------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

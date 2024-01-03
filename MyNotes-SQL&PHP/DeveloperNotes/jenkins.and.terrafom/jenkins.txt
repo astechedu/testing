@@ -1,0 +1,151 @@
+>>>> Jenkins <<<<<<<<<<<
+
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+Keys: jenkins on ec2 aws, Jenkins PHP Project To AWS, 
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+
+
+Jenkins:
+
+//Install Jenkins to EC2 (AWS): All Steps and Commands:
+https://youtu.be/ahEdad8fdi8?t=524
+
+//Session-Manager (No Need of ssh or kay-pair) to connect ec2
+https://youtu.be/SwSEmvWMuMU?t=1093
+
+
+//Jenkins connect to AWS, Create new dir in aws Instance 
+https://youtu.be/s7FtPa2sD2s?t=381
+
+
+//Deploy php project to AWS, webhook, FreeStyle Project Or Declarative pipeline
+https://youtu.be/64VkDEiLCY8?t=393    //PHP, Apache, GitHub, CI/CD
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+
+1. Deploy php application using jenkins pipeline | Continuous Deployment
+
+On Github repository: write jenkins file in project(repo)
+
+Declarative Pipeline:
+
+1.
+
+pipeline{
+  agent any
+  environment{
+     staging_server="23.234.35.234"         //IP address from AWS
+  }
+  stages{
+     stage('Deploy to Remote'){
+ 
+       sh 'scp -r ${WORKSPACE}/*' root@${stging_server}:/var/www/html/myproject/'      
+     }
+  }
+
+}
+ 
+
+
+
+
+
+2.
+Not Completed: 
+
+
+pipeline{
+  agent any
+  environment{
+     staging_server="23.234.35.234"         //IP address from AWS
+  }
+  stages{
+     stage('Deploy to Remote'){
+ 
+        sh '''
+            for fileName in `find ${WORKSPACE} -type t --mmin -10 | egrep -v ".git | jenkinsfile"`    //Find EveryThing wich are modified 10 minutes
+            do                           
+                scp -r ${WORKSPACE}/*' root@${stging_server}:/var/www/html/myproject/ 
+            done
+        '''   
+     }
+  }
+
+--------------------------------------------------------------------------------------
+
+
+1. 
+Integrate GitHub Repository to Jenkins Project
+
+
+
+
+-------------------------------------------------------------------
+
+//Jenkins On EC2 AWS
+
+//SSH putty to ec2
+
+Steps: 
+
+ubuntu@123-33-91-8: jenkins --version
+ubuntu@123-33-91-8: sudo apt-get update
+ubuntu@123-33-91-8: sudo apt-get install openjdk-11-jdk
+
+ubuntu@123-33-91-8: curl -fsSL https://pkg.jenki..... Copy from website //Uncomplete
+....
+....
+ubuntu@123-33-91-8: sudo apt-get update
+ubuntu@123-33-91-8: sudo apt-get install jenkins
+ubuntu@123-33-91-8: sudo systemctl start jeinkins.service
+ubuntu@123-33-91-8: sudo systemctl status jeinkins
+ubuntu@123-33-91-8: sudo ufw allow 8080
+ubuntu@123-33-91-8: sudo ufw enable
+ubuntu@123-33-91-8: sudo ufw status
+
+Now check browser website of ec2 instance ip address
+
+//Admin password to jenkins: how to get
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+----------------------------------------------------------------------------------------------
+
+
+>> Jenkins PHP Project To AWS:
+
+pipeline{
+
+ agent any 
+ environment{
+   staging_server="13.235.33.196"
+ }
+ states{
+   stage('Deploy to Remote'){
+     steps{
+       sh 'scp -r ${}/* root@$(staging_server):/var/www/html/myproject/'
+     }
+   }
+ }
+}
+
+-------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------

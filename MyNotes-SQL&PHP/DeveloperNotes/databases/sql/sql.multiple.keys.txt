@@ -1,0 +1,126 @@
+>>>> SQL Multiple Keys <<<<<
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys: Composite Key, Primary Key, Super Key, Alternative Key, Candidate Key,
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+-------------------------------------------------------------------
+Vdo: SQL Composite Key, With example
+https://youtu.be/SoL7Ex29ISE?t=46
+
+Vdo: Details of sql all keys
+https://youtu.be/EavNLiTk-eo?t=54
+
+Vdo: Alternate Key Details in short
+https://youtu.be/n2XvKaELZ-Q?t=37
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+
+
+
+>>> Composite Key <<<<
+
+create table employee(
+ id int, 
+ name varchar(20),
+ salary int,
+ age int,
+ gender varchar(20),
+ primary key(id, name)         //Composite key
+);
+
+--------------------------------------------------
+
+>> SQL All Keys Details <<<
+
+1. Candidate key: 
+      Is the attribute/column or a set of attribute/columns
+in a relation/table thate qualifies for uniqueness of each tubple/row.
+A relation/table can have one or more than one Candidate Keys. 
+A Candidate Key is also known as a minimal Super Key.
+
+2. Primary Key: 
+       Is the Candidate key attribute/column that is most suited to maintain uniqueness in 
+a table at the tuple/row level.
+
+3. Alternate Key:
+       Are the other Candidate key attribute/columns that you didn't choose as Primary Key
+column.
+
+4. Super Key: 
+      Is a superset of Candidate key. If you add any other attribute/column to a Candidate
+key them it become a Super Key.
+
+5 Composite Key: 
+       If a table do have a single column that qulifies for a Candidate key, then you have
+to select 2 or more column to make a row unique.
+
+
+-------------------------------------------------------------------------------------------------
+
+
+>>><- Candidate key -><<<<<
+
+
+Website: Details
+https://docs.progress.com/bundle/openedge-sql-development-117/page/Candidate-keys.html
+
+
+ CREATE TABLE employee (
+          empno  INTEGER NOT NULL PRIMARY KEY,
+          ss_no  INTEGER NOT NULL UNIQUE,
+          ename  CHAR (19),
+          sal  NUMERIC (10, 2),
+          deptno  INTEGER NOT NULL
+     ) ;
+
+
+--------------------------------------------------------------------------------------------------
+
+Website: With Diagram
+https://www.tutorialspoint.com/sql/sql-alternate-key.htm
+
+>>> Altername Key <<<<<
+
+
+    The alternate key does not allow duplicate values.
+    A table can have more than one alternate keys.
+    The alternate key can contain NULL values unless the NOT NULL constraint is set explicitly.
+    All alternate keys can be candidate keys, but all candidate keys can not be alternate keys.
+    The primary key, which is also a candidate key, can not be considered as an alternate key.
+
+
+
+CREATE TABLE CUSTOMERS(
+   ID INT,
+   NAME VARCHAR (20),
+   AGE INT,
+   AADHAAR_ID BIGINT,
+   MOBILE_NO BIGINT,
+   SALARY DECIMAL (18, 2),
+   PRIMARY KEY(ID)      
+);
+
+INSERT INTO CUSTOMERS VALUES 
+(1, 'Ramesh', 32, 90123498456, 9023456789, 22000.00 ),
+(2, 'Khilan', 25, 91123249545, 9032456578, 24500.34 ),
+(3, 'Kaushik', 23, 91223242546, 9012436789, 20000.12 );
+
+
+ID 	NAME 	AGE 	AADHAAR_ID 	MOBILE_NO 	SALARY
+1 	Ramesh 	32 	90123498456 	9023456789 	22000.00
+2 	Khilan 	25 	91123249545 	9032456578 	24500.34
+3 	Kaushik 23 	91223242546 	9012436789 	20000.12
+
+
+
+
+
+------------------------------------------------------------------------------------------------

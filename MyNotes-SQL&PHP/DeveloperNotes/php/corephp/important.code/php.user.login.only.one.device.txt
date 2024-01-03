@@ -1,0 +1,8 @@
+<<<  PHP >>
+
+
+--------------------------------------------------------------
+Vdo: PHP MySQL - Prevent Block Multiple Login for Same User
+https://youtu.be/NXtdRO5N6B0?t=106
+
+--------------------------------------------------------------

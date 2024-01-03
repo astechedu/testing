@@ -1,0 +1,364 @@
+
+<<<< Git Starting For Development <<<
+
+
+---------------------------------------------------------------------------
+keys: git cmds, git life cycle, staging area, checkout, pictorial graphp, 
+      resource, development starting, git checkout -b, Github, Github Actions, 
+      git log --online, 
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+---------------------------------------------------------------------------
+
+
+1. To create empty branch, you have to go to terminal and execute:
+
+ 
+
+git checkout --orphan branchname
+
+git rm -rf .
+
+
+add files: 
+---------
+
+git add .
+
+git commit -m "commit message"      //git commit -am "commit message"
+
+git push -u origin branchname
+
+
+
+
+-----------------------------------------------------------------------
+
+
+Git Life Cycle:
+--------------
+
+https://intellipaat.com/blog/tutorial/devops-tutorial/git-tutorial/
+
+
+              git init                      git add 
+Working Dir *----------* Initialization *-----------------
+                                                          *
+                                                          |
+                                                      ----------------
+                                                     | Staging Area  |
+                                                      ----------------
+                                                          |
+ 							  *
+GitHub *----------* Local Repositoty *------------------
+         git push                         git commit
+                         
+    
+
+
+-----------------------------------------------------------------------------------------
+
+// Development Starting
+
+//Working on Git step by step cmds
+
+//Git CMDS:
+
+ 
+Example: 01 
+
+//1. Using git add (Go to staging area)
+
+touch ajay.txt
+git status
+git add .                           //Adding files to staging area                
+git status
+git restore --staged ajay.txt      //Back to working dir
+
+
+//2. Usign git commit (Go to local repository)
+
+git add. ajay.txt                         //File adding to staging area
+git status   
+git commit -m "file to local repository"  //File go to local reposity
+git status
+git reset --soft HEAD^1                   //ComeBackToStagingArea, If last commit is 1, 
+git status 
+ 
+git reset HEAD~ ajay.txt           //Not used //If last commit is not first(or initial) Using: git reset HEAD~
+                                  //Not used //If last commit is first(or initial) Using: git update-ref -d HEAD
+
+
+//3. Usign git push (Go to github)
+
+
+----------------------------------------------------------------------------------------------------------
+
+Checkout:
+
+git checkout fileName      //Last commit match to new   (matching file)
+git checkout -f            //Recover all or one file matck   (maching files)
+
+
+
+Checkout -b:
+git checkout -b <branchName> origin/<remoteBranchName>   //Branch from origin to local
+git chechout -b cart origin/cart                         //Example
+
+-----------------------------------------------------------------------------------------
+
+Showing Commits: 
+
+git log -p -1    //For one where is changes
+git log -p -2    //
+
+------------------------------------------------------------------------------------------
+
+git diff -a                  //File compage working tree to staging area
+git diff --staged            //File compare with staging area to last commit
+
+-------------------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+
+//Details with pictorial graphp
+https://builtin.com/software-engineering-perspectives/git-reset-soft-head
+
+
+      _________________________________________________________________________________________________________
+     |                   |                  Local Git Repository  |                   |           |            |
+     |_________________________________________________________________________________________________________|
+            ^            |                                        |                   |           |
+            |            |                                        |                   |           | 
+            |            |                                        |                   |           |
+            |            |                                        |                   |           V git reset --soft
+      __________________________________________________________________________________________________________
+     |      |git commit  |git checkout      Index(Staging Area)                       |                         |
+     |__________________________________________________________________________________________________________|
+       ^                 |                                        |                   |
+       |                 |                                        |                   |
+       |                 V                                        |                   V git reset --mixed
+      ___________________________________________________________________________________________________________
+     | | git add                            Working Directory     |                                              |    
+     |___________________________________________________________________________________________________________|
+                                                                  |git reset --hard
+                                                                  V
+
+
+
+
+What Flags Do We Use With the Git Reset Command?
+
+    git reset --soft HEAD~1
+    git reset --mixed HEAD~1
+    git reset --hard HEAD~1
+
+-----------------------------------------------------------------------------------------
+
+Some:
+
+Git Restore:
+
+The "restore" command helps to unstage or even discard uncommitted local changes.
+
+
+git restore --staged index.html
+git restore --staged *.css
+git restore index.html
+git restore --source 7173808e index.html
+git restore --source master~2 index.html
+
+------------------------------------------------------------------------------------------
+
+
+
+
+
+Important Options:
+
+https://www.git-tower.com/learn/git/commands/git-restore
+
+
+
+<filename>
+The name of a file (or multiple files) you want to restore
+
+
+--staged:
+
+Removes the file from the Staging Area, but leaves its actual modifications untouched. 
+modifications will remain untouched
+
+
+
+--source <ref>
+
+Restores a specific revision of the file.
+
+
+
+--patch
+
+Allows you to select individual chunks to restore. 
+
+
+
+-----------------------------------------------------------------------------------------
+ --- Complemte -- to github sent
+
+-----------------------------------------------------------------------------------------
+
+
+
+Github: 
+
+Video:
+//Codespace on github php dev:
+https://youtu.be/4Ol6X2VJlfw?t=244
+
+1. Codespaces (PHP Development)
+
+Login to github
+Open repository 
+Click on green button '<>Code'
+Click on Codespaces link
+Your workspaces started 
+Run local server for php type in terminal : php -S 0.0.0.0:8000 
+Opne on browser your project is running.
+
+
+2. On Github pages website
+Open Github repository 
+Click on settings
+Click on General + tich on 'Template repository'
+Click on Pages to the left site
+Click on Branch 'main' or other branch select
+Click on save button
+Look on Top of the page 'GitHub Pages', Website linke is created(time tabken 20-30 sec).
+Opne website on browser clicking website url
+If Link is not yet created, reload your this page
+
+
+
+------------------------------------------------------------------------------------------
+
+>> Github Actions
+Video:
+https://youtu.be/5Us_oDjaNNE?t=802
+
+GitHb Actions: feature in Github to create custom authomated Workflows
+- automate SDLC workflows
+- implement CI CD DevOps
+- run a task on a specific event
+
+DEMO
+Step 1 - Sign up or Login to GitHub
+Step 2 - Create a new repository
+Step 3 - In the repo create a folder .github/workflows
+Step 4 - In the folder create a YAML file with extension.yml
+Step 5 - Add the workflow content in the file
+Step 6 - Commit and push the changes
+Step 7 - Goto main page of repo and goto "Actions"	
+Step 8 - Select the workflow form left side and check the logs and results 
+
+Terms:
+WORKFLOW- Collection of jobs, defined in a YAML file (name:hellow-world is workflow)
+name:
+EVENTS- Any activity in the repo that can trigger a workflow  (on:push is event)
+on:
+JOBS - Collection of steps
+jobs:
+STEPS- Actions to be taken, commands, scripts
+steps:
+Chained Jobs- needs: 
+
+
+
+
+
+
+
+Example:
+//Search on google (github actions yamal file):
+
+name: hellow-word
+on: push
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: my-step
+        run: echo "Hello World"
+
+
+
+Ex.2:
+
+name: Java CI with Grdle
+on: 
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 1.8
+      users: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - name: Grant execute permission for gradle
+      run: chmod +x gradlew
+    - name: Build with gradle
+      run: ./gradlew build
+	
+   publish:
+      needs: build
+-------------------------------------------------------------------------------------------
+
+>> GitLab (CI/CD)
+How to start gitlab runner: 
+CMD: gitlab-runner.exe start
+
+
+
+gitlab-io.yaml
+
+demo_job_1:
+    tags:
+      - ci
+    script:  
+      - echo Hello World
+
+
+------------------------------------------
+
+>> Set editor in git
+git config --glabal core.editor "nano"
+
+
+>> Change commit
+git commit --amend
+
+>> Change commit
+git commit --amend -m "Changes in home page"
+
+>> Check commits 
+git log --online
+
+
+>> Making Submodules
+git submodule add https://github.com/cakephp/shapes.git
+git submodule update   (Changes to first changed)
+
+
+
+
+

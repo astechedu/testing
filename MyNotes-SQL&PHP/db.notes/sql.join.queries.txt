@@ -1,0 +1,95 @@
+-----------------------
+                       |
+   SQL JOIN Queries    |
+                       |
+-----------------------
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+ Key: JOIN, 
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+
+
+
+--- Join Queries ---
+
+
+
+1. Natural Join
+
+-----x-----
+
+
+
+
+2. Self Join
+
+//Query for Self-join:
+
+i. 
+	SELECT e.employee_name AS employee,
+	m.employee_name AS managerFROM 
+	GFGemployees AS eJOIN GFGemployees 
+	AS m ON e.manager_id = m.employee_id;
+
+
+
+ii.
+
+// Tables in dummy.sql/mysql-dummy.sql file
+
+SELECT a.ID, b.NAME as EARNS_HIGHER, a.NAME 
+as EARNS_LESS, a.SALARY as LOWER_SALARY
+FROM CUSTOMERS a, CUSTOMERS b
+WHERE a.SALARY < b.SALARY;
+
+
+
+//Self Join with ORDER BY Clause
+
+Syntax: 
+
+SELECT column_name(s)
+FROM table1 a, table1 b
+WHERE a.common_field = b.common_field
+ORDER BY column_name;
+
+
+SELECT  a.ID, b.NAME as EARNS_HIGHER, a.NAME 
+as EARNS_LESS, a.SALARY as LOWER_SALARY
+FROM CUSTOMERS a, CUSTOMERS b
+WHERE a.SALARY < b.SALARY
+ORDER BY a.SALARY;
+
+
+
+
+
+
+-----x-----
+
+
+
+
+
+3. Inner Join
+
+-----x-----
+
+
+
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+

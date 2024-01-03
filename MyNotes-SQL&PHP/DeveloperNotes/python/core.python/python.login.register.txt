@@ -1,0 +1,212 @@
+<<<<< Python Login & Register <<<<<<
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+Key: Login, Register, Signup, 
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+
+//Login Example
+https://stackoverflow.com/questions/22170848/simple-login-program-in-python
+
+//Register
+https://www.youtube.com/watch?v=95JrLWKy6-I&pp=ygUGcHl0aG9u
+
+
+//SignUP
+https://medium.com/@moinahmedbgbn/a-basic-login-system-with-python-746a64dc88d6
+
+------------------------------------------------------------------------------
+
+>> Login Example
+//login.py file
+
+class login:
+  def __init__(self,id,password):
+      self.id=id
+      self.password=password
+      self.error = "Enter the valid username or password"
+
+  def check(self):
+      #print (self.id)
+      #print (log.id)
+      if self.id==log_id and self.password==log_password:
+         print("Login success!")
+      else:
+      	 print(self.error)
+
+
+#Creating Object
+log=login("admin","admin")
+
+log_id = input("Enter your user ID: ")
+log_password = input("Enter password: ")
+log.check()
+
+
+print ("----> Login Page <-----")
+
+
+
+
+#https://stackoverflow.com/questions/22170848/simple-login-program-in-python
+
+
+
+--------------------------------------------------------------------
+
+>> Register Example
+//register.py file
+
+
+from tkinter import *
+
+
+root = Tk()
+
+root.geometry("500x300")
+
+def getvals():
+	name = nameentry.get()
+	phone = phoneentry.get()
+	gender = genderentry.get()
+	emergency = emergencyentry.get()
+	paymentmode = paymentmodeentry.get()
+
+	print("Accepted")
+	print(name,phone,gender,emergency,paymentmode)
+
+#Heading
+Label(root, text="Python Registration Form",font="ar 15 bold").grid(row=0,column=3)
+
+#Field Name
+name = Label(root, text="Name")
+phone = Label(root, text="Phone")
+gender = Label(root, text="Gender")
+emergency = Label(root, text="Emergency")
+paymentmode = Label(root, text="Payment Mode")
+
+#Packing Field
+name.grid(row=1, column=2)
+phone.grid(row=2, column=2)
+gender.grid(row=3, column=2)
+emergency.grid(row=4, column=2)
+paymentmode.grid(row=5, column=2)
+
+#Variable for storing data
+namevalue = StringVar
+phonevalue = StringVar
+gendervalue = StringVar
+emergencyvalue = StringVar
+paymentmodevalue = StringVar
+checkvalue = IntVar
+
+#Creating entry field
+nameentry = Entry(root, textvariable=namevalue)	
+phoneentry = Entry(root, textvariable=phonevalue)	
+genderentry = Entry(root, textvariable=gendervalue)	
+emergencyentry = Entry(root, textvariable=emergencyvalue)	
+paymentmodeentry = Entry(root, textvariable=paymentmodevalue)	
+
+#Packing entry fields
+nameentry.grid(row=1,column=3)
+phoneentry.grid(row=2,column=3)
+genderentry.grid(row=3,column=3)
+emergencyentry.grid(row=4,column=3)
+paymentmodeentry.grid(row=5,column=3)
+
+
+#Creating checkbox
+checkbtn = Checkbutton(text="remember me?", variable=checkvalue)
+checkbtn.grid(row=6, column=3)
+Button(text="Submit", command=getvals).grid(row=7,column=3)
+
+
+root.mainloop()
+
+
+
+
+//Register
+https://www.youtube.com/watch?v=95JrLWKy6-I&pp=ygUGcHl0aG9u
+
+--------------------------------------------------------------------
+
+
+>> Signup <<
+
+//https://medium.com/@moinahmedbgbn/a-basic-login-system-with-python-746a64dc88d6
+//Then, we will generate an md5 hash of encoded password using the hexdigest( ) function.
+
+import hashlib
+
+
+def signup():
+     email = input(“Enter email address: “)
+     pwd = input(“Enter password: “)
+     conf_pwd = input(“Confirm password: “)     if conf_pwd == pwd:
+         enc = conf_pwd.encode()
+         hash1 = hashlib.md5(enc).hexdigest()     with open(“credentials.txt”, “w”) as f:
+         f.write(email + “\n”)
+         f.write(hash1)
+     f.close()
+     print(“You have registered successfully!”)     else:
+         print(“Password is not same as above! \n”)
+
+
+
+
+def login():
+     email = input(“Enter email: “)
+     pwd = input(“Enter password: “)     
+     auth = pwd.encode()
+     auth_hash = hashlib.md5(auth).hexdigest()
+     with open(“credentials.txt”, “r”) as f:
+         stored_email, stored_pwd = f.read().split(“\n”)
+     f.close()     if email == stored_email and auth_hash == stored_pwd:
+         print(“Logged in Successfully!”)
+     else:
+         print(“Login failed! \n”)
+
+
+--------------------------------------------------------------------
+
+import hashlib
+
+def signup():
+    email = input(“Enter email address: “)
+    pwd = input(“Enter password: “)
+    conf_pwd = input(“Confirm password: “)    if conf_pwd == pwd:
+        enc = conf_pwd.encode()
+        hash1 = hashlib.md5(enc).hexdigest()        with open(“credentials.txt”, “w”) as f:
+             f.write(email + “\n”)
+             f.write(hash1)
+        f.close()
+        print(“You have registered successfully!”)    else:
+        print(“Password is not same as above! \n”)def login():
+    email = input(“Enter email: “)
+    pwd = input(“Enter password: “)    auth = pwd.encode()
+    auth_hash = hashlib.md5(auth).hexdigest()
+    with open(“credentials.txt”, “r”) as f:
+        stored_email, stored_pwd = f.read().split(“\n”)
+    f.close()    if email == stored_email and auth_hash == stored_pwd:
+         print(“Logged in Successfully!”)
+     else:
+         print(“Login failed! \n”)while 1:
+    print("********** Login System **********")
+    print("1.Signup")
+    print("2.Login")
+    print("3.Exit")
+    ch = int(input("Enter your choice: "))
+    if ch == 1:
+        signup()
+    elif ch == 2:
+        login()
+    elif ch == 3:
+        break
+    else:
+        print("Wrong Choice!")
+
+------------------------------------------------------------------

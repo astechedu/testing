@@ -1,0 +1,68 @@
+<<< SQL String Functions <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys:  
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Sql Functions Examples
+
+
+
+-------------------------------------------------------------------
+
+Websites: 
+
+Fuction Examples:
+https://www.javatpoint.com/sql-server-functions
+
+-------------------------------------------------------------------
+
+
+-------------------------------------------------------------------
+
+>>> String Functions <<<<
+
+String Functions: 
+
+locate(), instr(), upper(),lower(),length(),substring(),now(),format(),concat(),replace(),trim()..
+
+
+
+Types of Functions:
+
+1. System Defined
+   Example: rand(), round(), upper(), lower(), count(), sum(), max(), min(), etc.
+
+SELECT id,NAME,CONCAT(NAME,id) AS Combined FROM users;
+SELECT CURDATE();
+SELECT CURRENT_DATE();
+
+SELECT DAY(CURRENT_DATE());
+SELECT MONTH(CURRENT_DATE());
+SELECT YEAR(CURRENT_DATE());
+
+SELECT DAYNAME(CURRENT_DATE());
+SELECT SYSDATE();
+SELECT NOW();
+
+
+
+
+-- Find String Positions
+
+//Find position of substring
+
+SELECT LOCATE('a', NAME) FROM products;
+SELECT INSTR(NAME, 'a') FROM products;
+
+SELECT LOCATE('a','An Apple',2)
+SELECT INSTR('An Apple','a');
+
+
+------------------------------------------------------------------------------

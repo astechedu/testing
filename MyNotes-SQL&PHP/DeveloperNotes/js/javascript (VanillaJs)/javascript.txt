@@ -1,0 +1,327 @@
+>>>> JavaScript >>>>>
+
+
+-----------------------------------------------------
+Keys: Javascript Loops, call, apply, bind, reduce, filter, currying, sort,
+      
+    
+-----------------------------------------------------
+
+Form Submit: 
+
+
+      <form id="myForm" action="/">
+          First name: <input type="text" name="fname" value="ajay"><br>
+          Last name: <input type="text" name="lname" value="singh"><br><br>
+          <input type="button" onclick="myFunction()" value="Submit form">
+        </form>
+
+<script>
+
+function myFunction() {
+
+      document.getElementById("myForm").submit();
+}
+</script>
+
+---------------------------------------------------------------------------
+
+
+Javascript Loops: 
+
+for loop
+
+for (initialExpression; condition; incrementExpression)
+  statement
+
+
+//Example:
+
+var substr = [1, 2, 3, 4];
+
+//loop from 0 index to max index
+for(var i = 0; i < substr.length; i++) {
+  console.log("loop", substr[i])
+}
+
+//reverse loop
+for(var i = substr.length-1; i >= 0; i--) {
+  console.log("reverse", substr[i])
+}
+
+//step loop
+for(var i = 0; i < substr.length; i+=2) {
+  console.log("step", substr[i])
+}
+
+
+//for in
+
+//dont really wnt to use this on arrays, use it on objects
+for(var i in substr) {
+    console.log(substr[i]) //note i returns index
+}
+
+
+//for of
+
+for(var i of subs) {
+    //can use break;
+    console.log(i); //note i returns value
+}
+
+
+forEach
+
+substr.forEach(function(v, i, a){
+    //cannot use break;
+    console.log(v, i, a);
+})
+
+
+Resources:
+
+
+var substr = currnt_image_list.split(',');
+for(var i=0; i< substr.length; i++) {
+  alert(substr[i]);
+}
+
+
+for (;;) {
+    // Do stuff
+}
+
+
+
+for (var i = 0, length = 10; i < length; i++) {
+    console.log(i);
+}
+
+
+for (var i = 0, length = myArray.length; i < length; i++) {
+    console.log(myArray[i]);
+}
+
+
+for (var i = myArray.length - 1; i > -1; i--) {
+    console.log(myArray[i]);
+}
+
+
+for (var key = 0, value = myArray[key], var length = myArray.length; key < length; value = myArray[++key]) {
+    console.log(value);
+}
+
+
+var i = 0, length = myArray.length;
+for (; i < length;) {
+    console.log(myArray[i]);
+    i++;
+}
+
+
+
+var key = 0, value;
+for (; value = myArray[key++];){ 
+    console.log(value);
+}
+
+
+
+//While Loop: 
+
+var key = 0;
+while(value = myArray[key++]){
+    console.log(value);
+}
+
+for(var key = 0;value = myArray[key++];){
+    console.log(value);
+}
+
+
+
+//for...in and for...of
+
+for (i in myArray) {
+    console.log(myArray[i]);
+}
+
+
+for (i in myArray) {
+    console.log(myArray[i]);
+}
+
+
+var myArray = [3, 5, 7];
+myArray.foo = "hello";
+
+for (var i in myArray) {
+  console.log(i); // logs 0, 1, 2, "foo"
+}
+
+for (var i of myArray) {
+  console.log(i); // logs 3, 5, 7
+}
+
+
+
+//Array.prototype.forEach()
+
+myArray.forEach(function(value, key, myArray) {
+    console.log(value);
+});
+
+
+
+
+----------------------------------------------------------------------------
+
+Function call, apply(passing arguements) and bind (fist make copy then call):
+
+//https://youtu.be/SaWTn1ZNTpo?t=604
+
+
+
+
+let userDetails={
+
+name:"ajay",
+age:23,
+Designation:"software Engineer"
+
+}
+
+let printDetails=function(){  
+  console.log(this);
+  console.log(this.name);
+}
+
+
+//printDetails.call(userDetails2);
+
+
+let userDetails2={
+
+name:"ajay singh",
+age:88,
+Designation:"software Engineer",
+//printDetails:function(){console.log(this.name)}
+
+}
+
+//Function Borrwoing
+printDetails.call(userDetails2);
+
+//Function apply same as function call
+
+printDetails.apply(userDetails2);
+
+//Function Bind
+let newfun =printDetails.bind(userDetails);
+newfun();
+
+
+
+
+
+----------------------------------------------------------------------------
+
+
+1. Map or map():
+//map(element,index,array)
+
+const arr1 = [2,6,9,8,5,7]
+const newArr = arr1.map((element) => {
+    return element * 2;
+})
+
+console.log(newArr)
+----------------------------------------------------
+
+2. Filter or filter()
+//filter(element)   
+
+const arr2 = [2,9,8,4,7,10,5]
+const newArr = arr2.filter((element) => {
+  return element % 2 === 0
+})
+
+console.log(newArr)
+---------------------------------------------------
+
+3. Reduce or reduce()
+//reduce(preVal,currVal)      //Sum of all values
+
+const arr3 = [2,4,5,6,7]
+const newVal = arr3.reduce((pre,curr) => {
+   return pre + curr
+})
+
+console.log(newVal)
+---------------------------------------------------
+
+4. Call or call()
+//
+
+01>>>: Now pssing arguements
+const person1 = () => {
+   fname = "ajay",
+   lname = "sisaudiya",
+   fullname: function(){
+      this.fname + " " + this.lname
+   }
+}
+
+const person2 = () => {
+   fname = "geeta",
+   lname = "sisaudiya"
+}
+
+console.log (person1.call(person2))
+
+
+
+02>>>: Passing Arguements
+
+const person1 = () => {
+   fname = "ajay",
+   lname = "sisaudiya",
+   fullname: function(hometown,country){
+      this.fname + " " + this.lname + " " + hometown + " " + country 
+   }
+}
+
+const person2 = () => {
+   fname = "geeta",
+   lname = "sisaudiya"
+}
+
+console.log (person1.fullname.call(person2, "Meerut", "India"))
+
+
+----------------------------------------------------------------
+
+5. Apply or apply()  Same As Call() Abobe
+// Passing parameter using Array
+
+console.log (person1.fullname.call(person2, ["Meerut", "India"]))
+
+
+-----------------------------------------------------------------
+
+6. Bind or bind()
+//Bind the function into object (Copy the function and return)
+
+const result = person1.fullname.bind(person2, "Meerut", "India")
+console.log(result)
+console.log(result())
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------
+

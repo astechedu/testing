@@ -1,0 +1,94 @@
+<<<<< Python3 & Pip3 <<<<<<
+
+------------------------------------------------------------------------------------- 
+------------------------------------------------------------------------------------- 
+
+Keys: Django On Centos8, 
+-------------------------------------------------------------------------------------
+
+Function		Description
+
+__init__()	        initialize the attributes of the object
+__str__()		returns a string representation of the object
+__len__()		returns the length of the object
+__add__()		adds two objects
+__call__()		call objects of the class like a normal function
+
+--------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
+
+>> Django On Centos8 :
+   ------------------
+
+//https://www.howtoforge.com/how-to-install-django-on-centos-8/
+// OR https://www.liquidweb.com/kb/install-django/
+
+//On Centos8
+
+dnf update && dnf upgrade
+
+dnf install python36 python3-pip -y
+pip3 install Django
+django-admin --version
+
+cd /opt
+ django-admin startproject djangoproject
+
+
+cd djangoproject
+ python3 manage.py migrate
+
+python3 manage.py createsuperuser
+
+nano /opt/djangoproject/djangoproject/settings.py
+ALLOWED_HOSTS = ['your-server-ip']
+
+cd /opt/djangoproject
+ python3 manage.py runserver 0.0.0.0:8000
+
+
+//Configure SELinux and Firewall
+firewall-cmd --permanent --add-port=8000/tcp
+ firewall-cmd --permanent --add-port=80/tcp
+ firewall-cmd --reload
+
+
+setsebool httpd_can_network_connect on -P
+
+visiting the URL http://your-server-ip:8000
+
+
+//https://www.howtoforge.com/how-to-install-django-on-centos-8/
+// OR https://www.liquidweb.com/kb/install-django/
+
+
+
+
+
+//Install Nginx and Gunicorn
+//https://www.howtoforge.com/how-to-install-django-on-centos-8/
+// OR https://www.liquidweb.com/kb/install-django/
+
+dnf install nginx -y
+pip3 install gunicorn
+
+systemctl start nginx
+ systemctl enable nginx
+
+chown -R nginx:nginx /opt/djangoproject
+
+
+
+-------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,117 @@
+>>>> JWT Token <<<<<<<<
+
+
+------------------------------------------------------------------
+Keys: 
+      Method Overloading, 
+------------------------------------------------------------------
+Video: Create JWT token 
+https://youtu.be/tZYRaKz8I0s?t=213
+
+--------------------------------------------------------------------
+
+------------------------------------------------------------------
+------------------------------------------------------------------	
+------------------------------------------------------------------
+
+
+JWT (Json Web Token)
+
+Made of these: 
+Header
+Payload
+Signature
+
+
+
+------------------------------------------------------------------
+
+
+>> Create JWT Token in php
+https://youtu.be/tZYRaKz8I0s?t=559
+
+index.php
+token.php
+
+
+class Token{
+
+  static function sign($payload, $key, $expire = null){
+    //Header
+    $header = ['algo' => 'HS256', 'type' => 'HWT']
+ 
+    if($expire){
+      $header['expire'] = time() + $expire;
+    }
+
+    $header_encoded = base64_encode(json_encode($header));
+
+    //Payload
+    $payload_encoded = base64_encode(json_encode($payload));
+   
+    //Signature
+    $signature = hash_hmac('SHA256', $header_encoded $payload_encoded, $key);
+    $signature_encoded = base64_encode(json_encode($signature));
+
+    return $header_encoded.'.'.$payload_encoded.'.'.$signature;
+  }
+
+
+   static function Verify($token, $key){
+
+    //Break token part
+     $token_parts = explode('.', $token);
+
+    //Generate Signature
+     $signature = base64_encode(hash_hmac('SHA256', $token_parts[0].$token_parts[1],$key));
+
+     //Verify Signature
+     if($signatue != $token_parts[2]){
+        return false;
+     }
+     
+      $header = base64_decode($token_parts[0]);
+
+.... InComplete...here....
+
+      //Get payload
+      $payload = json_decode(base64_decode($token_parts[1]),true);
+     
+      return $payload;
+   }
+}
+
+
+
+
+//index.php
+
+include 'Token.php';
+const KEY= "thisiskey";
+
+$token = Token::sign(['id' => 'jskdfdjk'], KEY);
+echo $token;
+
+$token = "Copy paste above token generated";
+
+print_r(Token::Verify($token, KEY));
+
+
+
+
+
+
+
+-----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+

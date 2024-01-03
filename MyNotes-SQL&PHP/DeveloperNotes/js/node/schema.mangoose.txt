@@ -1,0 +1,130 @@
+>>>> Schema Mangoose <<<<<<<
+
+
+
+-----------------------------------------------------------------
+
+
+
+Links: 
+https://kb.objectrocket.com/mongo-db/a-nodejs-mongoose-schema-example-1204
+
+Crud: 
+https://techvblogs.com/blog/build-crud-api-with-node-express-mongodb
+
+
+Schema: 
+
+
+Creating schema: 
+  npm install mongoose
+
+
+The instance of schema can now be used to define a schema. Let’s create it.
+
+	
+let smartphone = new Schema({
+  name: {
+    type: String
+  },
+  price: {
+    type: Number
+  },
+  inStock: {
+    type: Boolean
+  }
+});
+
+
+
+
+\\We can also make the code more concise in the following way.
+	
+let smartphone = new Schema({
+  name: String,
+  price: Number,
+  inStock: Boolean
+});
+
+
+
+
+
+Data Types: 
+
+    String
+    Number
+    Date
+    Mixed
+    Boolean
+    ObjectId
+    Buffer
+    Array
+
+
+
+
+//This is how model.js looks as of now.
+
+	
+const mongoose = require("mongoose");
+
+const Schema = mongoose.Schema;
+
+let smartphone = new Schema({
+  name: String,
+  price: Number,
+  inStock: Boolean
+});
+
+
+
+//Method 2 
+
+
+Creating a model
+
+Let’s create for the schema.
+
+
+const model = mongoose.model("smartphones", smartphone);
+
+
+
+
+const model = mongoose.model("smartphones", smartphone);
+module.exports = model;
+
+
+//This is how we create a schema in mongoose.
+	
+const mongoose = require("mongoose");
+
+const Schema = mongoose.Schema;
+
+let smartphone = new Schema({
+  name: String,
+  price: Number,
+  inStock: Boolean
+});
+
+const model = mongoose.model("smartphones", smartphone);
+
+module.exports = model;
+
+
+--------------------------------------------------------------------------------
+
+Export Product Model: 
+
+module.exports=mongoose.model("Product",formSchema);     //Export 'Product' Model
+
+---------------------------------------------------------------------------------
+
+
+
+
+
+
+
+

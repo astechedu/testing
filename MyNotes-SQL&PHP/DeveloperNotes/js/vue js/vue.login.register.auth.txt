@@ -1,0 +1,30 @@
+>>> Vue js login, register, auth <<<<<
+
+
+-------------------------------------------------------------------------------
+Keys: 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+//PlayList: 
+https://www.youtube.com/watch?v=9ItV8UuXb1I&list=PLlameCF3cMEtuXasp3TH4TapPcw3EteA5
+
+
+-------------------------------------------------------------------------------
+
+TypeScript with Options API:
+
+    Typing Component Props
+    Typing Component Emits
+    Typing Computed Properties
+    Typing Event Handlers
+    Augmenting Global Properties
+    Augmenting Custom Options
+
+//https://vuejs.org/guide/typescript/options-api.html#typing-component-props
+
+
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------

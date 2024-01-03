@@ -1,0 +1,42 @@
+<<<< Data Structure Tree >>>>
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+------------------------------------------------------------------
+Tree: Binary Tree, Binary search tree, AVL tree, B tree
+------------------------------------------------------------------
+
+//1. Classification of Data Structure
+https://www.geeksforgeeks.org/data-structures/
+
+//Binary Tree Representation
+https://www.youtube.com/watch?v=fUyEwCDJrrE&pp=ygUZYmluYXJ5IHRyZWUgcmVwZXNlbnRhdGlvbg%3D%3D
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+
+
+1. Classification of Data Structure:
+
+
+                        Data Structure
+                              |
+               __________________________________
+               |                                |
+          Linear Data                     Non-Linear Data 
+           Structure                        Structure
+         ______________________               ___________ 
+         |                    |               |         |
+    Static Data          Dynamic Data       Tree      Graph
+     Structure           Structure
+       __               _________________
+       |                |      |        |
+      Array           Queue   Stack  Linked List
+
+
+------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+

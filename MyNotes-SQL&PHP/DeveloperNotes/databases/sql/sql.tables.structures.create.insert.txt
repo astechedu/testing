@@ -1,0 +1,228 @@
+<<< SQL Table's Structures >>>
+
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+
+1)
+
+    CREATE TABLE customer (      
+      id int PRIMARY KEY,      
+      c_name nvarchar(45) NOT NULL,      
+      email nvarchar(45) NOT NULL,      
+      city nvarchar(25) NOT NULL      
+    );    
+
+
+INSERT INTO customer (id, c_name, email, city)       
+VALUES (1,'Steffen', 'stephen@javatpoint.com', 'Texas'),       
+(2, 'Joseph', 'Joseph@javatpoint.com', 'Alaska'),       
+(3, 'Peter', 'Peter@javatpoint.com', 'California'),    
+(4,'Donald', 'donald@javatpoint.com', 'New York'),       
+(5, 'Kevin', 'kevin@javatpoint.com', 'Florida'),  
+(6, 'Marielia', 'Marielia@javatpoint.com', 'Arizona'),    
+(7,'Antonio', 'Antonio@javatpoint.com', 'New York'),       
+(8, 'Diego', 'Diego@javatpoint.com', 'California'); 
+
+
+
+CREATE TABLE Customer(
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(50),
+    LastName VARCHAR(50),
+    Country VARCHAR(50),
+    Age int(2),
+  Phone int(10)
+);
+
+
+
+-- Insert some sample data into the Customers table
+
+INSERT INTO Customer (CustomerID, CustomerName, LastName, Country, Age, Phone)
+VALUES (1, 'Shubham', 'Thakur', 'India','23','xxxxxxxxxx'),
+       (2, 'Aman ', 'Chopra', 'Australia','21','xxxxxxxxxx'),
+       (3, 'Naveen', 'Tulasi', 'Sri lanka','24','xxxxxxxxxx'),
+       (4, 'Aditya', 'Arpan', 'Austria','21','xxxxxxxxxx'),
+       (5, 'Nishant. Salchichas S.A.', 'Jain', 'Spain','22','xxxxxxxxxx');
+---x---
+-----------------------------------------------------------
+
+2)
+
+CREATE TABLE users( 
+     user_id int NOT NULL,
+     username varchar(25) NOT NULL,
+     password varchar(30) NOT NULL,
+     PRIMARY KEY(user_id)
+    );
+
+CREATE TABLE users
+( user_id int PRIMARY KEY,
+  username varchar(25) NOT NULL,
+  password varchar(30) NOT NULL
+);
+
+CREATE TABLE users
+( user_id NUMBER PRIMARY KEY,
+  username varchar(25) NOT NULL,
+  password varchar(30) NOT NULL
+  );
+
+CREATE TABLE users
+( user_id int(5) NOT NULL,
+  username varchar(25) NOT NULL,
+  password varchar(30) NOT NULL,
+  PRIMARY KEY(user_id)
+  );
+
+CREATE TABLE users
+( user_id int(5) PRIMARY KEY,
+  username varchar(25) NOT NULL,
+  password varchar(30) NOT NULL
+  );
+  
+CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+
+---x---
+------------------------------------------------------------
+
+3)
+
+-- create a table Companies with name, id, address, email, and phone number
+CREATE TABLE Companies (
+  id int,
+  name varchar(50),
+  address text,
+  email varchar(50),
+  phone varchar(10)
+);
+
+
+-- create a table Students with name, id, address, grades, and phone number
+CREATE TABLE Students(
+  id int,
+  name varchar(50),
+  address text,
+  grades  varchar(50),
+  phone varchar(10)
+);
+
+
+-- create a Companies table if it does not exist
+CREATE TABLE IF NOT EXISTS Companies (
+  id int,
+  name varchar(50),
+  address text,
+  email varchar(50),
+  phone varchar(10)
+);
+
+
+CREATE TABLE AS:
+
+-- create a table by copying those records
+-- from Costomers table with country name USA
+CREATE TABLE USACustomers
+AS (
+  SELECT *
+  FROM Customers
+  WHERE country = 'USA'
+);
+
+
+---x---
+
+4)
+
+
+Create a Table using another table:
+
+
+CREATE TABLE Employee (
+    EmpId integer PRIMARY KEY, 
+    FirstName varchar(20), 
+    LastName varchar(20), 
+    Email varchar(25), 
+    PhoneNo varchar(25), 
+    Salary integer
+);
+
+
+
+    CREATE TABLE Employee  
+    (  
+    EmployeeID int,  
+    FirstName varchar(255),  
+    LastName varchar(255),  
+    Email varchar(255),  
+    AddressLine varchar(255),  
+    City varchar(255)  
+    );  
+
+
+CREATE TABLE table_name  AS  
+SELECT column1, column2,...   
+FROM old_table_name WHERE ..... ;  
+The following SQL creates a copy of the employee table.  
+CREATE TABLE EmployeeCopy AS  
+SELECT EmployeeID, FirstName, Email  
+FROM Employee; 
+
+---x---
+
+-------------------------------------------------------------
+
+CREATE TABLE links (
+	id	INTEGER PRIMARY KEY,
+	name	TEXT,
+	ahref	TEXT
+);
+
+
+CREATE TABLE categories (
+	id	INTEGER PRIMARY KEY,
+	name	TEXT
+);
+
+
+CREATE TABLE links_categories (
+	lid		integer REFERENCES	links,
+	cid		integer REFERENCES categories,
+	PRIMARY KEY (lid, cid)
+);
+
+
+INSERT INTO links (id,name,ahref) VALUES (1,'postgresql', 
+'http://www.postgresql.org');
+INSERT INTO links (id,name,ahref) VALUES (2,'bbc', 'http://www.bcc.com');
+
+
+INSERT INTO categories (id,name) VALUES (3,'informative');
+INSERT INTO categories (id,name) VALUES (4,'news');
+INSERT INTO categories (id,name) VALUES (5,'technology');
+INSERT INTO categories (id,name) VALUES (6,'database');
+
+
+INSERT INTO links_categories (lid,cid) VALUES (1,3);
+INSERT INTO links_categories (lid,cid) VALUES (1,5);
+INSERT INTO links_categories (lid,cid) VALUES (1,6);
+INSERT INTO links_categories (lid,cid) VALUES (2,3);
+INSERT INTO links_categories (lid,cid) VALUES (2,4);
+
+
+SELECT 	id,name,ahref,
+		array_to_string(array(SELECT links_categories.cid FROM 
+links_categories WHERE links_categories.lid = id), ':') AS categories
+FROM links;
+
+---x---
+
+
+-----------------------------------------------------------------------

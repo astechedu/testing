@@ -1,0 +1,579 @@
+
+API server:
+
+API Server acts as a frontend for the Kubernetes cluster. It is a central entity that receives all REST requests. 
+API server helps perform any action on the K8s cluster. The API server implements an intuitive interface that allows 
+users to communicate efficiently. The interface enables different tools to communicate easily with the cluster.
+
+
+Kubectl:
+
+There is a need for a command-line tool to interact with the Kubernetes cluster. 
+Kubectl is the command-line tool that helps users to communicate with the cluster. 
+The user will use the command-line tool via the APIs to communicate with the cluster.
+
+
+ETCD:
+
+Configuration details of the K8s architecture are stored in ETCD. Whenever there is a command from the user, 
+ETCD communicates with other components to receive the command. ETCD also manages network rules in a K8s architecture.
+
+
+Controller manager:
+
+Controller Manager is a type of server that gathers information from the API server. 
+It also forwards data to the API server at frequent intervals. Controllers can help IT teams administer nodes
+ and endpoints in a K8s architecture. We all know that K8s include a shared set of clusters. You will have to rely on the controller
+ manager to get the shared set of clusters to work.
+
+
+Scheduler:
+
+The schedule assigns tasks for the slave nodes in a K8s architecture. Also, every node consists of information 
+related to the usage of resources. The schedule’s responsibility is to store resource usage information on each node. 
+Workload distribution across nodes is also the responsibility of the scheduler. It tracks the current workload and distributes 
+it to available resources and nodes as and when required.
+
+
+Kubelet 
+
+Information to and from the control plane is transferred via Kubelet. The Kubelet also checks the health of 
+all the nodes involved in K8s architecture. It makes sure that all the containers are working to their maximum efficiency. 
+It does so by collecting pod configuration from the API server.
+
+
+Kubernetes proxy:
+
+Kubernetes Proxy is a type of load balancer for nodes and containers. It also acts as a network proxy to perform a task on any node. From regular health check-ups to managing the pod volumes, Kubernetes proxy performs several tasks.
+
+
+
+Pod:
+A pod can be a single container or a group of containers. Even if a pod is a group of containers, 
+it is viewed/controlled as a single application. Storage resources are withheld by pods in the K8s architecture. 
+To control the containers, each pod is assigned a unique network ID
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------
+minikube ip
+minikube ssh
+ifconfig
+putty key: user: docker and pass: tc-user
+
+
+
+Run, Expose, Describe, lable
+
+Minikube: (Working On windows 10)
+Running Containers:
+
+kubectl run nginx3 --image=nginx --port=80   //Running pod
+kubectl get po -o wide
+
+
+kubectl expose po nginx3 --type=NodePort    //Exposing service
+kubectl get svc
+
+minikube service nginx3 --url              //Getting url 
+
+http://192.168.59.100:30353                //Showing this ip; copy & paste on browser
+
+
+--------------------------------------------------------------------------------------
+
+Pods and containers: 
+
+
+kubectl run nginx3 --image=nginx --port=80            //Running pod
+
+kubectl exec --stdin --tty shell-demo -- /bin/bash   //
+OR
+kubectl exec --it shell-demo -- /bin/bash            //
+
+
+
+
+
+Running individual commands in a container
+kubectl exec shell-demo env
+
+
+
+Experiment with running other commands. Here are some examples:
+
+kubectl exec shell-demo -- ps aux
+kubectl exec shell-demo -- ls /
+kubectl exec shell-demo -- cat /proc/1/mounts
+
+
+
+
+
+
+Opening a shell when a Pod has more than one container
+kubectl exec -i -t my-pod --container main-app -- /bin/bash
+
+
+
+
+
+
+Change Lables: 
+
+
+Env: 
+
+
+
+
+"metadata": {
+  "labels": {
+    "key1" : "value1",
+    "key2" : "value2"
+  }
+}
+
+
+
+
+
+
+
+kubectl get nodes
+
+List assigned labels on the node
+kubectl get nodes --show-labels
+
+Add label to a node
+kubectl label nodes <your-node-name> <label>
+
+
+Remove label from a node
+kubectl label node <nodename> <labelname>-
+kubectl get nodes --show-labels | grep color
+
+
+
+kubectl delete pod nginx-deploy-6d8d787fb7-xxbn4
+
+
+Examples
+
+# Update pod 'foo' with the label 'unhealthy' and the value 'true'.
+kubectl label pods foo unhealthy=true
+
+# Update pod 'foo' with the label 'status' and the value 'unhealthy', overwriting any existing value.
+kubectl label --overwrite pods foo status=unhealthy
+
+# Update all pods in the namespace
+kubectl label pods --all status=unhealthy
+
+# Update a pod identified by the type and name in "pod.json"
+kubectl label -f pod.json status=unhealthy
+
+# Update pod 'foo' only if the resource is unchanged from version 1.
+kubectl label pods foo status=unhealthy --resource-version=1
+
+# Update pod 'foo' by removing a label named 'bar' if it exists.
+# Does not require the --overwrite flag.
+kubectl label pods foo bar-
+
+
+
+
+-----------------------------------------------------------------------------------------------------------
+
+
+log, describe, expose, run, create, label,
+
+
+Print the logs for a container in a pod.
+
+kubectl logs [-f] [-p] POD [-c CONTAINER]    //
+kubectl logs nginx
+
+
+kubectl label pod nginx2 key=val
+kubectl label pod nginx2 --overwrite key=newval	
+
+
+kubectl exec POD [-c CONTAINER] -- COMMAND [args...]
+	
+------------------------------------------------------------
+
+
+Create a Deployment:
+
+
+Open Dashboard with URL
+
+minikube dashboard --url
+
+
+
+ctl create deployment hello-node --image=registry.k8s.io/e2e-test-images/agnhost:2.39 -- /agnhost netexec --http-port=8080
+
+kubectl get deployments
+kubectl get pods
+kubectl get events
+kubectl config view
+
+
+Create a Service:
+
+kubectl expose deployment hello-node --type=LoadBalancer --port=8080
+kubectl get services
+minikube service hello-node
+
+
+Enable addons:
+minikube addons list
+minikube addons enable metrics-server
+kubectl get pod,svc -n kube-system
+minikube addons disable metrics-server
+
+
+kubectl delete service hello-node
+kubectl delete deployment hello-node
+
+minikube stop
+minikube delete
+
+
+--------------------------------------------------------------------------
+
+
+Create Deployment: 
+
+kubectl apply -f https://k8s.io/examples/controllers/nginx-deployment.yaml
+
+kubectl get deployments
+kubectl rollout status deployment/nginx-deployment
+kubectl get deployments
+kubectl get rs
+kubectl get pods --show-labels
+	
+
+
+Updating a Deployment:
+
+
+kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:1.16.1
+kubectl set image deployment/nginx-deployment nginx=nginx:1.16.1
+
+
+
+kubectl edit deployment/nginx-deployment
+
+kubectl edit deployment/nginx-deployment
+kubectl rollout status deployment/nginx-deployment
+
+kubectl get deployments
+
+kubectl get rs
+kubectl get pods
+kubectl describe deployments
+
+
+
+
+Rolling Back a Deployment
+
+kubectl set image deployment/nginx-deployment nginx=nginx:1.161
+
+kubectl rollout status deployment/nginx-deployment
+kubectl get rs
+kubectl get pods
+kubectl describe deployment
+
+
+
+
+Checking Rollout History of a Deployment:
+
+kubectl rollout history deployment/nginx-deployment
+kubectl rollout history deployment/nginx-deployment --revision=2
+kubectl rollout undo deployment/nginx-deployment
+kubectl rollout undo deployment/nginx-deployment --to-revision=2
+kubectl get deployment nginx-deployment
+kubectl describe deployment nginx-deployment
+
+
+
+
+Scaling a Deployment:
+
+
+kubectl scale deployment/nginx-deployment --replicas=10
+kubectl autoscale deployment/nginx-deployment --min=10 --max=15 --cpu-percent=80
+
+
+
+
+Proportional scaling:
+
+kubectl get deploy
+kubectl set image deployment/nginx-deployment nginx=nginx:sometag
+kubectl get rs
+kubectl get deploy
+kubectl get rs
+
+
+
+Pausing and Resuming a rollout of a Deployment:
+
+kubectl get deploy
+kubectl get rs
+kubectl rollout pause deployment/nginx-deployment
+kubectl set image deployment/nginx-deployment nginx=nginx:1.16.1
+kubectl rollout history deployment/nginx-deployment
+kubectl get rs
+kubectl set resources deployment/nginx-deployment -c=nginx --limits=cpu=200m,memory=512Mi
+kubectl rollout resume deployment/nginx-deployment
+
+kubectl get rs -w
+kubectl get rs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------
+
+On Windows:
+
+
+Cluster IP Address:
+
+You can get the IP address of the cluster via the ip command:
+
+PS C:\> .\minikube.exe start --help
+PS C:\> .\kubectl.exe cluster-info
+PS C:\> .\minikube.exe status
+
+
+PS C:\> .\minikube.exe ip
+192.168.99.100
+
+
+Kubernetes Dashboard:
+PS C:\> .\minikube.exe dashboard
+
+
+PS C:\> .\minikube.exe dashboard --url=true
+http://192.168.99.100:30000
+
+PS C:\> .\kubectl.exe run hello-nginx --image=nginx --port=80
+
+	
+
+PS C:\> .\kubectl.exe get nodes
+PS C:\> .\kubectl.exe get pods
+
+
+
+
+Tip: use-context minikube
+
+kubectl get nodes
+kubectl get nodes
+
+
+--------------------------------------------------
+
+SSH to minikube:
+
+minikube ssh
+
+cat   ~/.minikube/machines/minikube/config.json
+
+
+
+
+
+
+
+---------------------------------------------------
+ENV: 
+
+//nginx2.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+  - name: mypod
+    image: nginx
+    env:
+     - name: myname
+       value: "ajay sis"
+
+
+View env values:
+
+kubectl exec envar-demo -- printenv
+
+-------------------------------------------
+
+ENV:
+
+
+env: 
+    - name: SERVICE_PORT 
+        value: "8080" 
+    - name: SERVICE_IP 
+        value: "192.168.100.1"
+
+
+
+env: 
+    - name: SECRET_USERNAME 
+        valueFrom: 
+            secretKeyRef: 
+                name: secretname 
+                key: username
+
+
+
+How to set environment variables in Kubernetes
+kubectl set env deployment/example-deployment STORAGE_DIR=/local_storage
+
+OR
+
+apiVersion: v1 
+kind: Pod 
+metadata: 
+    name: envar_example 
+    labels: 
+        purpose: envar_example 
+spec: 
+    containers: 
+    - name: envar-demo-container 
+        image: some_repo/some_image 
+        env: 
+        - name: STORAGE_DIR 
+        value: /local_storage
+
+Environment variables can also reference secrets that an application requires, such as usernames and passwords.
+
+
+
+Set Kubernetes environment variables using the Linux CLI
+export STORAGE_DIR=/local_storage
+---------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

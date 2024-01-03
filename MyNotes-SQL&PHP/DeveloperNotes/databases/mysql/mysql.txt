@@ -1,0 +1,2210 @@
+
+>>>> MySql <<<<<
+
+
+
+-------------------------------------------------------------------------------------------------------
+
+key: tables products, users, mysql queries, Create, Close , Creating, Inserting, Get ID of Last Record,
+     Deleting, Updating, TRANSACTIONS, TRIGGER, PRIVILEGES, TRACKING, EVENTS, 
+     Stored Procedure, View, database script,Cart Tables, Category, Product Category, Cart Tables Structure,
+     
+
+Github problem: 
+
+astech commited on Mar 15      1 parent 08861da commit 4746fbf
+
+---------------------------------------------------------------------------------------------------------
+
+//MySQL to Get First, Second, Third, Nth Highest Salary
+
+Online Practice w3schools Editor:
+https://www.w3schools.com/MySQL/trymysql.asp?filename=trysql_select_all
+
+Link: 
+https://www.tutsmake.com/mysql-query-to-get-first-second-third-highest-salary/
+
+
+//PDO quaries:
+https://www.mysqltutorial.org/php-querying-data-from-mysql-table/
+
+//MySql DDL, DML, DCL, TCL
+https://www.w3schools.in/mysql/ddl-dml-dcl
+
+//SQL & OOPs (Neat and Clean Code)
+https://code.tutsplus.com/tutorials/real-world-oop-with-php-and-mysql--net-1918
+
+
+//MySQL database with products, products categories and different attributes (Ideas)
+
+https://stackoverflow.com/questions/36591794/mysql-database-with-products-products-categories-and-different-attributes
+
+------------------------------------------------------------------------------------------------------------
+
+BLOB: Binary Large Object can be used to store binary data in MySQL.
+
+GRANT: GRANT SELECT, INSERT ON customertable TO 'username'@'localhost'
+FEDERATED :
+ENUM :
+TINYTEXT,
+TEXT,
+MEDIUMTEXT and
+LONGTEXT. 
+
+VIEW 
+STORED PROCEDURE
+STORED FUNCTION
+TRIGGER 
+EVENT 
+
+NOWO:
+CURRDATEO
+CONCAT (X, Y)
+DATEDIFF (X, Y)
+
+-------------------------------------------------------------------
+
+PDO:
+
+$stmt = $conn->query("SELECT firstnme, lastname FROM employee");
+while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+  print "Name: <p>{$row[0] $row[1]}</p>";
+}
+
+
+PDO::query or 
+PDOStatement::execute
+
+Procedure:
+PDO::FETCH_ASSOC
+PDO::FETCH_BOTH (default)
+PDO::FETCH_BOUND
+PDO::FETCH_CLASS
+PDO::FETCH_OBJ
+
+---------------------------------------------------------------
+
+Link: 
+
+https://appinventiv.com/blog/top-web-app-database-list/
+
+
+
+Which is best Database for web applications In 2022?
+
+SQL database examples
+
+    Oracle.
+    MySQL.
+    SQLite
+    DynamoDB 
+    MS SQL Server.
+    PostgreSQL.
+    IBM DB2.
+    Redis.         
+    
+    Sybase
+    Firebirdsql
+    Amazon RDS
+    Google Cloud SQL
+    Microsoft Azure    
+
+7 Best NoSQL Databases for Data Science
+
+    MongoDB           //document-oriented database
+    Cassandra         //It can distribute your data across multiple machines
+    Elasticsearch     //document-oriented database
+    Neo4j             //graph-oriented database
+    HBase             //a distributed and column-oriented database
+    CouchDB           //document-oriented database
+    OrientDB          //a multi-model database supporting graph, document, key-value, and object model
+ 
+
+
+What are the common types of NoSQL databases?
+
+Types               Performence     Scalability      Flexibility      Complexity
+
+Key-Value Store     High            High             High             None
+Column Store        High            High             Moderate         Low
+Document            High            Variable(High)   High             Low
+Graph Database      Variable        Variable         High             High  
+
+
+
+-----------------------------------------------------------------------------------
+
+
+Triggers: 
+https://www.w3resource.com/mysql/mysql-triggers.php
+
+-----------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------
+
+
+Link: 
+https://www.mysqltutorial.org/mysql-nodejs/insert/
+
+
+
+Installing node.js driver for MySQL:
+
+npm init
+npm install mysql
+CREATE DATABASE todoapp;
+
+
+Connecting to MySQL database server from node.js
+let mysql = require('mysql');
+
+let connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'todoapp'
+});
+
+
+connection.connect(function(err) {
+  if (err) {
+    return console.error('error: ' + err.message);
+  }
+
+  console.log('Connected to the MySQL server.');
+});
+
+
+
+
+> node connect.js
+Connected to the MySQL server
+
+
+
+> node connect.js
+error: ER_BAD_DB_ERROR: Unknown database 'todoapps'
+
+
+
+
+Closing database connection:
+
+
+connection.end(function(err) {
+  if (err) {
+    return console.log('error:' + err.message);
+  }
+  console.log('Close the database connection.');
+});
+
+
+
+connection.destroy();
+
+
+-----------------------------------------------------
+
+
+
+Pooling connections
+
+
+var pool = mysql.createPool({
+    connectionLimit: 5,
+    host: 'localhost',
+    user: 'root',
+    password: '', 
+    database: 'todoapp'
+});
+
+
+pool.getConnection(function(err, connection) {
+  // execute query
+  // ...
+});
+
+
+
+
+pool.getConnection(function(err, connection) {
+  // execute query
+  // ...
+  connnection.release();
+});
+
+
+
+pool.end(function(err) {
+  if (err) {
+    return console.log(err.message);
+  }
+  // close all connections
+});
+
+------------------------------------------------------------
+
+
+Creating Tables in MySQL from Node.js:
+
+let mysql = require('mysql');
+let connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'todoapp'
+});
+
+// connect to the MySQL server
+connection.connect(function(err) {
+  if (err) {
+    return console.error('error: ' + err.message);
+  }
+
+  let createTodos = `create table if not exists todos(
+                          id int primary key auto_increment,
+                          title varchar(255)not null,
+                          completed tinyint(1) not null default 0
+                      )`;
+
+  connection.query(createTodos, function(err, results, fields) {
+    if (err) {
+      console.log(err.message);
+    }
+  });
+
+  connection.end(function(err) {
+    if (err) {
+      return console.log(err.message);
+    }
+  });
+});
+
+
+
+> node query.js
+
+
+>mysql -u root -p todoapp;
+Enter password: *********
+
+
+mysql> show tables;
++-------------------+
+| Tables_in_todoapp |
++-------------------+
+| todos             |
++-------------------+
+1 row in set (0.08 sec)
+
+
+----------------------------------------------------
+
+Inserting Rows Into a Table from Node.js:
+
+
+
+let config = {
+  host    : 'localhost',
+  user    : 'root',
+  password: '',
+  database: 'todoapp'
+};
+
+module.exports = config;
+
+
+Insert one row into a table:
+
+let mysql  = require('mysql');
+let config = require('./config.js');
+let connection = mysql.createConnection(config);
+
+// insert statment
+let sql = `INSERT INTO todos(title,completed)
+           VALUES('Learn how to insert a new row',true)`;
+
+// execute the insert statment
+connection.query(sql);
+
+connection.end();
+
+> node insert.js
+
+
+mysql> select * from todos;
++----+-------------------------------+-----------+
+| id | title                         | completed |
++----+-------------------------------+-----------+
+|  1 | Learn how to insert a new row |         1 |
++----+-------------------------------+-----------+
+1 row in set (0.00 sec)
+
+
+Inserting a row and return the inserted id
+
+let mysql = require('mysql');
+let config = require('./config.js');
+let connection = mysql.createConnection(config);
+
+let stmt = `INSERT INTO todos(title,completed)
+            VALUES(?,?)`;
+let todo = ['Insert a new row with placeholders', false];
+
+// execute the insert statment
+connection.query(stmt, todo, (err, results, fields) => {
+  if (err) {
+    return console.error(err.message);
+  }
+  // get inserted id
+  console.log('Todo Id:' + results.insertId);
+});
+
+connection.end();
+
+
+
+>node insert2.js
+Todo Id:2
+
+Insert multiple rows at a time
+
+
+let mysql = require('mysql');
+let config = require('./config.js');
+
+let connection = mysql.createConnection(config);
+
+// insert statment
+let stmt = `INSERT INTO todos(title,completed)  VALUES ?  `;
+let todos = [
+  ['Insert multiple rows at a time', false],
+  ['It should work perfectly', true]
+];
+
+// execute the insert statment
+connection.query(stmt, [todos], (err, results, fields) => {
+  if (err) {
+    return console.error(err.message);
+  }
+  // get inserted rows
+  console.log('Row inserted:' + results.affectedRows);
+});
+
+// close the database connection
+connection.end();
+
+
+
+>node insert3.js
+Row inserted:2
+
+
+--------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------
+
+Subquery: 
+
+select *from users
+
+//First Highest Salary without subquery
+select *from users order by salary desc limit 1;
+
+//Second Highest Salary with subquery
+select max(salary) from users where salary <> (select max(salary) from users);
+or 
+//Second Highest Salary Without subquery
+select *from users order by salary desc limit 1,1;
+
+
+//Order by desc
+select *from users order by salary desc
+
+
+//Showing only one
+select *from users limit 1;
+
+//Showing only two
+select *from users limit 2;
+
+//Showing only three
+select *from users limit 3;
+
+//Second highest salary using Limit without subquery
+select *from users order by salary desc limit 1,1;
+
+//Third highest salary using Limit with subquery
+select *from users order by salary desc limit 2,1;
+
+
+
+//Showing salary which greater or less than highest salary or second highest salary using subquery
+SELECT name,salary from users where salary > (select salary from users order by salary desc limit 1,1);
+SELECT name,salary from users where salary > (select salary from users order by salary desc limit 2,1);
+SELECT name,salary from users where salary < (select salary from users order by salary desc limit 1,1);
+
+
+//Update query
+update users 
+set salary = 6000, city = "testing" where id = 6;
+
+
+
+
+//Select data row wise
+select *from users where rownumber > 4
+
+
+
+//Any
+SELECT * from users where salary = ANY (select salary from users where salary > 2000);
+
+
+
+
+
+//Alter table commands:
+
+ALTER TABLE table_name
+ADD column_name datatype; 
+or
+DROP COLUMN column_name; 
+or
+RENAME COLUMN old_name to new_name; 
+or
+MODIFY column_name datatype; 
+or
+ALTER COLUMN column_name datatype; 
+
+
+Examples: 
+
+ALTER TABLE table_name
+
+ADD Email varchar(255);
+or
+ADD DateOfBirth date; 
+or
+DROP COLUMN Email;
+or
+DROP COLUMN DateOfBirth; 
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------
+
+#
+[Top](#top)
+<a name="mysql-transactions"></a>
+
+*MySQL Transaction:
+
+
+MySQL transaction statements
+
+MySQL provides us with the following important statement to control transactions:
+
+    To start a transaction, you use the START TRANSACTION  statement. The BEGIN or  BEGIN WORK are the aliases of the START TRANSACTION.
+    To commit the current transaction and make its changes permanent,  you use the COMMIT statement.
+    To roll back the current transaction and cancel its changes, you use the ROLLBACK statement.
+    To disable or enable the auto-commit mode for the current transaction, you use the SET autocommit statement.
+
+By default, MySQL automatically commits the changes permanently to the database. To force MySQL not to commit changes automatically, you use the following statement:
+
+
+
+	SET autocommit = 0;
+	OR
+	SET autocommit = OFF
+
+
+You use the following statement to enable the autocommit mode explicitly:
+
+
+	SET autocommit = 1;
+        OR
+        SET autocommit = ON;
+
+
+MySQL transaction example:
+
+We will use the  orders and orderDetails table from the sample database for the demonstration.
+<code>
+orders      
+      
+orderNumber
+orderDate
+requiredDate 
+shippedDate
+status
+comments
+customerNumber  
+</code>
+
+
+<code>
+orderdetails
+orderNumber
+productCode
+quantityOrderd
+priceEach
+orderLineNumber
+</code>
+
+
+
+COMMIT example: 
+
+In order to use a transaction, you first have to break the SQL statements into logical portions and determine when data should be committed or rolled back.
+
+The following illustrates the step of creating a new sales order:
+
+    First, start a transaction by using the START TRANSACTION  statement.
+    Next, select the latest sales order number from the orders table and use the next sales order number as the new sales order number.
+    Then, insert a new sales order into the orders table.
+    After that, insert sales order items into the orderdetails table.
+    Finally, commit the transaction using the COMMIT statement.
+
+Optionally, you can select data from both orders and orderdetails tables to check the new sales order.
+
+The following is the script that performs the above steps:
+
+
+<code>
+-- 1. start a new transaction
+START TRANSACTION;
+
+-- 2. Get the latest order number
+SELECT 
+    @orderNumber:=MAX(orderNUmber)+1
+FROM
+    orders;
+
+-- 3. insert a new order for customer 145
+INSERT INTO orders(orderNumber,
+                   orderDate,
+                   requiredDate,
+                   shippedDate,
+                   status,
+                   customerNumber)
+VALUES(@orderNumber,
+       '2005-05-31',
+       '2005-06-10',
+       '2005-06-11',
+       'In Process',
+        145);
+        
+-- 4. Insert order line items
+INSERT INTO orderdetails(orderNumber,
+                         productCode,
+                         quantityOrdered,
+                         priceEach,
+                         orderLineNumber)
+VALUES(@orderNumber,'S18_1749', 30, '136', 1),
+      (@orderNumber,'S18_2248', 50, '55.09', 2); 
+      
+-- 5. commit changes    
+COMMIT;
+<code>
+
+
+	@orderNumber:=IFNULL(MAX(orderNumber),0)+1
+	10425
+
+
+To get the newly created sales order, you use the following query:
+
+<code>
+SELECT 
+    a.orderNumber,
+    orderDate,
+    requiredDate,
+    shippedDate,
+    status,
+    comments,
+    customerNumber,
+    orderLineNumber,
+    productCode,
+    quantityOrdered,
+    priceEach
+FROM
+    orders a
+        INNER JOIN
+    orderdetails b USING (orderNumber)
+WHERE
+    a.ordernumber = 10426;
+</code>
+
+
+
+ROLLBACK example
+
+First, log in to the MySQL database server and delete data from the orders table:
+
+
+<code>
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELETE FROM orders;
+Query OK, 327 rows affected (0.03 sec)
+</code>
+
+As you can see from the output, MySQL confirmed that all the rows from the orders table were deleted.
+
+Second, log in to the MySQL database server in a separate session and query data from the orders table:
+
+<code>
+mysql> SELECT COUNT(*) FROM orders;
++----------+
+| COUNT(*) |
++----------+
+|      327 |
++----------+
+1 row in set (0.00 sec)
+</code>
+
+
+In this second session, we still can see the data from the orders table.
+
+We have made the changes in the first session. However, the changes are not permanent. In the first session, we can either commit or roll back the changes.
+
+For the demonstration purpose, we will roll back the changes in the first session.
+
+
+<code>
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.04 sec)
+</code>
+
+in the first session, we will also verify the contents of the orders table:
+
+
+<code>
+mysql> SELECT COUNT(*) FROM orders;
++----------+
+| COUNT(*) |
++----------+
+|      327 |
++----------+
+1 row in set (0.00 sec)
+</code>
+
+As you can see clearly from the output, the changes have been rolled back.
+
+
+:end:
+
+[Top](#top)
+
+
+
+----------------------------------------------------------------------------
+
+MySql Trigger: 
+
+A trigger is a set of actions that are run automatically when a specified change 
+operation (SQL INSERT, UPDATE, or DELETE statement) is performed on a specified table. 
+Triggers are useful for tasks such as enforcing business rules, validating input data, and keeping an audit trail.
+#
+
+Contents:
+
+    Uses for triggers
+    Benefits of using triggers in business
+    MySQL Triggers
+    Create MySQL triggers
+    Sample database, table, table structure, table records
+    Tool to create MySQL Triggers
+    MySQL Trigger : Example AFTER INSERT
+    MySQL Trigger : Example BEFORE INSERT
+    MySQL Trigger : Example AFTER UPDATE
+    MySQL Trigger : Example BEFORE UPDATE
+    MySQL Trigger : Example AFTER DELETE
+    How MySQL handle errors during trigger execution?
+    Delete a MySQL trigger
+
+
+#
+//Creating two tables users and usersbackup
+//When delete or insert or update data into users trigger is called.
+
+//Example when delete data from users table, inserted into usersdetails table
+create table users (
+id int not null auto_increment,
+name varchar(20),
+primary key(id)
+);
+
+
+create table usersbackup (
+id int not null auto_increment,
+name varchar(20),
+primary key(id)
+);
+
+
+//Check this statements 
+create trigger trigName after DELETE on users
+
+BEGIN
+insert into usersdetails (:old.id,:old.name) 
+END
+
+
+
+OR
+Here is a simple example:
+
+mysql> CREATE TRIGGER ins_sum BEFORE INSERT ON account
+    -> FOR EACH ROW SET @sum = @sum + NEW.amount;
+Query OK, 0 rows affected (0.06 sec)
+
+
+Example:
+
+Trigger Name: emp_details_AINS
+Default Trigger code details:
+
+USE `dbName`;
+DELIMITER 
+$$
+CREATE TRIGGER `emp_details_AINS` 
+AFTER INSERT 
+ON emp_details FOR EACH ROW
+-- Edit trigger body code below this line. Do not edit lines above this one
+
+After completing the code, click on apply button.
+
+----------------------------------------------------------------------------
+
+
+
+Tables:
+
+
+
+If you are 100% sure that you'll only have two levels of categories (main and sub), 
+you can do a few different things. None of them are your proposed solution:
+
+CREATE TABLE categories (
+    id int not null primary key,
+    main varchar(64)
+    sub varchar(64)
+);
+
+
+CREATE TABLE objects (
+    id int not null primary key,
+    category_id int,
+    name varchar(64),
+    FOREIGN KEY (category_id) REFERENCES categories (id)
+);
+
+
+
+
+Want all vehicles?
+
+SELECT * 
+FROM objects AS o 
+INNER JOIN categories AS c ON o.category_id = c.id 
+WHERE c.main = 'vehicles'
+
+
+
+Want all roflcopters?
+
+SELECT * 
+FROM objects AS o 
+INNER JOIN categories AS c ON o.category_id = c.id 
+WHERE c.main = 'vehicles' and c.sub='Roflcopters';
+
+
+
+
+
+
+It is obviously work. But you may use separate tables.
+
+create table categories 
+(
+    categoryId int not null,
+    categoryName varchar(20) not null,
+    primary key(categoryId)
+);
+
+create table subcategories 
+(
+    subcategoryId int not null,
+    subcategoryName varchar(20) not null,
+    parentId int not null, 
+    primary key(subcategoryId),
+    foreign key(categoryId) references categories(categoryId)
+);
+
+
+create tables items 
+(
+    item_id int unsigned not null auto_increment,
+    name varchar(255) not null,
+    description varchar(100) not null,
+    primary key(item_id),
+    foreign key(categoryId) references categories(categoryId),
+    foreign key(subcategoryId) references subcategories(subcategoryId)
+ )
+
+
+CREATE TABLE foo (
+    `creation_time`     DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `modification_time` DATETIME ON UPDATE CURRENT_TIMESTAMP
+)
+
+
+CREATE TABLE `Student Details` (
+  `Roll_No` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
+  `City` varchar(255) NOT NULL,
+  `Age` int(11) NOT NULL,
+  PRIMARY KEY (`Roll_No`)
+);
+
+
+
+create table users(
+id int not null AUTO_INCREMENT,
+first_name varchar(20),
+last_name varchar(30),
+city varchar(20),
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY key (id)
+);
+
+
+
+//Users Table 
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `firstname` varchar(100) NOT NULL,
+  `lastname` varchar(100) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `mobilenumber` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `is_active` enum('0','1') NOT NULL,
+  `date_time` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+//Category & Subcategory
+
+CREATE TABLE `categories` (
+  `id` int(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `parent_id` int(10) DEFAULT 0,
+  `category_name` varchar(255) DEFAULT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `subcategories` (
+  `id` int(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `parent_id` int(10) DEFAULT 0,
+  `subcategory_name` varchar(255) DEFAULT NULL,
+)
+
+
+
+
+CREATE TABLE `Employee`( 
+`name` VARCHAR(25) NOT NULL, 
+`employee_id` CHAR(9) NOT NULL, 
+`manager_id` CHAR(9) NOT NULL, 
+`salary` decimal(10,2) NULL,  
+PRIMARY KEY(`employee_id`),
+FOREIGN KEY (manager_id) REFERENCES employee(employee_id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE `Student`(
+`rollnumber` INT NOT NULL, 
+`name` VARCHAR(25) NOT NULL, 
+`country` ENUM('USA', 'UK', 'Australia'), 
+PRIMARY KEY(`rollnumber`));
+
+
+CREATE TABLE IF NOT EXISTS `tblusers` (
+  `id` int(11) NOT NULL,
+  `FirstName` varchar(150) NOT NULL,
+  `LastName` varchar(150) NOT NULL,
+  `EmailId` varchar(120) NOT NULL,
+  `ContactNumber` char(11) NOT NULL,
+  `Address` varchar(255) NOT NULL,
+  `PostingDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `users` (
+ `id` int(11) NOT NULL AUTO_INCREMENT,
+ `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+ `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+ `phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+ `created` datetime NOT NULL,
+ `modified` datetime NOT NULL,
+ `status` enum('1','0') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1' COMMENT '1=Active, 0=Inactive',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+
+
+//Codeigniter 4
+
+CREATE TABLE employees (
+    id int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',
+    name varchar(100) NOT NULL COMMENT 'Name',
+    email varchar(255) NOT NULL COMMENT 'Email Address',
+    PRIMARY KEY (id)
+  ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='datatable demo table' AUTO_INCREMENT=1;
+  
+
+INSERT INTO `employees` (`id`, `name`, `email`) VALUES
+(1, 'John Doe', 'john@gmail.com'),
+(2, 'Vanya Hargreeves', 'vanya@gmail.com'),
+(3, 'Luther Hargreeves', 'luther@gmail.com'),
+(4, 'Diego Hargreeves', 'diego@gmail.com'),
+(5, 'Klaus Hargreeves', 'klaus@gmail.com'),
+(6, 'Ben Hargreeves', 'ben@gmail.com'),
+(7, 'The Handler', 'handler@gmail.com');
+
+
+
+
+CREATE TABLE product(
+product_id INT(11) PRIMARY KEY AUTO_INCREMENT,
+product_name VARCHAR(200),
+product_price DOUBLE
+)ENGINE=INNODB;
+
+
+INSERT INTO product(product_name,product_price) VALUES
+('Product 1','2000'),
+('Product 2','5000'),
+('Product 3','4000'),
+('Product 4','6000'),
+('Product 5','7000');
+
+
+
+CREATE TABLE IF NOT EXISTS `products` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(200) NOT NULL,
+	`desc` text NOT NULL,
+	`price` decimal(7,2) NOT NULL,
+	`rrp` decimal(7,2) NOT NULL DEFAULT '0.00',
+	`quantity` int(11) NOT NULL,
+	`img` text NOT NULL,
+	`date_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+INSERT INTO `products` (`id`, `name`, `desc`, `price`, `rrp`, `quantity`, `img`, `date_added`) VALUES
+(1, 'Smart Watch', '<p>Unique watch made with stainless steel, ideal for those that prefer interative watches.</p>\r\n<h3>Features</h3>\r\n<ul>\r\n<li>Powered by Android with built-in apps.</li>\r\n<li>Adjustable to fit most.</li>\r\n<li>Long battery life, continuous wear for up to 2 days.</li>\r\n<li>Lightweight design, comfort on your wrist.</li>\r\n</ul>', '29.99', '0.00', 10, 'watch.jpg', '2019-03-13 17:55:22'),
+(2, 'Wallet', '', '14.99', '19.99', 34, 'wallet.jpg', '2019-03-13 18:52:49'),
+(3, 'Headphones', '', '19.99', '0.00', 23, 'headphones.jpg', '2019-03-13 18:47:56'),
+(4, 'Digital Camera', '', '69.99', '0.00', 7, 'camera.jpg', '2019-03-13 17:42:04');
+
+
+
+
+//Cart table
+
+
+CREATE DATABASE allphptricks;
+
+CREATE TABLE IF NOT EXISTS `products` (
+`id` int(10) NOT NULL AUTO_INCREMENT,
+`name` varchar(250) NOT NULL,
+`code` varchar(100) NOT NULL,
+`price` double(9,2) NOT NULL,
+`image` varchar(250) NOT NULL,
+PRIMARY KEY (`id`),
+UNIQUE KEY `code` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+//Products Table
+
+CREATE TABLE IF NOT EXISTS `products` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`name` varchar(200) NOT NULL,
+	`desc` text NOT NULL,
+	`price` decimal(7,2) NOT NULL,
+	`rrp` decimal(7,2) NOT NULL DEFAULT '0.00',
+	`quantity` int(11) NOT NULL,
+	`img` text NOT NULL,
+	`date_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+INSERT INTO `products` (`id`, `name`, `desc`, `price`, `rrp`, `quantity`, `img`, `date_added`) VALUES
+(1, 'Smart Watch', '<p>Unique watch made with stainless steel, ideal for those that prefer interative watches.</p>\r\n<h3>Features</h3>\r\n<ul>\r\n<li>Powered by Android with built-in apps.</li>\r\n<li>Adjustable to fit most.</li>\r\n<li>Long battery life, continuous wear for up to 2 days.</li>\r\n<li>Lightweight design, comfort on your wrist.</li>\r\n</ul>', '29.99', '0.00', 10, 'watch.jpg', '2019-03-13 17:55:22'),
+(2, 'Wallet', '', '14.99', '19.99', 34, 'wallet.jpg', '2019-03-13 18:52:49'),
+(3, 'Headphones', '', '19.99', '0.00', 23, 'headphones.jpg', '2019-03-13 18:47:56'),
+(4, 'Digital Camera', '', '69.99', '0.00', 7, 'camera.jpg', '2019-03-13 17:42:04');
+
+
+
+//Products Table
+
+//https://www.allphptricks.com/simple-shopping-cart-using-php-and-mysql/  (All Codes)
+
+CREATE DATABASE allphptricks;
+
+CREATE TABLE IF NOT EXISTS `products` (
+`id` int(10) NOT NULL AUTO_INCREMENT,
+`name` varchar(250) NOT NULL,
+`code` varchar(100) NOT NULL,
+`price` double(9,2) NOT NULL,
+`image` varchar(250) NOT NULL,
+PRIMARY KEY (`id`),
+UNIQUE KEY `code` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+//Employees
+
+create database mydb;
+
+create table employees
+(
+   id int not null auto_increment,
+   name varchar(20),
+   salary int,   
+   primary key (id)
+);
+
+insert into employees ( id,name,salary)values(1,'ajay',1000);
+insert into employees ( id,name,salary)values(2,'sunu',2000);
+insert into employees ( id,name,salary)values(3,'rohit',900);
+insert into employees ( id,name,salary)values(4,'zubin',3000);
+insert into employees ( id,name,salary)values(5,'kumar',800);
+insert into employees ( id,name,salary)values(6,'aryan',1000);
+insert into employees ( id,name,salary)values(7,'reeta',900);
+insert into employees ( id,name,salary)values(1,'suman',2000);
+
+select *from employees;
+
+
+
+
+CREATE TABLE IF NOT EXISTS `accounts` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+  	`username` varchar(50) NOT NULL,
+  	`password` varchar(255) NOT NULL,
+  	`email` varchar(100) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+INSERT INTO `accounts` (`id`, `username`, `password`, `email`) VALUES (1, 'test', '$2y$10$SfhYIDtn.iOuCW7zfoFLuuZHX6lja4lF4XA4JqNmpiH/.P3zB8JCa', 'test@test.com');
+
+
+
+
+
+CREATE TABLES: 
+
+CREATE TABLE roles (
+  role_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  role_name VARCHAR(50) NOT NULL,
+
+  PRIMARY KEY (role_id)
+);
+
+CREATE TABLE permissions (	
+  perm_id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  perm_desc VARCHAR(50) NOT NULL,
+
+  PRIMARY KEY (perm_id)
+);
+
+CREATE TABLE role_perm (
+  role_id INTEGER UNSIGNED NOT NULL,
+  perm_id INTEGER UNSIGNED NOT NULL,
+
+  FOREIGN KEY (role_id) REFERENCES roles(role_id),
+  FOREIGN KEY (perm_id) REFERENCES permissions(perm_id)
+);
+
+CREATE TABLE user_role (
+  user_id INTEGER UNSIGNED NOT NULL,
+  role_id INTEGER UNSIGNED NOT NULL,
+
+  FOREIGN KEY (user_id) REFERENCES users(user_id),
+  FOREIGN KEY (role_id) REFERENCES roles(role_id)
+);
+
+------------------------------------------------------------------
+
+
+
+CREATE TABLE `product_details` (
+  `id` int(20) NOT NULL,
+  `name` varchar(120) NOT NULL,
+  `brand` varchar(100) NOT NULL,
+  `price` decimal(8,2) NOT NULL,
+  `ram` char(5) NOT NULL,
+  `storage` varchar(50) NOT NULL,
+  `camera` varchar(20) NOT NULL,
+  `image` varchar(100) NOT NULL,
+  `quantity` mediumint(5) NOT NULL,
+  `status` enum('0','1') NOT NULL COMMENT '0-active,1-inactive'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+
+//Insert Data
+
+
+INSERT INTO `product_details` (`id`, `name`, `brand`, `price`, `ram`, 
+`storage`, `camera`, `image`, `quantity`, `status`) VALUES
+(1, 'Honor 9 Lite (Sapphire Black, 64 GB)  (4 GB RAM)', 'Honor', '14499.00', '4', '64', '13', '1.png', 10, '1'),
+(2, 'Infinix (Sandstone Blue, 32 GB)  (3 GB RAM)', 'Infinix', '8999.00', '3', '32', '13', '2.png', 10, '1'),
+(3, 'VIVO V8 Youth (Black, 32 GB)  (4 GB RAM)', 'VIVO', '16990.00', '4', '32', '16', '3.png', 10, '1'),
+(4, 'Moto (Gold, 32 GB)  (3 GB RAM)', 'Moto', '11499.00', '3', '32', '8', '4.png', 10, '1'),
+(5, 'Lenovo (Venom Black, 32 GB)  (3 GB RAM)', 'Lenevo', '8999.00', '3', '32', '13', '5.png', 10, '1'),
+(6, 'Samsung Galaxy (Gold, 16 GB)  (3 GB RAM)', 'Samsung', '11990.00', '3', '16', '13', '6.png', 10, '1'),
+(7, 'Moto Plus (Pearl White, 16 GB)  (2 GB RAM)', 'Moto', '8799.00', '2', '16', '8', '7.png', 10, '1'),
+(8, 'Panasonic (White, 16 GB)  (1 GB RAM)', 'Panasonic', '6999.00', '1', '16', '8', '8.png', 10, '1'),
+(9, 'OPPO (Black, 64 GB)  (6 GB RAM)', 'OPPO', '18990.00', '6', '64', '16', '9.png', 10, '1'),
+(10, 'Honor 7 (Gold, 32 GB)  (3 GB RAM)', 'Honor', '9999.00', '3', '32', '13', '10.png', 10, '1'),
+(11, 'Asus ZenFone (Midnight Blue, 64 GB)  (6 GB RAM)', 'Asus', '27999.00', '6', '128', '12', '11.png', 10, '1'),
+(12, 'Redmi 5A (Gold, 32 GB)  (3 GB RAM)', 'MI', '5999.00', '3', '32', '13', '12.png', 10, '1'),
+(13, 'Intex (Black, 16 GB)  (2 GB RAM)', 'Intex', '5999.00', '2', '16', '8', '13.png', 10, '1'),
+(14, 'Google Pixel (18:9 Display, 64 GB) White', 'Google', '62990.00', '4', '64', '12', '14.png', 10, '1');
+
+
+Ajax, PHP Search: https://www.phpzag.com/product-filter-search-with-ajax-php-mysql/
+
+
+
+------------------------------------------------------------------------------------
+//Cakephp 4
+
+CREATE TABLE `users` (
+    `id` int(11) NOT NULL,
+    `username` varchar(50) NOT NULL,
+    `name` varchar(60) NOT NULL,
+    `gender` varchar(10) NOT NULL,
+    `email` varchar(60) NOT NULL,
+    `city` varchar(80) NOT NULL
+)
+
+INSERT INTO `users` (`id`, `username`, `name`, `gender`, `email`, `city`) VALUES
+(1, 'yssyogesh', 'Yogesh singh', 'male', 'yogesh@makitweb.com', 'Bhopal'),
+(2, 'bsonarika', 'Sonarika Bhadoria', 'female', 'bsonarika@makitweb.com', 'Indore'),
+(3, 'sunil', 'Sunil singh', 'male', 'sunil@makitweb.com', 'Pune'),
+(4, 'vishal', 'Vishal Sahu', 'male', 'vishal@makitweb.com', 'Bhopal'),
+(5, 'jiten', 'jitendra singh', 'male', 'jitendra@makitweb.com', 'Delhi'),
+(6, 'shreya', 'Shreya joshi', 'female', 'shreya@makitweb.com', 'Indore'),
+(7, 'abhilash', 'Abhilash namdev', 'male', 'abhilash@makitweb.com', 'Pune'),
+(8, 'ekta', 'Ekta patidar', 'female', 'ekta@makitweb.com', 'Bhopal'),
+(9, 'deepak', 'Deepak singh', 'male', 'deepak@makitweb.com', 'Delhi'),
+(10, 'rohit', 'Rohit Kumar', 'male', 'rohit@makitweb.com', 'Bhopal');
+
+
+
+
+//transactions:
+
+CREATE TABLE IF NOT EXISTS `transactions` (
+`id` int(20) NOT NULL AUTO_INCREMENT,
+`order_id` int(50) NOT NULL,
+`amount` decimal(9,2) NOT NULL,
+`response_code` int(10) NOT NULL,
+`response_desc` varchar(50) NOT NULL,
+PRIMARY KEY (`id`),
+UNIQUE KEY `order_id` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
+
+
+
+
+
+//
+CREATE TABLE `items` (
+  `id` int(11) NOT NULL,
+  `name` varchar(256) NOT NULL,
+  `description` text NOT NULL,
+  `price` int(255) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `items` (`id`, `name`, `description`, `price`, `category_id`, `created`, `modified`) VALUES
+(1, 'LG P880 4X HD', 'My first awesome phone!', 336, 3, '2014-06-01 01:12:26', '2014-05-31 17:42:26'),
+(2, 'Google Nexus 4', 'The most awesome phone of 2013!', 299, 2, '2014-06-01 01:12:26', '2014-05-31 17:42:26'),
+(3, 'Samsung Galaxy S4', 'How about no?', 600, 3, '2014-06-01 01:12:26', '2014-05-31 17:42:26'),
+(6, 'Bench Shirt', 'The best shirt!', 29, 1, '2014-06-01 01:12:26', '2014-05-31 02:42:21'),
+(7, 'Lenovo Laptop', 'My business partner.', 399, 2, '2014-06-01 01:13:45', '2014-05-31 02:43:39'),
+(8, 'Samsung Galaxy Tab 10.1', 'Good tablet.', 259, 2, '2014-06-01 01:14:13', '2014-05-31 02:44:08'),
+(9, 'Spalding Watch', 'My sports watch.', 199, 1, '2014-06-01 01:18:36', '2014-05-31 02:48:31'),
+(10, 'Sony Smart Watch', 'The coolest smart watch!', 300, 2, '2014-06-06 17:10:01', '2014-06-05 18:39:51'),
+(11, 'Huawei Y300', 'For testing purposes.', 100, 2, '2014-06-06 17:11:04', '2014-06-05 18:40:54'),
+(12, 'Abercrombie Lake Arnold Shirt', 'Perfect as gift!', 60, 1, '2014-06-06 17:12:21', '2014-06-05 18:42:11'),
+(13, 'Abercrombie Allen Brook Shirt', 'Cool red shirt!', 70, 1, '2014-06-06 17:12:59', '2014-06-05 18:42:49'),
+(26, 'Another product', 'Awesome product!', 555, 2, '2014-11-22 19:07:34', '2014-11-21 21:37:34'),
+(28, 'Wallet', 'You can absolutely use this one!', 799, 6, '2014-12-04 21:12:03', '2014-12-03 23:42:03'),
+(31, 'Amanda Waller Shirt', 'New awesome shirt!', 333, 1, '2014-12-13 00:52:54', '2014-12-12 03:22:54'),
+(42, 'Nike Shoes for Men', 'Nike Shoes', 12999, 3, '2015-12-12 06:47:08', '2015-12-12 07:17:08'),
+(48, 'Bristol Shoes', 'Awesome shoes.', 999, 5, '2016-01-08 06:36:37', '2016-01-08 07:06:37'),
+(60, 'Rolex Watch', 'Luxury watch.', 25000, 1, '2016-01-11 15:46:02', '2016-01-11 16:16:02');
+
+----------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `name` varchar(250) NOT NULL,
+  `price` double NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `created` date NOT NULL,
+  `description` text NOT NULL,
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`name`, `price`, `quantity`, `status`, `created`, `description`, `category_id`) VALUES
+('Tivi 1', 20, 4, 1, '2021-07-13', 'good', 1),
+('Tivi 2', 63, 15, 0, '2020-08-11', 'good', 1),
+('Laptop 1', 24, 12, 1, '2021-08-12', 'good', 2),
+('Laptop 2', 60, 34, 1, '2020-08-12', 'good', 2),
+('Laptop 3', 23, 27, 0, '2020-08-17', 'good', 3),
+('Computer 1', 4.5, 2, 1, '2021-08-20', 'ABC', 3),
+('Computer 2', 111, 222, 1, '2021-09-25', 'AAA', 7),
+('Computer 3', 33333, 888, 0, '2021-10-11', 'abc', 2),
+('ABC', 20, 4, 1, '2021-07-12', 'good', 7),
+('ABC', 20, 4, 1, '2021-07-12', 'good', 7),
+('ABC', 20, 4, 1, '2021-07-12', 'good', 7),
+('ABC', 20, 4, 1, '2021-07-12', 'good', 7),
+('ABC', 20, 4, 1, '2021-07-12', 'good', 7);
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+Connection: 
+
+Connecting to a Database:
+
+    MySQLi Object-Oriented 
+
+    $conn = new mysqli($servername, $username, $databasename)
+
+    MySQLi Procedural
+
+    $conn = mysqli_connect($servername, 
+        $username, $password, $databasename);
+
+    PDO
+
+    $conn = new PDO("mysql:host=$servername;dbname=myDB",
+        $username, $password, $databasename);
+
+
+--------------------------------------------------------------
+
+
+    MySQLi Object-Oriented
+
+    $conn->query($query);
+
+    MySQLi Procedural
+
+    mysqli_query($conn, $query)
+
+    PDO
+
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+
+
+$conn->close();
+
+-----------------------------------------------------------------------------
+
+
+DDL, DML, DCL, TCL: 
+
+DDL: Data Definition Language
+DML: Data Manipulation Language
+DCL: Data Control Language
+TCL: Transaction Control Language
+
+
+DDL: create, alter, drop, truncate, cmment, rename
+DML: select, insert, delete, update, merge, call, explain plan, lock table
+DCL: grant, revoke 
+TCL: commit, rollback, savepoint, set transaction
+
+------------------------------------------------------------------------------
+
+
+
+
+
+-----------------------------------------------------------------
+
+// mysql queries:
+
+//PHP and MySQL Database Using Object-Oriented Approach
+https://www.techfry.com/php-tutorial/php-and-mysql-database-using-object-oriented-approach
+
+
+1. Create a New Connection
+
+$servername = 'localhost';
+$username = 'username';
+$password = 'password';
+
+$conn = new mysqli($servername, $username, $password);
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) 
+{
+ die('Connection failed: ' . $conn->connect_error);
+} 
+echo 'Connected successfully';
+
+-------------------------------
+
+2. Close the Connection
+
+$conn->close();
+
+--------------------------------
+
+3. Creating New Database
+
+$sql = "CREATE DATABASE myDB";
+if ($conn->query($sql) === TRUE) 
+{
+ echo "Database created successfully";
+} else 
+{
+ echo "Error creating database: " . $conn->error;
+}
+
+--------------------------
+
+4. Creating Tables
+
+$sql = "CREATE TABLE MyGuests (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+name VARCHAR(30) NOT NULL,
+email VARCHAR(50),
+reg_date TIMESTAMP
+)";
+
+if ($conn->query($sql) === TRUE) 
+{
+ echo "Table MyGuests created successfully";
+} 
+else 
+{
+ echo "Error creating table: " . $conn->error;
+}
+
+-------------------------------
+
+5. Inserting Data into Tables
+
+$sql = "INSERT INTO MyGuests (name, email)
+VALUES ('John Doe', 'john@example.com')";
+
+if ($conn->query($sql) === TRUE) 
+{
+ echo "New record created successfully";
+} 
+else 
+{
+ echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+-----------------------------------
+
+6. Get ID of Last Record
+
+$last_id = $conn->insert_id;
+
+-----------------------------------
+
+7. Getting Data from Tables
+
+$sql = "SELECT id, name FROM MyGuests";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) 
+{
+ // output data of each row
+ while($row = $result->fetch_assoc()) 
+ {
+  echo "id: " . $row["id"]. " - Name: " . $row["name"]. " <br>";
+ }
+} 
+else 
+{
+ echo "0 results";
+}
+
+
+//$sql = "SELECT * FROM MyGuests LIMIT 50";
+
+------------------------------------
+
+8. Deleting Data from Tables
+
+$sql = "DELETE FROM MyGuests WHERE id=3";
+
+if ($conn->query($sql) === TRUE) 
+{
+ echo "Record deleted successfully";
+} 
+else 
+{
+ echo "Error deleting record: " . $conn->error;
+}
+
+
+-----------------------------------
+
+9. Updating Data in Tables
+
+$sql = "UPDATE MyGuests SET name='Doe' WHERE id=2";
+
+if ($conn->query($sql) === TRUE) 
+{
+ echo "Record updated successfully";
+} 
+else 
+{
+ echo "Error updating record: " . $conn->error;
+}
+
+------------------------------------
+
+------------------------------------------------------------------
+
+
+TRANSACTION:
+
+START TRANSACTION;
+    INSERT INTO users (name, email) VALUES ('John Doe', 'johndoe@example.com');
+    UPDATE accounts SET balance = SUM(balance) WHERE name = 'John Doe';
+
+
+
+START TRANSACTION;
+    INSERT INTO users (name, email) VALUES ('John Doe', 'johndoe@example.com');
+    UPDATE accounts SET balance = SUM(balance) WHERE name = 'John Doe';
+COMMIT;
+
+
+
+START TRANSACTION;
+    INSERT INTO users (name, email) VALUES ('John Doe', 'johndoe@example.com');
+    UPDATE accounts SET balance = SUM(balance) WHERE user_id=15;
+ROLLBACK;
+
+-------------------------------------------------------------------------------
+
+//How to Use the InnoDB Storage Engine for Transactions
+
+SET storage_engine=InnoDB;
+
+
+START TRANSACTION;
+    UPDATE accounts SET balance = 50 WHERE user_id = 1;
+    UPDATE accounts SET balance = 2000 WHERE user_id = 2;
+COMMIT;
+
+
+
+//How to Handle Errors and Exceptions in Transactions
+
+START TRANSACTION;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        START TRANSACTION
+            ROLLBACK;
+            RESIGNAL;
+        END;
+    UPDATE accounts SET balance = 5000 WHERE user_id = 1;
+    UPDATE accounts SET balance = 1000 WHERE user_id = 2;
+    IF (SELECT balance FROM accounts WHERE user_id = 1) < 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Insufficient balance';
+    END IF;
+COMMIT;
+
+------------------------------------------------------------------------
+
+//How to Use Savepoints in MySQL Transactions
+
+START TRANSACTION;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        START TRANSACTION
+            ROLLBACK TO SAVEPOINT my_savepoint;
+            RESIGNAL;
+        END;
+    UPDATE accounts SET balance = 5000 WHERE user_id = 1;
+    UPDATE accounts SET balance = 1000 WHERE user_id = 2;
+    IF (SELECT balance FROM accounts WHERE user_id = 1) < 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Insufficient balance';
+    END IF;
+COMMIT;
+
+-----------------------------------------------------------------------------
+
+
+TRIGGER:
+
+//Update data into profile table & save old data into users table
+//Trigger name is profile_update
+
+
+1. Example:
+
+CREATE TRIGGER 
+'product_update'
+BEFORE 
+UPDATE 
+ON 'products'
+FOR EACH ROW 
+INSERT INTO productslogs SET pname_old = OLD.product_name, pprice_old = OLD.product_price
+
+
+1. Main Table
+
+create table products(
+id int not null unsigned auto_increment,
+product_name varchar(200),
+product_price double,
+primary key(id)
+);
+
+
+2. Save old data from products table before update product
+
+create table productslogs(
+id int not null unsigned auto_increment,
+pname_old varchar(200),
+pprice_old double,
+primary key(id)
+);
+
+
+-------------------------------------------------------------------------
+
+MySql PRIVILEGES: 
+
+
+MySql Previleges: 
+
+Users List: 
+
+users   hosts 
+
+
+
+Tables List
+
+use users 
+
+
+mysql> show grants for tony;
+
+mysql> show databases;
+mysql> use dbname;
+mysql> show tables;
+
+//Grant on one table or all tables
+mysql> grant all on users.* to tony;  //NOt working
+mysql> grant all on users.* 'tony'@'localhost';  //Working
+mysql> show grants for tony;          //NO
+
+mysql> show grants for tony@localhost;
+
+
+-------------------------------------------------------------------------
+
+MYSQL TRACKING : 
+
+//Tracking MySQL Database Changes
+
+
+Enable logging in MySQL:
+
+Type the following in mysql backend console.
+
+SET GLOBAL log_output = 'TABLE';
+SET GLOBAL general_log = 'ON';
+
+
+
+//Check for updates with queries: (you can customize this to your need)
+
+select argument from mysql.general_log where argument REGEXP '*INSERT*';
+
+//It may or may not be a waste of space depends on typical operations with tables. 
+//For INSERT and DELETE the only way to track is to store all column values. Only for 
+//UPDATE you can save some space. You can create 2 tables, for instance,
+
+
+
+update_history_main(id int not null auto_increment primary key,
+modify_date datetime not null,
+table_involved varchar(50) not null);
+
+update_history_details (id int not null auto_increment primary key,
+update_history_main_id int not null,
+field_name varchar(100),
+old_value varchar(100),
+new_value varchar(100),
+FOREIGN KEY (update_history_main_id) REFERENCES update_history_main(id)
+ON UPDATE CASCADE ON DELETE CASCADE);
+
+
+
+
+//Update. Thus, the body of your after update trigger for tickets table may look like
+
+DELIMITER $$$
+ CREATE TRIGGER afterTicketUpdate AFTER UPDATE ON tickets
+ FOR EACH ROW
+ BEGIN
+     DECLARE main_id int;
+     INSERT INTO update_history_main(modify_date, table_involved) 
+      VALUES(NOW(),'tickets';
+     SELECT LAST_INSERT_ID() INTO main_id;
+
+     IF (new.SubmittedFromDevice != old.SubmittedFromDevice) THEN
+      INSERT INTO update_history_details(update_history_main_id, field_name, 
+      old_value,new_value) 
+     VALUES (main_id, 'SubmittedFromDevice',old.SubmittedFromDevice,
+        new.SubmittedFromDevice);
+     END IF; // ... check all other fields. 
+ END
+$$$
+
+
+
+//tracking tables could then hold something like the following:
+
+TicketNum          
+ModifiedDateTime   
+Action
+
+-----------------------------------------------------------------------------------------
+
+Stroed Procedure in mysql: 
+
+https://dev.mysql.com/doc/refman/8.0/en/create-procedure.html
+
+
+Syntax: 
+
+create procedure procedute_name 
+   begin
+      select *from table_name
+   end
+call procedure_name
+
+
+GUI:
+
+//Go to phpmyadmin + click on 'Routines' option + "create new routine" 
+now, routine name + direction-> output (fill karo) + Name->uid + Type (int)
+
+Write in blow black box: 
+
+   begin
+      select *from table_name
+   end
+
+-----------------------------------------------------------------------------------------
+
+TRIGGER & DROP TRIGGER: 
+
+https://dev.mysql.com/doc/refman/8.0/en/create-procedure.html
+
+
+
+CREATE TRIGGER trigger_name trigge_time trigger_event
+ON table_name FOR EACH ROW
+  BEGIN
+    --variable declarations
+    --trigger code
+  END;
+
+
+It is a special type of stored procedure that is invoked automatically in respone to and event.
+
+Each trigger is associated with a table, which is activated on any DML statement such as INSERT,UPDATE,
+or DELETE
+
+
+Example 01: 
+
+DELIMETER //
+
+CREATE TRIGGER tigg BEFORE INSERT ON orders FOR EACH ROW
+
+BEGIN
+
+IF NEW.price < 0 THEN SET NEW.price = 0
+
+END IF;
+
+END //
+
+
+
+DROP TRIGGERS: 
+
+mysql> DROP TRIGGER tigg;
+
+
+
+
+Example 02: 
+
+mysql> CREATE TABLE account (acct_num INT, amount DECIMAL(10,2));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TRIGGER ins_sum BEFORE INSERT ON account
+       FOR EACH ROW SET @sum = @sum + NEW.amount;
+Query OK, 0 rows affected (0.01 sec)
+
+
+
+mysql> SET @sum = 0;
+mysql> INSERT INTO account VALUES(137,14.98),(141,1937.50),(97,-100.00);
+mysql> SELECT @sum AS 'Total amount inserted';
+
+
+Example 03: 
+
+mysql> CREATE TRIGGER ins_transaction BEFORE INSERT ON account
+       FOR EACH ROW PRECEDES ins_sum
+       SET
+       @deposits = @deposits + IF(NEW.amount>0,NEW.amount,0),
+       @withdrawals = @withdrawals + IF(NEW.amount<0,-NEW.amount,0);
+Query OK, 0 rows affected (0.01 sec)
+
+
+
+Example 04:
+
+
+mysql> delimiter //
+mysql> CREATE TRIGGER upd_check BEFORE UPDATE ON account
+       FOR EACH ROW
+       BEGIN
+           IF NEW.amount < 0 THEN
+               SET NEW.amount = 0;
+           ELSEIF NEW.amount > 100 THEN
+               SET NEW.amount = 100;
+           END IF;
+       END;//
+mysql> delimiter ;
+
+
+-------------------------------------------------------------------------
+
+View: 
+
+
+CREATE VIEW STU_VIEW AS
+SELECT SName, class from STUDENT;
+
+Types: 
+
+1. Read only view 2. updatable view
+
+
+--------------------------------------------------------------------
+
+
+//Stored Procedure:
+
+[begin_label:] 
+BEGIN     
+[statement_list] 
+END 
+[end_label])
+
+
+//Example: 
+
+1. 
+DELIMITER $$
+CREATE PROCEDURE my_procedure1()
+BEGIN   
+  Select * from users  
+END$$
+
+//Calling Processure 
+Call my_procedure1();
+
+
+
+2.
+DELIMITER $$
+CREATE PROCEDURE my_procedure_User_Variables()
+BEGIN   
+SET @x = 15;       
+SET @y = 10;       
+SELECT @x, @y, @x-@y;   
+END$$
+
+
+
+-------------------------------------------------------------------------
+
+//EVENTS 
+
+
+1. 
+
+Example: 
+
+CREATE EVENT e_hourly
+    ON SCHEDULE
+      EVERY 1 HOUR
+    COMMENT 'Clears out sessions table each hour.'
+    DO
+      DELETE FROM site_activity.sessions;
+
+2. 
+Example:
+
+delimiter |
+
+CREATE EVENT e_daily
+    ON SCHEDULE
+      EVERY 1 DAY
+    COMMENT 'Saves total number of sessions then clears the table each day'
+    DO
+      BEGIN
+        INSERT INTO site_activity.totals (time, total)
+          SELECT CURRENT_TIMESTAMP, COUNT(*)
+            FROM site_activity.sessions;
+        DELETE FROM site_activity.sessions;
+      END |
+
+delimiter ;
+
+
+
+3. 
+
+Example:
+
+CREATE EVENT e_call_myproc
+    ON SCHEDULE
+      AT CURRENT_TIMESTAMP + INTERVAL 1 DAY
+    DO CALL myproc(5, 27);
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+
+MySql Subquery: 
+
+//Mysql subquery 
+
+select emp_name,city,income from employees
+where emp_id in (select emp_id from employees);
+
+
+//Subquery with comparison operators
+
+select *from employees
+ where emp_id in (select emp_id from employees 
+  where income > 350000);
+
+
+select emp_name,city,income from employees
+  where income = (select max(income) from employees);
+
+
+
+//Mysql subquery with in or not-in
+
+select name,city from student
+where city not in ( select city from student2 where city="los Angeles");
+
+
+
+
+
+
+
+//Mysql subquery in the FROM Clause
+
+Select max(items), min(items), floor(avg(items)) 
+form 
+ (select order_id,count(order_id) as items from orders
+  group by order_data) as student_order_detail;
+
+
+//MySql Correlated Subqueries
+
+select emp_name, city_income
+from employees emp where income > (select employees where city = emp.city)
+)
+
+
+//Mysql subqueries with exists or not exists
+
+select name, occupation,age from customer C where exists (select *from oders o
+where c.cust_id = o.cust_id);
+
+
+
+select name,occupation,age from customer c
+where not exists (select *from orders o 
+where c.cust_id = O.cust_id);
+
+
+//Mysql row subqueries
+
+select *from customer c where row(cust_id,occupation) = (
+  select order_id,order_date from orders o where c.cust_id = o.cust_id);
+
+//msyql subqueries with all, any and some
+
+select cust_id,name from customer where cust_id > any (select cust_id from order);
+
+
+select cust_id,name from customer where cust_id > all (select cust_id from orders);
+
+
+-------------------------------------------------------------------------
+
+
+
+Database Script: 
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `userId` int(8) NOT NULL,
+  `userName` varchar(55) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `displayName` varchar(55) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`userId`, `userName`, `password`, `displayName`) VALUES
+(1, 'admin', '$2a$10$0FHEQ5/cplO3eEKillHvh.y009Wsf4WCKvQHsZntLamTUToIBe.fG', 'Admin');
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`userId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `userId` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+
+
+
+--------------------------------------------------------------------------
+
+
+Cart Tables: 
+https://youtu.be/J03Xhs3mzWU?list=PLEHeowSHffVBUWYi-HmH1kykqNs7Q34Yp&t=365
+
+
+a)
+
+1) customers 
+2) orders
+3) order_items
+4) products
+
+b)
+
+users               (CT Computer youtube channel)
+user_details  (foreign key (user_id)
+product_categorie
+products
+product_ratings
+product_reviews          (foreign key: product_id, user_id)
+product_carts            (foreign key: product_id, user_id)
+payment_request_details  (
+
+order_payments
+product_orders
+product_order_details
+
+
+------------------------------------------------------------------------------------
+
+
+//MySQL database with products, products categories and different attributes
+//Basic Ideas
+
+E.g.:
+
+   1.  Product iGal 7S → Category Smartphones → Attributes attr_phone
+
+   2.  Product UberLaptop → Category Notebooks & Laptops → Attributes attr_laptop
+
+        Tables: 
+
+
+	pruducts              			cttegories
+                                     
+	id           int(11)         -------> 	 id   int(11)
+	name         varchar(200)    - 		 name varchar(200)
+        category_id  int(11)       <-
+
+
+
+
+
+
+------------------------------------------------------------------------------------
+
+
+//Cart Tables Structure:
+https://stackoverflow.com/questions/49250955/better-way-to-make-the-shopping-cart-table-with-mysql
+
+The first table:
+
+customerID | customerName | customerEmail | ....
+-------------------------------------------------
+INT (INCR) | VARCHAR(200) | VARCHAR (200) | ....
+
+
+
+The shop table:
+
+shopID    | shopName | etc....
+----------------------------
+INT (INCR)| VARCHAR  | etc ....
+
+
+
+The products table:
+
+productID | productName | ProductDescription | etc....
+------------------------------------------------------
+INT (INCR)| VARCHAR .   | TEXT               | etc...
+
+
+
+
+The cart table is very short, but can be expanded very easily till it fits your needs:
+
+
+cartID    | customerID              | DatePlaced
+------------------------------------------------
+INT (INCR)| INT (From customerTable)| DATETIME
+
+
+
+
+Addding the products to the cart table directly:
+
+cartDetailID   | cartID | shopID | productID | Quantity | dateAdd
+----------------------------------------------------------------
+INT (INCREMENT)| INT    | INT    | INT       | INT      | DATETIME
+
+
+
+
+The cartID here can be repeated and your table will look like this:
+
+
+ cartDetailID   | cartID | shopID | productID | Quantity | dateAdd
+ -----------------------------------------------------------------------------
+ 0              | 15     | 1      | 253       | 3        | 2018-08-03 09:43:17
+ 1              | 15     | 1      | 255       | 1        | 2018-08-03 09:43:17
+
+
+
+
+------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------

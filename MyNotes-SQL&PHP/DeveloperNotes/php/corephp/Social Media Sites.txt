@@ -1,0 +1,54 @@
+<<<<< PHP Social Media  >>>>
+
+
+--------------------------------------------------------
+--------------------------------------------------------
+Keys: 
+
+--------------------------------------------------------
+--------------------------------------------------------
+Social Website links or More Projeccts download
+https://download.code-projects.org/details/a84fcf5b-8aaa-4965-9cf0-2b0151b2a0fb
+
+Like And Unlike in social media:
+https://codewithawa.com/posts/like-and-unlike-system-using-php-and-mysql-database
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+//Social Networking Site project demo:
+https://code-projects.org/social-networking-site-in-php-with-source-code-2/
+
+Features:
+
+    Login/Register System
+    Share/Manage post
+    Search friends
+    Unfriend user account
+    Manage photos
+    Messages
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+//Website 
+https://codewithawa.com/posts/like-and-unlike-system-using-php-and-mysql-database
+
+posts:
+
+    id  - int(11)
+    text - text
+    likes - int(11)
+
+users:
+
+    id - int(11)
+    name - varchar(255)
+
+likes:
+
+    id - int(11)
+    userid - int(11)
+    postid - int(11)
+
+---------------------------------------------------------

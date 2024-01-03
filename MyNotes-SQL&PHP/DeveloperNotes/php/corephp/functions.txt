@@ -1,0 +1,28 @@
+>>> Functions <<<<<
+
+
+----------------------------------------------------------
+----------------------------------------------------------
+Keys: 
+----------------------------------------------------------
+----------------------------------------------------------
+
+
+>> Function:
+
+//Function without parameters
+function(){}
+
+
+//Function with paramerters
+function(x,y){}
+
+//Arguments: Actual Arguments, Formal Arguments (parameters)
+
+function myfun(a,b)   //Formal Arguments or Formal Parameters (a,b)
+
+myfun(x,y)            //Actual Arguments or Actual Parameters(x,y)
+
+
+
+----------------------------------------------------------

@@ -1,0 +1,281 @@
+>>>> PHP Categories & Sub Categories >>>>>>
+
+
+
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+key: Categories & Subcategories in same table, Members & Group, Mulit level Categories Menu, 
+
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+//Category & Sub Category 
+https://youtu.be/Jrsh039x5do?t=104
+
+//Programming with Vishal  (Categories & Subcategories)
+https://youtu.be/cjYhk4wOOOk?t=42
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+
+//Categories & Subcategories in same table
+
+https://youtu.be/Jrsh039x5do?t=704         //Very Good Video
+
+Sample: Ony Two Level Not Multi level
+
+Category Table: 
+
+---------------------------------
+id  |  parent_id  |  name
+1         0          Web Design
+2         1          HTML
+3         1          CSS
+4         1          Javascript
+5         0          Web Development
+6         5          PHP
+7         5          Codeigniter
+8         5          Laravel
+
+----------------------------------
+ 
+
+<body>
+
+<form method="post">
+  <label>Parent Category</label>
+  <select name="parentcat">
+     <option>Select Category</option>
+     <option value="0">None</option>
+  </select>
+
+<label></label>
+<input type="text" name="catname">
+
+<input type="submit" name="submit">
+
+
+</form>
+
+</body>
+
+
+Database Connection: 
+
+
+if(isset($_POST['submit']))
+{
+  $sql="insert into categories(parent_id,name)values('".$_POST['parent']."','".$_POST['catname']."')";
+  $result=mysqli_query($conn,$sql);
+  if($result)
+  {
+    echo 'inserted';
+  }
+}
+
+
+//Recursion: Showing categories
+
+function showcategory($parentid){
+   $sql = select * from categoies where parent_id='".$parentid."'";
+
+   $result = mysqli_query($GLOBALS[$con,$sql]);
+
+   $output="<ul>"\n;
+   
+   while($data=myqli_fetch_arrray($result))
+   {
+      $output.="<li>\n.$data['name']
+      $output .= showcategory($data['id']);
+      $output .="</li>";
+    }
+
+     $output .="</ul>";
+  
+    return $output;
+
+
+}
+
+showcategory(0);
+
+
+
+
+----------------------------------------------------------------------
+
+Programming with vishal: 
+https://youtu.be/cjYhk4wOOOk?t=42
+
+
+Example: 02 
+
+Categories & Subcategories Table: 
+
+Categories Table: 
+
+
+create table categories(
+
+);
+
+
+
+Subcategories table:
+
+
+create table sub_categories(
+id not null auto_increment primary key,
+categories_id int 
+sub_categories_id varchar(100),
+status int,
+
+);
+
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+Example:
+
+products
+ id
+ categories_id
+ sub_categories_id
+
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+//
+https://stackoverflow.com/questions/31949292/categories-and-subcategories-from-one-mysql-table
+
+
+Example: 03: 
+
+CREATE TABLE categories (
+  cat_id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  cat_name VARCHAR(64),
+  # Other columns...
+) ENGINE=InnoDB;
+
+
+
+
+CREATE TABLE category_relations (
+  ancestor_id INT(11) UNSIGNED,
+  descendant_id INT(11) UNSIGNED,
+  depth INT(11) UNSIGNED
+  PRIMARY KEY (ancestor_id, descendant_id),
+  FOREIGN KEY (ancestor_id) REFERENCES categories.cat_id,
+  FOREIGN KEY (descendant_id) REFERENCES categories.cat_id
+) ENGINE=InnoDB;
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------
+
+Members & Group: OneToOne Relation:
+
+Members           Groups
+id                group_id
+name              email
+email             name
+contact           logo
+group_id          desc.
+
+
+
+----------------------------------------------------------------------
+
+Mulit level Categories Menu:
+
+https://youtu.be/_Np-s0n-ty4?t=522
+
+Table: 
+
+Schema:
+
+create table city(
+ id int not null auto_increment,
+ city varchar(50),
+ parent_id int(11),
+ primary key (id)
+); 
+
+
+
+id  city      parent_id
+1   India     0
+2   Punjab    1
+3   UP        1
+4   Gurdaspur 2   
+5   Amritsar  2
+6   Agra      3
+7   USA       0
+
+Etc.....
+
+
+
+Functionality: 
+
+$con=mysqli_connect('localhost','root','','youtube');
+$con=mysqli_query($con,"select * from city");
+$arr[],
+while($row=mysqli_fetch_assoc($res)) {
+  $arr[$row['id']]['city']=$row['parent_id'];
+  $arr[$row['id']]['parent_id']=$row['parent_id'];  
+}
+$html='';
+function buildTreeView($arr,$parent,$level=0,$prelevel=-1) {
+  global $html;
+  foreach($arr as $id=>$data) {
+     if($parent==$data['parent_id]){
+        if($level>$prelevel) {
+            if($html==''){
+		$html .='<ul class="nav navbar-nav">';
+            }else{
+                $html .='<ul class="dropdown-menu">';
+            }           
+        }
+        if($level==$prelevel){
+           $html.='</li>';
+        }
+        $html.='<li><a href="#">'.$data['city'].'<span class="caret"></span></a>';
+        if($level>$prelevel) {
+           $prelevel=$level;
+        }
+        $level++;
+        buildTreeView($arr,$id,$level,$prelevel);
+        $level--;
+     }
+  }
+  if($level==$prelevel) {  
+    $html.='</li></ul>';
+  }
+  return $html;
+}
+
+
+
+<div class="navbar-collapse collapse">
+   <?php
+      echo buildTreeView($arr,0);
+    ?>
+</div>
+
+----------------------------------------------------------------------------------------
+
+
+
+
+

@@ -1,0 +1,34 @@
+<<<<< Python MongoDB <<<<<<
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+>> MongoDB 
+
+//main.py file
+//Retrieve all records using find()
+
+import pymongo
+from pymongo import MongoClient
+
+CONNECTION_STRING="mongodb+srv://astechedu:ajay123@cluster0.wx4ui.mongodb.net/?retryWrites=true&w=majority"
+
+if __name__=='__main__':
+	 client = MongoClient(CONNECTION_STRING)
+	 db = client.astechedu
+	 collection = db.users	 
+
+data = collection.find_one()     #One Record
+
+all_data = collection.find()     #All Records
+for d in all_data:	
+	print(r)
+
+
+#https://youtu.be/X3eSATZhXp0?t=785
+
+--------------------------------------------------------------------

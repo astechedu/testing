@@ -1,0 +1,64 @@
+>>> Linux Apache2 & Nginx <<<<<
+
+
+
+---------------------------------------------------------------------
+Keys: Apache2, Nginx, 
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+>> Nginx <<
+
+https://cloudinfrastructureservices.co.uk/how-to-install-nginx-on-ubuntu-22-04-and-configure/
+
+
+Features of Nginx:
+
+Some of the crucial features of Nginx include:
+
+    Reverse Proxy – Nginx acts as a reverse proxy, routing traffic from the internet to one or more servers running applications or services.
+
+    Load balancing – distributes incoming traffic across multiple servers, improving the scalability and reliability of a system.
+
+    HTTP cache – caches static content and dynamically generated content, reducing the load on the application servers and improving the performance of the system.
+
+    SSL/TLS termination – handles SSL/TLS encryption and decryption, offloading this resource intensive process from the application servers.
+
+    Virtual hosting – hosts multiple websites on a single server, using a technique called “virtual hosting.”
+
+    FastCGI support – works with FastCGI servers, allowing it to serve dynamic content using scripting languages such as PHP.
+
+    HTTP/2 support – supports the HTTP/2 protocol, which allows for faster and more efficient transfer of web content.
+
+    Rewriting and redirection – rewrites URLs and redirects traffic, making it easy to modify the behaviour of a web server without changing the underlying application code.
+
+    Access controls – Nginx can be configured to allow or deny access to specific resources based on the IP address, hostname, or other criteria.
+
+
+//Advantages of Nginx
+Performance
+Stability
+Low resource consumption
+Flexibility
+Simplicity
+Community support
+
+
+
+
+---------------------------------------------------------------------
+
+
+
+
+>> Nginx <<
+
+
+
+
+
+
+
+---------------------------------------------------------------------

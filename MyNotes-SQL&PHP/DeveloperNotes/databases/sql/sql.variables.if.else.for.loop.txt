@@ -1,0 +1,123 @@
+<<< SQL Variables,If,Else,For,While,case <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys: Variable, If Else, case,
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Sql Programming Examples
+https://www.w3schools.com/sql/sql_examples.asp
+
+
+vdo: Variable
+https://youtu.be/Q0AQ5TvHNIU?t=93
+
+Vdo: If Else
+https://youtu.be/CIxKN05KG4Q?t=258
+
+vdo: Case, when..then..else
+https://youtu.be/n_0kijUi7IA?t=487
+
+vdo: IF, Case
+https://youtu.be/azkZI3uA71I?t=952     //Yahoo baba
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+>> Variable <<
+
+Integer,data,or varing character string.
+Types: Local, Global
+
+Local Variable: Starts with @
+
+Example:
+  declare @first_var as int  //Declare
+  set @first_var=100         //Set val
+  print(@first_var)          //Printing
+
+
+Global Variable: By System maintains, user can not declare, starts with @@
+      
+
+Example:
+
+--------------------------------------------------------------------
+
+>>> If Else:
+
+1. 
+  SELECT id,name,percentage,
+  IF(percentage >= 33,"Pass","Fail") AS Result 
+  FROM students;
+
+2.
+ 
+  SELECT id,name,percentage,
+  CASE
+      WHEN percentage >= 80 AND percentage <= 100 THEN "Merit"
+      WHEN percentage >= 60 AND percentage < 80 THEN "Ist Division"
+      WHEN percentage >= 45 AND percentage < 60 THEN "IInd Division"
+      WHEN percentage >= 33 AND percentage < 45 THEN "IIIrd Division"
+      WHEN percentage < 33 THEN "Fail"
+      ELSE "Not Correct %"
+  END AS Grade 
+  FROM students; 
+
+3.
+  UPDATE students SET
+  percentage = (CASE id
+       WHEN 3 THEN 39
+       WHEN 7 THEN 62
+  END)
+  WHERE id IN (3, 7);
+
+4.
+  declare @first_var as int      //Declare
+  set @first_var=100             //Set val
+  //print(@first_var)            //Printing
+
+begin 
+  if @name='ajay'
+   print('Correct Name Entered')
+  end
+end
+
+-----------------------------------------------------------------
+
+>>> Case <<<
+
+SELECT OrderID, Quantity,
+CASE WHEN Quantity > 30 THEN 'The quantity is greater than 30'
+ WHEN Quantity = 30 THEN 'The quantity is 30'
+ ELSE 'The quantity is under 30'
+END AS QuantityText
+FROM OrderDetails;
+
+
+Syntax:
+
+1. 
+
+Case
+  when condition1 then result
+  when condition2 then result
+  else result
+end
+
+2.
+
+Case Expression
+  when value1 then result
+  when value2 then result
+  else result
+end
+-----------------------------------------------------------------
+
+

@@ -1,0 +1,1103 @@
+https://binocs.co/in/
+
+
+Installing Docker on Kali Linux
+
+
+sudo apt update
+sudo apt install -y docker.io
+sudo systemctl enable docker --now
+docker
+sudo usermod -aG docker $USER
+
+
+
+Installing docker-ce on Kali Linux
+
+
+
+
+
+
+
+
+
+
+
+sudo apt-get update && sudo apt-get install -y docker.io
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------
+
+Install Docker and Docker Compose on Kali Linux
+
+
+
+Step 1: Install Dependency packages
+
+Start the installation by ensuring that all the packages used by docker as dependencies are installed.
+
+
+sudo apt update && sudo apt -y full-upgrade
+sudo apt install curl gnupg2 apt-transport-https software-properties-common ca-certificates
+
+
+Check if a reboot is required after the upgrade:
+
+[ -f /var/run/reboot-required ] && sudo reboot -f
+
+
+
+Step 2: Import Docker GPG key
+
+Import Docker GPG key used for signing Docker packages:
+
+
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker-archive-keyring.gpg
+
+
+
+Step 3: Add the Docker repository to Kali Linux
+
+Add Docker repository which contain the latest stable releases of Docker CE.
+
+echo "deb [arch=amd64] https://download.docker.com/linux/debian bullseye stable" | sudo tee  /etc/apt/sources.list.d/docker.list
+
+This command will add repository URL to /etc/apt/sources.list.d/docker.list.
+
+
+Step 4: Install Docker on Kali Linux
+
+Update the apt package index.
+
+sudo apt update
+
+
+To install Docker CE on Kali Linux, run the command:
+
+sudo apt install docker-ce docker-ce-cli containerd.io
+
+Hit the y key to start installation of Docker on Kali Linux.
+
+
+
+This installation will add docker group to the system without any users. Add your user account to the group to run docker commands as non-privileged user.
+
+sudo usermod -aG docker $USER
+newgrp docker
+
+
+
+Check Docker version installed.
+
+$ docker version
+
+
+Step 5: Install Docker Compose on Kali Linux
+
+Use the guide below to install latest Docker Compose on Kali Linux.
+
+
+After installation, confirm successful installation by checking version.
+
+$ docker-compose version
+Docker Compose version v2.15.1
+
+
+
+Step 6: Test Docker installation.
+
+Run a test docker container:
+
+docker run --rm -it  hello-world
+
+
+Step 6: Test Docker Compose installation
+
+Create a test Docker Compose file.
+
+vim docker-compose.yml
+
+Add below data to the file.
+
+
+
+version: '3'  
+services:
+  web:
+    image: nginx:latest
+    ports:
+     - "8080:80"
+    links:
+     - php
+  php:
+    image: php:8-fpm
+
+
+
+Start service containers.
+
+$ docker-compose up -d
+
+
+
+Show running Containers:
+
+docker-compose ps
+docker-compose stop
+docker-compose rm
+
+
+----------------------------------------------------------------------------
+
+
+Docker For Development Enviroment: 
+
+
+
+1. 
+
+
+
+cp .env.example .env
+
+nano .env
+
+
+APP_NAME=Travellist
+APP_ENV=dev
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+
+LOG_CHANNEL=stack
+
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=travellist
+DB_USERNAME=travellist_user
+DB_PASSWORD=password
+
+
+
+
+nano Dockerfile
+
+FROM php:7.4-fpm
+
+# Arguments defined in docker-compose.yml
+ARG user
+ARG uid
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Create system user to run Composer and Artisan Commands
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
+
+# Set working directory
+WORKDIR /var/www
+
+USER $user
+
+
+
+
+
+mkdir -p docker-compose/nginx
+nano docker-compose/nginx/travellist.conf
+
+
+docker-compose/nginx/travellist.conf
+
+
+server {
+    listen 80;
+    index index.php index.html;
+    error_log  /var/log/nginx/error.log;
+    access_log /var/log/nginx/access.log;
+    root /var/www/public;
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass app:9000;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+    }
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+        gzip_static on;
+    }
+}
+
+
+
+
+
+mkdir docker-compose/mysql
+
+nano docker-compose/mysql/init_db.sql
+
+
+
+docker-compose/mysql/db_init.sql
+
+
+DROP TABLE IF EXISTS `places`;
+
+CREATE TABLE `places` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `visited` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `places` (name, visited) VALUES ('Berlin',0),('Budapest',0),('Cincinnati',1),('Denver',0),('Helsinki',0),('Lisbon',0),('Moscow',1),('Nairobi',0),('Oslo',1),('Rio',0),('Tokyo',0);
+
+
+
+
+
+nano docker-compose.yml
+
+
+docker-compose.yml
+
+version: "3.7"
+services:
+
+
+networks:
+  travellist:
+    driver: bridge
+
+
+
+docker-compose.yml
+
+  app:
+    build:
+      args:
+        user: sammy
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: travellist
+    container_name: travellist-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - travellist
+
+
+
+
+
+docker-compose.yml
+
+
+
+db:
+    image: mysql:8.0
+    container_name: travellist-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - travellist
+
+
+
+
+docker-compose.yml
+
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: sammy
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: travellist
+    container_name: travellist-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - travellist
+
+  db:
+    image: mysql:8.0
+    container_name: travellist-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - travellist
+
+  nginx:
+    image: nginx:alpine
+    container_name: travellist-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - travellist
+
+networks:
+  travellist:
+    driver: bridge
+
+
+
+
+
+
+
+docker-compose build app
+
+docker-compose up -d
+
+docker-compose ps
+docker-compose exec app ls -l
+
+
+docker-compose exec app rm -rf vendor composer.lock
+docker-compose exec app composer install
+
+docker-compose exec app php artisan key:generate
+
+
+http://server_domain_or_IP:8000
+
+docker-compose logs nginx
+docker-compose pause
+docker-compose unpause
+docker-compose down
+
+
+
+
+
+
+-------------------------------------------------------------------
+
+
+
+
+2. 
+
+How to Dockerize Laravel Applications with Nginx, Php-FPM, Node js (Bonus: Deploy to CloudRun)
+
+
+
+
+user root;
+worker_processes  auto;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    access_log    /dev/stdout;
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    server {
+        # we use port 80 here to work with our docker config but you can configure it to any port you want, just remember to update the dockerfile accordingly
+		listen 80;
+
+    	index index.php index.html;
+
+        # your application here
+    	server_name app;
+
+    	error_log  /var/log/nginx/error.log;
+
+    	access_log /var/log/nginx/access.log;
+
+        # this should be the path of your public folder in laravel which from our dockerfile it would be /var/www/public
+    	root /var/www/public;
+
+		location ~ \.php$ {
+			try_files $uri =404;
+			fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        	fastcgi_pass 127.0.0.1:9000;
+        	fastcgi_index index.php;
+        	include fastcgi_params;
+        	fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        	fastcgi_param PATH_INFO $fastcgi_path_info;
+		fastcgi_buffering off;
+		}
+
+		location / {
+			try_files $uri $uri/ /index.php?$query_string;
+        	gzip_static on;
+		}
+}
+}
+
+
+
+
+
+
+
+upload_max_filesize=40M
+post_max_size=40M
+max_execution_time=180
+memory_limit=-1
+
+
+
+
+
+Dockerfile Config:
+
+
+# 2022 update
+FROM php:8.1-fpm
+
+# setup user as root
+USER root
+
+WORKDIR /var/www
+
+# setup node js source will be used later to install node js
+RUN curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
+RUN ["sh",  "./nodesource_setup.sh"]
+
+# Install environment dependencies
+RUN apt-get update \
+	# gd
+	&& apt-get install -y build-essential  openssl nginx libfreetype6-dev libjpeg-dev libpng-dev libwebp-dev zlib1g-dev libzip-dev gcc g++ make vim unzip curl git jpegoptim optipng pngquant gifsicle locales libonig-dev nodejs  \
+	&& docker-php-ext-configure gd  \
+	&& docker-php-ext-install gd \
+	# gmp
+	&& apt-get install -y --no-install-recommends libgmp-dev \
+	&& docker-php-ext-install gmp \
+	# pdo_mysql
+	&& docker-php-ext-install pdo_mysql mbstring \
+	# pdo
+	&& docker-php-ext-install pdo \
+	# opcache
+	&& docker-php-ext-enable opcache \
+	# exif
+    && docker-php-ext-install exif \
+    && docker-php-ext-install sockets \
+    && docker-php-ext-install pcntl \
+    && docker-php-ext-install bcmath \
+	# zip
+	&& docker-php-ext-install zip \
+	&& apt-get autoclean -y \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& rm -rf /tmp/pear/
+
+# Copy files
+COPY . /var/www
+
+COPY ./deploy/local.ini /usr/local/etc/php/local.ini
+
+COPY ./deploy/conf.d/nginx.conf /etc/nginx/nginx.conf
+
+RUN chmod +rwx /var/www
+
+RUN chmod -R 777 /var/www
+
+# setup FE
+RUN npm install
+
+RUN npm rebuild node-sass
+
+RUN npm run prod
+
+# setup composer and laravel
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN composer install --working-dir="/var/www"
+
+RUN composer dump-autoload --working-dir="/var/www" 
+
+RUN php artisan optimize
+
+RUN php artisan route:clear
+
+RUN php artisan route:cache
+
+RUN php artisan config:clear
+
+RUN php artisan config:cache
+
+RUN php artisan view:clear
+
+RUN php artisan view:cache
+
+# remove this line if you do not want to run migrations on each build
+RUN php artisan migrate --force
+
+EXPOSE 80
+
+RUN ["chmod", "+x", "post_deploy.sh"]
+
+CMD [ "sh", "./post_deploy.sh" ]
+# CMD php artisan serve --host=127.0.0.1 --port=9000
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------
+
+
+
+
+3.
+
+
+FROM composer:2.4 as build
+COPY . /app/
+RUN composer install --prefer-dist --no-dev --optimize-autoloader --no-interaction
+
+FROM php:8.1-apache-buster as dev
+
+ENV APP_ENV=dev
+ENV APP_DEBUG=true
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+RUN apt-get update && apt-get install -y zip
+RUN docker-php-ext-install pdo pdo_mysql
+
+COPY . /var/www/html/
+COPY --from=build /usr/bin/composer /usr/bin/composer
+RUN composer install --prefer-dist --no-interaction
+
+COPY docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY .env.dev /var/www/html/.env
+
+RUN php artisan config:cache && \
+    php artisan route:cache && \
+    chmod 777 -R /var/www/html/storage/ && \
+    chown -R www-data:www-data /var/www/ && \
+    a2enmod rewrite
+
+FROM php:8.1-apache-buster as production
+
+ENV APP_ENV=production
+ENV APP_DEBUG=false
+
+RUN docker-php-ext-configure opcache --enable-opcache && \
+    docker-php-ext-install pdo pdo_mysql
+COPY docker/php/conf.d/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+
+COPY --from=build /app /var/www/html
+COPY docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY .env.prod /var/www/html/.env
+
+RUN php artisan config:cache && \
+    php artisan route:cache && \
+    chmod 777 -R /var/www/html/storage/ && \
+    chown -R www-data:www-data /var/www/ && \
+    a2enmod rewrite
+
+
+
+
+
+
+
+<VirtualHost *:80>
+
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/html/public/
+
+  <Directory /var/www/>
+    AllowOverride All
+    Require all granted
+  </Directory>
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
+
+
+
+
+
+
+
+
+
+version: '3'
+services:
+  app:
+    build:
+      context: ./
+      target: dev
+    volumes:
+      - .:/var/www/html
+      - .env.dev:/var/www/html/.env
+    ports:
+      - "8082:80"
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+    networks:
+      - laravel
+    depends_on:
+      - mysql    
+  mysql:
+      image: 'mysql/mysql-server:8.0'
+      environment:
+        MYSQL_ROOT_HOST: "%"
+        MYSQL_ROOT_PASSWORD: "root"
+        MYSQL_USER: "laravel"
+        MYSQL_PASSWORD: "FhgVoFuOrWspc3TgBIA2K4dZGuJTPwSYBoLnNckcaxy"
+        MYSQL_DATABASE: "laravel"
+        MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      ports:
+        - 3906:3306
+      volumes:
+        - 'mysql8:/var/lib/mysql'
+        - './db/init.sql:/docker-entrypoint-initdb.d/01init.sql'
+      networks:
+        - laravel
+networks:
+    laravel:
+        driver: bridge
+volumes:
+    mysql8:
+        driver: local
+
+
+
+
+
+------------------------------------------------------------------------------------------
+
+Laravel On Docker: 
+
+https://github.com/k90mirzaei/laravel9-docker/tree/master/.docker/php
+
+.docker/nginx/nginx-conf
+.docker/php/dockerfile
+.docker/php/php.ini
+
+
+.docker/php/dockerfile
+
+FROM php:8.1-fpm
+
+ENV USER=www
+ENV GROUP=www
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+# Install Postgre PDO
+RUN apt-get update && apt-get install -y libpq-dev && docker-php-ext-install pdo pdo_pgsql
+
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+# Setup working directory
+WORKDIR /var/www/
+
+
+# Create User and Group
+RUN groupadd -g 1000 ${GROUP} && useradd -u 1000 -ms /bin/bash -g ${GROUP} ${USER}
+
+# Grant Permissions
+RUN chown -R ${USER} /var/www
+
+# Select User
+USER ${USER}
+
+# Copy permission to selected user
+COPY --chown=${USER}:${GROUP} . .
+
+EXPOSE 9000
+
+CMD ["php-fpm"]
+Footer
+
+
+
+
+.docker/php/php.ini
+
+upload_max_filesize = 100M
+post_max_size = 108M
+
+
+
+
+In Root: 
+
+docker-compose.yml
+
+version: '3.8'
+
+networks:
+  app-network:
+
+volumes:
+  app-data:
+
+services:
+  webserver:
+    image: nginx:1.21.6-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www
+      - .docker/nginx:/etc/nginx/conf.d
+    networks:
+      app-network:
+
+  backend:
+    build:
+      context: .docker/php
+      dockerfile: dockerfile
+    container_name: backend
+    volumes:
+      - ./:/var/www
+      - .docker/php/php.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      app-network:
+
+
+
+-----------------------X----------------------------------------
+
+
+
+
+Django: 
+
+pip install django
+django-admin
+django-admin startproject projectName
+python runserver projectname
+python3  manage.py runserver
+
+
+
+
+
+
+
+How to Set Up the Project
+Basic directory structure
+
+
+flask-docker
+├── app.py
+├── Dockerfile
+├── requirements.txt
+└── venv
+
+
+
+How to modify app.py
+
+Let's add the following lines of code to our app.py:
+
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_geek():
+    return '<h1>Hello from Flask & Docker</h2>'
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
+
+
+
+How to modify the Dockerfile
+
+# syntax=docker/dockerfile:1
+
+FROM python:3.8-slim-buster
+
+WORKDIR /python-docker
+
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+
+COPY . .
+
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+
+
+
+
+How to Build a Docker Image
+
+docker build --tag python-docker .
+
+docker images
+docker run
+
+http://localhost:5000/
+
+docker run -d -p 5000:5000 python-docker
+docker ps
+
+docker container prune
+
+
+
+--------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Python3: 
+
+
+Django:
+
+
+pip install django
+django-admin
+django-admin startproject <projectName?
+
+
+python manage.py runserver
+
+
+
+
+Django Crud : 
+
+
+virtualenv library
+pip install django==2.1.7
+django-admin startapp libraryapp
+python manage.py startapp book
+
+
+
+
+
+# DataFlair Static Files Settings
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static-files')
+#DataFlair #User_Uploaded_Files
+MEDIA_URL = 'media/'
+MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
+
+
+pip install pillow
+
+from django.db import models
+#DataFlair Models
+class Book(models.Model):
+    name = models.CharField(max_length = 50)
+    picture = models.ImageField()
+    author = models.CharField(max_length = 30, default=’anonymous’)
+    email = models.EmailField(blank = True)
+    describe = models.TextField(default = ‘DataFlair Django tutorials’)
+    def __str__(self):
+        return self.name
+
+
+
+from django import forms
+from .models import Book
+#DataFlair
+class BookCreate(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = '__all__'
+
+
+
+admin.site.register(Book)
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py createsuperuser
+
+
+
+from django.shortcuts import render, redirect
+from .models import Book
+from .forms import BookCreate
+from django.http import HttpResponse
+
+#DataFlair
+def index(request):
+    shelf = Book.objects.all()
+    return render(request, 'book/library.html', {'shelf': shelf})
+
+def upload(request):
+    upload = BookCreate()
+    if request.method == 'POST':
+        upload = BookCreate(request.POST, request.FILES)
+        if upload.is_valid():
+            upload.save()
+            return redirect('index')
+        else:
+            return HttpResponse("""your form is wrong, reload on <a href = "{{ url : 'index'}}">reload</a>""")
+else:
+        return render(request, 'book/upload_form.html', {'upload_form':upload})
+
+def update_book(request, book_id):
+    book_id = int(book_id)
+    try:
+        book_sel = Book.objects.get(id = book_id)
+    except Book.DoesNotExist:
+        return redirect('index')
+    book_form = BookCreate(request.POST or None, instance = book_sel)
+    if book_form.is_valid():
+       book_form.save()
+       return redirect('index')
+    return render(request, 'book/upload_form.html', {'upload_form':book_form})
+
+def delete_book(request, book_id):
+    book_id = int(book_id)
+    try:
+        book_sel = Book.objects.get(id = book_id)
+    except Book.DoesNotExist:
+        return redirect('index')
+    book_sel.delete()
+    return redirect('index')
+
+
+
+
+
+-------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

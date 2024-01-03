@@ -1,0 +1,31 @@
+>>>>> AWS Lambda Function <<<<<
+
+
+-----------------------------------------------------------
+
+keys: Lambda Function,
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+Vdo: Learning AWS Lambda | Live Project | Part I 
+https://youtu.be/ad7-GkgxP-8?t=756                 //Python
+https://youtu.be/0GkOyj0bh0g?t=140                 //Part I 
+
+
+Vdo: AWS Lambda Internal Working | Brain Mentors Pvt. Ltd.  //Simple vdos
+https://youtu.be/CnTf7VqW6e4?t=18
+
+Vdo: AWS Lambda | Serverless Architecture in Hindi | Brain Mentors
+https://youtu.be/_tchnKABomU?t=2
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+>> Lambda
+
+aws lambda -> Amazon Api Gateway Integration -> Postman testing
+
+
+
+
+-------------------------------------------------------------

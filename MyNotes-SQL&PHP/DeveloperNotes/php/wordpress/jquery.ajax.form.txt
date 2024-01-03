@@ -1,0 +1,43 @@
+>>>> Create New Page In Wordpress <<<<<<
+
+
+
+--------------------------------------------------------------
+
+
+//When new page is created in wordpress always copy page.php into new page then changes
+
+
+create pages: 
+
+
+//copy page.php and copy and paste on page-contact-us.php 
+
+page-contact-us.php
+
+<form id="frmContactUs'>
+   <table>
+     <tr>
+         <td>Name</td>
+         <td><input type="text" name="name" required/>  
+     </tr>
+     <tr>
+         <td>Email</td>
+         <td><input type="text" name="email" required/>  
+     </tr>   
+      <tr>
+         <td></td>
+         <td><input type="submit" name="submit"/>  
+     </tr>
+
+   </table>
+</form>
+
+
+
+
+
+
+
+
+

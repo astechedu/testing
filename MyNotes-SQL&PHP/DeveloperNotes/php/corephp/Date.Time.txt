@@ -1,0 +1,109 @@
+<<<<< PHP Date & Time <<<<<
+
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+
+>> Date()
+
+https://youtu.be/lSQ7JmBj6AA?t=356
+
+date_add(), date_sub(),date_modify(), date_diff(), checkdate(),
+
+
+
+               date (format)
+                    |
+                    |
+        --------------------------------------------------
+        |                   |                |            |
+        Day               Month             Year         Week
+
+
+  d (01 to 31)          F (January)         Y (2019)    D (Mon)
+  j (1 to 31)           m (01)              y (19)      l (Monday)
+  s (st, nd, rd or th)  M (Jan)                         N (1)
+                        n (1)                           w (1)
+
+
+
+Example:
+
+   echo "Today is ".date("d")."<br>";
+   echo "Today is ".date("jS")."<br>";
+   echo "Today is ".date("F")."<br>";
+   echo "Today is ".date("m")."<br>";
+   echo "Today is ".date("n")."<br>";
+   echo "Today is ".date("M")."<br>";
+   echo "Year is ".date("Y")."<br>";
+   echo "Year is ".date("y")."<br>";
+
+   echo "Full Date is ".date("d/m/Y")."<br>";
+   echo "Full Date is ".date("Y-m-d")."<br>";
+
+   echo "Full Date is ".date("d/m/Y")."<br>";
+   echo "Full Date is ".date("Y-M-d")."<br>";
+   echo "Full Date is ".date("D")."<br>";
+   echo "Full Date is ".date("l")."<br>";
+
+   echo "Week Day is ".date("N")."<br>";
+   echo "Week Day is ".date("w")."<br>";
+
+
+
+Date Examples:
+
+15-03-2013 + 30 Days = 14-04-2013
+
+date_add(object, interval)
+date_sub(object, interval)
+date_modify(object, modify)
+
+Example: 
+date_add():
+----------
+$date = date_create("2015-05-15");
+date_add($date, date_interval_create_from_date_string("30 days"));
+echo date_format($date, "d-m-Y" );
+
+date_sub():
+-----------
+$date = date_create("2015-05-15");
+date_sub($date, date_interval_create_from_date_string("30 days"));
+echo date_format($date, "d-m-Y" );
+
+date_modify():
+-------------
+$date = date_create("2015-05-15");
+date_modify($date, "10 days");        //Adding
+echo date_format($date, "d-m-Y" );
+
+date_modify($date, "-10 days");       //Subtracting
+
+--------------------------------------------------------------------
+---------------------------------------------------------------------
+
+$exhibitions = array();
+[start_date] => 2023-11-15
+[end_date] => 2023-12-10
+
+//https://stackoverflow.com/questions/77489724/create-date-range-from-two-dates-and-then-duplicate-subarray-for-each-date-in-ra
+
+foreach ($exhibitions as $key => $value) {
+
+    $startDate = strtotime($value['start_date']);
+    $endDate = strtotime($value['end_date']);
+
+    // Loop between timestamps, 24 hours at a time
+    for ($i = $startDate; $i <= $endDate; $i = $i + 86400 ) {
+            $given_date = date('Y-m-d', $i );     
+            $exhibitions[$key]['date'] = $given_date;
+    }    
+
+};
+
+------------------------------------------------------------------------
+
+
+

@@ -1,0 +1,105 @@
+>>> PHP OOPs __call Method <<<
+
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+Keys: Call Method, __callStatic(),  
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+Vdo: Examples: __call Method
+https://youtu.be/casoKXH_410?t=471
+
+Vdo: __callStatic()
+https://youtu.be/ss4LABJrD10?t=153
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+>> Call Method: 
+
+
+Example 01:
+
+class student{
+  private $first_name;
+  private $last_name;
+
+  private function setName($fname, $lname){
+     $this->first_name = $fname;
+     $this->last_name = $lname;
+  }
+
+}
+
+$test = new student();
+
+$test->setName("ajay","sisaudiya");        //Showing fetal error
+
+
+---x---
+
+
+
+
+Example 02:
+
+class student{
+  private $first_name;
+  private $last_name;
+
+  private function setName($fname, $lname){
+     $this->first_name = $fname;
+     $this->last_name = $lname;
+  }
+
+  public function __call($method, $args){
+    echo "This is private or non-existing method";
+  }
+
+}
+
+$test = new student();
+$test->person();
+
+---x---
+
+-------------------------------------------------------------------------
+
+Example 03:
+
+class student{
+  private $first_name;
+  private $last_name;
+
+  public function getName(){ return $this->first_name;}
+
+  private function setName($fname, $lname){
+     $this->first_name = $fname;
+     $this->last_name = $lname;
+  }
+
+  public function __call($method, $args){
+    if(method_exists($this, $method)){
+       call_user_func_array([$this, $method], $args);
+    }else{
+       echo "Method does not exist : $method";
+    }
+  }
+
+}
+
+
+$test = new student();
+$test->setName("raman","gupta");      //Method Exists in class
+//$test->person("ajay","sis");       //Method not exists in class
+
+$test->getName();
+
+
+
+---x---
+----------------------------------------
+

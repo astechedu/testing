@@ -1,0 +1,243 @@
+>>>> JavaScript - 2022 >>>>>
+
+
+-----------------------------------------------------
+Keys: 
+      
+    
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+//New JavaScript Features (ECMAScript 2022:ES2021)
+https://dev.to/brayanarrieta/new-javascript-features-ecmascript-2022-with-examples-4nhg
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+
+//ECMAScript 2022:ES2021:
+
+The new ECMAScript features for this year are:
+
+    Top-level await
+    Private instance fields, methods, and accessors
+    Static class fields and methods
+    Static class initialization blocks
+    Error: .cause
+    Array, String, and TypedArray: .at() Method
+    Object: .hasOwn()
+    RegExp: match .indices ('d' flag)
+
+
+//Top-level await:
+
+>>The new behavior:
+await Promise.resolve(console.log('Hello World'));
+// → Hello World
+
+>>Use cases:
+const strings = await import(`/i18n/${navigator.language}`);
+
+>>Resource initialization:
+
+const connection = await dbConnector();
+
+
+>>Dependency fallbacks:
+
+let jQuery;
+try {
+  jQuery = await import('https://cdn-a.com/jQuery');
+} catch {
+  jQuery = await import('https://cdn-b.com/jQuery');
+}
+
+------------------------------------------------------------
+
+//Private instance fields, methods, and accessors
+
+>>Private class fields
+
+>>Example:
+
+class Test {
+  #firstName = 'test-name';
+}
+
+const test = new Test();
+test.firstName
+
+// Output: undefined
+
+
+>>Private class methods
+
+>>Example
+
+class Test {
+
+  #addTestRunner(testRunner){
+    this.testRunner = testRunner
+  }
+}
+
+const test = new Test();
+test.addTestRunner({name: 'test'});
+
+>>Output: TypeError: test.addTestRunner is not a function
+
+---------------------------------------------------------------------
+
+//Private accessors (getters and setters) 
+
+>>Example
+
+class Test {
+
+  get #name(){
+    return 'test-name';
+  }
+}
+
+const test = new Test();
+test.name
+
+// Output: undefined
+
+----------------------------------------------------------
+
+//Static class fields and methods 
+
+Examples
+Static class fields
+
+class Test {
+  static firstName = 'test-static-name';
+}
+
+Test.firstName
+
+// Output: test-static-name
+
+--------------------------------------------------------------
+//Static class methods
+
+class Test {
+  static greeting(){
+    console.log('Hello this is a greeting from a static method');
+  }
+}
+
+Test.greeting();
+
+>>Output: Hello this is a greeting from a static method
+
+-----------------------------------------------------------
+//Static class initialization blocks 
+
+>>Example
+
+class Test {
+  static numbers = [1,2,3,4,5,6];
+  static evenNumbers = [];
+  static oddNumbers = [];
+
+  // static class initialization block
+  static {
+   this.numbers.forEach((number) => {
+     if(!(number % 2) ) {
+       this.evenNumbers.push(number);
+     } else {
+        this.oddNumbers.push(number);
+     }
+   });
+  }
+}
+
+Test.evenNumbers;
+// Output: [2, 4, 6]
+
+Test.oddNumbers;
+// Output: [1, 3, 5]
+----------------------------------------------------------
+
+//
+Array, String, and TypedArray: .at() Method 
+
+>>Example
+
+Access the latest element of the Array and String
+The old behavior
+
+const fruitsArray = ['banana', 'apple', 'orange', 'kiwi'];
+console.log(fruitsArray[fruitsArray.length -1])                // See Diff (Long)
+// Output: kiwi
+
+
+const fruit = 'kiwi';
+console.log(fruit[fruit.length -1])
+// Output: i
+
+>>The new behavior
+
+const fruitsArray = ['banana', 'apple', 'orange', 'kiwi'];
+console.log(fruitsArray.at(-1))                                 // See Diff (Short)s
+// Output: kiwi
+
+const fruit = 'kiwi';
+console.log(fruit.at(-1))
+// Output: i
+
+
+
+---------------------------------------------------------
+
+Object: .hasOwn()
+
+Today, it is very common (especially in library code) to write code like
+
+let hasOwnProperty = Object.prototype.hasOwnProperty
+
+if (hasOwnProperty.call(object, "foo")) {
+  console.log("has property foo")
+}
+
+This new feature simplifies that code to
+
+if (Object.hasOwn(object, "foo")) {
+  console.log("has property foo")
+}
+
+------------------------------------------------------------
+
+// RegExp: match .indices ('d' flag)
+
+>>Example
+Without the /d flag
+
+const regexExample = /greeting(\d)/g;
+const exampleString = 'greeting1greeting2';
+const result = [...exampleString.matchAll(regexExample)];
+console.log(result[0]);
+
+
+With the /d flag
+
+const regexExample2022 = /greeting(\d)/dg;
+const exampleString = 'greeting1greeting2';
+const result = [...exampleString.matchAll(regexExample2022)];
+console.log(result[0]);
+
+------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+

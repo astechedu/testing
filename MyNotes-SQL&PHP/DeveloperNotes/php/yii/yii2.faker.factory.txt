@@ -1,0 +1,178 @@
+>>>> Yii2 Faker Factory <<<<
+
+--------------------------------------------------------------------
+
+Key: 
+
+
+--------------------------------------------------------------------
+ 
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+
+
+>> Faker Factory 
+https://www.yiiframework.com/extension/yiisoft/yii2-faker/doc/guide/2.0/en/basic-usage
+
+
+Example 01:
+
+
+return [
+'controllerMap' => [
+    'fixture' => [
+        'class' => 'yii\faker\FixtureController',
+        'templatePath' => '@common/tests/templates/fixtures',
+        'fixtureDataPath' => '@common/tests/fixtures/data',
+    ],
+    // ...
+],
+// ...
+];
+
+---------
+
+$faker = Faker\Factory::create();
+
+// generate data by accessing properties
+   echo $faker->name;
+// 'Lucy Cechtelar';
+   echo $faker->address;
+ // "426 Jordy Lodge
+// Cartwrightshire, SC 88120-6700"
+    echo $faker->text;
+
+--------------------------------------------------------
+
+Exmple 02:
+
+
+php composer.phar require --prefer-dist yiisoft/yii2-faker
+
+"yiisoft/yii2-faker": "~2.0.0"
+
+
+'controllerMap' => [
+    'fixture' => [
+        'class' => 'yii\faker\FixtureController',
+    ],
+],
+
+
+
+-----------------------------------------------------------------
+
+
+Example 03: 
+
+
+$faker = Faker\Factory::create();
+echo $faker->name;
+echo $faker->address;
+echo $faker->text;
+
+
+
+Testing: 
+
+// users.php file under the template path (by default @tests/unit/templates/fixtures)
+/**
+ * @var $faker \Faker\Generator
+ * @var $index integer
+ */
+return [
+    'name' => $faker->firstName,
+    'phone' => $faker->phoneNumber,
+    'city' => $faker->city,
+    'password' => Yii::$app->getSecurity()->generatePasswordHash('password_' . $index),
+    'auth_key' => Yii::$app->getSecurity()->generateRandomString(),
+    'intro' => $faker->sentence(7, true),  // generate a sentence with 7 words
+];
+
+
+
+# generate fixtures from users fixture template
+php yii fixture/generate users
+
+# to generate several fixture data files
+php yii fixture/generate users profiles teams
+
+php yii fixture/generate-all
+php yii fixture/generate-all --count=3
+
+
+# generate fixtures in russian language
+php yii fixture/generate users --count=5 --language="ru_RU"
+
+# read templates from the other path
+php yii fixture/generate-all --templatePath='@app/path/to/my/custom/templates'
+
+# generate fixtures into other directory.
+php yii fixture/generate-all --fixtureDataPath='@tests/acceptance/fixtures/data'
+
+-----------------------------------------------------------------------------------
+
+
+
+
+
+
+-----------------------------------------------------------------------------------
+
+class Book extends \Faker\Provider\Base
+{
+    public function title($nbWords = 5)
+    {
+        $sentence = $this->generator->sentence($nbWords);
+        return mb_substr($sentence, 0, mb_strlen($sentence) - 1);
+    }
+}
+
+You can use it by adding it to the $providers property of the current command. In your console.php config:
+
+return [
+    'controllerMap' => [
+        'fixture' => [
+            'class' => 'yii\faker\FixtureController',
+            'providers' => [
+                'app\tests\unit\faker\providers\Book',
+            ],
+        ],
+        // ...
+    ],
+    // ...
+];
+
+
+-----------------------------------------------------------------------------------
+
+Yii 2 Advanced Template
+
+If you want to run faker in the Yii 2 advanced template, you need to set templatePath and fixtureDataPath. For example if you want to setup common fixtures, use the following config in console/config/main.php:
+
+return [
+    'controllerMap' => [
+        'fixture' => [
+            'class' => 'yii\faker\FixtureController',
+            'templatePath' => '@common/tests/templates/fixtures',
+            'fixtureDataPath' => '@common/tests/fixtures/data',
+        ],
+        // ...
+    ],
+    // ...
+];
+
+-------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+

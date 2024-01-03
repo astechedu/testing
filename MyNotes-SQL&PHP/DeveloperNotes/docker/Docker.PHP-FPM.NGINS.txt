@@ -1,0 +1,159 @@
+>>>> Docker PHP-FPM & NGINX <<<<<<<
+
+
+
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Keys: Production Environment, 
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+
+
+>> PHP-FPM & NGINX
+
+Website: https://blog.devsense.com/2019/php-nginx-docker
+
+//PHP and Nginx on Docker 
+
+//docker-compose.yml
+
+version: "3"
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports: 
+      - "8080:80"
+    networks:
+      - internal
+  php:
+    image: php:fpm-alpine
+    networks:
+      - internal
+networks:
+  internal:
+    driver: bridge
+
+
+
+//Dockerfile
+
+FROM nginx:alpine
+ADD nginx/default.conf /etc/nginx/conf.d
+
+
+
+//Then create default.conf inside the same directory:
+
+server {
+    listen 0.0.0.0:80;
+    root /var/www/html;
+    location / {
+        index index.php index.html;
+    }
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_pass php:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name;
+    }
+}
+
+
+
+
+
+
+//Volumes for Development environment
+
+version: "3"
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports: 
+      - "8080:80"
+    networks:
+      - internal
+    volumes:
+      - ./data/:/var/www/html/
+      - ./logs/nginx:/var/log/nginx/
+  php:
+    image: php:fpm-alpine
+    networks:
+      - internal
+    volumes:
+      - ./data/:/var/www/html/
+            - ./logs/php.log:/var/log/fpm-php.www.log
+networks:
+  internal:
+    driver: bridge
+
+
+
+
+
+
+>>-----> Production Environment <-----<<
+
+
+//docker-compose-prod.yml
+
+version: "3"
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/production/Dockerfile
+    ports: 
+      - "8080:80"
+    networks:
+      - internal
+  php:
+    build:
+      context: .
+      dockerfile: php/Dockerfile
+    networks:
+      - internal
+networks:
+  internal:
+    driver: bridge
+
+
+>>Important Notes for Productions: 
+
+//We removed all volumes, changed Dockerfile for nginx and added Dockerfile for PHP container. Because we no longer use Volumes, we now need to copy source files straight to containers.
+
+
+//Our production Dockerfile for nginx:
+
+
+FROM nginx:alpine
+COPY nginx/default.conf /etc/nginx/conf.d
+COPY ./data/ /var/www/html/
+
+
+//The only thing changed is copying of all the source files from /data to /var/www/html folder in the container. And finally newly created Dockerfile for php container looks like this:
+
+FROM php:fpm-alpine
+RUN docker-php-ext-install opcache
+COPY php/production/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+COPY ./data/ /var/www/html/
+
+You can see, that we have added OPCache module.
+
+//https://blog.devsense.com/2019/php-nginx-docker
+------------------------------------------------------------
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------

@@ -1,0 +1,125 @@
+>>>> Aryan <<<<
+
+
+---------------------------------------------------------------------------------
+
+English: 
+
+1. Parts of speech
+   Noun, Pronou, Varb, Adjective, Adverb, Prepositons, Conjunction,Interjections
+
+   Definitions:
+     Noun:    Noun is the name of a person, place, aminal or thing etc.
+     Pronoun: A word that is used in place of a noun is called a pronoun.
+
+2. Tenses
+   Present, Past, Future
+
+3. 
+
+
+
+----------------------------------------------------------------------------------
+
+Math: 
+
+1. Arithmatic
+   Numbers, Natural Numbers, Whole Numbers, Integers, Rational Numbers, Irrational Numbers, Real Numbers
+
+
+2. Geometry 
+   Lines, Angles, Triangles, Quadrilateral, Solid Shapes,  
+
+
+3. Algebra
+
+
+
+-----------------------------------------------------------------------------------
+
+Science:
+
+Science: https://www.vedantu.com/ncert-solutions/ncert-solutions-class-10-science
+
+
+Force,Motion,Energy
+Seed Germination
+Evaporation
+Condensation
+
+
+Germs: 
+    Germs are microorganisms. This means that they can be seen only through a microscope.
+    microscopic bacteria, viruses, fungi, and protozoa
+
+
+
+
+
+Science: 
+
+1. Physics
+2. Chemistry
+3. Zoology
+
+
+
+Scientists: 
+
+Newtons: 3 laws of motions
+Einstiens
+
+
+
+Pendulam, OM's loaw, electric circuit
+
+
+
+
+Science Chapters: 
+
+Chapter 1 - Chemical Reactions and Equations	
+Chapter 2 - Acids, Bases and Salts
+Chapter 3 - Metals and Non-metals
+Chapter 4 - Carbon and Its Compounds
+Chapter 5 - Periodic Classification of Elements
+Chapter 6 - Life Processes
+Chapter 7 - Control and Coordination	
+Chapter 8 - How do Organisms Reproduce?
+Chapter 9 - Heredity and Evolution	
+Chapter 10 - Light Reflection and Refraction
+Chapter 11 - Human Eye and Colourful World
+Chapter 12 - Electricity
+Chapter 13 - Magnetic Effects of Electric Current
+Chapter 14 - Sources of Energy
+Chapter 15 - Our Environment
+Chapter 16 - Management of Natural Resources
+
+-----------------------------------------------------------------------------------
+
+Hindi:
+
+
+-----------------------------------------------------------------------------------
+
+
+
+Symfony6.3x Migrations Part-13 | Create & Run | Migrate
+
+
+#php #symfony #symfonyTutorial
+
+
+php,php tutorial,symfony,symfony tutorial,symfony development,symfony migrations,seeding,insert data into databases,doctrine migrations in symfony,migration status & list in symfony project
+
+--------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+

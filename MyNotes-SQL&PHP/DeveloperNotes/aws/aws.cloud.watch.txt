@@ -1,0 +1,36 @@
+>>>>> AWS Cloud Watch <<<<<
+
+
+-----------------------------------------------------------
+
+keys: Cloud Watch, 
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+Vdo: Understand AWS Cloud Watch In Hindi | Brain Mentors Pvt. Ltd.
+https://youtu.be/0VsudGmO_CU?t=32
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+>> SSH: 
+
+ssh -i test.pem ec2-user@3.16.128.114
+
+
+-------------------------------------------------------------
+
+>> Cloud Watch (Monitoring)
+
+As: Alarm, Logs, CUP Utilization, DB Connections Count, Free Storage, Freeable Memory, Write IOPS(Count/Second), Read IOPS(Count/Second)
+
+Terms:
+
+. Dashboard
+. Alarms
+. Logs
+. Events
+
+
+---------------------------------------------------------------

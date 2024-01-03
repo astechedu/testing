@@ -1,0 +1,111 @@
+>>>> MongoDB Relations <<<<<
+
+
+
+----------------------------------------------------------------------
+Keys: One to one relation,  One to Many Relations, Many to Many Relation, 
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+Vdo: One to one relations
+https://youtu.be/KA9RrZEmUNg?t=145
+
+Vdo: One to Many Relations
+https://youtu.be/t_9fgpsO_vM?t=728
+
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+
+
+>>> One to one relations
+
+//Insert document with data in collection 'persons'
+
+db.persons.insertOne({
+   name:"ajay",
+   isVarified: true,
+   earning: 4000
+
+})
+
+//Reading document from collection 'persons'
+db.persons.findOne()
+{
+  "_id" : ObjectId("7c8b90a42a03555a98484049d"),
+  "name" : "ajay",
+  "idVarified" : true,
+  "earning" : 4000
+}
+
+
+//Insert document with data in collection 'videos'
+
+db.videos.insertOne({
+   topic:"Fun One",
+   length: 4,
+   earning: 4000,
+   creator: ObjectId("6c9b9395959999899958")     //creator or owner (persons), Link to persons; like foreign key in mysql
+})
+
+//Reading document from collection 'videos'
+db.videos.findOne()
+{
+  "_id" : ObjectId("5c9b90a42a03555a98484042c"),
+  "topic" : "Fun One",
+  "length" : 4,
+  "creator" : ObjectId("6c9b9395959999899958")
+}
+
+
+---x---
+-----------------------------------------------------------------------
+
+
+>>> One to Many Relations
+
+db.comment.insertOne({ 
+  videoname: "react js", 
+  comment: "How to install reactjs", 
+  replies: [
+             { _id: "repl112", text: "stuff 1"},       // Like foreign key in mysql 
+             { _id: "rep223", text: "stuff 2"}         // Like foreign key in mysql 
+]})
+
+
+db.replies.insertMany([
+ {_id: "repl112",
+   text: "You can use node"
+ },
+ {
+  _id: "rep223",
+   text: "You can use homebrew"
+ }])
+
+
+
+-----------------------------------------------------------------------
+
+>> Many to Many Relation
+
+//Create document  
+db.courses.insertOne({
+   name:"react native",   //ObjectId("5ca33a89s889kks8kks43")
+   price: 12.0
+})
+
+//Create document 
+db.users.insertOne({
+   name:"ajay",         //ObjectId("5ck333lk3k3j53k33jkk36"
+   isVerified: true
+})
+
+//Create one more document
+db.purchased.insertOne({
+  productId: ObjectId("5ca33a89s889kks8kks43"),      //Linked to courses
+  customerId: ObjectId("5ck333lk3k3j53k33jkk36")     //Linked to users
+})
+
+
+
+------------------------------------------------------------------------

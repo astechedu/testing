@@ -1,0 +1,579 @@
+<<< SQL Window Function <<<<<
+
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Keys: Rank,Dense Rank,Percent Rank, Row Number, Lead, Lag, Over(),
+      Window Function, Partition By, Simple Exmple On Rank() & Dense_rank(),
+      
+
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+Website:
+ 
+//Window Function
+https://youtu.be/8ss44NA9fKw?t=176
+
+//Window Functions: Rank() & DENSE_RANK() Details                     - V Good
+https://youtu.be/NNpFHQl_GT0?t=54
+
+//Window Function RANK(), DENSE_RANK() wiht Partition By  in Details  - V Good
+https://youtu.be/xMWEVFC4FOk?t=202
+
+//Window Funtion: Lead(), Leg()
+Vdo: https://youtu.be/DJwdmodw7Bs?t=40
+
+//Wesite: Examples of window function, create & insert data also
+https://www.sqlshack.com/overview-of-sql-rank-functions/
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+
+
+----> Windows Functions <-----
+
+Vdo: https://youtu.be/8ss44NA9fKw?t=260
+
+
+1. Aggregate Functions (Avg,Sum,Count,Min(),Max())
+2. Ranking Funcions (Rank, Dense Rank, Percent Rank, Row number, etc)
+3. Analytical Functions (Lead, Lag, etc)
+
+
+
+   On writing OVER(), aggregate function MAX() will be treated s WINDOWS 
+   function so it will not expect us to write GROUP BY
+  
+Uses: 
+     
+     select e.*, ( select Max(salary from emp) ) from emmp e;    //Same Result, Showing Max sal to all rows
+     select e.*, Max(salary) OVER() from emmp e;                 //Same Result, Showing Max sal to all rows
+
+
+
+
+
+     ---> Aggregate Function <---
+
+
+     select e.*, Max(salary) OVER(PARTITION BY deptno) from emmp e;   // Showing Max sal according to dept_id
+    
+
+
+--- x ---
+
+
+     ---> Ranking Function <---
+     
+
+     Rank()       : Ranking value is missed.  Ex. 1, 2, 2, 2, 5, 6, 6, 6, 9 ....
+     DENSE_RANK() : Ranking value not missed. EX. 1, 2, 2, 2, 3, 4, 4, 4, 5 ....
+     ROW_NUMBER   : Unique number to each row
+
+
+     select e.*, ROW_NUMBER() OVER(ORDER BY empno) from emp e;                       
+     select e.*, ROW_NUMBER() OVER(PARTITION BY deptno Order By empno) from emp e;
+ 
+     select *from (
+     select e.* ROW_NUMBER() OVER(PARTITION BY DEPTNO ORDER BY EMPNO) R from emp e)
+     Where R<=2;
+
+     select DISTINCT Salary from (
+     select e.* DENSE_RANK() OVER(ORDER BY Salary DESC) R from emp e)
+     Where R=3;
+
+     select *from (
+     select e.* DENSE_RANK() OVER(PARTITION BY DeptNo ORDER BY Salary DESC) R from emp e)
+     Where R<=2;
+
+     select e.*, RANK() OVER (ORDER BY salary DESC) OVER from emp e;
+     select e.*, DENSE_RANK() OVER (ORDER BY Salary DESC) from emp e;
+
+    select e.*, RANK() OVER(ORDER BY salary DESC), DENSE_RANK() OVER(ORDER BY Salary DESC) from emp e;
+
+
+    select e.*, RANK() OVER(ORDER BY salary DESC),DENSE_RANK() OVER(ORDER BY Salary DESC),PERCENT_RANK() OVER(ORDER BY Salary DESC) OVER from emp e;
+  
+
+--- x ---
+
+
+
+   ---> Analytical Function <---
+
+
+Syntax: 
+
+LAG/LEAD (scalar_expression [,offset] [,default])
+ OVER ([ partition_by_class ] order_by_clause )
+                   [] - means optional parameter
+
+
+  select e.*, LAG OVER ( PARTITION BY deptno ORDER BY SAL DESC ) R from emp e;
+
+  select e.*, LAG OVER ( ORDER BY empno ) R from emp e;
+    
+  select e.*, LAG(SAL,2) OVER ( ORDER BY empno ) R from emp e;
+
+  select e.*, LAG(SAL,1,0) OVER ( ORDER BY empno ) R from emp e;
+  
+  select SAL, LAG(SAL,1,0) OVER ( ORDER BY empno ) R from emp e;
+
+  select e.*, LEAD(SAL,1,0) OVER ( ORDER BY empno ) R from emp e;
+
+
+
+  select SAL,PREV,
+  CASE
+      WHEN sal>prev THEN 'HIGHER'
+      WHEN sal>prev THEN 'LOWER'
+      ELSE 'EQUAL'
+  END SALARYCOMP
+  from (
+  select SAL, LAG(SAL,1,0) OVER( ORDER BY empno ) prev from emp e);
+
+  Video stopped at 19:34 
+
+
+---- x ----
+
+
+--------------------------------------------------------------------------
+
+
+>>> Simple Exmple On Rank() & Dense_rank(): 
+
+Vdo: https://youtu.be/NNpFHQl_GT0?t=318
+
+
+1. Aggregate Functions (Avg,Sum,Count,Min(),Max())
+2. Ranking Funcions (Rank, Dense Rank, Percent Rank, Row number, etc)
+3. Analytical Functions (Lead, Lag, etc)
+
+
+
+Example 01: 
+
+select 
+ emp_name,
+ ROW_NUMBER() OVER (order by dept_id asc) row_number,
+ RANK()       OVER (order by dept_id asc) rank,
+ DENSE_RANK() OVER (order by dept_id asc) dense_rank
+From emp
+order by dept_id asc;
+
+
+
+Example 02: 
+//Vdo: https://youtu.be/xMWEVFC4FOk?t=307
+
+1)
+//Not partition wise
+
+select emp_id,emp_name,department_id,salary
+ ,RANK()       OVER (order by salary desc) as rank
+ ,DENSE_RANK() OVER (order by salary desc) as dense_rank
+ ,ROW_NUMBER() OVER (order by salary desc) as row_number
+From emp;
+
+
+
+2) 
+//Partition wise department_id, Rank will be re-calculated
+
+select emp_id,emp_name,department_id,salary
+ ,RANK()       OVER (partition by department_id order by salary desc) as rank
+ ,DENSE_RANK() OVER (partition by department_id order by salary desc) as dense_rank
+ ,ROW_NUMBER() OVER (partition by department_id order by salary desc) as row_number
+From emp;
+
+
+
+------------------------------------------------------------------------------------
+
+>>>> Lead() & Leg() <<<<<
+
+Video: 
+https://youtu.be/DJwdmodw7Bs?t=365
+
+
+LEAD() : The lead function gives the next column values based on ordering.
+LEG()  : The leg fuction gives the previous column values on ordering.
+
+
+
+
+SELECT * FROM scott,dept;
+
+Example:
+
+--- LEAD ----
+
+select deptno, dname, loc,
+LEAD(loc) OVER(ORDER BY deptno) AS new_loc
+FROM scott,dept;
+
+select deptno, dname, loc,
+LEAD(loc,1) OVER(ORDER BY deptno) AS new_loc
+FROM scott,dept;
+
+
+select deptno, dname, loc,
+LEAD(loc,2) OVER(ORDER BY deptno) AS new_loc
+FROM scott,dept;
+
+
+select deptno, dname, loc,
+LEAD(loc,4) OVER(ORDER BY deptno) AS new_loc
+FROM scott,dept;
+
+
+//Default value: null replaced with 0
+
+select deptno, dname, loc,
+LEAD(loc,4,0) OVER(ORDER BY deptno) AS new_loc
+FROM scott,dept;
+
+//Default value as a string
+
+select deptno, dname, loc,
+LEAD(loc,4,'cityname') OVER(ORDER BY deptno) AS city
+FROM scott,dept;
+
+--- LEG ---
+
+select deptno, dname, loc,
+LEG(loc,1) OVER(ORDER BY deptno) AS city
+FROM scott,dept;
+
+select deptno, dname, loc,
+LEG(loc,1,0) OVER(ORDER BY deptno) AS city
+FROM scott,dept;
+
+
+
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+
+>>> Window Functions <<<<<<
+
+
+
+https://www.sqlshack.com/overview-of-sql-rank-functions/
+
+
+ We have the following rank functions.
+
+    ROW_NUMBER()
+    RANK()
+    DENSE_RANK()
+    NTILE()
+
+
+CREATE TABLE ExamResult
+(StudentName VARCHAR(70), 
+ Subject     VARCHAR(20), 
+ Marks       INT
+);
+INSERT INTO ExamResult
+VALUES
+('Lily', 
+ 'Maths', 
+ 65
+);
+INSERT INTO ExamResult
+VALUES
+('Lily', 
+ 'Science', 
+ 80
+);
+INSERT INTO ExamResult
+VALUES
+('Lily', 
+ 'english', 
+ 70
+);
+INSERT INTO ExamResult
+VALUES
+('Isabella', 
+ 'Maths', 
+ 50
+);
+INSERT INTO ExamResult
+VALUES
+('Isabella', 
+ 'Science', 
+ 70
+);
+INSERT INTO ExamResult
+VALUES
+('Isabella', 
+ 'english', 
+ 90
+);
+INSERT INTO ExamResult
+VALUES
+('Olivia', 
+ 'Maths', 
+ 55
+);
+INSERT INTO ExamResult
+VALUES
+('Olivia', 
+ 'Science', 
+ 60
+);
+INSERT INTO ExamResult
+VALUES
+('Olivia', 
+ 'english', 
+ 89
+);
+
+
+
+//ROW_Number() SQL RANK function: 
+
+
+Marks in ascending order: 
+
+
+SELECT Studentname, 
+       Subject, 
+       Marks, 
+       ROW_NUMBER() OVER(ORDER BY Marks) RowNumber
+FROM ExamResult;
+
+
+Marks in descending order:
+
+SELECT Studentname, 
+       Subject, 
+       Marks, 
+       ROW_NUMBER() OVER(ORDER BY Marks desc) RowNumber
+FROM ExamResult;
+
+
+SELECT Studentname, 
+       Subject, 
+       Marks, 
+       ROW_NUMBER() OVER(ORDER BY Marks desc) RowNumber
+FROM ExamResult;
+
+
+
+//RANK() SQL RANK Function:
+
+
+
+ Execute the following query to get this result set. In this query, you can note the following things:
+
+    We use PARTITION BY Studentname clause to perform calculations on each student group
+    Each subset should get rank as per their Marks in descending order
+    The result set uses Order By clause to sort results on Studentname and their rank
+
+
+Ascending Order: 
+
+SELECT Studentname, 
+       Subject, 
+       Marks, 
+       RANK() OVER(PARTITION BY Studentname ORDER BY Marks DESC) Rank
+FROM ExamResult
+ORDER BY Studentname, 
+         Rank;
+
+Descending Order: 
+
+
+SELECT Studentname, 
+       Subject, 
+       Marks, 
+       RANK() OVER(ORDER BY Marks DESC) Rank
+FROM ExamResult
+ORDER BY Rank;
+
+
+
+
+//DENSE_RANK() SQL RANK function
+
+//Let’s execute the following query with the DENSE_RANK() function.
+
+SELECT Studentname, 
+       Subject, 
+       Marks, 
+       DENSE_RANK() OVER(ORDER BY Marks DESC) Rank
+FROM ExamResult
+ORDER BY Rank;
+
+
+
+//Let’s use DENSE_RANK function in combination with the SQL PARTITION BY clause.
+
+SELECT Studentname, 
+       Subject, 
+       Marks, 
+       DENSE_RANK() OVER(PARTITION BY Subject ORDER BY Marks DESC) Rank
+FROM ExamResult
+ORDER BY Studentname, 
+         Rank;
+
+//Let’s update the student mark with the following query and rerun the query.
+
+Update Examresult set Marks=70 where Studentname='Isabella' and Subject='Maths'
+
+
+//Let’s see the difference between RANK() and DENSE_RANK() SQL Rank function with the following query. 
+
+
+Query 1
+SELECT Studentname, 
+       Subject, 
+       Marks, 
+       RANK() OVER(PARTITION BY StudentName ORDER BY Marks ) Rank
+FROM ExamResult
+ORDER BY Studentname, 
+         Rank;
+
+Query 2
+SELECT Studentname, 
+       Subject, 
+       Marks, 
+       DENSE_RANK() OVER(PARTITION BY StudentName ORDER BY Marks ) Rank
+FROM ExamResult
+ORDER BY Studentname, 
+         Rank;
+
+
+
+//NTILE(N) SQL RANK function
+
+
+SELECT *, 
+       NTILE(2) OVER(
+       ORDER BY Marks DESC) Rank
+FROM ExamResult
+ORDER BY rank;
+
+
+//In the output, we can see two groups. Group 1 contains five rows, and Group 2 contains four rows. 
+
+Similarly, NTILE(3) divides the number of rows of three groups having three records in each group. 
+
+
+SELECT *, 
+       NTILE(3) OVER(
+       ORDER BY Marks DESC) Rank
+FROM ExamResult
+ORDER BY rank;
+
+
+//We can use SQL PARTITION BY clause to have more than one partition. In the following query, each partition on subjects is divided into two groups.
+
+
+SELECT *, 
+       NTILE(2) OVER(PARTITION  BY subject ORDER BY Marks DESC) Rank
+FROM ExamResult
+ORDER BY subject, rank;
+
+
+
+//Practical usage of SQL RANK functions:
+
+We can use SQL RANK function to fetch specific rows from the data. Suppose we want to get the data of the students from ranks 1 to 3. In the following query, we use common table expressions(CTE) to get data using ROW_NUMBER() function and later filtered the result from CTE to satisfy our condition. 
+
+
+WITH StudentRanks AS
+(
+  SELECT *, ROW_NUMBER() OVER( ORDER BY Marks) AS Ranks
+  FROM ExamResult
+)
+ 
+SELECT StudentName , Marks 
+FROM StudentRanks
+WHERE Ranks >= 1 and Ranks <=3
+ORDER BY Ranks
+
+//We can use the OFFSET FETCH command starting from SQL Server 2012 to fetch a specific number of records. 
+
+WITH StudentRanks AS
+(
+  SELECT *, ROW_NUMBER() OVER( ORDER BY Marks) AS Ranks
+  FROM ExamResult
+)
+ 
+SELECT StudentName , Marks 
+FROM StudentRanks
+ORDER BY Ranks OFFSET 1 ROWS FETCH NEXT 3 ROWS ONLY;
+
+
+WITH StudentRanks AS
+(
+  SELECT *, ROW_NUMBER() OVER( ORDER BY Marks) AS Ranks
+  FROM ExamResult
+)
+ 
+SELECT StudentName , Marks 
+FROM StudentRanks
+ORDER BY Ranks OFFSET 1 ROWS FETCH NEXT 3 ROWS ONLY;
+
+
+
+------> A quick summary of SQL RANK Functions <-------
+
+ROW_Number:	
+
+	It assigns the sequential rank number to each unique record.
+
+RANK:
+	It assigns the rank number to each row in a partition. It skips the number for similar values.
+
+Dense_RANK:	
+
+	It assigns the rank number to each row in a partition. It does not skip the number for similar values.
+
+NTILE(N):
+	
+        It divides the number of rows as per specified partition and assigns unique value in the partition. 
+
+
+------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+
+
+
+
+
+
+
+

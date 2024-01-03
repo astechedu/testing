@@ -1,0 +1,662 @@
+--------------------
+
+  M  Y  S  Q  L 
+
+--------------------
+1. 
+
+
+1. DEPT Table:
+
+CREATE TABLE "DEPT" (
+ "DEPTNO" NUMBER(2,0), 
+ "DNAME" VARCHAR2(14), 
+ "LOC" VARCHAR2(13)
+);
+
+
+Insert into DEPT (DEPTNO,DNAME,LOC) values (10,'ACCOUNTING','NEW YORK');
+Insert into DEPT (DEPTNO,DNAME,LOC) values (20,'RESEARCH','DALLAS');
+Insert into DEPT (DEPTNO,DNAME,LOC) values (30,'SALES','CHICAGO');
+Insert into DEPT (DEPTNO,DNAME,LOC) values (40,'OPERATIONS','BOSTON');
+Insert into DEPT (DEPTNO,DNAME,LOC) values (50,'IT','HYDERABAD');
+
+
+
+2. EMP Table:
+
+CREATE TABLE EMP
+   (	"EMPNO" NUMBER(4,0), 
+	"ENAME" VARCHAR2(10 BYTE), 
+	"JOB" VARCHAR2(9 BYTE), 
+	"MGR" NUMBER(4,0), 
+	"HIREDATE" DATE, 
+	"SAL" NUMBER(7,2), 
+	"DEPTNO" NUMBER(2,0)
+   )
+
+
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (7839,'KING','PRESIDENT',null,to_date('17-11-81','DD-MM-RR'),5000,10);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (7698,'BLAKE','MANAGER',7839,to_date('01-05-81','DD-MM-RR'),2850,30);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (7782,'CLARK','MANAGER',7839,to_date('09-06-81','DD-MM-RR'),2450,10);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (7566,'JONES','MANAGER',7839,to_date('02-04-81','DD-MM-RR'),2975,20);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (7788,'SCOTT','ANALYST',7566,to_date('19-04-87','DD-MM-RR'),3000,20);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (7902,'FORD','ANALYST',7566,to_date('03-12-81','DD-MM-RR'),3000,20);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (7369,'SMITH','CLERK',7902,to_date('17-12-80','DD-MM-RR'),50,20);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (7499,'ALLEN','SALESMAN',7698,to_date('20-02-81','DD-MM-RR'),1600,30);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (7521,'WARD','SALESMAN',7698,to_date('22-02-81','DD-MM-RR'),1250,30);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (7654,'MARTIN','SALESMAN',7698,to_date('28-09-81','DD-MM-RR'),1250,30);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (7844,'TURNER','SALESMAN',7698,to_date('08-09-81','DD-MM-RR'),1500,30);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (7876,'ADAMS','CLERK',7788,to_date('23-05-87','DD-MM-RR'),1100,20);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (7900,'JAMES','CLERK',7698,to_date('03-12-81','DD-MM-RR'),8005,30);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (8001,'ANABELLE','CLERK',7698,to_date('03-12-81','DD-MM-RR'),5500,20);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (8002,'olive','CLERK',7698,to_date('03-12-81','DD-MM-RR'),5800,20);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (8003,'OLIVE','CLERK',7698,to_date('03-12-81','DD-MM-RR'),5800,20);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (8004,'KINGS','CLERK',7698,to_date('03-12-81','DD-MM-RR'),5800,20);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (8005,'KINE','CLERK',7698,to_date('03-12-81','DD-MM-RR'),5800,20);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (8006,'KILLEY','SALESMAN',7788,to_date('12-06-90','DD-MM-RR'),7500,null);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (8007,'Jason','developer',7788,to_date('12-06-90','DD-MM-RR'),7500,null);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (8008,'BIPLAB  ','CRELK',7788,to_date('12-07-89','DD-MM-RR'),8999,20);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (8009,'BIPLAB','SALESMAN',7698,to_date('12-03-22','DD-MM-RR'),9000,30);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (8010,'Jason','SALESMAN',7698,to_date('12-03-22','DD-MM-RR'),9000,30);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (8011,'KINE','CLERK',7788,to_date('16-09-22','DD-MM-RR'),9800,30);
+Insert into EMP (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,DEPTNO) values (1234,'BIPLAB',null,null,null,1000,50);
+
+
+
+
+3. BOOKS Table:
+
+CREATE TABLE "BOOKS" (
+ "BOOKID" NUMBER(5,0), 
+ "BOOKNAME" VARCHAR2(100), 
+ "CATEGORY" VARCHAR2(20), 
+ "AUTHOR" VARCHAR2(50), 
+ "PUBLICATIONDATE" DATE, 
+ "LANGUAGE" VARCHAR2(20), 
+ "DESCRIPTION" VARCHAR2(1000)
+);
+ 
+ 
+Insert into BOOKS (BOOKID,BOOKNAME,CATEGORY,AUTHOR,PUBLICATIONDATE,LANGUAGE,DESCRIPTION) values (1001,'In Search Of Her','Fiction','Deesha Sangani',to_date('12-08-20','DD-MM-RR'),'English','A mother who would stop at nothing for her child, is a dangerous woman to mess with.');
+ 
+Insert into BOOKS (BOOKID,BOOKNAME,CATEGORY,AUTHOR,PUBLICATIONDATE,LANGUAGE,DESCRIPTION) values (1002,'You are the best wife','Fiction','Ajaya Pandey',to_date('23-11-15','DD-MM-RR'),'English','You Are The Best Wife: A True Love Story is a story about how people find true love and comfort in dissimilarities; about how two people with absolutely different ideologies meet and fall in love');
+ 
+Insert into BOOKS (BOOKID,BOOKNAME,CATEGORY,AUTHOR,PUBLICATIONDATE,LANGUAGE,DESCRIPTION) values (1003,'Something I Never Told You','Adventure','Shravya Bhinder',to_date('02-05-19','DD-MM-RR'),'English',null);
+ 
+Insert into BOOKS (BOOKID,BOOKNAME,CATEGORY,AUTHOR,PUBLICATIONDATE,LANGUAGE,DESCRIPTION) values (1004,'Chanakya Neeti','Literature','Ashwini Parashar',to_date('01-08-22','DD-MM-RR'),'Hindi','सिकंदर ने पंजाब, गांधर आदि राज्यों को जीतकर उन्हें अपने अधीन कर लिया था। वहां यवन सैनिकों के अत्याचारों से लोग त्रास्त थे। चारों तरफ आतंक व्याप्त था। बहू-बेटियों की अस्मिता असुरक्षित थी। यवन पूरे भारत को जीतना चाहते थे। स्थिति बड़ी दयनीय थी। यवनों के राज्य का विस्तार पूरे भारतवर्ष में हो, यह चाणक्य जैसे आत्मसम्मानी देशभक्त के लिए असहनीय थ');
+ 
+
+
+4. LIBRARY TABLE:
+
+CREATE TABLE "LIBRARY" (
+ "TRANID" NUMBER(*,0), 
+ "EMPID" NUMBER(4,0), 
+ "BOOKID" NUMBER(5,0), 
+ "ISSUEDATE" TIMESTAMP (6), 
+ "RETURNDATE" TIMESTAMP (6)
+);
+ 
+
+Insert into LIBRARY (TRANID,EMPID,BOOKID,ISSUEDATE,RETURNDATE) values (100001,8010,1001,to_timestamp('02-03-22 12:00:00.000000000 AM','DD-MM-RR fmHH12:fmMI:SSXFF AM'),to_timestamp('15-03-22 12:00:00.000000000 AM','DD-MM-RR fmHH12:fmMI:SSXFF AM'));
+ 
+Insert into LIBRARY (TRANID,EMPID,BOOKID,ISSUEDATE,RETURNDATE) values (100003,8010,1002,to_timestamp('19-09-22 12:00:00.000000000 AM','DD-MM-RR fmHH12:fmMI:SSXFF AM'),to_timestamp('22-09-22 12:00:00.000000000 AM','DD-MM-RR fmHH12:fmMI:SSXFF AM'));
+ 
+Insert into LIBRARY (TRANID,EMPID,BOOKID,ISSUEDATE,RETURNDATE) values (100004,8006,1001,to_timestamp('19-01-22 12:00:00.000000000 AM','DD-MM-RR fmHH12:fmMI:SSXFF AM'),to_timestamp('22-02-22 12:00:00.000000000 AM','DD-MM-RR fmHH12:fmMI:SSXFF AM'));
+ 
+Insert into LIBRARY (TRANID,EMPID,BOOKID,ISSUEDATE,RETURNDATE) values (100005,8006,1002,to_timestamp('12-05-22 12:00:00.000000000 AM','DD-MM-RR fmHH12:fmMI:SSXFF AM'),to_timestamp('12-05-22 12:00:00.000000000 AM','DD-MM-RR fmHH12:fmMI:SSXFF AM'));
+ 
+Insert into LIBRARY (TRANID,EMPID,BOOKID,ISSUEDATE,RETURNDATE) values (100006,8006,1003,to_timestamp('08-07-22 12:00:00.000000000 AM','DD-MM-RR fmHH12:fmMI:SSXFF AM'),to_timestamp('09-08-22 12:00:00.000000000 AM','DD-MM-RR fmHH12:fmMI:SSXFF AM'));
+ 
+Insert into LIBRARY (TRANID,EMPID,BOOKID,ISSUEDATE,RETURNDATE) values (100007,8006,1004,to_timestamp('19-04-22 12:00:00.000000000 AM','DD-MM-RR fmHH12:fmMI:SSXFF AM'),to_timestamp('22-09-22 12:00:00.000000000 AM','DD-MM-RR fmHH12:fmMI:SSXFF AM'));
+ 
+Insert into LIBRARY (TRANID,EMPID,BOOKID,ISSUEDATE,RETURNDATE) values (100008,8001,1001,to_timestamp('19-02-22 12:00:00.000000000 AM','DD-MM-RR fmHH12:fmMI:SSXFF AM'),null);
+ 
+Insert into LIBRARY (TRANID,EMPID,BOOKID,ISSUEDATE,RETURNDATE) values (100009,8001,1002,to_timestamp('12-09-22 12:00:00.000000000 AM','DD-MM-RR fmHH12:fmMI:SSXFF AM'),null);
+ 
+Insert into LIBRARY (TRANID,EMPID,BOOKID,ISSUEDATE,RETURNDATE) values (100010,8001,1003,to_timestamp('08-09-22 12:00:00.000000000 AM','DD-MM-RR fmHH12:fmMI:SSXFF AM'),null);
+ 
+Insert into LIBRARY (TRANID,EMPID,BOOKID,ISSUEDATE,RETURNDATE) values (100002,8010,1001,to_timestamp('19-09-22 12:00:00.000000000 AM','DD-MM-RR fmHH12:fmMI:SSXFF AM'),null);
+ 
+----x----
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+
+2. 
+
+>>Data and Schema for the emp-dept db
+>>The Sample data 
+>> The MySQL schema for this database
+
+DROP TABLE IF EXISTS dept;
+DROP TABLE IF EXISTS salgrade;
+DROP TABLE IF EXISTS emp;
+
+CREATE TABLE salgrade(
+grade int(4) not null primary key,
+losal decimal(10,2),
+hisal decimal(10,2));
+
+CREATE TABLE dept(
+deptno int(2) not null primary key,
+dname varchar(50) not null,
+location varchar(50) not null);
+
+CREATE TABLE emp(
+empno int(4) not null primary key,
+ename varchar(50) not null,
+job varchar(50) not null,
+mgr int(4),
+hiredate date,
+sal decimal(10,2),
+comm decimal(10,2),
+deptno int(2) not null);
+
+insert into dept values (10,'Accounting','New York');
+
+insert into dept values (20,'Research','Dallas');
+
+insert into dept values (30,'Sales','Chicago');
+
+insert into dept values (40,'Operations','Boston');
+
+insert into emp values (7369,'SMITH','CLERK',7902,'93/6/13',800,0.00,20);
+
+insert into emp values (7499,'ALLEN','SALESMAN',7698,'98/8/15',1600,300,30);
+
+insert into emp values (7521,'WARD','SALESMAN',7698,'96/3/26',1250,500,30);
+
+insert into emp values (7566,'JONES','MANAGER',7839,'95/10/31',2975,null,20);
+
+insert into emp values (7698,'BLAKE','MANAGER',7839,'92/6/11',2850,null,30);
+
+insert into emp values (7782,'CLARK','MANAGER',7839,'93/5/14',2450,null,10);
+
+insert into emp values (7788,'SCOTT','ANALYST',7566,'96/3/5',3000,null,20);
+
+insert into emp values (7839,'KING','PRESIDENT',null,'90/6/9',5000,0,10);
+
+insert into emp values (7844,'TURNER','SALESMAN',7698,'95/6/4',1500,0,30);
+
+insert into emp values (7876,'ADAMS','CLERK',7788,'99/6/4',1100,null,20);
+
+insert into emp values (7900,'JAMES','CLERK',7698,'00/6/23',950,null,30);
+
+insert into emp values (7934,'MILLER','CLERK',7782,'00/1/21',1300,null,10);
+
+insert into emp values (7902,'FORD','ANALYST',7566,'97/12/5',3000,null,20);
+
+insert into emp values (7654,'MARTIN','SALESMAN',7698,'98/12/5',1250,1400,30);
+
+insert into salgrade values (1,700,1200);
+
+insert into salgrade values (2,1201,1400);
+
+insert into salgrade values (3,1401,2000);
+
+insert into salgrade values (4,2001,3000);
+
+insert into salgrade values (5,3001,99999);
+
+----x----
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+3.
+
+>> Table: products
+
+
+Create Table: 
+CREATE TABLE `products` (
+  `productID`    int(10) unsigned  NOT NULL AUTO_INCREMENT,
+  `productCode`  char(3)           NOT NULL DEFAULT '',
+  `name`         varchar(30)       NOT NULL DEFAULT '',
+  `quantity`     int(10) unsigned  NOT NULL DEFAULT '0',
+  `price`        decimal(7,2)      NOT NULL DEFAULT '99999.99',
+  PRIMARY KEY (`productID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+
+INSERT INTO products VALUES (1001, 'PEN', 'Pen Red', 5000, 1.23);
+INSERT INTO products VALUES
+         (NULL, 'PEN', 'Pen Blue',  8000, 1.25),
+         (NULL, 'PEN', 'Pen Black', 2000, 1.25);
+
+INSERT INTO products (productCode, name, quantity, price) VALUES
+         ('PEC', 'Pencil 2B', 10000, 0.48),
+         ('PEC', 'Pencil 2H', 8000, 0.49);
+
+INSERT INTO products (productCode, name) VALUES ('PEC', 'Pencil HB');
+INSERT INTO products values (NULL, NULL, NULL, NULL, NULL);
+
+DELETE FROM products WHERE productID = 1006;
+
+
+
+----x----
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+4. 
+
+
+--Natural Join Example--
+
+Table-1: Department 
+
+Create Table department
+(
+   DEPT_NAME Varchar(20),
+   MANAGER_NAME Varchar(255)
+);
+
+INSERT INTO department(DEPT_NAME,MANAGER_NAME) VALUES ( "IT", "ROHAN");
+INSERT INTO department(DEPT_NAME,MANAGER_NAME) VALUES ( "SALES", "RAHUL");
+INSERT INTO department(DEPT_NAME,MANAGER_NAME) VALUES ( "HR", "TANMAY");
+INSERT INTO department(DEPT_NAME,MANAGER_NAME) VALUES ( "FINANCE", "ASHISH");
+INSERT INTO department(DEPT_NAME,MANAGER_NAME) VALUES ("MARKETING", "SAMAY");
+
+
+Table-2: Employee 
+
+Create Table employee
+(
+   EMP_ID int,
+   EMP_NAME Varchar(20),
+   DEPT_NAME Varchar(255)
+);
+
+
+INSERT INTO employee(EMP_ID, EMP_NAME, DEPT_NAME) VALUES (1, "SUMIT", "HR");
+INSERT INTO employee(EMP_ID, EMP_NAME, DEPT_NAME) VALUES (2, "JOEL", "IT");
+INSERT INTO employee(EMP_ID, EMP_NAME, DEPT_NAME) VALUES (3, "BISWA", "MARKETING");
+INSERT INTO employee(EMP_ID, EMP_NAME, DEPT_NAME) VALUES (4, "VAIBHAV", "IT");
+INSERT INTO employee(EMP_ID, EMP_NAME, DEPT_NAME) VALUES (5, "SAGAR", "SALES");
+
+
+----x----
+
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+
+
+5. 
+
+//https://www.javatpoint.com/mysql-natural-join
+
+
+----Natural Join Example---
+
+
+    /* -- Table name: customer -*/  
+
+    CREATE TABLE customer (  
+        id INT AUTO_INCREMENT PRIMARY KEY,  
+        customer_name VARCHAR(55),  
+        account int,  
+        email VARCHAR(55)  
+    );    
+      
+
+
+    /* -- Table name: balance -*/  
+
+    CREATE TABLE balance (  
+        id INT AUTO_INCREMENT PRIMARY KEY,  
+        account int,  
+        balance FLOAT(10, 2)  
+    );  
+
+
+
+    /* -- Data for customer table -*/  
+    INSERT INTO customer(customer_name, account, email)  
+    VALUES('Stephen', 1030, 'stephen@javatpoint.com'),  
+        ('Jenifer', 2035, 'jenifer@javatpoint.com'),  
+        ('Mathew', 5564, 'mathew@javatpoint.com'),  
+        ('Smith', 4534, 'smith@javatpoint.com'),  
+        ('David', 7648, 'david@javatpoint.com');  
+      
+    /* -- Data for balance table -*/  
+    INSERT INTO balance(account, balance)  
+    VALUES(1030, 50000.00),   
+        (2035, 230000.00),   
+        (5564, 125000.00),   
+        (4534, 80000.00),   
+        (7648, 45000.00);  
+
+
+NATURAL JOIN:
+
+mysql> SELECT cust. customer_name, bal.balance   
+       FROM customer AS cust   
+       NATURAL JOIN balance AS bal;  
+
+
+INNER JOIN:
+
+mysql> SELECT cust. customer_name, bal.balance   
+       FROM customer AS cust   
+       INNER JOIN balance AS bal   
+       ON cust.id = bal.id;  
+
+
+mysql> SELECT * FROM customer NATURAL JOIN balance;  
+
+
+Natural Join with WHERE Clause:
+
+mysql> SELECT cust. customer_name, bal.balance   
+       FROM customer AS cust   
+       NATURAL JOIN balance AS bal  
+       WHERE bal.balance > 50000;  
+
+
+
+//Natural Join Using Three Tables: 
+
+
+    SELECT [column_names | *]   
+    FROM table_name1   
+    NATURAL JOIN table_name2  
+    NATURAL JOIN table_name3;  
+
+
+    CREATE TABLE cust_info (  
+        account int,  
+        mobile VARCHAR(15),  
+        address VARCHAR(65)  
+    );  
+
+
+INSERT INTO cust_info(account, mobile, address)  
+VALUES(1030, '598675498654', '777 Brockton Avenue, Abington MA 251'),   
+    (2035, '698853747888', '337 Russell St, Hadley MA 103'),   
+    (5564, '234456977555', '20 Soojian Dr, Leicester MA 154'),   
+    (4534, '987656789666', '780 Lynnway, Lynn MA 19'),   
+    (7648, '756489372222', '700 Oak Street, Brockton MA 23'); 
+
+
+
+    mysql> SELECT C.customer_name, C.account, B.balance, I.mobile   
+    FROM customer AS C  
+    NATURAL JOIN balance AS B  
+    NATURAL JOIN cust_info AS I;  
+
+
+
+//Difference between Natural Join and Inner Join:
+
+SN 	Natural Join 	Inner Join
+1. 	It joins the tables based on the same column names and their data types. 	It joins the tables based on the column name specified in the ON clause explicitly.
+
+2. 	It always returns unique columns in the result set. 	It returns all the attributes of both tables along with duplicate columns that match the ON clause condition.
+
+3. 	If we have not specified any condition in this join, it returns the records based on the common columns. 	It returns only those rows that exist in both tables.
+
+4. 	
+
+The syntax of natural join is given below:
+
+SELECT [column_names | *]
+FROM table_name1
+NATURAL JOIN table_name2; 	
+
+
+The syntax of inner join is given below:
+
+SELECT [column_names | *]
+FROM table_name1
+INNER JOIN table_name2
+ON table_name1.column_name = table_name2.column_name;
+
+
+
+---x----
+
+----------------------------------------------------------------------------------
+
+5.
+https://webdamn.com/product-search-filtering-using-ajax-php-mysql/
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `sku_id` varchar(50) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(255) NOT NULL,
+  `product_name` varchar(300) NOT NULL,
+  `image` varchar(300) NOT NULL,
+  `price` int(11) NOT NULL,
+  `brand` varchar(100) NOT NULL,
+  `material` varchar(100) NOT NULL,
+  `size` varchar(20) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+---x---
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+
+//Here is the command to create the table agents:
+//Tables: Orders, Customer, Agents
+
+// https://www.w3resource.com/sql/sql-table.php
+
+
+CREATE TABLE  "AGENTS" 
+   (	
+    "AGENT_CODE" CHAR(6) NOT NULL PRIMARY KEY, 
+	"AGENT_NAME" CHAR(40), 
+	"WORKING_AREA" CHAR(35), 
+	"COMMISSION" NUMBER(10,2), 
+	"PHONE_NO" CHAR(15), 
+	"COUNTRY" VARCHAR2(25) 
+	 );
+
+Now insert records into the table agents :
+
+INSERT INTO AGENTS VALUES ('A007', 'Ramasundar', 'Bangalore', '0.15', '077-25814763', '');
+INSERT INTO AGENTS VALUES ('A003', 'Alex ', 'London', '0.13', '075-12458969', '');
+INSERT INTO AGENTS VALUES ('A008', 'Alford', 'New York', '0.12', '044-25874365', '');
+INSERT INTO AGENTS VALUES ('A011', 'Ravi Kumar', 'Bangalore', '0.15', '077-45625874', '');
+INSERT INTO AGENTS VALUES ('A010', 'Santakumar', 'Chennai', '0.14', '007-22388644', '');
+INSERT INTO AGENTS VALUES ('A012', 'Lucida', 'San Jose', '0.12', '044-52981425', '');
+INSERT INTO AGENTS VALUES ('A005', 'Anderson', 'Brisban', '0.13', '045-21447739', '');
+INSERT INTO AGENTS VALUES ('A001', 'Subbarao', 'Bangalore', '0.14', '077-12346674', '');
+INSERT INTO AGENTS VALUES ('A002', 'Mukesh', 'Mumbai', '0.11', '029-12358964', '');
+INSERT INTO AGENTS VALUES ('A006', 'McDen', 'London', '0.15', '078-22255588', '');
+INSERT INTO AGENTS VALUES ('A004', 'Ivan', 'Torento', '0.15', '008-22544166', '');
+INSERT INTO AGENTS VALUES ('A009', 'Benjamin', 'Hampshair', '0.11', '008-22536178', '');
+
+
+
+Here is the command to create the table customer :
+
+CREATE TABLE  "CUSTOMER" 
+   (	"CUST_CODE" VARCHAR2(6) NOT NULL PRIMARY KEY, 
+	"CUST_NAME" VARCHAR2(40) NOT NULL, 
+	"CUST_CITY" CHAR(35), 
+	"WORKING_AREA" VARCHAR2(35) NOT NULL, 
+	"CUST_COUNTRY" VARCHAR2(20) NOT NULL, 
+	"GRADE" NUMBER, 
+	"OPENING_AMT" NUMBER(12,2) NOT NULL, 
+	"RECEIVE_AMT" NUMBER(12,2) NOT NULL, 
+	"PAYMENT_AMT" NUMBER(12,2) NOT NULL, 
+	"OUTSTANDING_AMT" NUMBER(12,2) NOT NULL, 
+	"PHONE_NO" VARCHAR2(17) NOT NULL, 
+	"AGENT_CODE" CHAR(6) NOT NULL REFERENCES AGENTS
+);   
+
+
+Now insert records into the table customer :
+
+INSERT INTO CUSTOMER VALUES ('C00013', 'Holmes', 'London', 'London', 'UK', '2', '6000.00', '5000.00', '7000.00', '4000.00', 'BBBBBBB', 'A003');
+INSERT INTO CUSTOMER VALUES ('C00001', 'Micheal', 'New York', 'New York', 'USA', '2', '3000.00', '5000.00', '2000.00', '6000.00', 'CCCCCCC', 'A008');
+INSERT INTO CUSTOMER VALUES ('C00020', 'Albert', 'New York', 'New York', 'USA', '3', '5000.00', '7000.00', '6000.00', '6000.00', 'BBBBSBB', 'A008');
+INSERT INTO CUSTOMER VALUES ('C00025', 'Ravindran', 'Bangalore', 'Bangalore', 'India', '2', '5000.00', '7000.00', '4000.00', '8000.00', 'AVAVAVA', 'A011');
+INSERT INTO CUSTOMER VALUES ('C00024', 'Cook', 'London', 'London', 'UK', '2', '4000.00', '9000.00', '7000.00', '6000.00', 'FSDDSDF', 'A006');
+INSERT INTO CUSTOMER VALUES ('C00015', 'Stuart', 'London', 'London', 'UK', '1', '6000.00', '8000.00', '3000.00', '11000.00', 'GFSGERS', 'A003');
+INSERT INTO CUSTOMER VALUES ('C00002', 'Bolt', 'New York', 'New York', 'USA', '3', '5000.00', '7000.00', '9000.00', '3000.00', 'DDNRDRH', 'A008');
+INSERT INTO CUSTOMER VALUES ('C00018', 'Fleming', 'Brisban', 'Brisban', 'Australia', '2', '7000.00', '7000.00', '9000.00', '5000.00', 'NHBGVFC', 'A005');
+INSERT INTO CUSTOMER VALUES ('C00021', 'Jacks', 'Brisban', 'Brisban', 'Australia', '1', '7000.00', '7000.00', '7000.00', '7000.00', 'WERTGDF', 'A005');
+INSERT INTO CUSTOMER VALUES ('C00019', 'Yearannaidu', 'Chennai', 'Chennai', 'India', '1', '8000.00', '7000.00', '7000.00', '8000.00', 'ZZZZBFV', 'A010');
+INSERT INTO CUSTOMER VALUES ('C00005', 'Sasikant', 'Mumbai', 'Mumbai', 'India', '1', '7000.00', '11000.00', '7000.00', '11000.00', '147-25896312', 'A002');
+INSERT INTO CUSTOMER VALUES ('C00007', 'Ramanathan', 'Chennai', 'Chennai', 'India', '1', '7000.00', '11000.00', '9000.00', '9000.00', 'GHRDWSD', 'A010');
+INSERT INTO CUSTOMER VALUES ('C00022', 'Avinash', 'Mumbai', 'Mumbai', 'India', '2', '7000.00', '11000.00', '9000.00', '9000.00', '113-12345678','A002');
+INSERT INTO CUSTOMER VALUES ('C00004', 'Winston', 'Brisban', 'Brisban', 'Australia', '1', '5000.00', '8000.00', '7000.00', '6000.00', 'AAAAAAA', 'A005');
+INSERT INTO CUSTOMER VALUES ('C00023', 'Karl', 'London', 'London', 'UK', '0', '4000.00', '6000.00', '7000.00', '3000.00', 'AAAABAA', 'A006');
+INSERT INTO CUSTOMER VALUES ('C00006', 'Shilton', 'Torento', 'Torento', 'Canada', '1', '10000.00', '7000.00', '6000.00', '11000.00', 'DDDDDDD', 'A004');
+INSERT INTO CUSTOMER VALUES ('C00010', 'Charles', 'Hampshair', 'Hampshair', 'UK', '3', '6000.00', '4000.00', '5000.00', '5000.00', 'MMMMMMM', 'A009');
+INSERT INTO CUSTOMER VALUES ('C00017', 'Srinivas', 'Bangalore', 'Bangalore', 'India', '2', '8000.00', '4000.00', '3000.00', '9000.00', 'AAAAAAB', 'A007');
+INSERT INTO CUSTOMER VALUES ('C00012', 'Steven', 'San Jose', 'San Jose', 'USA', '1', '5000.00', '7000.00', '9000.00', '3000.00', 'KRFYGJK', 'A012');
+INSERT INTO CUSTOMER VALUES ('C00008', 'Karolina', 'Torento', 'Torento', 'Canada', '1', '7000.00', '7000.00', '9000.00', '5000.00', 'HJKORED', 'A004');
+INSERT INTO CUSTOMER VALUES ('C00003', 'Martin', 'Torento', 'Torento', 'Canada', '2', '8000.00', '7000.00', '7000.00', '8000.00', 'MJYURFD', 'A004');
+INSERT INTO CUSTOMER VALUES ('C00009', 'Ramesh', 'Mumbai', 'Mumbai', 'India', '3', '8000.00', '7000.00', '3000.00', '12000.00', 'Phone No', 'A002');
+INSERT INTO CUSTOMER VALUES ('C00014', 'Rangarappa', 'Bangalore', 'Bangalore', 'India', '2', '8000.00', '11000.00', '7000.00', '12000.00', 'AAAATGF', 'A001');
+INSERT INTO CUSTOMER VALUES ('C00016', 'Venkatpati', 'Bangalore', 'Bangalore', 'India', '2', '8000.00', '11000.00', '7000.00', '12000.00', 'JRTVFDD', 'A007');
+INSERT INTO CUSTOMER VALUES ('C00011', 'Sundariya', 'Chennai', 'Chennai', 'India', '3', '7000.00', '11000.00', '7000.00', '11000.00', 'PPHGRTS', 'A010');
+
+
+
+
+//Here is the command to create the table orders :
+
+
+CREATE TABLE  "ORDERS" 
+   (
+        "ORD_NUM" NUMBER(6,0) NOT NULL PRIMARY KEY, 
+	"ORD_AMOUNT" NUMBER(12,2) NOT NULL, 
+	"ADVANCE_AMOUNT" NUMBER(12,2) NOT NULL, 
+	"ORD_DATE" DATE NOT NULL, 
+	"CUST_CODE" VARCHAR2(6) NOT NULL REFERENCES CUSTOMER, 
+	"AGENT_CODE" CHAR(6) NOT NULL REFERENCES AGENTS, 
+	"ORD_DESCRIPTION" VARCHAR2(60) NOT NULL
+   );
+
+Now insert records into the table orders :
+
+INSERT INTO ORDERS VALUES('200100', '1000.00', '600.00', '08/01/2008', 'C00013', 'A003', 'SOD');
+INSERT INTO ORDERS VALUES('200110', '3000.00', '500.00', '04/15/2008', 'C00019', 'A010', 'SOD');
+INSERT INTO ORDERS VALUES('200107', '4500.00', '900.00', '08/30/2008', 'C00007', 'A010', 'SOD');
+INSERT INTO ORDERS VALUES('200112', '2000.00', '400.00', '05/30/2008', 'C00016', 'A007', 'SOD'); 
+INSERT INTO ORDERS VALUES('200113', '4000.00', '600.00', '06/10/2008', 'C00022', 'A002', 'SOD');
+INSERT INTO ORDERS VALUES('200102', '2000.00', '300.00', '05/25/2008', 'C00012', 'A012', 'SOD');
+INSERT INTO ORDERS VALUES('200114', '3500.00', '2000.00', '08/15/2008', 'C00002', 'A008', 'SOD');
+INSERT INTO ORDERS VALUES('200122', '2500.00', '400.00', '09/16/2008', 'C00003', 'A004', 'SOD');
+INSERT INTO ORDERS VALUES('200118', '500.00', '100.00', '07/20/2008', 'C00023', 'A006', 'SOD');
+INSERT INTO ORDERS VALUES('200119', '4000.00', '700.00', '09/16/2008', 'C00007', 'A010', 'SOD');
+INSERT INTO ORDERS VALUES('200121', '1500.00', '600.00', '09/23/2008', 'C00008', 'A004', 'SOD');
+INSERT INTO ORDERS VALUES('200130', '2500.00', '400.00', '07/30/2008', 'C00025', 'A011', 'SOD');
+INSERT INTO ORDERS VALUES('200134', '4200.00', '1800.00', '09/25/2008', 'C00004', 'A005', 'SOD');
+INSERT INTO ORDERS VALUES('200108', '4000.00', '600.00', '02/15/2008', 'C00008', 'A004', 'SOD');
+INSERT INTO ORDERS VALUES('200103', '1500.00', '700.00', '05/15/2008', 'C00021', 'A005', 'SOD');
+INSERT INTO ORDERS VALUES('200105', '2500.00', '500.00', '07/18/2008', 'C00025', 'A011', 'SOD');
+INSERT INTO ORDERS VALUES('200109', '3500.00', '800.00', '07/30/2008', 'C00011', 'A010', 'SOD');
+INSERT INTO ORDERS VALUES('200101', '3000.00', '1000.00', '07/15/2008', 'C00001', 'A008', 'SOD');
+INSERT INTO ORDERS VALUES('200111', '1000.00', '300.00', '07/10/2008', 'C00020', 'A008', 'SOD');
+INSERT INTO ORDERS VALUES('200104', '1500.00', '500.00', '03/13/2008', 'C00006', 'A004', 'SOD');
+INSERT INTO ORDERS VALUES('200106', '2500.00', '700.00', '04/20/2008', 'C00005', 'A002', 'SOD');
+INSERT INTO ORDERS VALUES('200125', '2000.00', '600.00', '10/10/2008', 'C00018', 'A005', 'SOD');
+INSERT INTO ORDERS VALUES('200117', '800.00', '200.00', '10/20/2008', 'C00014', 'A001', 'SOD');
+INSERT INTO ORDERS VALUES('200123', '500.00', '100.00', '09/16/2008', 'C00022', 'A002', 'SOD');
+INSERT INTO ORDERS VALUES('200120', '500.00', '100.00', '07/20/2008', 'C00009', 'A002', 'SOD');
+INSERT INTO ORDERS VALUES('200116', '500.00', '100.00', '07/13/2008', 'C00010', 'A009', 'SOD');
+INSERT INTO ORDERS VALUES('200124', '500.00', '100.00', '06/20/2008', 'C00017', 'A007', 'SOD'); 
+INSERT INTO ORDERS VALUES('200126', '500.00', '100.00', '06/24/2008', 'C00022', 'A002', 'SOD');
+INSERT INTO ORDERS VALUES('200129', '2500.00', '500.00', '07/20/2008', 'C00024', 'A006', 'SOD');
+INSERT INTO ORDERS VALUES('200127', '2500.00', '400.00', '07/20/2008', 'C00015', 'A003', 'SOD');
+INSERT INTO ORDERS VALUES('200128', '3500.00', '1500.00', '07/20/2008', 'C00009', 'A002', 'SOD');
+INSERT INTO ORDERS VALUES('200135', '2000.00', '800.00', '09/16/2008', 'C00007', 'A010', 'SOD');
+INSERT INTO ORDERS VALUES('200131', '900.00', '150.00', '08/26/2008', 'C00012', 'A012', 'SOD');
+INSERT INTO ORDERS VALUES('200133', '1200.00', '400.00', '06/29/2008', 'C00009', 'A002', 'SOD');
+
+
+
+----x-----
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+
+CREATE TABLE GFGemployees (
+  employee_id 
+  INT PRIMAR KEY, 
+  employee_name VARCHAR(50), 
+  manager_id INT
+);
+
+INSERT INTO GFGemployees (employee_id, employee_name, manager_id)
+VALUES  (1, 'Zaid', 3),  (2, 'Rahul', 3),  (3, 'Raman', 4),  
+(4, 'Kamran', NULL),  (5, 'Farhan', 4);
+
+---x---
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+--- SELF JOIN ---
+
+CREATE TABLE CUSTOMERS (
+   ID INT NOT NULL,
+   NAME VARCHAR (20) NOT NULL,
+   AGE INT NOT NULL,
+   ADDRESS CHAR (25),
+   SALARY DECIMAL (18, 2),       
+   PRIMARY KEY (ID)
+);
+
+
+
+INSERT INTO CUSTOMERS VALUES
+(1, 'Ramesh', 32, 'Ahmedabad', 2000.00 ),
+(2, 'Khilan', 25, 'Delhi', 1500.00 ),
+(3, 'Kaushik', 23, 'Kota', 2000.00 ),
+(4, 'Chaitali', 25, 'Mumbai', 6500.00 ),
+(5, 'Hardik', 27, 'Bhopal', 8500.00 ),
+(6, 'Komal', 22, 'Hyderabad', 4500.00 ),
+(7, 'Muffy', 24, 'Indore', 10000.00 );
+
+
+---x---
+
+------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
