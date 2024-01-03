@@ -8,7 +8,7 @@
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
 
- Key: JOIN, 
+ Key: JOIN, NATURAL JOIN(), SELF JOIN(), LEFT JOIN(), RIGHT JOIN(), FULL JOIN(), 
 
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
@@ -17,7 +17,7 @@
 
 
 
---- Join Queries ---
+  --- Join Queries ---
 
 
 
@@ -27,8 +27,18 @@
 
 
 
+3. Inner Join
 
-2. Self Join
+-----x-----
+
+
+
+
+3. Self Join
+
+//Self Join is a type of inner join, which is performed in cases where the comparison between 
+//two columns of a same table is required;
+
 
 //Query for Self-join:
 
@@ -37,7 +47,6 @@ i.
 	m.employee_name AS managerFROM 
 	GFGemployees AS eJOIN GFGemployees 
 	AS m ON e.manager_id = m.employee_id;
-
 
 
 ii.
@@ -67,22 +76,7 @@ FROM CUSTOMERS a, CUSTOMERS b
 WHERE a.SALARY < b.SALARY
 ORDER BY a.SALARY;
 
-
-
-
-
-
 -----x-----
-
-
-
-
-
-3. Inner Join
-
------x-----
-
-
 
 
 
