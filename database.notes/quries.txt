@@ -1,11 +1,18 @@
 --------------------
-
-  Queries
-
+                    |
+     Queries        |
+                    |
 --------------------
 
 ----------------------------------------------------------------------------------
 
+ Key: Query By Mysql, 
+
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
 
 1. Write a SQL query to display employee name of employees reporting to Employee 8798
@@ -26,21 +33,38 @@
 ----------------------------------------------------------------------------------
 
 
+
 *Consider the table employee given below, your job is to determine third highest salary of the given table using correlated query.
 
 SELECT name,salary FROM employees e where 3 = (SELECT COUNT(DISTINCT(f.salary)) FROM employees f WHERE f.salary >= e.salary);
 
+
 -----------------------------------------------------------------------------------
 
 
+-- Query BY Myself --
+
+
+//Queries on products & orders tables:
+
+-- Write a query to display no of products sold to each product id.
+SELECT o.product_id,  COUNT(*) AS NoOfProducts FROM orders o GROUP BY o.product_id ORDER BY COUNT(*) ASC;
+
+-- Write a query to display no of products sold and its total price to each product id.
+SELECT p.name,o.product_id, SUM(p.price) AS TotalSal, COUNT(*) AS NoOfProducts FROM products p INNER JOIN orders o ON p.id = o.product_id GROUP BY o.product_id ORDER BY COUNT(*) ASC;
+
+-- Write a query to display a name that is not sold till now.
+SELECT p.name FROM products p WHERE p.id NOT IN (SELECT o.product_id FROM orders o WHERE p.id = o.product_id);
+
+-- Write a query to display a name that is sold.
+SELECT p.name FROM products p WHERE p.id IN (SELECT o.product_id FROM orders o WHERE p.id = o.product_id);
+
+
+---x----
 
 
 
-
-
-
-
-
+-----------------------------------------------------------------------------------
 
 
 
