@@ -1,0 +1,116 @@
+>>> SQL GROUP BY <<<<
+
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+--------------------------------------------------------------
+--------------------------------------------------------------
+Keys: GROUP BY, 
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+
+
+
+Website: GROUP BY 
+https://www.w3resource.com/sql/group-by.php
+
+
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+
+-- GROUP BY ---
+
+GROUP BY clause
+
+The usage of SQL GROUP BY clause is, to divide the rows in a table into smaller groups.
+The GROUP BY clause is used with the SQL SELECT statement.
+The grouping can happen after retrieves the rows from a table.
+
+
+Syntax:
+
+SELECT <column_list> 
+FROM < table name >
+WHERE <condition>GROUP BY <columns> 
+[HAVING] <condition>;
+
+
+Parameters:
+Name 	        Description
+table_name 	Name of the table.
+column_list 	Name of the columns of the table.
+columns 	Name of the columns which will participate in grouping.. 
+
+
+//The following query displays number of employees work in each department.
+
+SELECT department_id "Department Code", 
+COUNT(*) "No of Employees" 
+FROM employees 
+GROUP BY department_id; 
+
+
+//The following query displays total salary paid to employees work in each department.
+
+SELECT department_id, SUM(salary) 
+FROM  employees 
+GROUP BY  department_id;
+
+
+//The following query displays number of employees, total salary paid to employees work in each department.
+
+SELECT department_id "Department Code", 
+COUNT(*) "No of Employees", 
+SUM(salary) "Total Salary" 
+FROM  employees 
+GROUP BY  department_id;
+
+
+
+//The following query displays the department code, job id, total salary paid to employees group by department_id, job_id.
+
+SELECT department_id "Department Code", job_id, 
+SUM(salary) "Total Salary" 
+FROM employees 
+GROUP BY department_id,job_id;
+
+
+//The following query displays the department code, total salary paid to employees group by department_id and manager_id=103.
+
+SELECT department_id "Department Code", 
+SUM(salary) "Total Salary" 
+FROM employees 
+WHERE MANAGER_ID = 103 
+GROUP BY department_id;
+
+
+
+//The following query displays the department id, number of employees of those groups that have more than 2 employees:
+
+SELECT department_id, count(*) "No. of Employee" 
+FROM employees 
+GROUP BY  department_id 
+HAVING count(*)>2;
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+--------------------------------------------------------------
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+
+
+
+

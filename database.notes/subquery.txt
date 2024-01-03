@@ -3,6 +3,9 @@
 
 --------------------------------------------------------------
 --------------------------------------------------------------
+Keys: Subquery, 
+--------------------------------------------------------------
+--------------------------------------------------------------
 
 
 
@@ -108,14 +111,164 @@ SELECT cust_id, name FROM customer WHERE
 cust_id > ALL (SELECT cust_id FROM Orders);
 
 
-
-
-
-
-
-
 --------------------------------------------------------------
 --------------------------------------------------------------
+
+*:)
+
+-- Subqery --
+
+//https://www.w3resource.com/sql/subqueries/understanding-sql-subqueries.php
+
+ A subquery is a SQL query nested inside a larger query.
+
+    A subquery may occur in :
+        - A SELECT clause
+        - A FROM clause
+        - A WHERE clause
+
+//SQL Subqueries Example :
+
+SELECT *  
+FROM `marks`  
+WHERE studentid = 'V002';
+
+
+//Now we want to write a query to identify all students who get better marks than that of the student who's StudentID is 'V002', but we do not know the marks of 'V002'.
+
+- To solve the problem, we require two queries. One query returns the marks (stored in Total_marks field) of 'V002' and a second query identifies the students who get better marks than the result of the first query. 
+
+
+
+First query:
+
+SELECT *  
+FROM `marks`  
+WHERE studentid = 'V002';
+
+
+//The result of the query is 80.
+- Using the result of this query, here we have written another query to identify the students who get better marks than 80. Here is the query : 
+
+
+Second query:
+
+SELECT a.studentid, a.name, b.total_marks
+FROM student a, marks b
+WHERE a.studentid = b.studentid
+AND b.total_marks >80;
+
+
+//Above two queries identified students who get the better number than the student who's StudentID is 'V002' (Abhay).
+
+You can combine the above two queries by placing one query inside the other. The subquery (also called the 'inner query') is the query inside the parentheses. See the following code and query result :
+
+SQL Code:
+
+SELECT a.studentid, a.name, b.total_marks
+FROM student a, marks b
+WHERE a.studentid = b.studentid AND b.total_marks >
+(SELECT total_marks
+FROM marks
+WHERE studentid =  'V002');
+
+
+
+//Subqueries: General Rules:
+
+A subquery SELECT statement is almost similar to the SELECT statement and it is used to begin a regular or outer query. Here is the syntax of a subquery:
+
+Syntax:
+
+(SELECT [DISTINCT] subquery_select_argument
+FROM {table_name | view_name}
+{table_name | view_name} ...
+[WHERE search_conditions]
+[GROUP BY aggregate_expression [, aggregate_expression] ...]
+[HAVING search_conditions])
+
+
+
+//Type of Subqueries
+
+    Single row subquery        : Returns zero or one row.
+    Multiple row subquery      : Returns one or more rows.
+    Multiple column subqueries : Returns one or more columns.
+    Correlated subqueries      : Reference one or more columns in the outer SQL statement. The subquery is known as a correlated                                        subquery because the subquery is related to the outer SQL statement.
+    Nested subqueries          : Subqueries are placed within another subquery.
+
+
+
+
+//Subqueries with INSERT statement
+
+INSERT statement can be used with subqueries. Here are the syntax and an example of subqueries using INSERT statement.
+
+Syntax:
+
+INSERT INTO table_name [ (column1 [, column2 ]) ]
+SELECT [ *|column1 [, column2 ]
+FROM table1 [, table2 ]
+[ WHERE VALUE OPERATOR ];
+
+
+//If we want to insert those orders from 'orders' table which have the advance_amount 2000 or 5000 into 'neworder' table the following SQL can be used:
+
+
+INSERT INTO neworder
+SELECT * FROM  orders
+WHERE advance_amount in(2000,5000);
+
+
+
+//Subqueries with UPDATE statement:
+
+Syntax:
+
+UPDATE table  SET column_name = new_value
+[ WHERE OPERATOR [ VALUE ]
+(SELECT COLUMN_NAME
+FROM TABLE_NAME)     
+[ WHERE) ]
+
+
+
+//If we want to update that ord_date in 'neworder' table with '15-JAN-10' which have the difference of ord_amount and advance_amount is less than the minimum ord_amount of 'orders' table the following SQL can be used: 
+
+
+
+
+UPDATE neworder
+SET ord_date='15-JAN-10'
+WHERE ord_amount-advance_amount <
+(SELECT MIN(ord_amount) FROM orders);
+
+
+//Subqueries with DELETE statement:
+
+
+Syntax:
+
+DELETE FROM TABLE_NAME
+[ WHERE OPERATOR [ VALUE ]
+(SELECT COLUMN_NAME    
+FROM TABLE_NAME)    
+[ WHERE) ]
+
+
+//If we want to delete those orders from 'neworder' table which advance_amount are less than the maximum advance_amount of 'orders' table, the following SQL can be used:
+
+
+DELETE FROM neworder
+WHERE advance_amount<
+(SELECT MAX(advance_amount) FROM orders);
+
+
+
+
+
+
+
 --------------------------------------------------------------
 --------------------------------------------------------------
 --------------------------------------------------------------

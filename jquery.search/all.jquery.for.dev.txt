@@ -1,0 +1,174 @@
+<<<< JQUERY <<<<<
+
+
+
+--------------------------------------------------------------
+Keys: ajax(), post(), get(), parseJson(), getScript(), param(), 
+
+--------------------------------------------------------------
+
+--------------------------------------------------------------
+
+//Link Script
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+Website: 
+https://www.geeksforgeeks.org/jquery-ajax-method/
+
+Website: Community
+https://www.geeksforgeeks.org/community/?ref=leftbar
+
+
+--------------------------------------------------------------
+
+--------------------------------------------------------------
+
+--------------------------------------------------------------
+
+
+
+1.
+--- ajax() ---
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    <h3 id="h11"></h3> 
+    <button>Click</button>
+
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $.ajax({
+                    url: "geeks.txt",
+                    success: function (result) {
+                        $("#h11").html(result);
+                    }
+                });
+            });
+        });
+    </script>
+
+---x---
+
+
+
+    <h3 id="h11"></h3>
+    <button>Click</button>
+
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $.ajax({
+                    url: "geeks.txt",
+                    success: function (result) {
+                        $("#h11").html(result);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+
+---x---
+
+
+
+2.
+
+<button>Click</button>
+ 
+    <!-- Script to use ajaxSetup() method -->
+
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $.ajaxSetup({
+                    url: "geeks1_data.txt",
+                    success: function (result) {
+                        $("h3").html(result);
+                    }
+                });
+                $.ajax();
+            });
+        });
+    </script>
+
+
+
+
+
+
+    <button>Click</button>
+ 
+    <!-- Script to use jQuery ajaxSetup() Method -->
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $.ajaxSetup({
+                    url: "geek2_dat.txt", error: function (xhr) {
+                        alert("Error: " + xhr.status + " " + xhr.statusText);
+                    }
+                });
+                $.ajax();
+            });
+        });
+    </script>
+
+
+---x---
+
+
+ <button>Click</button>
+ 
+    <div></div>
+ 
+    <!-- Script using param() method -->
+    <script>
+        $(document).ready(function () {
+ 
+            personObj = new Object();
+ 
+            personObj.Firstword = "Geeks";
+            personObj.Secondword = "For";
+            personObj.Thirdword = "Geeks";
+            personObj.Wordcolor = "Green";
+ 
+            $("button").click(function () {
+                $("div").text($.param(personObj));
+            });
+        });
+    </script>
+
+
+
+
+    <button>Click</button>
+ 
+    <div></div>
+ 
+    <!-- Script using param() method -->
+    <script>
+        $(document).ready(function () {
+ 
+            personObj = new Object();
+ 
+            personObj.Fullword = "GeeksForGeeks ";
+            personObj.Wordcolor = " Green";
+ 
+            $("button").click(function () {
+                $("div").text($.param(personObj));
+            });
+        });
+    </script>
+
+---x---
+
+
+
+
+
+
