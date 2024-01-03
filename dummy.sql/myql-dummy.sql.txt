@@ -419,6 +419,28 @@ ON table_name1.column_name = table_name2.column_name;
 ---x----
 
 ----------------------------------------------------------------------------------
+
+5.
+https://webdamn.com/product-search-filtering-using-ajax-php-mysql/
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `sku_id` varchar(50) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(255) NOT NULL,
+  `product_name` varchar(300) NOT NULL,
+  `image` varchar(300) NOT NULL,
+  `price` int(11) NOT NULL,
+  `brand` varchar(100) NOT NULL,
+  `material` varchar(100) NOT NULL,
+  `size` varchar(20) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+---x---
+
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------

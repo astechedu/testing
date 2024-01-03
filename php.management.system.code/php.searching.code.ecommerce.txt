@@ -1,0 +1,47 @@
+>>> PHP Ecommerce Searching Code <<<
+
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+Keys: 
+
+
+--------------------------------------------------------------------
+
+Website: PHP, Management System Code 
+https://webdamn.com/product-search-filtering-using-ajax-php-mysql/
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+
+
+
+
+    -- Management System Code --
+
+//https://webdamn.com/product-search-filtering-using-ajax-php-mysql/
+
+    User Management System with PHP & MySQL
+    Datatables Add Edit Delete with Ajax, PHP & MySQL
+    Build Helpdesk System with jQuery, PHP & MySQL
+    Build Online Voting System with PHP & MySQL
+    School Management System with PHP & MySQL
+    DataTables Add Edit Delete with CodeIgniter
+    Create RESTful API using CodeIgniter
+    Build Reusable Captcha Script with PHP
+    Product Search Filtering using Ajax, PHP & MySQL
+    Image Upload and Crop in Modal with jQuery, PHP & MySQL
+    Build Push Notification System with PHP & MySQL
+    Project Management System with PHP and MySQL
+    Hospital Management System with PHP & MySQL
+    Build Newsletter System with PHP and MySQL
+    Skeleton Screen Loading Effect with Ajax and PHP
+    Build Discussion Forum with PHP and MySQL
+    Customer Relationship Management (CRM) System with PHP & MySQL
+    Online Exam System with PHP & MySQL
+    Expense Management System with PHP & MySQL
+
+----x----
