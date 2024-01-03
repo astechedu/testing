@@ -30,6 +30,9 @@ CREATE FULLTEXT INDEX searchindex ON tbl_product(prod_name);
 
 
 
+ SHOW VARIABLES LIKE "event%";
+
+ SET GLOBAL event_sheduler = ON;
 
 -------------------------------------------------------------------
 
