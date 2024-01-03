@@ -15,6 +15,52 @@ https://www.javatpoint.com/mysql-subquery
 --------------------------------------------------------------
 --------------------------------------------------------------
 
+--- Subquery ---
+
+Syntax: 
+
+SELECT column_name(s)
+FROM  table_name
+WHERE column_name operator
+    (SELECT column_name FROM table_name WHERE c );
+
+
+
+Example: 
+
+1. Comparison operators used
+
+SELECT *
+FROM payment
+WHERE amount > (select avg(amount) from payment)
+
+
+2. Logical opearator used
+
+SELECT customer_id from customer;
+
+SELECT customer_id, amount, mode
+FROM payment
+WHERE customer_id IN (select customer_id from customer)
+
+
+3. Exists operator
+
+SELECT first_name, last_name
+FROM customer c
+WHERE EXISTS (
+    SELECT customer_id, amount
+    FROM payment p
+    WHERE p.customer_id = c.customer_id 
+    AND amout > 100
+);
+
+
+
+---x---
+
+
+
 
 MySQL Subquery Syntax:
 
@@ -267,10 +313,89 @@ WHERE advance_amount<
 
 
 
+--------------------------------------------------------------
+
+-- Subquery Examples --
 
 
+
+
+SELECT city_destination, transportation, ticket_price, travel_time
+FROM one_way_ticket
+WHERE city_destination = (
+    SELECT closest_city
+    FROM best_10_places
+    WHERE activity_type = 'snorkeling'
+      AND ranking_position = 1
+  )
+  AND city_origin = 'Paris'
+
+
+SELECT city_destination, ticket_price, travel_time, transportation
+FROM one_way_ticket
+WHERE ticket_price < (
+    SELECT ticket_price
+    FROM one_way_ticket
+    WHERE city_destination = 'Bariloche'
+      AND city_origin = 'Paris'
+  )
+  AND city_origin = 'Paris'
+
+
+
+SELECT city_destination, transportation, ticket_price, travel_time
+FROM one_way_ticket
+WHERE city_destination IN (
+    SELECT closest_city
+    FROM best_10_places
+    WHERE activity_type = 'snorkeling'
+      AND ranking_position <= 3
+  )
+  AND city_origin = 'Paris'
+
+
+
+SELECT city_destination, ticket_price, pseudo_table.quantity
+FROM one_way_ticket
+JOIN (
+    SELECT closest_city AS city, count(*) AS quantity
+    FROM best_10_places
+    GROUP BY 1
+  ) pseudo_table
+  ON one_way_ticket.pseudo_table.city
+
+
+
+SELECT city_destination, transportation, ticket_price, travel_time
+FROM one_way_ticket
+WHERE EXISTS (
+    SELECT closest_city
+    FROM best_10_places
+    WHERE activity_type = 'snorkeling'
+      AND closest_city = one_way_ticket.city_destination
+  )
+  AND EXISTS (
+    SELECT closest_city
+    FROM best_10_places
+    WHERE activity_type = 'trekking'
+    AND closest_city = one_way_ticket.city_destination
+  )
+  AND city_origin = 'Paris'
+
+
+----x----
+
 --------------------------------------------------------------
---------------------------------------------------------------
+
+
+combinations with ALL and ANY, I’ve included a table with the most common uses of these operators:
+
+Condition	Returns TRUE if ...	Returns FALSE if ...
+
+Where 10 > ANY ( subquery )	The subquery returns at least one value that’s greater than 10.	All returned values are 10 or less.
+Where 10 > ALL ( subquery )	The subquery returns only values greater than 10.	The subquery returns at least one value of 10 or less.
+Where 10 = ANY (subquery)	The subquery returns at least one value equal to 10.	No returned values are equal to 10.
+Where 10 = ALL (subquery)	All values returned by subquery are 10.	At least one returned value is not equal to 10.
 --------------------------------------------------------------
 
 
