@@ -15,13 +15,38 @@
 ----------------------------------------------------------------------------------
 
 
-
+>> MYSQL JOINS <<<<
 
   --- Join Queries ---
 
 
 
 1. Natural Join
+
+          Natural Join: Guidelines:
+
+	    - The associated tables have one or more pairs of identically named columns.
+	    - The columns must be the same data type.
+	    - Don’t use ON clause in a natural join
+
+
+Syntax:
+
+	SELECT *
+	FROM table1
+	NATURAL JOIN table2;
+
+
+	SELECT *
+	FROM foods 
+	NATURAL JOIN company;
+
+Example: 
+
+	SELECT * 
+	FROM company
+	NATURAL JOIN foods;
+
 
 -----x-----
 
@@ -76,14 +101,96 @@ FROM CUSTOMERS a, CUSTOMERS b
 WHERE a.SALARY < b.SALARY
 ORDER BY a.SALARY;
 
+
 -----x-----
 
 
 
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
+
+>>> Oracle Join <<<
+
+Oracle Natural Join:
+
+
+    The join is based on all the columns in the two tables that have the same name and data types.
+    The join creates, by using the NATURAL JOIN keywords.
+    It selects rows from the two tables that have equal values in all matched columns.
+    When specifying columns that are involved in the natural join, do not qualify the column name with a table name or table alias.
+
+
+Syntax:
+
+	SELECT table1.column, table2.column
+	FROM table1
+	NATURAL JOIN table2;
+
+
+SELECT postal_code, city,
+    region_id, country_name
+    FROM locations
+    NATURAL JOIN countries;
+
+
+
+SELECT postal_code, city,
+     region_id, country_name
+     FROM locations
+     NATURAL JOIN countries
+     WHERE location_id>2000;
+
+
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
+
+>>> SQLite Join <<<
+
+
+
+SQLite NATURAL JOIN:
+
+Natural Join: Guidelines
+
+- The associated tables have one or more pairs of identically named columns.
+- The columns must be the same data type.
+- Don’t use ON clause in a NATURAL JOIN
+
+
+SELECT * FROM table_a 
+NATURAL JOIN table_b;
+
+
+SELECT *
+FROM table_a
+INNER JOIN table_b
+ON table_a.id=table_b.id;
+
+
+
+SELECT doctor_id,doctor_name,degree,patient_name,vdate
+FROM doctors 
+NATURAL JOIN visits 
+WHERE doctors.degree="MD";
+
+
+
 ----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+>>> SQL Server Join <<<
+
+
+
+
 -----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
+
 
