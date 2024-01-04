@@ -1,0 +1,187 @@
+
+>>> SQL STORED Functions <<<<
+
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+Keys: Stored Functions, 
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+Website: Stored Functions
+https://www.javatpoint.com/mysql-stored-function
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+
+
+---> STORED FUNCTION <---
+
+
+
+1.
+SHOW FUNCTION STATUS        //Show a function status
+
+2.
+SHOW FUNCTION STATUS        //Show functions with like operator
+WHERE LIKE '%myfun%';
+
+3.
+DROP FUNCTION fun1;         //Drop a function
+
+
+
+
+Example 01: 
+
+ DELIMITER $$
+ CREATE FUNCTION fun1() RETURNS VARCHAR(20)
+ DETERMINISTIC
+ BEGIN 
+   DECLARE fname VARCHAR(10);
+   SET fname = "ajay";
+   RETURN fname;
+ END $$
+ DELIMITER ;
+
+
+ SELECT fun1();               //Calling function
+
+
+
+---x---
+
+
+Example 02:                                         //Passing params
+
+DELIMITER $$
+CREATE FUNCTION display_price(price INT) RETURNS INT
+
+BEGIN 
+  DECLARE product_price DECIMAL(5,2);
+  SET product_price = price;
+  RETURN product_price;
+END $$
+DELIMITER ;
+
+
+SELECT display_price(23);                          //Calling function
+SELECT NAME,display_price(price) FROM products;   //Using function in query 
+
+
+
+---x---
+
+
+Example 03: 
+
+DELIMITER $$
+CREATE FUNCTION show_num() RETURNS INT 
+DETERMINISTIC
+BEGIN 
+  DECLARE val DECIMAL(9,2);
+  SET val = 33;
+  RETURN val;
+END $$
+DELIMITER ;
+
+
+SELECT show_num();            //Calling a function
+
+
+---x---
+
+
+Example 04:  Find the 10% of salary as a discount.
+
+DELIMITER $$
+CREATE FUNCTION discount(price INT) RETURNS INT 
+DETERMINISTIC
+BEGIN 
+  DECLARE dcount DECIMAL(9,2);
+  SET  dcount = price * 0.10;
+  RETURN dcount;
+END $$
+DELIMITER ;
+
+
+SELECT discount(1000);                                           //Calling function 
+SELECT NAME,discount(price) AS 'Discount 10%' FROM products;     //Using function in query
+
+
+---x---
+
+
+Example 05:  Check Voter Status 
+
+
+DELIMITER $$
+CREATE FUNCTION check_vote(age INT) RETURNS VARCHAR(20)
+DETERMINISTIC
+BEGIN 
+  DECLARE vote VARCHAR(20); 
+  IF age < 18 THEN
+    SET vote ='Not Allowed';
+  ELSEIF age >= 18 THEN
+    SET vote = 'Allowed';
+  END IF;
+  RETURN vote;
+END $$
+DELIMITER ;
+
+
+
+//Using funtion
+SELECT check_vote(38) AS VoterStatus;
+SELECT check_vote(17) AS VoterStatus;
+
+
+//Using function in query 
+SELECT name, age, check_vote(age) AS VoterStatus FROM test WHERE age IS NOT NULL;
+
+
+
+---x---
+
+
+Example 06:  Using Case
+
+
+DELIMITER $$
+CREATE FUNCTION check_vote(age INT) RETURNS VARCHAR(20)
+DETERMINISTIC
+BEGIN 
+  -- DECLARE vote varchar(20); 
+ RETURN
+ CASE 
+    WHEN age < 18 THEN 'Now Allowed'
+    WHEN age >= 18 THEN 'Allowed'  
+    ELSE "incorrect data"
+  END;
+END $$
+DELIMITER ;
+
+
+
+SELECT check_vote(17) AS VoterStatus;                             //Call a function 
+SELECT NAME,age, check_vote(age) AS voteStatus FROM test;         //Using in a query 
+
+------------------------------------------------------------------------
+
+
+
+
+//Stored Function Call in Procedure:
+
+Here, we are going to see how this function can be called in a stored procedure. This statement creates a procedure in a database that uses Customer_Occupation() stored function.
+
+    DELIMITER $$  
+    CREATE PROCEDURE GetCustomerDetail()  
+    BEGIN  
+        SELECT name, age, Customer_Occupation(age) FROM customer ORDER BY age;  
+    END $$  
+    DELIMITER ;  
+
+
+------------------------------------------------------------------------

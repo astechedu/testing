@@ -1,0 +1,122 @@
+>>>> SQL New Features <<<<
+
+
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+Keys: 
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+Vdo: What's new feature SQL Server 2022 
+https://youtu.be/16CMSkO6MUY?t=57
+
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+>> T-SQL Enhancements IN SQL SERVER 2022:
+
+1. Time Series functions
+
+DATE_BUCKET      : Return the date-time value corresponding to the start of each date-time
+                   bucket from the timestamp defined by the origin parametes.
+GENERATE_SERIES  : Generates  series of numbers within a given interval.
+FIRST_VALUE      : Returns the first value in an ordered set of values.
+LAST_VALUE       : Returns the last value in ordered set of values.
+
+
+2. T-SQL functions
+
+GREATEST       : This function returns the maximum value from a list of one or more expressions.
+LEAST          : This function return the maximun value from a list of one or more expression.
+STRING_SPLIT   : A table-valued function that splits a sting into rows of substrings.
+
+
+3. Resumable add table constraints
+
+Supports pausing and resuming an ALTER TABLE ADD CONSTRAINT
+
+4. Create Statistics
+
+AUTO_DROP option
+
+This features allows the creation of statistics objects in a made such 
+that a schema change will not be blocked by the statistics, but instead
+the statistics will be dropped. In this way, auto drop statistics behave 
+like auto creaated statistics.
+
+
+5. SELECT WINDOW CLAUSE
+
+This function can help rank the rows of a dataset or to create
+aggregations of a column of data across a limited number of rows.
+WINDOW clause determines the partiioning and ordering or a rowset
+before the window function which uses the window in OVER clause is applied.
+
+
+
+
+
+----x-----
+
+
+
+Example: 
+
+-- 2 T-SQL functions
+SELECT GREATEST('9',3.8,'N'7') AS GreatestVal;
+SELECT GREATEST('VIKASH',N'SQL GUIDE','VIKASH DBA') AS GreatestVal;
+
+SELECT LEAST('9',3.8,N'7') AS LeastVal;
+
+SELECT LEAST ('VIKASH', N'SQL GUIDE', 'VIKASH') AS Least_String;
+GO
+
+select value from STRINT_SPLIT('VIKASH KUMAR DBA SQL', ' ') AS STRING_PLIT;
+
+
+SELECT value
+FROM GENERATE_SERIES(START = 1, STOP = 100);
+
+
+select *from production.product
+USE advantureWorks2019;
+
+GO
+
+select Name, ListPrice,
+       FIRST_VALUE(Name) OVER (ORDER BY ListPrice ASC) AS LeastExpensive
+FROM Production.Product
+WHERE ProductSubcategoryID = 37;
+
+GO
+
+2. T-SQL function 
+
+
+
+
+alter table table1
+add constraint PK_Constrain primary key clusterd(a)
+with (online = ON, MAXDOP = 2, RESUMABLE = ON, MAX_DURATION = 240);
+
+
+
+
+
+
+Examples: 
+
+SELECT GREATEST (1.2, 83);
+SELECT GREATEST ('ajay', 'amit kumar');
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
