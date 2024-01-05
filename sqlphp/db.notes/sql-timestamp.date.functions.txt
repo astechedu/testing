@@ -1,0 +1,58 @@
+>>> SQL Timestamp, Date Functions  <<<<
+
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+Keys: TIME, DATE, YEAR, TIMESTAMP, TIMESTAMPTZ
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+
+Vdo: Timestamp, Date functions details
+https://youtu.be/kwGh6XvLrEk?t=1
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+
+
+>>> Timestamp functions and operators:
+
+
+.SHOW TIMEZONE
+.SELECT NOW()
+.SELECT TIMEOFDAY()
+.SELECT CURRENT_TIME
+.SELECT CURRENT_DATE
+
+
+>>> Extract Function: 
+
+Syntax: 
+       SELECT EXTRACT(MONTH FROM date_field) FROM TABLE
+
+.YEAT
+.QUATER
+.MONTH
+.WEEK
+.DAY
+.HOUR
+.MINUTE
+.DOW - day of week
+.DOY - day of year
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+--------------------------------------------------------------
+--------------------------------------------------------------

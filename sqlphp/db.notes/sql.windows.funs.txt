@@ -1,0 +1,218 @@
+>>>> SQL Windows Functions <<<<<
+
+
+
+---------------------------------------------------------------
+---------------------------------------------------------------
+Keys: 
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+Vdo: Windows Functions: with examples : in hindi- v good vdo
+https://youtu.be/a3WkE-VtR9k?t=56
+
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+
+--> Window Function in Short <---
+
+
+1.
+
+SELECT *,
+ RANK() OVER( ORDER BY Salary ASC ) AS Rank                             //Skip rank number after same rank
+ DENSE_RANK( ORDER BY Salary ASC ) OVER(ORDER BY Salary ASC) AS Rank    //Not skip after give same rank
+ ROW_NUMBER() OVER( ORDER BY Salary ASC ) AS Rank                       // Print diff number to each row
+FROM Emp
+
+
+2.
+
+SELECT *,
+ RANK() OVER( PARTITION BY departname ORDER BY Salary ASC ) AS Rank                             // Like a group
+ DENSE_RANK(  PARTITION BY departname ORDER BY Salary ASC ) OVER(ORDER BY Salary ASC) AS Rank    //Like a gorup
+ ROW_NUMBER() OVER(  PARTITION BY departname ORDER BY Salary ASC ) AS Rank                       // Like a group
+FROM Emp
+
+-----------------------------------------------------------------------------------------------
+
+---- Window Function Types ----
+
+There is no official division of the SQL window functions into categories but high level we can
+divide into three types
+
+
+        --- Window Functions ---
+     /             |            \
+    /              |             \
+ Aggregate        Ranking        Value / Analytic
+ .Sum            .ROW_NUMBER     .LEAD
+ .AVG            .RANK           .LAG
+ .COUNT          .DENSE_RANK     .RIRST_VALUE
+ .MIN            .PERCENT_RANK   .LAST_VALUE   
+ .MAX
+
+
+
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+
+
+
+>>> MySQL Window Functions <<<<<
+
+
+Syntax:
+
+The following are the basic syntax for using a window function:
+
+    window_function_name(expression)   
+    OVER (  
+        [partition_defintion]  
+        [order_definition]  
+        [frame_definition]  
+    )  
+
+Partition Clause
+    PARTITION BY <expression>[{,<expression>...}]  
+
+ORDER BY Clause
+    ORDER BY <expression> [ASC|DESC], [{,<expression>...}]  
+
+
+Frame Clause:
+
+frame_unit {<frame_start>|<frame_between>}  
+
+
+The frame_between expression can be written as:
+
+    BETWEEN frame_boundary_1 AND frame_boundary_2  
+
+
+
+UNBOUNDED FOLLOWING: It specifies the end of the frame at the final row in the partition.
+
+N FOLLOWING: It is the physical N of rows after the first current row.
+
+
+    RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW  
+
+
+
+<---> Window Function Concept <--->
+
+
+
+
+    CREATE TABLE Sales(  
+        Employee_Name VARCHAR(45) NOT NULL,  
+        Year INT NOT NULL,  
+                Country VARCHAR(45) NOT NULL,  
+        Product VARCHAR(45) NOT NULL,  
+        Sale DECIMAL(12,2) NOT NULL,  
+        PRIMARY KEY(Employee_Name, Year)  
+    );  
+
+INSERT INTO Sales(Employee_Name, Year, Country, Product, Sale)  
+VALUES('Joseph', 2017, 'India', 'Laptop', 10000),  
+('Joseph', 2018, 'India', 'Laptop', 15000),  
+('Joseph', 2019, 'India', 'TV', 20000),  
+('Bob', 2017, 'US', 'Computer', 15000),  
+('Bob', 2018, 'US', 'Computer', 10000),  
+('Bob', 2019, 'US', 'TV', 20000),  
+('Peter', 2017, 'Canada', 'Mobile', 20000),  
+('Peter', 2018, 'Canada', 'Calculator', 1500),  
+('Peter', 2019, 'Canada', 'Mobile', 25000);
+
+
+mysql> SELECT * FROM Sales;
+
+mysql> SELECT SUM(sale) AS Total_Sales FROM Sales;  
+
+
+mysql> SELECT Year, Product, SUM(Sale) AS Total_Sales   
+       FROM Sales   
+       GROUP BY Year   
+       ORDER BY Product; 
+
+
+mysql> SELECT Year, Product, Sale, SUM(Sale)   
+       OVER(PARTITION BY Year) AS Total_Sales   
+       FROM Sales;  
+
+
+|---> Types of Window Function <----|
+
+
+---> Aggregate Functions <----
+
+It is a function that operates on multiple rows and produces the result in a single row. Some of the important aggregate functions are:
+
+COUNT, SUM, AVG, MIN, MAX, and many more.
+
+Ranking Functions:
+
+
+It is a function that allows us to rank each row of a partition in a given table. Some of the important ranking functions are:
+
+RANK, 
+DENSE_RANK, 
+PERCENT_RANK, 
+ROW_NUMBER, 
+CUME_DIST, etc.
+
+
+----> Analytical Functions <-----
+
+
+It is a function, which is locally represented by a power series. Some of the important analytical functions are:
+
+NTILE, 
+LEAD, 
+LAG, 
+NTH, 
+FIRST_VALUE, 
+LAST_VALUE, etc.
+
+
+Example of Analytical Function:
+
+    SELECT Year, Product, Sale,   
+    NTile(4) OVER() AS Total_Sales   
+    FROM Sales;  
+
+
+    SELECT Year, Product, Sale,   
+    LEAD(Sale,1) OVER(ORDER BY Year) AS Total_Sales   
+    FROM Sales;  
+
+---------------------------------------------------------------
+---------------------------------------------------------------
+
+
+SELECT new_id, new_cat,
+SUM(new_id) OVER(PARTITION BY new_cat ORDER BY new_id) AS "Total",
+AVG(new_id) OVER(PARTITION BY new_cat ORDER BY new_id) AS "Average",
+COUNT(new_id) OVER(PARTITION BY new_cat ORDER BY new_id) AS "Count",
+MIN(new_id) OVER(PARTITION BY new_cat ORDER BY new_id) AS "MIN",
+MAX(new_id) OVER(PARTITION BY new_cat ORDER BY new_id) AS "Max"
+FROM test_data;
+
+
+
+SELECT new_id, new_cat,
+SUM(new_id) OVER(ORDER BY new_id ROWS BETWEEN UNBOUNDD PRECEDING AND UNBOUNDED FOLLOWING) AS "Total",
+AVG(new_id) OVER(ORDER BY new_id ROWS BETWEEN UNBOUNDD PRECEDING AND UNBOUNDED FOLLOWING) AS "Average",
+COUNT(new_id) OVER(ORDER BY new_id ROWS BETWEEN UNBOUNDD PRECEDING AND UNBOUNDED FOLLOWING) AS "Count",
+MIN(new_id) OVER(ORDER BY new_id ROWS BETWEEN UNBOUNDD PRECEDING AND UNBOUNDED FOLLOWING) AS "MIN",
+MAX(new_id) OVER(ORDER BY new_id ROWS BETWEEN UNBOUNDD PRECEDING AND UNBOUNDED FOLLOWING) AS "Max"
+FROM test_data;
+
+
+
+--------------------------------------------------------------------
+
