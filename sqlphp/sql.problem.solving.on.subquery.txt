@@ -1,0 +1,92 @@
+>>>> SQL Subqueries <<<<<
+
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+Keys: 
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+//SQL problem solving on Ecommerce using Subquery:
+https://medium.com/@filip.sekan/using-subqueries-in-sql-to-solve-real-world-data-analysis-problems-d4a40fd36378
+
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+
+
+>> Probleml on ecommerce using subqury <<<<
+
+
+1. 
+Problem Description:
+     In the e-commerce example, you may want to extract all orders made by a specific customer named “Mike Novak” for marketing or customer analysis purposes. You can use the subquery to find the customer ID and then join the “Orders” table to retrieve the corresponding orders. This will allow you to analyze the customer’s order history, including the number of orders, the total amount spent, and the types of products purchased.
+
+
+Example:
+
+SELECT *
+FROM Orders
+WHERE customer_id = (
+    SELECT customer_id
+    FROM Customers
+    WHERE name = 'Mike Novak'
+);
+
+
+
+
+
+//Calculating Aggregate Functions on Subsets of Data
+
+Problem Description: 
+         In the sales example, you may want to analyze the performance of different products to make informed business decisions. By using a subquery to group the sales by product ID and calculate the total sales for each product, you can identify the best-selling products and adjust your product inventory or marketing strategy accordingly.
+
+
+Example:
+
+SELECT product_id, SUM(quantity * price) as total_sales
+FROM Sales
+GROUP BY product_id;
+
+
+
+//Filtering Data Based on Specific Criteria
+
+
+Problem Description: You may want to target users who have recently made a purchase with a special promotion or discount. By using a subquery to retrieve the user IDs of those who have made a purchase in the past month, you can filter the “Users” table to retrieve the corresponding user data and target those users with personalized marketing campaigns.
+
+Example:
+
+SELECT *
+FROM Users
+WHERE user_id IN (
+  SELECT DISTINCT user_id
+  FROM Purchases
+  WHERE purchase_date >= DATEADD(month, -1, GETDATE())
+);
+
+
+
+---x----
+
+
+----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
