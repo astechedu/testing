@@ -4,7 +4,7 @@
 
 ---------------------------------------------------------------
 ---------------------------------------------------------------
-Keys: 
+Keys: RANK, DENSE_RANK, PERCENT RANK, ROW_NUMBER, LEAD, LAG,
 ---------------------------------------------------------------
 ---------------------------------------------------------------
 ---------------------------------------------------------------
@@ -12,6 +12,8 @@ Keys:
 Vdo: Windows Functions: with examples : in hindi- v good vdo
 https://youtu.be/a3WkE-VtR9k?t=56
 
+VDO: All window functions
+https://youtu.be/8ss44NA9fKw?t=1026
 ---------------------------------------------------------------
 ---------------------------------------------------------------
 ---------------------------------------------------------------
@@ -36,6 +38,16 @@ SELECT *,
  DENSE_RANK(  PARTITION BY departname ORDER BY Salary ASC ) OVER(ORDER BY Salary ASC) AS Rank    //Like a gorup
  ROW_NUMBER() OVER(  PARTITION BY departname ORDER BY Salary ASC ) AS Rank                       // Like a group
 FROM Emp
+
+
+
+3.
+
+SELECT *,
+ LAG(salary,1,0) OVER( ORDER BY id ASC ) AS PreviousVal          //Display previous value                          
+ LEAD(salary,1,0) OVER( ORDER BY id ASC ) AS NextVal            //Display next value
+FROM Emp
+
 
 -----------------------------------------------------------------------------------------------
 

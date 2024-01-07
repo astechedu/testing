@@ -48,7 +48,7 @@ Example 01:
 
  SELECT fun1();               //Calling function
 
-
+ DROP FUNCTION fun1;          //Drop function
 
 ---x---
 
