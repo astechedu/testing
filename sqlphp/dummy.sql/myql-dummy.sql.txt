@@ -3,6 +3,15 @@
   M  Y  S  Q  L 
 
 --------------------
+
+----------------------------------------------------------------------------------
+
+
+Keys: Atheletes, Points, DEPT, EMP, BOOKS, LIBRARY, Products, Orders, Departments, 
+      Employee, Customer, customers, cust_info, department, Agents, 
+
+
+-----------------------------------------------------------------------------------
 1. 
 
 
@@ -629,9 +638,42 @@ INSERT INTO CUSTOMERS VALUES
 
 ------------------------------------------------------------
 
+Step 2: Create a Table named "athelete"
 
+create table atheletes(Id int, Name varchar(20), 
+AtheleteNO int,
+primary key(Id)
+);
 
+Step 3: Insert values into the table "athelete"
 
+INSERT INTO atheletes (Id, Name, AtheleteNO)
+VALUES (1, 'abisheik', 27);
+INSERT INTO atheletes (Id, Name, AtheleteNO)
+VALUES (2, 'Niyas', 27);
+INSERT INTO atheletes (Id, Name, AtheleteNO)
+VALUES (3, 'Joseph', 29);
+INSERT INTO atheletes (Id, Name, AtheleteNO)
+VALUES (4, 'Juan', 24);
+
+Step 4: Create a table named "Points"
+
+CREATE TABLE Points(ID   INT, Score  INT,AtheleteID  INT,    
+   PRIMARY KEY (ID)
+);
+
+Step 5: Insert values into the table "Points"
+
+INSERT INTO Points (ID, Score, AtheleteID)
+VALUES (1, 270, 1);
+INSERT INTO Points (ID, Score, AtheleteID)
+VALUES (2, 297, 2);
+INSERT INTO Points (ID, Score, AtheleteID)
+VALUES (3, 210, 3);
+INSERT INTO Points (ID, Score, AtheleteID)
+VALUES (4, 180, 4);
+
+----x----
 
 
 
