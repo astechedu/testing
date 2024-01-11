@@ -1,0 +1,101 @@
+>>>>> PHP Ajax Jquery Code <<<<
+
+
+---------------------------------------------------------------
+Keys: PHP - Ajax Jquery Reauest to db.php file, 
+
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+
+1. PHP - Ajax Jquery Reauest to db.php file in Same Folder
+
+//index.php
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PHP</title>
+	<link rel="shortcut icon" href="#">
+</head>
+<body>
+
+
+<div id="demo"></div>
+	
+Select Id:	
+<select id="select" onchange="changeId(this.value)">
+</select>
+
+
+Select users:	
+<select id="users" onchange="changeUser(this.value)">
+</select>
+
+
+<script src="jquery.js"></script>
+<script>
+  //$(function(){});    //In short
+
+  $(document).ready(function(){
+   
+      $.ajax({
+      	type:"POST",
+      	url: "db.php",
+      	success: function(data){
+      	   var records = JSON.parse(data);
+         
+        var id = "";
+        var users = "";
+		$.each(records , function(index, val) { 
+		  //console.log(val['age']);
+		  
+          id += '<option id=' +  index  +  '>' + val["age"] + '</option>';
+          users += "<option>" + val['name'] + "</option>";
+
+		});
+	           
+           	// $("#demo").html(txt);  
+           	   $("#select").html(id); 
+           	   $("#users").html(users);
+      	}
+      });
+
+  });
+
+
+function changeUser(user){
+  alert("Try to change user " + user);
+}
+
+function changeId(id){
+  alert("Try to change id " + id);
+  
+}
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+//db.php
+
+[
+ {"name":"ajay","age":"23"},
+ {"name":"amit","age":"33"},
+ {"name":"sonu","age":"89"}
+]
+
+----x----
+
+
+
+
+
+---------------------------------------------------------------
+---------------------------------------------------------------
