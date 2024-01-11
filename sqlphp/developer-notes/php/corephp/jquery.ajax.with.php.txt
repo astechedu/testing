@@ -1,0 +1,223 @@
+<<<<< PHP Jquery Ajax Request <<<<
+
+
+-----------------------------------------------------------
+Keys: 
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+--> 
+How to Use jQuery Ajax Call in PHP Script:
+
+
+beforeSend: When we send a request to the server then before that the beforeSend function will excute.
+
+    <script type="text/javascript" language="javascript">  
+      
+       $("#btn").live("click",function(){  
+          var fname = $("#fname").val();  
+          var lname = $("#lname").val();  
+          $.ajax({  
+             type:"POST",  
+             url:"demo.php",  
+             data:"fname="+fname+'&lname='+lname,  
+             beforeSend: function(data){  
+                alert("this test");  
+             }  
+          });  
+       });  
+      
+    </script>   
+
+
+
+Complete: If the request successfully executed when the request finishes.
+
+    <script type="text/javascript" language="javascript">  
+      
+       $("#btn").live("click",function(){  
+          var fname = $("#fname").val();  
+          var lname = $("#lname").val();  
+          $.ajax({  
+             type:"POST",  
+             url:"demo.php",  
+             data:"fname="+fname+'&lname='+lname,  
+             complete:function(data){  
+                alert(data);  
+             }  
+          });  
+       });  
+      
+    </script>   
+
+
+
+
+Data: Which data (string) value will be sent to the server.
+
+    <script type="text/javascript" language="javascript">  
+      
+       $("#btn").live("click",function(){  
+          var fname = $("#fname").val();  
+          var lname = $("#lname").val();  
+          $.ajax({  
+             type:"POST",  
+             url:"demo.php",  
+             data:"fname="+fname+'&lname='+lname,  
+          });  
+       });  
+      
+    </script>   
+
+
+Success: When this function is executed if the request succeeds.
+
+    <script type="text/javascript" language="javascript">  
+      
+       $("#btn").live("click",function(){  
+          var fname = $("#fname").val();  
+          var lname = $("#lname").val();  
+          $.ajax({  
+             type:"POST",  
+             url:"demo.php",  
+             data:"fname="+fname+'&lname='+lname,  
+             success:function(data){  
+                alert(data);  
+             }  
+          });  
+       });  
+      
+    </script> 
+
+
+
+type This is used to send data to a GET or POST method. The default value is GET.
+
+POST method 
+
+    <script type="text/javascript" language="javascript">  
+      
+       $("#btn").live("click",function(){  
+          var fname = $("#fname").val();  
+          var lname = $("#lname").val();  
+          $.ajax({  
+             type:"POST",  
+             url:"demo.php",  
+             data:"fname="+fname+'&lname='+lname,  
+             success:function(data){  
+                alert(data);  
+             }  
+          });  
+       });  
+      
+    </script>   
+
+
+
+GET method
+
+    <script type="text/javascript" language="javascript">  
+      
+       $("#btn").live("click",function(){  
+          var fname = $("#fname").val();  
+          var lname = $("#lname").val();  
+          $.ajax({  
+             type:"GET",  
+             url:"demo.php",  
+             data:"fname="+fname+'&lname='+lname,  
+             success:function(data){  
+                alert(data);  
+             }  
+          });  
+       });  
+      
+    </script>   
+
+
+url: Which the request is sent.
+
+    <script type="text/javascript" language="javascript">  
+      
+       $("#btn").live("click",function(){  
+          var fname = $("#fname").val();  
+          var lname = $("#lname").val();  
+          $.ajax({  
+             type:"POST",  
+             url:"demo.php",  
+             data:"fname="+fname+'&lname='+lname,  
+             success:function(data){  
+                alert(data);  
+             }  
+          });  
+       });  
+      
+    </script>   
+
+
+
+//Step 1: Create a two file index.php 
+
+
+
+    <script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>  
+    <script type="text/javascript" language="javascript">  
+      
+    $("#btn").live("click",function(){  
+          
+          
+        var fname = $("#fname").val();  
+        var lname = $("#lname").val();  
+          
+        $.ajax({  
+                  
+        type:"POST",  
+        url:"demo.php",  
+        data:"fname="+fname+'&lname='+lname,  
+        success:function(data){  
+            alert(data);  
+              
+        }  
+          
+        });  
+          
+    });  
+      
+    </script>  
+      
+     First name: <input type="text" name="fname" id="fname"><br>  
+     Last name: <input type="text" name="lname" id="lname"><br>  
+     <input type="button" value="Submit" id="btn">   
+
+Step 2:  Create a Demo.php file
+
+
+
+
+    <?php  
+      
+       echo $_POST["fname"]."---".$_POST["lname"];  
+      
+    ?>   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

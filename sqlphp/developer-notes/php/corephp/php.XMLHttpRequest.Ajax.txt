@@ -1,0 +1,610 @@
+>>>>> PHP XMLHttpRequest Ajax Request <<<<
+
+
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+Keys: XMLHttpRequest, get(), post(), PHP - AJAX and MySQL, 
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+
+>>> AJAX - Send a Request To a Server: 
+          The XMLHttpRequest object is used to exchange data with a server.
+
+
+-> Send a Request To a Serve:
+      To send a request to a server, we use the open() and send() methods of the XMLHttpRequest object:
+
+
+        Syntax: 
+	open(method, url, async)
+        send();
+
+
+	xhttp.open("GET", "ajax_info.txt", true);         
+	xhttp.send();
+
+
+GET or POST?:
+GET is simpler and faster than POST, and can be used in most cases.
+
+
+->GET():
+ 
+Example:
+	xhttp.open("GET", "demo_get.asp", true);
+	xhttp.send(); 
+
+
+Example:
+	xhttp.open("GET", "demo_get.asp?t=" + Math.random(), true);
+	xhttp.send(); 
+
+
+Example:
+	xhttp.open("GET", "demo_get2.asp?fname=Henry&lname=Ford", true);
+	xhttp.send(); 
+
+
+-> POST():
+
+Example:
+	xhttp.open("POST", "demo_post.asp", true);
+	xhttp.send(); 
+
+Example:
+	xhttp.open("POST", "demo_post2.asp", true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("fname=Henry&lname=Ford"); 
+
+
+
+The url - A File On a Server:
+
+	xhttp.open("GET", "ajax_test.asp", true);
+
+
+Asynchronous - True or False?:
+
+	xhttp.open("GET", "ajax_test.asp", true);
+
+
+-> The onreadystatechange Property:
+
+Example:
+
+xhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("demo").innerHTML = this.responseText;
+  }
+};
+xhttp.open("GET", "ajax_info.txt", true);
+xhttp.send(); 
+
+
+ajax_info.txt
+
+
+<h1>AJAX</h1>
+<p>AJAX is not a programming language.</p>
+<p>AJAX is a technique for accessing web servers from a web page.</p>
+<p>AJAX stands for Asynchronous JavaScript And XML.</p>
+   
+
+Synchronous Request: 
+	xhttp.open("GET", "ajax_info.txt", false);
+
+
+Example:
+	xhttp.open("GET", "ajax_info.txt", false);
+	xhttp.send();
+	document.getElementById("demo").innerHTML = xhttp.responseText; 
+
+
+
+-> AJAX - Server Response:
+	The readyState property holds the status of the XMLHttpRequest.
+
+		When readyState is 4 and status is 200, the response is ready
+
+
+
+Example:
+
+function loadDoc() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("demo").innerHTML =
+            this.responseText;
+       }
+    };
+    xhttp.open("GET", "ajax_info.txt", true);
+    xhttp.send();
+}
+
+
+
+
+ajax_info.txt: 
+
+<h1>AJAX</h1>
+<p>AJAX is not a programming language.</p>
+<p>AJAX is a technique for accessing web servers from a web page.</p>
+<p>AJAX stands for Asynchronous JavaScript And XML.</p>
+
+---x----
+
+
+-> Using a Callback Function: 
+
+
+Example:
+
+loadDoc("url-1", myFunction1);
+
+loadDoc("url-2", myFunction2);
+
+function loadDoc(url, cFunction) {
+  var xhttp;
+  xhttp=new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      cFunction(this);
+    }
+ };
+  xhttp.open("GET", url, true);
+  xhttp.send();
+}
+
+function myFunction1(xhttp) {
+  // action goes here
+}
+function myFunction2(xhttp) {
+  // action goes here
+}
+
+---x----
+
+-> 
+Server Response Properties:
+
+Property 	Description
+
+responseText 	get the response data as a string
+responseXML 	get the response data as XML data
+
+
+
+-> 
+Server Response Methods:
+
+Method 				Description
+
+getResponseHeader() 	        Returns specific header information from the server resource
+getAllResponseHeaders() 	Returns all the header information from the server resource
+
+
+
+-> 
+The responseText Property:
+
+Example:
+	document.getElementById("demo").innerHTML = xhttp.responseText;
+ 
+
+	The responseText property returns the server response as 
+	a JavaScript string, and you can use it accordingly:
+
+---x---
+
+
+The responseXML Property:
+
+The XML HttpRequest object has an in-built XML parser.
+
+
+Example:
+
+Request the file cd_catalog.xml and parse the response:
+
+
+xmlDoc = xhttp.responseXML;
+txt = "";
+x = xmlDoc.getElementsByTagName("ARTIST");
+for (i = 0; i < x.length; i++) {
+  txt += x[i].childNodes[0].nodeValue + "<br>";
+  }
+document.getElementById("demo").innerHTML = txt;
+xhttp.open("GET", "cd_catalog.xml", true);
+xhttp.send(); 
+
+
+->
+
+The getAllResponseHeaders() Method:
+	The getAllResponseHeaders() method returns all header information from the server response.
+
+Example:
+
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("demo").innerHTML =
+    this.getAllResponseHeaders();
+  }
+}; 
+
+
+
+->
+
+The getResponseHeader() Method:
+	The getResponseHeader() method returns specific header information from the server response.
+Example:
+
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("demo").innerHTML =
+    this.getResponseHeader("Last-Modified");
+  }
+};
+xhttp.open("GET", "ajax_info.txt", true);
+xhttp.send();
+
+
+
+---x---
+
+
+
+->
+
+AJAX XML Example:
+	AJAX can be used for interactive communication with an XML file.
+
+
+LoadXMLDoc()
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    myFunction(this);
+    }
+  };
+  xhttp.open("GET", "cd_catalog.xml", true);
+  xhttp.send();
+}
+function myFunction(xml) {
+  var i;
+  var xmlDoc = xml.responseXML;
+  var table="<tr><th>Title</th><th>Artist</th></tr>";
+  var x = xmlDoc.getElementsByTagName("CD");
+  for (i = 0; i <x.length; i++) {
+    table += "<tr><td>" +
+    x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+    "</td><td>" +
+    x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+    "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+
+
+
+----x----
+
+
+-> 
+AJAX PHP Example:
+
+Example:
+
+<html>
+<head>
+<script>
+function showHint(str) {
+    if (str.length == 0) {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET", "gethint.php?q=" + str, true);
+        xmlhttp.send();
+    }
+}
+</script>
+
+
+</head>
+<body>
+
+<p><b>Start typing a name in the input field below:</b></p>
+<form>
+First name: <input type="text" onkeyup="showHint(this.value)">
+</form>
+<p>Suggestions: <span id="txtHint"></span></p>
+</body>
+</html> 
+
+
+
+
+//The PHP File - "gethint.php"
+
+	The PHP file checks an array of names, and returns the corresponding name(s) to the browser:
+
+<?php
+// Array with names
+$a[] = "Anna";
+$a[] = "Brittany";
+$a[] = "Cinderella";
+$a[] = "Diana";
+$a[] = "Eva";
+$a[] = "Fiona";
+$a[] = "Gunda";
+$a[] = "Hege";
+$a[] = "Inga";
+$a[] = "Johanna";
+$a[] = "Kitty";
+$a[] = "Linda";
+$a[] = "Nina";
+$a[] = "Ophelia";
+$a[] = "Petunia";
+$a[] = "Amanda";
+$a[] = "Raquel";
+$a[] = "Cindy";
+$a[] = "Doris";
+$a[] = "Eve";
+$a[] = "Evita";
+$a[] = "Sunniva";
+$a[] = "Tove";
+$a[] = "Unni";
+$a[] = "Violet";
+$a[] = "Liza";
+$a[] = "Elizabeth";
+$a[] = "Ellen";
+$a[] = "Wenche";
+$a[] = "Vicky";
+
+// get the q parameter from URL
+$q = $_REQUEST["q"];
+
+$hint = "";
+
+// lookup all hints from array if $q is different from ""
+if ($q !== "") {
+    $q = strtolower($q);
+    $len=strlen($q);
+    foreach($a as $name) {
+        if (stristr($q, substr($name, 0, $len))) {
+            if ($hint === "") {
+                $hint = $name;
+            } else {
+                $hint .= ", $name";
+            }
+        }
+    }
+}
+
+// Output "no suggestion" if no hint was found or output correct values
+echo $hint === "" ? "no suggestion" : $hint;
+?> 
+
+
+----x----
+
+
+-> 
+AJAX Database Example:
+	AJAX can be used for interactive communication with a database.
+
+
+Example Explained - The showCustomer() Function:
+
+
+showCustomer
+
+function showCustomer(str) {
+  var xhttp;
+  if (str == "") {
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  }
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("txtHint").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "getcustomer.php?q="+str, true);
+  xhttp.send();
+}
+
+
+
+
+
+The AJAX Server Page:
+	The page on the server called by the JavaScript above is an PHP file called "getcustomer.php".
+
+<?php
+$mysqli = new mysqli("servername", "username", "password", "dbname");
+if($mysqli->connect_error) {
+  exit('Could not connect');
+}
+
+$sql = "SELECT customerid, companyname, contactname, address, city, postalcode, country
+FROM customers WHERE customerid = ?";
+
+$stmt = $mysqli->prepare($sql);
+$stmt->bind_param("s", $_GET['q']);
+$stmt->execute();
+$stmt->store_result();
+$stmt->bind_result($cid, $cname, $name, $adr, $city, $pcode, $country);
+$stmt->fetch();
+$stmt->close();
+
+echo "<table>";
+echo "<tr>";
+echo "<th>CustomerID</th>";
+echo "<td>" . $cid . "</td>";
+echo "<th>CompanyName</th>";
+echo "<td>" . $cname . "</td>";
+echo "<th>ContactName</th>";
+echo "<td>" . $name . "</td>";
+echo "<th>Address</th>";
+echo "<td>" . $adr . "</td>";
+echo "<th>City</th>";
+echo "<td>" . $city . "</td>";
+echo "<th>PostalCode</th>";
+echo "<td>" . $pcode . "</td>";
+echo "<th>Country</th>";
+echo "<td>" . $country . "</td>";
+echo "</tr>";
+echo "</table>";
+?> 
+
+
+
+----x----
+
+
+
+-> PHP - AJAX and MySQL:
+
+AJAX Database Example
+
+
+Example
+<html>
+<head>
+<script>
+function showUser(str) {
+  if (str == "") {
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("txtHint").innerHTML = this.responseText;
+      }
+    };
+    xmlhttp.open("GET","getuser.php?q="+str,true);
+    xmlhttp.send();
+  }
+}
+</script>
+</head>
+<body>
+
+<form>
+<select name="users" onchange="showUser(this.value)">
+  <option value="">Select a person:</option>
+  <option value="1">Peter Griffin</option>
+  <option value="2">Lois Griffin</option>
+  <option value="3">Joseph Swanson</option>
+  <option value="4">Glenn Quagmire</option>
+  </select>
+</form>
+<br>
+<div id="txtHint"><b>Person info will be listed here...</b></div>
+
+</body>
+</html>
+
+
+
+
+The PHP File:
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, td, th {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+th {text-align: left;}
+</style>
+</head>
+<body>
+
+<?php
+$q = intval($_GET['q']);
+
+$con = mysqli_connect('localhost','peter','abc123');
+if (!$con) {
+  die('Could not connect: ' . mysqli_error($con));
+}
+
+mysqli_select_db($con,"ajax_demo");
+$sql="SELECT * FROM user WHERE id = '".$q."'";
+$result = mysqli_query($con,$sql);
+
+echo "<table>
+<tr>
+<th>Firstname</th>
+<th>Lastname</th>
+<th>Age</th>
+<th>Hometown</th>
+<th>Job</th>
+</tr>";
+while($row = mysqli_fetch_array($result)) {
+  echo "<tr>";
+  echo "<td>" . $row['FirstName'] . "</td>";
+  echo "<td>" . $row['LastName'] . "</td>";
+  echo "<td>" . $row['Age'] . "</td>";
+  echo "<td>" . $row['Hometown'] . "</td>";
+  echo "<td>" . $row['Job'] . "</td>";
+  echo "</tr>";
+}
+echo "</table>";
+mysqli_close($con);
+?>
+</body>
+</html>
+
+----x----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
