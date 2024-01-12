@@ -1,0 +1,101 @@
+>>>> PHP Higher Order Function <<<<<<
+
+
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+Keys: 
+--------------------------------------------------------------
+
+Websites: 
+
+//Higher Order Function Examples
+https://www.sitepoint.com/functional-programming-in-php-higher-order-functions/
+
+--------------------------------------------------------------
+
+
+
+>>> Higher Order Function <<<<
+
+
+1. 
+// Simple user-defined function we'll pass to our higher-order function
+function echoHelloWorld() {
+  echo "Hello World!";
+}
+
+// Higher-order function that takes a function as an input and calls it
+function higherOrderFunction(callable $func) {
+  $func();
+}
+
+// Call our higher-order function and give it our echoHelloWorld() function. 
+// Notice we pass just the name as a string and no parenthesis.
+// This echos "Hello World!"
+higherOrderFunction('echoHelloWorld'); 
+
+
+
+
+---x----
+
+
+2.
+
+
+function callback(){
+  $num = 410;
+  return $num;
+}
+
+function higherOrderFun($fun){
+  
+  return $fun();
+}
+
+echo higherOrderFun('callback');
+
+
+
+
+---x---
+
+
+3. 
+
+$arrayOfNums = [1,2,3,4,5];
+
+// Example of creating a function and giving it to a higher-order function array_filter()
+function isEven($num) {
+  return ($num % 2) === 0;
+}
+
+// array_filter is a higher-order function
+$evenNums = array_filter($arrayOfNums, 'isEven');
+
+var_dump($evenNums); // Prints out array containing [2, 4]
+
+
+----x----
+
+
+4. 
+
+
+function printCustomMessage($message) {
+  echo "$message";
+}
+
+call_user_func('printCustomMessage', 'Called custom message through the use of call_user_func!');
+
+
+---x---
+
+
+
+
+
+
+
+
