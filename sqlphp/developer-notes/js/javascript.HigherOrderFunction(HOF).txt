@@ -1,0 +1,203 @@
+>>>>> Javascript Higher Order Function <<<<<
+
+
+
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Keys: 
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Websites: 
+
+//Higher Order Functions (HOF) Examples: 
+https://www.telerik.com/blogs/master-higher-order-functions-javascript
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+
+
+---> HOF <---
+
+
+
+//Declaring the Function
+
+function greetings() {
+return "Good Morning"
+}
+//Executing the Function
+greetings()
+greetings()
+
+
+
+function favouriteFood(){
+return "rice";
+}
+//Execute function
+favouriteFood()
+//returns rice
+
+//Added Properties to the function
+favouriteFood.beans = "Beans"
+console.log(favouriteFood.beans)
+//prints Beans
+
+
+
+
+-----> Higher-Order Functions <------
+
+
+>> Map Function   map()    Args: element, index, array
+
+
+//Using a Normal Function
+
+Here’s how we can solve the problem using a normal function.
+
+const num = [10, 20, 30];
+const num10 = [];
+for(let i = 0; i < num.length; i++) {
+  num10.push(num[i] * 2);
+}
+// prints [ 100, 200, 300 ]
+console.log(num10);
+
+
+
+//Using a Higher-Order Function (Map)
+
+With a higher-order function, the code is shorter; here’s the code below.
+
+const num = [10, 20, 30];
+const num10 = num.map(i => i * 2);
+console.log(num10);
+
+
+
+
+>>> Filter Function  filter(): 
+
+
+//Using a Normal Function
+
+Here’s how we can solve the problem using a normal function.
+
+const students = [
+  { name: 'John James', status: true},
+  { name: 'Micheal Obi', status: false },
+  { name: 'Bola Ade', status: true },
+  { name: 'Emmanuel', status: false },
+  { name: 'Faithfulness Alamu',status: true },
+];
+const presentStudent= [];
+for(let i = 0; i < student.length; i++) {
+  if(students[i].status >= true) {
+    presentStudent.push(students[i].name);
+  }
+}
+console.log(presentStudent);
+//Output
+//[ 'John James', 'Bola Ade', 'Faithfulness Alamu' ]
+
+
+
+
+//Using a Higher-Order Function (Filter)
+
+Here’s the same problem solved using a higher-order function.
+
+const students = [
+  { name: 'John James', status: true},
+  { name: 'Micheal Obi', status: false },
+  { name: 'Bola Ade', status: true },
+  { name: 'Emmanuel', status: false },
+  { name: 'Faithfulness Alamu', status: true },
+];
+const presentStudent =students.filter(student => student.status == true);
+console.log(presentStudent);
+
+
+
+>>> Reduce Function:  reduce() : 
+
+
+The method accepts two arguments:
+
+    Callback function
+    Initial value
+
+The callback function accepts the following four parameters:
+
+    Accumulator
+    Current value
+    Current index
+    Source array
+
+
+//Using a Normal Function
+
+Here’s how we can solve the problem using a normal function.
+
+const numbers = [10, 29, 11, 43, 37];
+let subtract = 0;
+for(let i = 0; i < arr.length; i++) {
+  subtract = subtract + numbers[i];
+}
+console.log(subtract); // prints 110
+
+
+
+
+//Using a Higher-Order Function (Reduce)
+
+The same problem was solved using a higher-order function.
+
+const numbers = [10, 29, 11, 43, 37];
+const subtract = numbers.reduce(function(acc, value) {
+  return acc + value;
+});
+console.log(subtract); // prints 110
+
+
+
+>>>> Creating Our Higher-Order Function:
+
+
+function mapClone(arr, fn) {
+  const nameList = [];
+  for(let i = 0; i < arr.length; i++) {
+    nameList.push(
+      fn(arr[i])
+    );
+  }
+  return nameList;
+}
+
+
+
+
+const names = ['Emmanuel', 'John', 'Philip', 'James', 'Andrew'];
+const nameLength = mapClone(names, function(item) {
+  return item.length;
+});
+
+console.log(nameLength) // prints [ 8, 4, 6, 5, 6 ]
+
+
+
+
+
+-----x------
+
+
+
+
+
+
+

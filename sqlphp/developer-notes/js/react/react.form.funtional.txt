@@ -1,0 +1,460 @@
+>>>> React Functional Form >>>>>
+
+
+--------------------------------------------------------------------------
+
+Keys: Prop Drilling, useEffetc(), useState(), useReducer(), useContext(), 
+      useSlector(), useCallback, useMemo, useRef(), Context Api, 
+      React Reducer, Post Request, React Redux Action,useLayoutEffect, 
+      useImperativeHandle, componentDidMount, useEffectEvent, componentWillUnmount, 
+      forwardRef, useNavigate, useParams, React Form,
+
+    
+      MyForm, My Multi Inputs Form, 
+
+---------------------------------------------------------------------------
+
+Website:
+
+//Multi Input forms in functional component in Short
+https://javascript.plainenglish.io/handling-multiple-inputs-in-react-forms-887222366226
+
+//Multi Input forms in functional component & Saperate inputs
+https://dev.to/deboragaleano/how-to-handle-multiple-inputs-in-react-55el
+
+
+//Multi Input forms in functional component
+https://learnwithaditya.hashnode.dev/handling-multiple-inputs-using-react-hooks-in-react-native
+
+
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+
+//Multi Inputs in a form
+
+
+//4 States
+
+const initialState = {
+    name: '',
+    email: '',
+    phone: '',
+    password: '',
+}
+
+const [inputs, setInputs] = useState(initialState);
+
+
+const handleOnchange = (text, input) => {
+  setInputs(prevState => ({...prevState, [input]: text}));
+};
+
+
+
+-Same AS-
+
+
+
+// 4 states
+const [name, setName] = useState('');
+const [email, setEmail] = useState('');
+const [phone, setPhone] = useState('');
+const [password, setPassword] = useState('');
+
+    /* Name handle */
+    const handleChangeName = e => {
+      setName(e.target.value)
+    }
+
+    /* Password handle */
+    const handleChangeEmail = e => {
+      setEmail(e.target.value)
+    }
+
+
+    /* Password handle */
+    const handleChangePhone = e => {
+      setPhone(e.target.value)
+    }
+
+    /* Password handle */
+    const handleChangePassword = e => {
+      setPassword(e.target.value)
+    }
+
+
+----x-----
+
+
+
+
+
+-----> MyForm <-----
+
+
+import { useState } from 'react'
+function Form() {
+	const [name, setName] = useState('')
+	const [password, setPassword] = useState('')
+
+    /* Name handle */
+    const handleChangeName = e => {
+      setName(e.target.value)
+      console.log(name)
+    }
+  
+    /* Password handle */
+    const handleChangePassword = e => {
+      setName(e.target.value)
+      console.log(name)
+    }
+
+    /* Button handle */
+	const hangleSubmit = e => {
+	  e.preventDefault()
+	  console.log(e)
+	}
+
+  return (
+    <>     
+      <form>
+        <div>Name:</div>
+      	<div> 
+      		<input 
+      		type="text" 
+      		name={name}
+      		onChange = { handleChangeName } />
+      	</div>
+ 
+        <div>Password:</div>
+      	<div>
+      		<input 
+      		type="text"
+      		name={password}
+      		onChange = { handleChangePassword } />
+      	</div>
+
+      	<div>
+      		<button 
+      		type="submit" 
+      		onClick = { hangleSubmit }>Submit</button>
+        </div>
+            	      	
+      </form>   
+      
+    </>
+  )
+}
+
+export default Form
+
+
+
+
+
+----x-----
+
+
+
+----------------------------------------------------
+
+
+Example 2:  Three States
+
+
+Using a Single State Object
+
+const [formValues, setFormValues] = useState({
+  firstName: '',
+  lastName: '',
+  email: '',
+  // more inputs...
+});
+
+
+
+Handling Multiple Inputs
+
+const handleChange = (event) => {
+  const { name, value } = event.target;
+  setFormValues({ ...formValues, [name]: value });
+};
+
+
+
+<input
+  name="firstName"
+  value={formValues.firstName}
+  onChange={handleChange}
+/>
+<input
+  name="lastName"
+  value={formValues.lastName}
+  onChange={handleChange}
+/>
+<input
+  name="email"
+  value={formValues.email}
+  onChange={handleChange}
+/>
+// more inputs...
+
+
+
+Handling Form Submission
+
+handleSubmit
+
+
+---------------------------------------------------
+
+
+
+
+
+
+
+
+---> 5 Diff States <---
+
+
+import React, { useState } from "react";
+
+export default function Form() {
+  const [newCompany, setCompany] = useState("");
+  const [newPosition, setPosition] = useState("");
+  const [newLink, setNewLink] = useState("");
+  const [newDate, setNewDate] = useState("");
+  const [newNote, setNewNote] = useState("");
+
+  return (
+        <form>
+          <input
+            value={newCompany}
+            onChange={(e) => setCompany(e.target.value)}
+            label="Company"
+          />
+          <input
+            value={newPosition}
+            onChange={(e) => setPosition(e.target.value)}
+            label="Job Title"
+          />
+          <input
+            value={newLink}
+            onChange={(e) => setNewLink(e.target.value)}
+            label="Job Link"
+          />
+          <input
+            type="date"
+            value={newDate}
+            onChange={(e) => setNewDate(e.target.value)}
+          />
+          <input
+            value={newNote}
+            onChange={(e) => setNewNote(e.target.value)}
+            label="Note"
+          />
+          <button type="submit"> Submit </button>
+        </form>
+  );
+}
+
+
+
+    Also, if I want to add a reset function later, my code will look like this: 🙅🏽‍♀️
+
+  const reset = () => {
+    setCompany("");
+    setPosition("");
+    setNewLink("");
+    setNewDate("");
+    setNewNote("");
+  };
+
+
+
+>>
+The Solution: Refactoring ✨
+Step 1: Add input default values and initialize state 
+
+
+const initialValues = {
+  company: "",
+  position: "",
+  link: "",
+  date: "",
+  note: "",
+};
+
+export default function Form() {
+  const [values, setValues] = useState(initialValues);
+
+  return (
+        <form>
+          <input
+            value={values.company}
+            onChange={(e) => setCompany(e.target.value)}
+            label="Company"
+          />
+ //...
+
+
+
+Step 2: Handle multiple input change 
+
+
+//... 
+
+  const handleInputChange = (e) => {
+    //const name = e.target.name 
+    //const value = e.target.value 
+    const { name, value } = e.target;
+
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  return (
+        <form>
+          <input
+            value={values.company}
+            onChange={handleInputChange}
+            name="company" //IMPORTANT 
+            label="Company"
+          />
+   // ... 
+
+
+
+
+
+Step 3: Add handleInputChange to input fields 
+
+
+import React, { useState } from "react";
+
+const initialValues = {
+  company: "",
+  position: "",
+  link: "",
+  date: "",
+  note: "",
+};
+
+export default function Form() {
+  const [values, setValues] = useState(initialValues);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  return (
+        <form>
+          <input
+            value={values.company}
+            onChange={handleInputChange}
+            name="company"
+            label="Company"
+          />
+          <input
+            value={values.position}
+            onChange={handleInputChange}
+            name="position"
+            label="Job Title"
+          />
+           // ... Rest of the input fields
+          <button type="submit"> Submit </button>
+        </form>
+  );
+}
+
+
+
+-------x------------
+--------------------------------------------------------------------------------
+
+
+>>>> My Multi Inputs Form <<<<
+
+
+import { useState } from 'react'
+
+function Form() {
+
+	const inputVals = {
+		name: "",
+		password:""
+	}
+
+	const [form, setForm] = useState(inputVals)
+
+
+const handleChange = (e) => {	 
+
+  setForm( (prev) => {
+      return {...prev, [e.target.name]: e.target.value}
+  })
+    //console.log(form)
+}
+
+
+const handleSubmit = e => {	
+   e.preventDefault()
+   console.log(form)
+}
+
+
+  return (
+    <>     
+      <form>
+        <div>Name:</div>
+      	<div> 
+      		<input 
+      		type="text" 
+      		name='name'
+      		onChange = { handleChange } />
+      	</div>
+ 
+        <div>Password:</div>
+      	<div>
+      		<input 
+      		type="text"
+      		name="password"
+      		onChange = { handleChange } />      		
+      		
+      	</div>
+
+      	<div>
+      		<button 
+      		type="submit"
+            onClick = { handleSubmit }
+      		>Submit</button>
+        </div>
+            	      	
+      </form>   
+      
+      <div> 
+      <h2>Name: { form.name }  </h2>
+      <h2>Password: { form.password }</h2>
+      </div>
+    </>
+  )
+}
+
+export default Form
+
+
+----x-----
+
+
+
+
+
+
