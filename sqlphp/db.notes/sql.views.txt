@@ -32,7 +32,7 @@ Website:
 
 1. Simple View        : Logical table created from single Base table. Does not hold data
 2. Complex View       : Logical table created from more than one Base tables.
-3. Materialized View  : Like a Physical table that Stores query output or intermediate results. Data holds
+3. Materialized View  : Like a Physical table that Stores query output or intermediate results. Data holds (Cached, Bufferd)
 
 
 
