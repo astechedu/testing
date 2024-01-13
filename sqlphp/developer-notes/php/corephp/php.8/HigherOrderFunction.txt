@@ -1,11 +1,11 @@
 >>>> PHP Higher Order Function <<<<<<
 
-
-
 --------------------------------------------------------------
 --------------------------------------------------------------
 Keys: 
 --------------------------------------------------------------
+--------------------------------------------------------------
+
 
 Websites: 
 
@@ -13,10 +13,137 @@ Websites:
 https://www.sitepoint.com/functional-programming-in-php-higher-order-functions/
 
 --------------------------------------------------------------
+--------------------------------------------------------------
+
 
 
 
 >>> Higher Order Function <<<<
+
+        Higher Order Function accepts another function as argument and return a function.
+
+
+
+
+1.
+
+function callback() {    
+    echo "Callback executed in Higher Order Function";  
+}
+
+function hof($callback) {                                 //Higher Order Function 
+    
+    $callback();
+}
+
+ echo hof('callback');
+
+
+2. 
+
+
+function callback() {    
+    return 10;
+}
+
+function hof($callback) {                     //Higher Order Function 
+    
+    echo $callback();
+}
+
+ hof('callback');
+
+
+
+3.
+
+function callback() {    
+    return 10;
+}
+
+function hof($callback) {                                        //Higher Order Function
+    
+    return $callback();
+}
+
+ echo hof('callback');
+
+
+
+
+4. HOF    And Type Hinting
+
+
+function result($sum) {    
+    return $sum;
+}
+
+function add(int $num, string $result) {           //Higher Order Function 
+    $sum = $num + 2;
+    return $result($sum);
+}
+
+
+ echo add(10, 'result');
+
+
+
+
+5. Higher Order Function Using Type Hinting (Like: int, string, int|string etc)
+
+
+function callback(): string {    
+    return "Done";  
+}
+
+function hof(int $num1, int $num2, string $callback): int|string {               //Higher Order Function 
+    
+    $sum = $num1 + $num2;
+    return "Sum is {$sum} " .$callback();
+}
+
+ echo hof(5,1, 'callback');
+
+
+
+6;
+
+//Double the marks : Creating higher Order Function 
+
+$marks = [10,52,30,84,95];
+//$marks = [1,2,3,4,5];
+
+function result(array $marks) {   
+     
+
+     for($i=0; $i < count($marks); $i++){
+
+         $marks_product[] = $marks[$i] * 2;
+     }
+
+     return $marks_product;
+}
+
+
+function add(array $marks, $result) {            //Higher Order Function
+ 
+   return $result($marks);
+
+}
+ 
+ $newMarks = add($marks, 'result');
+
+ echo "<pre>"; print_r($newMarks);
+
+
+
+
+
+
+---x---
+
+
+
 
 
 1. 
