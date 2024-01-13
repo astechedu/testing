@@ -137,6 +137,35 @@ function add(array $marks, $result) {            //Higher Order Function
 
 
 
+7. 
+
+
+//Find discount for each price;
+
+$price = [12,10,100,2000];
+
+
+function callbackfun(array $price): array {    
+
+    for($i=0; $i < count($price); $i++){
+       $discount[] = $price[$i] * 0.10;
+    }
+    return $discount;
+}
+
+
+
+function hof($callbackfun, array $price): array  {   
+ 
+    return callbackfun($price);
+}
+
+$discount = hof('callbackfun', $price);
+
+echo "<pre>"; print_r($discount);
+
+
+
 
 
 
@@ -182,6 +211,7 @@ function higherOrderFun($fun){
 }
 
 echo higherOrderFun('callback');
+
 
 
 
