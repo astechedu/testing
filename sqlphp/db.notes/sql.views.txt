@@ -15,6 +15,34 @@ Website:
 ----------------------------------------------------------------
 
 
+>>>-->  What is a View?  <-<<<
+
+
+SQL has a special version of tables called View, which is a virtual table that is compiled in runtime. 
+A View is just an SQL statement, and the data associated with it is not physically stored in the view 
+but is stored in the base tables of it.
+
+
+---x---
+
+
+* Simple View
+
+These views can only contain a single base table or can be created only from one table. 
+Group functions such as MAX(), COUNT(), etc., cannot be used here, and it does not contain groups of data. 
+
+
+----x----
+
+
+*Complex View
+
+These views can contain more than one base table or can be constructed on more than one base table, and they contain a group by clause, join conditions, an order by clause. Group functions can be used here, and it contains groups of data. Complex views cannot always be used to perform DML operations. 
+
+----x----
+
+
+
 >>> Create View <<<<
 
 	In SQL, a view is a virtual table based on the result-set of an SQL statement.
