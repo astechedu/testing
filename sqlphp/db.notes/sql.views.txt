@@ -1,0 +1,248 @@
+>>>> SQL Views <<<<<
+
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+Keys: 
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+Website: 
+
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+
+>>> Create View <<<<
+
+	In SQL, a view is a virtual table based on the result-set of an SQL statement.
+
+	There are 2 types of Views in SQL: Simple View and Complex View.
+
+	Simple views can only contain a single base table. 
+	Complex views can be constructed on more than one base table.
+
+    1. Simple view : When the view is been created on View in SQL
+    2. Complex view : When the view is been created on multiple tables then it is called as complex view.
+    3. Materialized view : The materialized view is view like a physical table which is used mainly for performance management.
+
+
+1. Simple views
+
+
+
+CREATE VIEW Syntax
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition; 
+
+
+
+
+SQL CREATE VIEW Examples:
+
+	The following SQL creates a view that shows all customers from Brazil:
+
+Example:
+
+Get your own SQL Server
+CREATE VIEW [Brazil Customers] AS
+SELECT CustomerName, ContactName
+FROM Customers
+WHERE Country = 'Brazil';
+
+
+
+	We can query the view above as follows:
+
+Example:
+
+SELECT * FROM [Brazil Customers];
+
+
+---x----
+
+
+//The following SQL creates a view that selects every product in the "Products" table with a price higher than the average price:
+
+
+CREATE VIEW [Products Above Average Price] AS
+SELECT ProductName, Price
+FROM Products
+WHERE Price > (SELECT AVG(Price) FROM Products); 
+
+
+	We can query the view above as follows:
+
+Example:
+
+SELECT * FROM [Products Above Average Price];
+
+
+---x---
+
+
+>> SQL Updating a View:
+
+	A view can be updated with the CREATE OR REPLACE VIEW statement.
+
+Syntax:
+
+CREATE OR REPLACE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition; 
+
+
+
+//The following SQL adds the "City" column to the "Brazil Customers" view:
+
+
+Example:
+
+CREATE OR REPLACE VIEW [Brazil Customers] AS
+SELECT CustomerName, ContactName, City
+FROM Customers
+WHERE Country = 'Brazil';
+
+--
+
+SQL Dropping a View:
+
+	A view is deleted with the DROP VIEW statement.
+
+Syntax:
+
+	DROP VIEW view_name; 
+
+
+//The following SQL drops the "Brazil Customers" view:
+
+
+Example:
+
+DROP VIEW [Brazil Customers];
+	
+
+----x----
+---------------------------------------------------------------
+
+
+
+2. Complex views                                    //Complex Views
+
+	Creating View from multiple tables:
+
+
+
+Example:
+
+CREATE VIEW EmployeeByDepartment AS
+
+SELECT e.emp_id, d.dept_id, e.emp_name 
+FROM Employee e, Department d 
+WHERE e.dept_id=d.dept_id;
+
+
+Example: 
+
+	1.Customer :-Customer_name, Customer_num, Customer_code columns
+	2.Item     :-Customer_code,Item_code,Item_name,Item_category columns
+
+
+    Create view V_Customer
+    AS Select e.Customer_name,d.Item_name
+    from Customer e,Item d
+    where e.Customer_code=d.customer_code
+    Group by item_category;
+
+
+
+Example:
+
+CREATE VIEW MarksView AS
+SELECT StudentDetails.NAME, StudentDetails.ADDRESS, StudentMarks.MARKS
+FROM StudentDetails, StudentMarks
+WHERE StudentDetails.NAME = StudentMarks.NAME;
+
+
+SELECT * FROM MarksView;
+
+
+--
+
+
+Business Requirement:
+
+Our business requirement is to create a complex view in SQL Server that will return the following result set by joining the Department and Employee table
+
+
+
+CREATE VIEW vwEmployeesByDepartment
+AS
+SELECT emp.ID, 
+        emp.Name, 
+        emp.Salary, 
+        CAST(emp.DOB AS Date) AS DOB,
+        emp.Gender,
+        dept.Name AS DepartmentName
+FROM Employee emp
+INNER JOIN Department dept
+ON emp.DeptID = dept.ID
+
+
+
+SELECT * FROM vwEmployeesByDepartment
+
+---
+
+
+>> UPDATE DML Operation on Complex View in SQL Server:
+
+      https://dotnettutorials.net/lesson/complex-views-in-sql-server/
+
+
+
+
+Update vwEmployeesByDepartment 
+SET DepartmentName =’HR’ 
+where Name = ‘Pranaya’
+
+SELECT * FROM vwEmployeesByDepartment
+
+
+Ex: 
+
+First correct the department table, change the department name to IT where ID is 1 in the Department table by executing the below UPDATE statement.
+
+
+Conclusion:
+
+    In a Complex View, if your update statement affects one base table, then the update succeeded but it may or may not update the data correctly.
+
+
+if your update statement affects more than one table, then the update failed and we will get an error message stating “View or function ‘vwEmployeesByDepartment’ is not updatable because the modification affects multiple base tables”s
+
+----x----
+
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--x---
