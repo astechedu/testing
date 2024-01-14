@@ -10,7 +10,7 @@ Keys: Prop Drilling, useEffetc(), useState(), useReducer(), useContext(),
       forwardRef, useNavigate, useParams, React Form,
 
     
-      MyForm, My Multi Inputs Form, 
+      MyForm, My Multi Inputs Form, Condition in Form, 
 
 ---------------------------------------------------------------------------
 
@@ -463,7 +463,31 @@ export default Form
 
 ----x-----
 
+----------------------------------------------------
 
+>> Condition in Form:
+
+function handleChange(e){
+  if(e.target.name == "firstName"){
+     const capName = (e.target.value).toUpperCase();
+     setName(capName);
+  }else{
+     setPswd(e.target.value);
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+----x----
 
 
 
