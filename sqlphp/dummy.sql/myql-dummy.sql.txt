@@ -9,7 +9,7 @@
 
 Keys: Atheletes, Points, DEPT, EMP, BOOKS, LIBRARY, Products, Orders, Departments, 
       Employee, Customer, customers, cust_info, department, Agents, Department & Employee,  
-
+      Sales, 
 
 -----------------------------------------------------------------------------------
 1. 
@@ -717,6 +717,31 @@ GO
 ----x----
 
 ----------------------------------------------------------------------------------
+
+Sales: 
+
+CREATE TABLE sales (
+    product_name VARCHAR(50),
+    sales_date DATE,
+    revenue DECIMAL(10, 2)
+);
+
+
+
+INSERT INTO sales (product_name, sales_date, revenue) VALUES 
+    ('Product A', '2023-03-01', 1000), 
+    ('Product A', '2023-03-15', 1500), 
+    ('Product A', '2023-03-30', 2000), 
+    ('Product B', '2023-03-01', 800), 
+    ('Product B', '2023-03-15', 1200), 
+    ('Product B', '2023-03-30', 1600),
+    ('Product C', '2023-03-01', 500),
+    ('Product C', '2023-03-15', 750),
+    ('Product C', '2023-03-30', 1000);
+
+
+---x---
+
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
