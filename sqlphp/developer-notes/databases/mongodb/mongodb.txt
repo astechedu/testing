@@ -1,8 +1,14 @@
 >>>> MongoDB <<<<<
 
 
+--------------------------------------------------------------
 
 --------------------------------------------------------------
+--------------------------------------------------------------
+Keys: Create, Insert, Find, Remove, Drop, Delete, Update, $set, $inc, 
+--------------------------------------------------------------
+--------------------------------------------------------------
+
 
 
 Link: 
@@ -435,6 +441,96 @@ db.students.find({ gender: 'F' });
 
 ---------------------------------------------------------------------
 
+
+
+Mongodb CMDs:
+
+use database1      //switched to db database1 or create if not exists
+db                 //check which database are we connected 
+
+show dbs           //Show databases
+
+db.dropDatabase()  //Drop database 
+db.getName()
+
+db.createCollection("teachers")    //Create Collection
+
+db.createCollection("teachers",{capped : true, size : 9232768}){“ok” : 1}    //Create Collection
+
+db.Student.insert( { "Studentname" : "Meena", "StudentBranch" : "Computer Science"})       //Insert Data
+
+
+db.getCollection()
+
+
+db.createView()
+
+
+db.createView()
+
+Syntax: 
+	db.createView(<view>, <source>, <pipeline>, <collation>)
+
+
+db.collection.dataSize()
+db.collection.deleteOne()
+db.collection.deleteMany()
+db.collection.drop()
+db.collection.find()
+db.collection.findOne()
+db.collection.insert()
+db.collection.remove()
+db.collection.watch()
+db.collection.distinct()
+db.collection.count()
+
+
+db.collection.update():
+db.collection.update(query, update, options)
+
+
+db.collection.validate()
+db.collection.validate(<documents>)
+
+db.collection.validate( {
+   full: <boolean>,  // Optional
+   repair: <boolean>,  // Optional, added in MongoDB 5.0
+   checkBSONConformance: <boolean>  // Optional, added in MongoDB 6.2
+} )
+
+
+
+db.employee.insert({_id : 1,  firstName:"ank"})
+db.employee.find()
+
+
+ db.employee.updateMany(
+    { },
+    { $set: { join_date: new Date() } }
+)
+
+
+db.employee.updateMany(
+    { },
+    { $unset: { "join_date": "" } }
+)
+
+
+
+ db.employee.updateMany(
+    { },
+    { $set: { join_date: new Date() } }
+)
+
+
+
+ db.employee.updateMany(
+    { },
+    { $unset: { "join_date": "" } }
+)
+
+
+-------------------------------------------------------------------------
 
 
 
