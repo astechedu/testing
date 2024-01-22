@@ -5,11 +5,17 @@
 
 --------------------------------------------------------------
 --------------------------------------------------------------
-Keys: Create, Insert, Find, Remove, Drop, Delete, Update, $set, $inc, 
+Keys: Create, Insert, Find, Drop, Update, $set, $inc, $gte, 
 --------------------------------------------------------------
 --------------------------------------------------------------
 
+--------------------------------------------------------------------------
 
+//Mongo db tutorial 
+https://www.youtube.com/watch?v=Cjr-gkQSii8
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
 
 Link: 
 
@@ -479,7 +485,7 @@ db.collection.drop()
 db.collection.find()
 db.collection.findOne()
 db.collection.insert()
-db.collection.remove()
+db.collection.drop()                     //Drop collection in mongodb-7 Ex. db.users.drop()
 db.collection.watch()
 db.collection.distinct()
 db.collection.count()
@@ -530,7 +536,38 @@ db.employee.updateMany(
 )
 
 
+ db.users.updateMany(                     //Add new field
+    {age:13},
+    { $set: { "isElegible": false } }
+)
+
+
+ db.users.updateMany(                     //Add new field
+    {age:{$gte:15}},
+    { $set: { "isElegible": true } }      //Add new field age greater then 14
+)
+
+
+
 -------------------------------------------------------------------------
+
+--- Delete Document ---
+
+ db.users.deleteOne(                  //Delete one document whose age is 15
+    {age:15}            
+)
+
+ db.users.deleteOne(                  //Delete one document whose age is 15
+    {name:"ajay"}            
+)
+
+ db.users.deleteMany(                     //Delete manay documents
+    {age:{$gte:15}},
+    { $set: { "isElegible": true } }      //Add new field age greater then 14
+)
+
+
+--------------------------------------------------------------------------
 
 
 
