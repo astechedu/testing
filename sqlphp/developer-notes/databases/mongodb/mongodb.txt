@@ -992,7 +992,98 @@ db.students2.insertMany( [
    { "_id" : 2, quiz2: 5, test1: 80, test2: 89, modified: new Date("01/05/2020") },
 ] )
 
+	
 --------------------------------------------------------------------------------------------------
+
+
+
+----> Use a View to Join Two Collections <-----
+
+You can use $lookup to create a view over two collections and then run queries against the view. Applications can query the view without having to construct or maintain complex pipelines.
+
+
+Example
+
+Create two sample collections, inventory and orders:
+
+db.inventory.insertMany( [
+   { prodId: 100, price: 20, quantity: 125 },
+   { prodId: 101, price: 10, quantity: 234 },
+   { prodId: 102, price: 15, quantity: 432 },
+   { prodId: 103, price: 17, quantity: 320 }
+] )
+db.orders.insertMany( [
+   { orderId: 201, custid: 301, prodId: 100, numPurchased: 20 },
+   { orderId: 202, custid: 302, prodId: 101, numPurchased: 10 },
+   { orderId: 203, custid: 303, prodId: 102, numPurchased: 5 },
+   { orderId: 204, custid: 303, prodId: 103, numPurchased: 15 },
+   { orderId: 205, custid: 303, prodId: 103, numPurchased: 20 },
+   { orderId: 206, custid: 302, prodId: 102, numPurchased: 1 },
+   { orderId: 207, custid: 302, prodId: 101, numPurchased: 5 },
+   { orderId: 208, custid: 301, prodId: 100, numPurchased: 10 },
+   { orderId: 209, custid: 303, prodId: 103, numPurchased: 30 }
+] )
+
+
+
+
+--------------------------------------------------------------------------------------------------
+
+
+
+----- Mongodb queries -----
+
+
+1. Joins: ($lookup): left outer join, right outer join, full join, inner join 
+
+vdo: https://youtu.be/zzVa5cvQK6w?list=PLA3GkZPtsafZydhN4nP0h7hw7PQuLsBv1&t=483   
+
+Ex:
+
+db.cust.aggregate([{$lookup:{from:"orders",localField:"_id", foreignField:"customer_id",as:"orderDetail"}}]).pretty()
+   
+
+
+$inc, $min, $max, $mul, $unset, $rename, upsert,     $push,$pop,$addToSet       (Topics)
+$project, $bucket, aggregate(), 
+$lookup (like Left Outer Join in mysql)
+
+
+//Update field but not add to the document
+
+-- Decrease all age by -2
+db.users.updateMany({},{$inc:{age-2}})
+
+--Increase age of sita to 50 only if her age is lesser than it 
+db.users.updateOne({name:"sita"},{$max:{age:50}})                 //Now updated age is 50        $max	
+
+-- Decrease in above 
+db.users.updateOne({name:"sita"},{$min:{age:23}})                 //Now updated age is 23           $min
+
+-- Multipy by factor or 2
+db.users.updateOne({name:"sita"},{$mul:{age:2}})                 //Now Multiply by 2                     $mul
+
+-- Unset
+db.users.updateOne({name:"sita"},{$unset:{age:200}})            //Remove age                                    $unset
+
+
+-- Rename of field
+db.users.updateOne({name:"sita"},{$rename:{age:"studentAge"}})  //Rename of field, rename age with studentAge   $rename
+
+
+
+-- Rename of field
+db.users.updateOne({},{$rename:{age:"studentAge"}})           //Rename of all fields, rename age with studentAge   $rename
+
+--Insert document if condition not found (agar golu nahi milta hai toh)
+db.users.updateOne({name:"golu"},{$set:{age:100}},{upsert:true})   // Agar golu nahi milta toh ye document insert kardo
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
 
 
 

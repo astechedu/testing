@@ -1,0 +1,169 @@
+>>>> MongoDB Aggregate  <<<<<
+
+
+--------------------------------------------------------------
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+Keys:   Aggregation - SUM, MAX, MIN, AVG 
+
+
+      Create, Insert, Find, Drop, Update, limit(), 
+      $set, $inc, $gte, $eq, $expr, $not, $in, $or, $and, $nin, $ne, $lte, $gte, 
+      sort,      
+       $addFields, $set, $project, $unset, $replaceRoot, $replaceWith, Projection, 
+
+
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------
+
+
+//Mongodb aggregation
+https://www.artofcse.com/learning/mongodb-aggregations
+---------------------------------------------------------------------------
+
+$min, $max:
+
+db.collection.find({ max: { $max: "$price" }, min: { $min: "$price" } });
+
+Output: 
+	{ max: 2000, min: 5000 }
+
+
+db.collection.aggregate([ 
+    { "$group": { 
+        "_id": null,
+        "max": { "$max": "$price" }, 
+        "min": { "$min": "$price" } 
+    }}
+])
+
+
+
+
+
+----- Mongodb queries -----
+
+
+1. Joins: ($lookup): left outer join, right outer join, full join, inner join 
+
+vdo: https://youtu.be/zzVa5cvQK6w?list=PLA3GkZPtsafZydhN4nP0h7hw7PQuLsBv1&t=483   
+
+Ex:
+
+db.cust.aggregate([{$lookup:{from:"orders",localField:"_id", foreignField:"customer_id",as:"orderDetail"}}]).pretty()
+   
+
+
+$inc, $min, $max, $mul, $unset, $rename, upsert,     $push,$pop,$addToSet       (Topics)
+$project, $bucket, aggregate(), 
+$lookup (like Left Outer Join in mysql)
+
+
+
+
+//Update field but not add to the document
+
+-- Decrease all age by -2
+db.users.updateMany({},{$inc:{age-2}})
+
+--Increase age of sita to 50 only if her age is lesser than it 
+db.users.updateOne({name:"sita"},{$max:{age:50}})                 //Now updated age is 50        $max	
+
+-- Decrease in above 
+db.users.updateOne({name:"sita"},{$min:{age:23}})                 //Now updated age is 23           $min
+
+-- Multipy by factor or 2
+db.users.updateOne({name:"sita"},{$mul:{age:2}})                 //Now Multiply by 2                     $mul
+
+-- Unset
+db.users.updateOne({name:"sita"},{$unset:{age:200}})            //Remove age                                    $unset
+
+
+-- Rename of field
+db.users.updateOne({name:"sita"},{$rename:{age:"studentAge"}})  //Rename of field, rename age with studentAge   $rename
+
+
+
+-- Rename of field
+db.users.updateOne({},{$rename:{age:"studentAge"}})           //Rename of all fields, rename age with studentAge   $rename
+
+--Insert document if condition not found (agar golu nahi milta hai toh)
+db.users.updateOne({name:"golu"},{$set:{age:100}},{upsert:true})   // Agar golu nahi milta toh ye document insert kardo
+
+
+
+
+-----------------------------------------------------------------------------------------------------------
+
+
+
+// how to perform aggregations such as (SUM, MAX, MIN, AVG, PUSH, addToSet, FRIST, LAST) on MongoDB query.
+
+
+SUM:
+
+	db.employees.aggregate([ { $group: { _id: "$phone", total: { $sum: "$salary" } } } ])
+
+MAX:
+
+	db.employees.aggregate([ { $group: { _id: "$phone", total: { $max: "$salary" } } } ])
+
+MIN:
+
+	db.employees.aggregate([ { $group: { _id: "$phone", total: { $min: "$salary" } } } ])
+
+AVG:
+
+	db.employees.aggregate([ { $group: { _id: "$phone", total: { $avg: "$salary" } } } ])
+
+PUSH:
+
+	db.employees.aggregate([ { $group: { 
+
+	_id: "$phone", total: { $push: "$salary" } } } ])
+
+addToSet:
+
+	db.employees.aggregate([ { $group: { _id: "$phone", total: { $addToSet: "$salary" } } } ])
+
+First:
+
+	db.employees.aggregate([ { $group: { _id: "$phone", total: { $first: "$salary" } } } ])
+
+Last:
+
+	db.employees.aggregate([ { $group: { _id: "$phone", total: { $last: "$salary" } } } ])
+
+--------------------------------------------------------------------------------------------------
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MongoDB Aggregation - SUM, MAX, MIN, AVG 
+
+
+
+
+
+
+--------------------------------------------------------
