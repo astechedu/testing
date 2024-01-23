@@ -24,6 +24,7 @@ Keys:   Aggregation - SUM, MAX, MIN, AVG
 
 //Mongodb aggregation
 https://www.artofcse.com/learning/mongodb-aggregations
+	
 ---------------------------------------------------------------------------
 
 $min, $max:
@@ -143,27 +144,45 @@ Last:
 
  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 MongoDB Aggregation - SUM, MAX, MIN, AVG 
 
-
-
-
-
-
 --------------------------------------------------------
+
+
+
+db.users.insertMany([
+  { _id:1, fname: 'ajay',lname: 'sisaudiya', age: 80, salary: 6000,city: 'noida', state: 'up' },
+  { _id:2,fname: 'geeta', lname: 'negi', age: 7 },
+  { _id:3,fname: 'aryan', lname: 'negi', age: 61 },
+  { _id:4,fname: 'sohan', lname: 'zubin', age: 71 },
+  { _id:5,fname: 'joni', lname: 'singh', age: 80 },
+  { _id:6,fname: 'zubin', lname: 'kumari', age: 7 },
+  { _id:7,fname: 'komal', lname: 'rawat', age: 80, city: 'dehradun' },
+  { _id:8,fname: 'mohan', lname: 'gupta', age: '50', city: 'meerut' },
+  { _id:9,fname: 'sss', lname: 'kumar', age: 61, city: 'delhi' },
+  { _id:10,fname: 'ttt', lname: 'kumar', age: 61, city: 'delhi' },
+  { _id:11,fname: 'sohan', lname: 'singh', age: 51, city: 'delhi' },
+  { _id:12,fname: 'rohan', lname: 'singh', age: 52, city: 'delhi' },
+  { _id:13,fname: 'vijay', lname: 'rawat', age: 80, city: 'dhampur' },
+  { _id:14,fname: 'vijay2', lname: 'rawat2', age: 80, city: 'dhampur', salary: 4000, country: 'india', state: 'uk'}
+])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

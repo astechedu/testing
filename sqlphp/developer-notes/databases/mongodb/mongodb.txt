@@ -25,9 +25,7 @@ Ith the update operations, the aggregation pipeline can consist of the following
 
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-
 --------------------------------------------------------------------------
-
 
 //Mongo db tutorial 
 https://www.youtube.com/watch?v=Cjr-gkQSii8
@@ -35,6 +33,65 @@ https://www.youtube.com/watch?v=Cjr-gkQSii8
 
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
+--------------------------------------------------------------------------
+Given Json File: 
+//Import json to create collection 
+https://youtu.be/I0fxhB81nqc?t=160
+
+mongoimport "C:\Users\ajay\documents\new folder\students.json" -d college -c students --jonArray --drop
+
+--------------------------------------------------------------------------
+
+----> queries <----
+
+
+//Method 1: Add New Field Without Values:
+
+	db.collection.updateMany({}, {$set:{"new_field": null}})
+
+//Method 2: Add New Field With Specific Value:
+
+	db.collection.updateMany({}, {$set:{"new_field": 10}}) 
+
+//Method 3: Add New Field Using Values from Existing Fields:
+
+db.collection.updateMany(
+    {},
+    [
+        {"$set": {"name": { "$concat": ["$field1", " ", "$field2"]}}}
+    ]
+)
+
+
+
+//Example 1: Add New Field Without Values
+
+	db.teams.updateMany({}, {$set:{"rebounds": null}})
+	db.teams.find().limit(3)
+
+//Example 2: Add New Field With Specific Value:
+
+	db.teams.updateMany({}, {$set:{"rebounds": 10}})
+        db.teams.find().limit(3)
+
+
+//Example 3: Add New Field Using Values from Existing Fields
+
+db.teams.updateMany(
+    {},
+    [
+        {"$set": {"name": { "$concat": ["$team", " ", "$position"]}}}
+    ]
+)
+
+
+db.teams.find().limit(3)
+
+
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+
 
 Link: 
 
@@ -993,6 +1050,12 @@ db.students2.insertMany( [
 ] )
 
 	
+db.teams.insertOne({team: "Mavs", position: "Guard", points: 31})
+db.teams.insertOne({team: "Spurs", position: "Guard", points: 22})
+db.teams.insertOne({team: "Rockets", position: "Center", points: 19})
+db.teams.insertOne({team: "Warriors", position: "Forward", points: 26})
+db.teams.insertOne({team: "Cavs", position: "Guard", points: 33})
+
 --------------------------------------------------------------------------------------------------
 
 
