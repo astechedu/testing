@@ -1,0 +1,71 @@
+>>>> Oracle View <<<
+
+
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+Keys: 
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+
+Update:
+https://www.techonthenet.com/oracle/views.php
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+
+
+
+
+//Oracle / PLSQL: VIEW
+
+
+Syntax:
+
+The syntax for the CREATE VIEW Statement in Oracle/PLSQL is:
+
+CREATE VIEW view_name AS
+  SELECT columns
+  FROM tables
+  [WHERE conditions];
+
+
+
+//Example
+
+CREATE VIEW sup_orders AS
+  SELECT suppliers.supplier_id, orders.quantity, orders.price
+  FROM suppliers
+  INNER JOIN orders
+  ON suppliers.supplier_id = orders.supplier_id
+  WHERE suppliers.supplier_name = 'Microsoft';
+
+
+//Update VIEW
+
+Syntax;
+
+
+CREATE OR REPLACE VIEW view_name AS
+  SELECT columns
+  FROM table
+  WHERE conditions;
+
+//Example
+
+CREATE or REPLACE VIEW sup_orders AS
+  SELECT suppliers.supplier_id, orders.quantity, orders.price
+  FROM suppliers
+  INNER JOIN orders
+  ON suppliers.supplier_id = orders.supplier_id
+  WHERE suppliers.supplier_name = 'Apple';
+
+
+//DROP VIEW view_name;
+	DROP VIEW sup_orders;
+
+
+
+
+
+
+	
