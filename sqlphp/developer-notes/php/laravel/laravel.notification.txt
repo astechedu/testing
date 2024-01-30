@@ -4,7 +4,7 @@
 ------------------------------------------------------------------
 ------------------------------------------------------------------
 
-Key: Role, Admin, Subadmin, Domain
+Key: Laravel 10 Notifications,
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
@@ -14,13 +14,246 @@ https://youtu.be/rEsJ-WR8pAc?t=866
 ---------------------------------------------------------------------------------------
 
 
+Mail Traip:
 
-  - Larave 10 Notification -
+//Laravel 10
+MAIL_MAILER=smtp
+MAIL_HOST=mailpit
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+
+
+//Mail Traip Copied from mail traip
+
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=89899998989889
+MAIL_PASSWORD=667788787878788
+
+--------------------------------------------------------------------------------
 
 Create account on mailtraip
 Create migration table 
 Create Model
 Create Notification controller
 Create Notification
+
+--------------------------------------------------------------------------------
+
+
+--- Laravel 10 Notifications ---
+
+Dir: 
+
+1. Login or Register Mail Traip and copy laravel mail code
+
+2. app\Http\Controllers\NotificationController.php
+3. app\Models\User.php
+4. app\Notifications\MyNotification.php
+5. routes\web.php
+
+
+
+2. 
+//app\Http\Controllers\NotificationController.php
+
+
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\User;
+use App\Notifications\MyNotification;
+
+class NotificationController extends Controller
+{
+    public function index(){
+
+    	$user = User::find(1);                                             //You must write some conditions here
+
+
+        //foreach($users as $user){                                        //For multi users write two lines also which given below
+        //}
+
+    
+    	$messages['hi'] = "Happy Birthday {$user->name}";                   //This line
+
+        $user->notify(new MyNotification($messages));                       //This line
+
+    	dd('done');                                                         //This line
+    }
+}
+
+
+
+
+
+
+3. 
+
+//app\Models\User.php
+
+
+<?php
+
+namespace App\Models;
+
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Models\Phone;
+
+class User extends Authenticatable
+{
+    use HasApiTokens, HasFactory, Notifiable;
+
+
+    //protected $primaryKey='id';
+
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
+    
+}
+
+
+
+
+
+
+
+4.
+
+//app\Notifications\MyNotification.php
+
+
+<?php
+
+namespace App\Notifications;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
+
+
+class MyNotification extends Notification
+{
+    use Queueable;
+
+    private $messages;                                                 //1. This line only
+
+
+    public function __construct($messages)
+    {
+        $this->messages = $messages;                                    //2. This line only
+        
+    }
+
+
+    public function via(object $notifiable): array
+    {
+        return ['mail'];
+    }
+
+
+
+    public function toMail(object $notifiable): MailMessage
+    {
+        //dd($this->messages); exit;
+        return (new MailMessage)
+
+                    ->line($this->messages['hi']);                         //3. This line only
+                    //->line($this->messages['wish']);
+                    //->line('The introduction to the notification.')
+                    //->action('Notification Action', url('/'))
+                    //->line('Thank you for using our application!');
+    }
+
+  
+
+    public function toArray(object $notifiable): array
+    {
+        return [
+            //
+        ];
+    }
+}
+
+
+
+
+5. Routes\web.php
+
+
+use App\Http\Controllers\NotificationController;
+
+
+Route::get('user-notify', [NotificationController::class, 'index']);
+
+
+
+
+-----------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------
+      Laravel 10 Notifications
+
+1. Login or Register Mail Trap and copy laravel mail code(ENV File) -done         -done
+
+2. app\Http\Controllers\NotificationController.php                -done           -done
+
+3. app\Models\User.php                                            -done           -done
+
+4. app\Notifications\MyNotification.php                           -done           -done
+
+5. routes\web.php                                                 -done           -done
+
+
+-------------------------------------------------------------------------------
+
+
+
+
+
+
+//Mail Traip Copied from mail traip
+
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=83c66999ga1216
+MAIL_PASSWORD=84l67oddg1fs13
+
+
+---------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
 
 

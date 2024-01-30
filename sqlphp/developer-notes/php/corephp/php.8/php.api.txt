@@ -1,0 +1,59 @@
+>>>>> PHP  APi <<<<
+
+
+---------------------------------------------------------------
+Keys: Api
+
+--------------------------------------------------------------
+
+Form Data: 
+//Video: https://youtu.be/IagGGcC95Ig?t=718
+
+
+>>Insert Data
+
+//dbh.inc.php
+
+$dsn = "mysql:host=localhost;dbname=myfirstdatabase";
+$dbusername = "root";
+$dbpassword = "";
+
+try{
+  $pdo = new PDO($dsn, $dbusername, $dbpassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}catch(PDOException $e){
+  echo "Connection failed: " . $e->getMessage();
+}
+
+-------------------------------------------------------------------
+
+
+--- Api ---
+
+CORS errors:
+
+
+
+Access-Control-Allow-Credentials    true
+Access-Control-Allow-Headers        Authorization
+Access-Control-Allow-Methods        GET, POST, PUT
+Access-Control-Allow-Origin         http://localhost
+
+Content-Length  164
+Content-Type    application/json; charset=UTF-8
+Date    Tue, 07 May 2019 20:33:52 GMT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,332 @@
+>>>>> PHP  APi with Curl <<<<
+
+
+---------------------------------------------------------------
+Keys: 1. Api With Curl, 2. Rest Api Create & Consume with Curl, 
+
+--------------------------------------------------------------
+
+Form Data: 
+//Video: https://youtu.be/IagGGcC95Ig?t=718
+
+
+>>Insert Data
+
+//dbh.inc.php
+
+$dsn = "mysql:host=localhost;dbname=myfirstdatabase";
+$dbusername = "root";
+$dbpassword = "";
+
+try{
+  $pdo = new PDO($dsn, $dbusername, $dbpassword);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}catch(PDOException $e){
+  echo "Connection failed: " . $e->getMessage();
+}
+
+-------------------------------------------------------------------
+
+
+--- 1. Api With Curl ---
+
+//https://www.geeksforgeeks.org/how-to-add-api-function-to-a-simple-php-page/
+
+
+CORS errors:
+
+
+Access-Control-Allow-Credentials    true
+Access-Control-Allow-Headers        Authorization
+Access-Control-Allow-Methods        GET, POST, PUT
+Access-Control-Allow-Origin         http://localhost
+
+Content-Length  164
+Content-Type    application/json; charset=UTF-8
+Date    Tue, 07 May 2019 20:33:52 GMT
+
+
+-----------------------------------------------------------------
+
+
+<?php
+ 
+$url = 'RequiredLink';
+$data = [
+    'collection'  => 'RequiredAPI'
+];
+  
+$curl = curl_init($url);
+ 
+function APIcall($method, $url, $data) {
+    $curl = curl_init();
+     
+    switch ($method) {
+        case "POST":
+            curl_setopt($curl, CURLOPT_POST, 1);
+            if ($data)
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+            break;
+        case "PUT":
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+            if ($data)
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+            break;
+    }
+    
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+        'APIKEY: RegisteredAPIkey',
+        'Content-Type: application/json',
+    ));
+    
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    $result = curl_exec($curl);
+     
+    if(!$result) {
+        echo("Connection failure!");
+    }
+    curl_close($curl);
+    return $result;
+}
+?>
+-------------------------------------------------------------
+
+<?php
+require_once("MobileRestHandler.php");
+
+$mobileRestHandler = new MobileRestHandler();
+$mobileRestHandler->getAllMobiles();
+?>
+
+
+-----------------------------------------------------------------------------------------------------
+
+
+ GET: Fetch information or data collection. For example product details from a table:
+
+    $returnData = callAPI(‘GET’, ‘https://api.geeksforgeeks.com/url_for_get/’.$user[‘user’][‘buyer_id’], false); $response = json_decode($returnData, true); $errors = $response[‘response’][‘errors’]; $data = $response[‘response’][‘data’][0];
+
+
+
+ POST: Adds or creates new information such as feedback or reviews of some restaurant:
+
+    $arrayOfData = array( “buyer” => $user[‘user’][‘buyer_id’], “payment” => array( “accountNumber” => $this->request->data[‘accountNumber’], “routing” => $this->request->data[‘routing’], “method” => $this->request->data[‘method’] ), ); $apiCall = APIcall(‘POST’, ‘https://api.geeksforgeeks.com/url_for_post/’, json_encode($data_array)); $response = json_decode($apiCall, true); $errors = $response[‘response’][‘errors’]; $data = $response[‘response’][‘data’][0];
+
+
+
+ PUT: Updates existing data:
+
+    $arrayOfData = array( “amount” => ‘RequiredAmount’ ); $updateData = APIcall(‘PUT’, ‘https://api.geeksforgeeks.com/url_for_put/’.$putParameter, json_encode($arrayOfData)); $response = json_decode($updateData, true); $errors = $response[‘response’][‘errors’]; $data = $response[‘response’][‘data’][0];
+
+
+
+ DELETE: Deletes existing data:
+
+    APIcall(‘DELETE’, ‘https://api.geeksforgeeks.com/url_for_delete/’ . $required_id, false);
+
+
+
+-------------------------------------------------------------------------------------------------
+
+
+
+
+2. 
+--- Create and Consume Simple REST API in PHP ---- 
+
+//https://www.allphptricks.com/create-and-consume-simple-rest-api-in-php/
+
+
+
+CORS errors:
+
+
+Access-Control-Allow-Credentials    true
+Access-Control-Allow-Headers        Authorization
+Access-Control-Allow-Methods        GET, POST, PUT
+Access-Control-Allow-Origin         http://localhost
+
+Content-Length  164
+Content-Type    application/json; charset=UTF-8
+Date    Tue, 07 May 2019 20:33:52 GMT
+
+--------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
+
+REST requests are related to CRUD operations (Create, Read, Update, Delete) in database, REST uses GET, POST, PUT and DELETE requests. Let me compare them with CRUD.
+
+    GET is used to retrieve information which is similar to Read
+    POST is used to create new record which is similar to Create
+    PUT is used to update record which is similar to Update
+    DELETE is used to delete record which is similar to Delete
+
+--------------------------------------------------------------------------------------------------
+
+How to Create and Consume Simple REST API in PHP:
+
+
+    1. Create REST API in PHP
+    2. Consume REST API in PHP
+--------------------------------------------------------------------------------------------------
+1. Create REST API in PHP
+
+To create a REST API, follow these steps:
+
+    Create a Database and Table with Dummy Data
+    Create a Database Connection
+    Create a REST API File
+
+--------------------------------------------------------------------------------------------------
+
+1. Create a Database and Table with Dummy Data
+
+To create database run the following query.
+
+	CREATE DATABASE allphptricks;
+
+
+CREATE TABLE IF NOT EXISTS `transactions` (
+`id` int(20) NOT NULL AUTO_INCREMENT,
+`order_id` int(50) NOT NULL,
+`amount` decimal(9,2) NOT NULL,
+`response_code` int(10) NOT NULL,
+`response_desc` varchar(50) NOT NULL,
+PRIMARY KEY (`id`),
+UNIQUE KEY `order_id` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
+
+
+--------------------------------------------------------------------------------------------------
+
+2. Create a Database Connection
+
+db.php file
+
+// Enter your Host, username, password, database below.
+$con = mysqli_connect("localhost","root","","allphptricks");
+    if (mysqli_connect_errno()){
+	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	die();
+	}
+
+
+--------------------------------------------------------------------------------------------------
+
+3. Create a REST API File
+
+
+Create a api.php file and paste the following script in it.
+
+--------------------------------------------------------------------------------------------------
+
+<?php
+header("Content-Type:application/json");
+if (isset($_GET['order_id']) && $_GET['order_id']!="") {
+	include('db.php');
+	$order_id = $_GET['order_id'];
+	$result = mysqli_query(
+	$con,
+	"SELECT * FROM `transactions` WHERE order_id=$order_id");
+	if(mysqli_num_rows($result)>0){
+	$row = mysqli_fetch_array($result);
+	$amount = $row['amount'];
+	$response_code = $row['response_code'];
+	$response_desc = $row['response_desc'];
+	response($order_id, $amount, $response_code,$response_desc);
+	mysqli_close($con);
+	}else{
+		response(NULL, NULL, 200,"No Record Found");
+		}
+}else{
+	response(NULL, NULL, 400,"Invalid Request");
+	}
+
+function response($order_id,$amount,$response_code,$response_desc){
+	$response['order_id'] = $order_id;
+	$response['amount'] = $amount;
+	$response['response_code'] = $response_code;
+	$response['response_desc'] = $response_desc;
+	
+	$json_response = json_encode($response);
+	echo $json_response;
+}
+?>
+
+
+http://localhost/rest/api.php?order_id=15478959
+
+--------------------------------------------------------------------------------------------------
+
+.htaccess file
+
+RewriteEngine On    # Turn on the rewriting engine
+
+RewriteRule ^api/([0-9a-zA-Z_-]*)$ api.php?order_id=$1 [NC,L]
+
+http://localhost/rest/api/15478959
+
+--------------------------------------------------------------------------------------------------
+
+
+2. Consume REST API in PHP
+
+
+To consume a REST API, follow these steps:
+
+    Create an Index File with HTML Form
+    Fetch Records through CURL
+
+--------------------------------------------------------------------------------------------------
+
+1. Create an Index File with HTML Form
+
+<form action="" method="POST">
+<label>Enter Order ID:</label><br />
+<input type="text" name="order_id" placeholder="Enter Order ID" required/>
+<br /><br />
+<button type="submit" name="submit">Submit</button>
+</form>
+
+--------------------------------------------------------------------------------------------------
+
+2. Fetch Records through CURL
+
+<?php
+if (isset($_POST['order_id']) && $_POST['order_id']!="") {
+	$order_id = $_POST['order_id'];
+	$url = "http://localhost/rest/api/".$order_id;
+	
+	$client = curl_init($url);
+	curl_setopt($client,CURLOPT_RETURNTRANSFER,true);
+	$response = curl_exec($client);
+	
+	$result = json_decode($response);
+	
+	echo "<table>";
+	echo "<tr><td>Order ID:</td><td>$result->order_id</td></tr>";
+	echo "<tr><td>Amount:</td><td>$result->amount</td></tr>";
+	echo "<tr><td>Response Code:</td><td>$result->response_code</td></tr>";
+	echo "<tr><td>Response Desc:</td><td>$result->response_desc</td></tr>";
+	echo "</table>";
+}
+    ?>
+--------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
