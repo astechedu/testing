@@ -1,0 +1,15 @@
+>>> Curl CMDS  <<<<<
+
+
+--------------------------------------------------------------
+
+curl www.google.com                         // Output on terminal
+curl -o "google" https://www.google.com     //Save about output in a file
+curl --request GET https://www.google.com   //request hit by get 
+
+curl --request POST --data "username, password" https://www.google.com
+curl -o ama https://www.google.com  \       //Send request to Multiple urls
+>    -o yah https://www.yahoo.com
+
+
+----------------------------------------------------------------

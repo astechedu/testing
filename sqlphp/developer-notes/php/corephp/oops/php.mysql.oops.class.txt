@@ -1,0 +1,477 @@
+>>> PHP, MySql and Oops Class <<<
+
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+Keys: class 1, class 2, 
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+
+
+Class 1:
+
+---> PHP, MySql and Oops Class <-----
+
+
+
+
+
+
+class DB{ 
+    private $dbHost     = "localhost"; 
+    private $dbUsername = "root"; 
+    private $dbPassword = "root"; 
+    private $dbName     = "codexworld"; 
+     
+    public function __construct(){ 
+        if(!isset($this->db)){ 
+            // Connect to the database 
+            try{ 
+                $conn = new PDO("mysql:host=".$this->dbHost.";dbname=".$this->dbName, $this->dbUsername, $this->dbPassword); 
+                $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+                $this->db = $conn; 
+            }catch(PDOException $e){ 
+                die("Failed to connect with MySQL: " . $e->getMessage()); 
+            } 
+        } 
+    } 
+     
+    /* 
+     * Returns rows from the database based on the conditions 
+     * @param string name of the table 
+     * @param array select, where, order_by, limit and return_type conditions 
+     */ 
+    public function getRows($table,$conditions = array()){ 
+        $sql = 'SELECT '; 
+        $sql .= array_key_exists("select",$conditions)?$conditions['select']:'*'; 
+        $sql .= ' FROM '.$table; 
+        if(array_key_exists("where",$conditions)){ 
+            $sql .= ' WHERE '; 
+            $i = 0; 
+            foreach($conditions['where'] as $key => $value){ 
+                $pre = ($i > 0)?' AND ':''; 
+                $sql .= $pre.$key." = '".$value."'"; 
+                $i++; 
+            } 
+        } 
+         
+        if(array_key_exists("order_by",$conditions)){ 
+            $sql .= ' ORDER BY '.$conditions['order_by'];  
+        } 
+         
+        if(array_key_exists("start",$conditions) && array_key_exists("limit",$conditions)){ 
+            $sql .= ' LIMIT '.$conditions['start'].','.$conditions['limit'];  
+        }elseif(!array_key_exists("start",$conditions) && array_key_exists("limit",$conditions)){ 
+            $sql .= ' LIMIT '.$conditions['limit'];  
+        } 
+         
+        $query = $this->db->prepare($sql); 
+        $query->execute(); 
+         
+        if(array_key_exists("return_type",$conditions) && $conditions['return_type'] != 'all'){ 
+            switch($conditions['return_type']){ 
+                case 'count': 
+                    $data = $query->rowCount(); 
+                    break; 
+                case 'single': 
+                    $data = $query->fetch(PDO::FETCH_ASSOC); 
+                    break; 
+                default: 
+                    $data = ''; 
+            } 
+        }else{ 
+            if($query->rowCount() > 0){ 
+                $data = $query->fetchAll(); 
+            } 
+        } 
+        return !empty($data)?$data:false; 
+    } 
+     
+    /* 
+     * Insert data into the database 
+     * @param string name of the table 
+     * @param array the data for inserting into the table 
+     */ 
+    public function insert($table,$data){ 
+        if(!empty($data) && is_array($data)){ 
+            $columns = ''; 
+            $values  = ''; 
+            $i = 0; 
+            if(!array_key_exists('created',$data)){ 
+                $data['created'] = date("Y-m-d H:i:s"); 
+            } 
+            if(!array_key_exists('modified',$data)){ 
+                $data['modified'] = date("Y-m-d H:i:s"); 
+            } 
+ 
+            $columnString = implode(',', array_keys($data)); 
+            $valueString = ":".implode(',:', array_keys($data)); 
+            $sql = "INSERT INTO ".$table." (".$columnString.") VALUES (".$valueString.")"; 
+            $query = $this->db->prepare($sql); 
+            foreach($data as $key=>$val){ 
+                 $query->bindValue(':'.$key, $val); 
+            } 
+            $insert = $query->execute(); 
+            return $insert?$this->db->lastInsertId():false; 
+        }else{ 
+            return false; 
+        } 
+    } 
+     
+    /* 
+     * Update data into the database 
+     * @param string name of the table 
+     * @param array the data for updating into the table 
+     * @param array where condition on updating data 
+     */ 
+    public function update($table,$data,$conditions){ 
+        if(!empty($data) && is_array($data)){ 
+            $colvalSet = ''; 
+            $whereSql = ''; 
+            $i = 0; 
+            if(!array_key_exists('modified',$data)){ 
+                $data['modified'] = date("Y-m-d H:i:s"); 
+            } 
+            foreach($data as $key=>$val){ 
+                $pre = ($i > 0)?', ':''; 
+                $colvalSet .= $pre.$key."='".$val."'"; 
+                $i++; 
+            } 
+            if(!empty($conditions)&& is_array($conditions)){ 
+                $whereSql .= ' WHERE '; 
+                $i = 0; 
+                foreach($conditions as $key => $value){ 
+                    $pre = ($i > 0)?' AND ':''; 
+                    $whereSql .= $pre.$key." = '".$value."'"; 
+                    $i++; 
+                } 
+            } 
+            $sql = "UPDATE ".$table." SET ".$colvalSet.$whereSql; 
+            $query = $this->db->prepare($sql); 
+            $update = $query->execute(); 
+            return $update?$query->rowCount():false; 
+        }else{ 
+            return false; 
+        } 
+    } 
+     
+    /* 
+     * Delete data from the database 
+     * @param string name of the table 
+     * @param array where condition on deleting data 
+     */ 
+    public function delete($table,$conditions){ 
+        $whereSql = ''; 
+        if(!empty($conditions)&& is_array($conditions)){ 
+            $whereSql .= ' WHERE '; 
+            $i = 0; 
+            foreach($conditions as $key => $value){ 
+                $pre = ($i > 0)?' AND ':''; 
+                $whereSql .= $pre.$key." = '".$value."'"; 
+                $i++; 
+            } 
+        } 
+        $sql = "DELETE FROM ".$table.$whereSql; 
+        $delete = $this->db->exec($sql); 
+        return $delete?$delete:false; 
+    } 
+}
+
+CRUD Operations (action.php)
+
+The action.php file is used to perform the CRUD operations using PHP PDO extension and MySQL (DB class). The code is executed based on the action_type specified in the URL query string:
+
+    add – Add or insert records in the database.
+    edit – Update records in the database using the id given in the query string of the link.
+    delete – Remove data from the database using the id given in the query string of the link.
+
+After the data manipulation, the status is stored using PHP SESSION and redirects back to the respective web page.
+
+<?php 
+// Start session 
+session_start(); 
+ 
+// Include and initialize DB class 
+require_once 'DB.class.php'; 
+$db = new DB(); 
+ 
+// Database table name 
+$tblName = 'users'; 
+ 
+$postData = $statusMsg = $valErr = ''; 
+$status = 'danger'; 
+$redirectURL = 'index.php'; 
+ 
+// If Add request is submitted 
+if(!empty($_REQUEST['action_type']) && $_REQUEST['action_type'] == 'add'){ 
+    $redirectURL = 'add.php'; 
+     
+    // Get user's input 
+    $postData = $_POST; 
+    $name = !empty($_POST['name'])?trim($_POST['name']):''; 
+    $email = !empty($_POST['email'])?trim($_POST['email']):''; 
+    $phone = !empty($_POST['phone'])?trim($_POST['phone']):''; 
+     
+    // Validate form fields 
+    if(empty($name)){ 
+        $valErr .= 'Please enter your name.<br/>'; 
+    } 
+    if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){ 
+        $valErr .= 'Please enter a valid email.<br/>'; 
+    } 
+    if(empty($phone)){ 
+        $valErr .= 'Please enter your phone no.<br/>'; 
+    } 
+     
+    // Check whether user inputs are empty 
+    if(empty($valErr)){ 
+        // Insert data into the database 
+        $userData = array( 
+            'name' => $name, 
+            'email' => $email, 
+            'phone' => $phone 
+        ); 
+        $insert = $db->insert($tblName, $userData); 
+         
+        if($insert){ 
+            $status = 'success'; 
+            $statusMsg = 'User data has been added successfully!'; 
+            $postData = ''; 
+             
+            $redirectURL = 'index.php'; 
+        }else{ 
+            $statusMsg = 'Something went wrong, please try again after some time.'; 
+        } 
+    }else{ 
+        $statusMsg = '<p>Please fill all the mandatory fields:</p>'.trim($valErr, '<br/>'); 
+    } 
+     
+    // Store status into the SESSION 
+    $sessData['postData'] = $postData; 
+    $sessData['status']['type'] = $status; 
+    $sessData['status']['msg'] = $statusMsg; 
+    $_SESSION['sessData'] = $sessData; 
+}elseif(!empty($_REQUEST['action_type']) && $_REQUEST['action_type'] == 'edit' && !empty($_POST['id'])){ // If Edit request is submitted 
+    $redirectURL = 'edit.php?id='.$_POST['id']; 
+     
+    // Get user's input 
+    $postData = $_POST; 
+    $name = !empty($_POST['name'])?trim($_POST['name']):''; 
+    $email = !empty($_POST['email'])?trim($_POST['email']):''; 
+    $phone = !empty($_POST['phone'])?trim($_POST['phone']):''; 
+     
+    // Validate form fields 
+    if(empty($name)){ 
+        $valErr .= 'Please enter your name.<br/>'; 
+    } 
+    if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){ 
+        $valErr .= 'Please enter a valid email.<br/>'; 
+    } 
+    if(empty($phone)){ 
+        $valErr .= 'Please enter your phone no.<br/>'; 
+    } 
+     
+    // Check whether user inputs are empty 
+    if(empty($valErr)){ 
+        // Update data in the database 
+        $userData = array( 
+            'name' => $name, 
+            'email' => $email, 
+            'phone' => $phone 
+        ); 
+        $conditions = array('id' => $_POST['id']); 
+        $update = $db->update($tblName, $userData, $conditions); 
+         
+        if($update){ 
+            $status = 'success'; 
+            $statusMsg = 'User data has been updated successfully!'; 
+            $postData = ''; 
+             
+            $redirectURL = 'index.php'; 
+        }else{ 
+            $statusMsg = 'Something went wrong, please try again after some time.'; 
+        } 
+    }else{ 
+        $statusMsg = '<p>Please fill all the mandatory fields:</p>'.trim($valErr, '<br/>'); 
+    } 
+     
+    // Store status into the SESSION 
+    $sessData['postData'] = $postData; 
+    $sessData['status']['type'] = $status; 
+    $sessData['status']['msg'] = $statusMsg; 
+    $_SESSION['sessData'] = $sessData; 
+}elseif(!empty($_REQUEST['action_type']) && $_REQUEST['action_type'] == 'delete' && !empty($_GET['id'])){ // If Delete request is submitted 
+    // Delete data from the database 
+    $conditions = array('id' => $_GET['id']); 
+    $delete = $db->delete($tblName, $conditions); 
+     
+    if($delete){ 
+        $status = 'success'; 
+        $statusMsg = 'User data has been deleted successfully!'; 
+    }else{ 
+        $statusMsg = 'Something went wrong, please try again after some time.'; 
+    } 
+     
+    // Store status into the SESSION 
+    $sessData['status']['type'] = $status; 
+    $sessData['status']['msg'] = $statusMsg; 
+    $_SESSION['sessData'] = $sessData; 
+} 
+ 
+// Redirect to the home/add/edit page 
+header("Location: $redirectURL"); 
+exit;
+
+
+----x----
+
+
+
+
+
+
+Class 2:
+
+---> PHP, MySql and Oops Class <-----
+
+//https://devjunky.com/PHP-OOP-Database-Class-Example/
+
+//PHP OOP Database Class Example:
+
+
+    class DatabaseClass{	
+	
+        private $connection = null;
+
+        // this function is called everytime this class is instantiated		
+        public function __construct(){
+            
+        }
+		
+        // Insert a row/s in a Database Table
+        public function Insert( ){
+            
+        }
+
+        // Select a row/s in a Database Table
+        public function Select( ){
+            
+        }
+		
+        // Update a row/s in a Database Table
+        public function Update( ){
+            
+        }		
+		
+        // Remove a row/s in a Database Table
+        public function Remove( ){
+            
+        }		
+        
+        // execute statement
+        private function executeStatement( ){
+			
+        }
+		
+    }
+
+
+
+
+-----
+
+class DatabaseClass{	
+	
+        private $connection = null;
+
+        // this function is called everytime this class is instantiated		
+        public function __construct( $dbhost = "localhost", $dbname = "myDataBaseName", $username = "root", $password    = ""){
+
+            try{
+			
+                $this->connection = new PDO("mysql:host={$dbhost};dbname={$dbname};", $username, $password);
+                $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+				
+            }catch(Exception $e){
+                throw new Exception($e->getMessage());   
+            }			
+			
+        }
+		
+        // Insert a row/s in a Database Table
+        public function Insert( $statement = "" , $parameters = [] ){
+            try{
+				
+                $this->executeStatement( $statement , $parameters );
+                return $this->connection->lastInsertId();
+				
+            }catch(Exception $e){
+                throw new Exception($e->getMessage());   
+            }		
+        }
+
+        // Select a row/s in a Database Table
+        public function Select( $statement = "" , $parameters = [] ){
+            try{
+				
+                $stmt = $this->executeStatement( $statement , $parameters );
+                return $stmt->fetchAll();
+				
+            }catch(Exception $e){
+                throw new Exception($e->getMessage());   
+            }		
+        }
+		
+        // Update a row/s in a Database Table
+        public function Update( $statement = "" , $parameters = [] ){
+            try{
+				
+                $this->executeStatement( $statement , $parameters );
+				
+            }catch(Exception $e){
+                throw new Exception($e->getMessage());   
+            }		
+        }		
+		
+        // Remove a row/s in a Database Table
+        public function Remove( $statement = "" , $parameters = [] ){
+            try{
+				
+                $this->executeStatement( $statement , $parameters );
+				
+            }catch(Exception $e){
+                throw new Exception($e->getMessage());   
+            }		
+        }		
+        
+        // execute statement
+        private function executeStatement( $statement = "" , $parameters = [] ){
+            try{
+			
+                $stmt = $this->connection->prepare($statement);
+                $stmt->execute($parameters);
+                return $stmt;
+				
+            }catch(Exception $e){
+                throw new Exception($e->getMessage());   
+            }		
+        }
+		
+    }
+
+----
+
+--------x--------
+
+
+
+
+----x----
