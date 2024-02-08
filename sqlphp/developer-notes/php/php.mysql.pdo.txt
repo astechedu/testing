@@ -1,0 +1,246 @@
+>>>> PHP MySql PDO <<<<<
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+key: 
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+//PDO Queries
+https://phpdelusions.net/pdo_examples/insert
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+
+-----> PHP MySql and PDO <-----
+
+
+//Class
+
+ class Database {
+	public $conn     = null;
+	public $host     = '127.0.0.1';
+	public $db       = 'relationship';
+	public $username = 'root';
+	public $password = '';
+	public $port     = "3306";
+	public $charset  = 'utf8mb4';
+
+	//public $dsn = "mysql:host=".$this->host.";dbname=".$this->db.";charset=".$this->charset;
+    //public $dsn = "mysql:host=localhost;dbname=practice;charset=utf8mb4";
+     
+	public function __cunstruct(){		
+      //
+	}
+
+    public function connection(){
+		try{
+
+		    $conn = new PDO("mysql:host=$this->host;dbname=$this->db", $this->username, $this->password);
+		   //$conn->close();
+		      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		   if($conn){		          
+		           $this->conn = $conn;				  
+		      //echo "Database successfully connected";
+		   }
+                
+		}catch(Exception $e){
+		  echo "<br>";
+		  echo $e->getMessage();
+		}
+	}
+
+	public function getData(){
+		//print_r($this->connection());
+
+		//echo "<pre>";print_r($this->conn);
+		$sql = "select *from users";
+		$stmt = $this->conn->prepare($sql);		
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		//echo "<pre>";print_r($result);
+		$this->conn = null;
+		if(empty($result)){
+			isset($result)?? null;
+		}
+		return $users = $result?? null;    
+	}
+
+	public function getDataById($id){
+		//print_r($this->connection());
+		//echo "<pre>";print_r($this->conn);
+		$sql = 'select *from users where id=:id';
+		$stmt = $this->conn->prepare($sql);		
+		$stmt->execute(['id' => $id]);
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		//echo "<pre>";print_r($result);
+		$this->conn = null;
+		if(empty($result)){
+			isset($result)?? null;
+		}
+		return $users = $result?? null;    
+	}
+
+	public function agetDataById(int $id){
+		print_r($id);
+		$sql = "select *from users where id=".$id;
+		$stmt = $this->conn->prepare($sql);	
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_OBJ);
+		//echo "<pre>";print_r($result);
+		return $users = $result?? null;    
+	}
+
+
+	public function allData() {
+
+		try {
+		  $conn = new PDO("mysql:host=$this->host;dbname=$this->db", $this->username, $this->password);
+		  // set the PDO error mode to exception
+		  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		  echo "Connected successfully";
+
+          echo "<pre>"; print_r($conn);
+
+          $sql = 'select *from users';
+
+          $stmt = $conn->query($sql);
+
+          $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+   
+
+			if ($users) {
+
+			     foreach ($users as $user) {
+				    echo $user['id'] . '<br>';
+				    echo $user['name'] . '<br>';
+				 }
+			}
+
+
+		} catch(PDOException $e) {
+		  echo "Connection failed: " . $e->getMessage();
+		}   
+    
+	}
+
+public function allDataById($where, $options=[]) {
+
+		try {
+		  $conn = new PDO("mysql:host=$this->host;dbname=$this->db", $this->username, $this->password);
+		  // set the PDO error mode to exception
+		  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		  
+
+          echo "<pre>"; print_r($conn);
+
+          $sql = 'select *from users where id="'.$where.'"';
+
+          $stmt = $conn->query($sql);
+
+          $users = $stmt->fetchAll(PDO::FETCH_ASSOC);   
+
+			if ($users) {
+
+			     foreach ($users as $user) {
+				    echo $user['id'] . '<br>';
+				    echo $user['name'] . '<br>';
+				 }
+			}
+
+		} catch(PDOException $e) {
+		  echo "Connection failed: " . $e->getMessage();
+		}   
+    
+	}
+
+
+
+//INSERT query with positional placeholders
+public function register($db,$name,$password) {
+
+		try {
+		  $pdo = new PDO("mysql:host=$this->host;dbname=$db", $this->username, $this->password);
+		  // set the PDO error mode to exception
+		  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		  
+
+         //echo "<pre>"; print_r($conn);
+
+		  $sql = "INSERT INTO users (name,password) VALUES (?,?)";
+		  $stmt= $pdo->prepare($sql);
+		  $registerd = $stmt->execute([$name, $password]);
+         
+			if ($registerd) {
+              echo "User successfully Registered ".$name;			    
+			}
+
+		} catch(PDOException $e) {
+		  echo "Connection failed: " . $e->getMessage();
+		}   
+    
+	}
+
+
+
+
+//INSERT query with named placeholders
+public function register2($db,$table,$name,$password) {
+
+		try {
+		  $pdo = new PDO("mysql:host=$this->host;dbname=$db", $this->username, $this->password);
+		  // set the PDO error mode to exception
+		  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		  
+
+		  $data = [
+			   'name' => $name,
+			   'password' => $password,
+		  ];
+
+		  $sql = "INSERT INTO $table (name,password) VALUES (:name, :password)";
+		  $stmt= $pdo->prepare($sql);
+		  $registerd = $stmt->execute($data);
+         
+			if ($registerd) {
+              echo "User successfully Registered ".$name;			    
+			}
+
+		} catch(PDOException $e) {
+		  echo "Connection failed: " . $e->getMessage();
+		}   
+    
+	}
+
+
+
+}
+
+
+
+
+
+
+include 'connection.php';
+
+$db = new Database();
+
+$data = $db->allData();
+
+$id=2; 
+$dataId = $db->allDataById($id);
+
+$register = $db->register2('test','users','akshita','akshita123');
+
+
+
+
+
+
+----x----
+
+------------------------------------------------------------
+
+
+
+
