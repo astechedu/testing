@@ -213,6 +213,62 @@ public function register2($db,$table,$name,$password) {
 	}
 
 
+//Update query with named placeholders
+public function updateUser($db,$table,$id,$name,$password) {
+
+		try {
+		  $pdo = new PDO("mysql:host=$this->host;dbname=$db", $this->username, $this->password);
+		  // set the PDO error mode to exception
+		  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		  
+
+		  $data = [
+			   'name' => $name,
+			   'password' => $password,
+			   'id' => $id,
+		  ];
+
+		  $sql = "Update users SET name=:name, password=:password WHERE id=:id" ;
+		  $stmt= $pdo->prepare($sql);
+		  $updateUser = $stmt->execute($data);
+         
+			if ($updateUser) {
+              echo "User successfully Updated ".$id;			    
+			}
+
+		} catch(PDOException $e) {
+		  echo "Connection failed: " . $e->getMessage();
+		}   
+    
+	}
+
+
+//Delete query with named placeholders
+public function deleteUser($db,$table,$id) {
+
+		try {
+		  $pdo = new PDO("mysql:host=$this->host;dbname=$db", $this->username, $this->password);
+		  // set the PDO error mode to exception
+		  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);		  
+
+		  $data = [
+			   'id' => $id,
+		  ];
+
+		  $sql = "DELETE FROM users where id=:id" ;
+		  $stmt= $pdo->prepare($sql);
+		  $deleteUser = $stmt->execute($data);
+         
+			if ($deleteUser) {
+              echo "User successfully Deleted ".$id;			    
+			}
+
+		} catch(PDOException $e) {
+		  echo "Connection failed: " . $e->getMessage();
+		}   
+    
+	}
+
+
 
 }
 
@@ -232,9 +288,13 @@ $dataId = $db->allDataById($id);
 
 $register = $db->register2('test','users','akshita','akshita123');
 
+$update = $db->updateUser('test','users',15,'akshita','akshita123');
+$delete = $db->deleteUser('test','users',15);
 
 
 
+//PHP PDO MySql All Operations
+https://phpdelusions.net/pdo_examples/update
 
 
 ----x----
