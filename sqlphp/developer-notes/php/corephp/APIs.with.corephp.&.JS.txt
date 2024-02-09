@@ -1,0 +1,57 @@
+<<<<< APIs PHP with JS  >>>>
+
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+Keys: Core PHP With React, 
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+
+
+//1. Vdo: Simple react(frontend) api with CORE PHP as Backend: Save user data
+https://youtu.be/yxnm109XdYI?t=1039
+
+
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+
+
+
+
+----> Core PHP With React <----
+
+
+//Watch video no 1 above list
+
+1. Frontend: React
+2. Backend: Core PHP 
+3. MariaDB
+
+
+1. React as Frontend
+
+ a) Using useState hook
+ b) Axios to http request to php backend
+
+
+2. Core PHP 
+ a) Config Cors (Cross orign allow on top of php page)       //Give permission to react frontend api or comming request 
+ b) Writing query to save data into databas
+
+3. MariaDB
+  a) Create a table 
+  
+
+
+
+
+----x----
+
