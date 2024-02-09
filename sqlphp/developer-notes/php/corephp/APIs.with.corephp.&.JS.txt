@@ -29,7 +29,9 @@ https://youtu.be/yxnm109XdYI?t=1039
 ----> Core PHP With React <----
 
 
-//Watch video no 1 above list
+//Watch this video 
+https://youtu.be/yxnm109XdYI?t=1041
+
 
 1. Frontend: React
 2. Backend: Core PHP 
@@ -42,15 +44,108 @@ https://youtu.be/yxnm109XdYI?t=1039
  b) Axios to http request to php backend
 
 
+import './Style.css';
+import { useState } from 'react';
+import axio from 'axios';
+
+function App() {
+   const [name, setName] = setState('');
+   const [mobile, setMobile] = setState('');
+   const [email, setEmail] = setState('');
+  
+   const handleSubmit = () => {
+     if(name.length === 0){
+       alert("Name has left blank!");
+     }
+     else if(mobile.length === 0 ) {
+       alert("Mobile has left blank!");
+     }else if(email.length === 0 ) {
+       alert("Email has left blank!");
+     }else{
+        const url = "http://localhost/anyname.php";
+
+        let fData = new FormData();
+        fData.append('name', name);
+	fData.append('mobile', mobile);
+        fData.append('email', email);
+
+        axios.post(url, fData)
+         .then(response=>alert(response.data))
+         .catch(error=>alert(error));
+     }
+   }
+
+  return {
+  <>
+    <div>
+      <label htmlFor="name">Name</label>
+      <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value) }  />
+
+      <label htmlFor="mobile">Mobile</label>
+      <input type="text" id="mobile" value={mobile} onChange={(e) => setMobile(e.target.value) />
+
+      <label htmlFor="email">Email</label>
+      <input type="text" id="email"  value={email} onChange={(e) => setEmail(e.target.value) />
+
+      <input type="button" name="send" id="send" value="Send" />
+    </div>
+  </>
+  }
+}
+
+
+----x----
+
 2. Core PHP 
  a) Config Cors (Cross orign allow on top of php page)       //Give permission to react frontend api or comming request 
  b) Writing query to save data into databas
 
+sudo gedit index.php     //Or any file name
+
+//In index.php file
+
+header('Access-Control-Allow-Origin: *');
+
+$conn = new mysqli("localhost","react_api","1181","react_api");
+
+if(mysqli_connect_error())
+   echo mysqli_connect_error();
+   exit();
+}else{
+       $name = $_POST['name'];
+       $mobile = $_POST['mobile'];
+       $email = $_POST['email'];
+
+       $sql = "INSERT INTO users(name,mobile,email) values('$name','$mobile','$email')";
+       $res = mysqli_query($conn, $sql);
+   
+       if($res){
+           echo "Success!";
+       }else{
+           echo "Error!";
+       }
+       $conn->close();
+}
+
+
+----x----
+
 3. MariaDB
-  a) Create a table 
+  a) Create database react_api or anyName
+  b) Create table users or anyName 
+  c) ./mysql -u 'react_api' -p
   
 
+create table users (
+  id int auto_increment primary key,
+  name varchar(10),
+  mobile int,
+  email varchar(10)
+);
 
+insert into users(id,name,mobile,email) values(1,'ajay',0000000000,'abc1@gmail.com');
+insert into users(id,name,mobile,email) values(2,'amit',0000000000,'abc2@gmail.com');
+insert into users(id,name,mobile,email) values(3,'sumo',0000000000,'abc3@gmail.com');
 
 
 ----x----
