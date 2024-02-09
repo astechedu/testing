@@ -1,0 +1,61 @@
+<<<<< Js (VueJs or RectJs) On PHP Pages  >>>>>>
+
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+Keys: VueJs on php page,
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+
+//Vue Js on PHP page
+https://youtu.be/XnlA8OCW3ec?t=392
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+
+
+----> VueJs on php page <----
+
+
+<body>
+   <div id="app" class="content" align="center">
+        <h1>Hello From PHP File</h1>
+        <h3>{{ title }}</h3>
+        <ul>
+            <li v-for="{name,index} in names" :key="index">
+                {{name}}
+            </li>
+        </ul>
+   </div>
+   <script src="https://unpgk.com/vue@next"></script>
+
+   <script>
+     const TestApp = {
+       data(){
+         return {
+          title: "Hellow From Vuejs 3",
+          names: [
+             'Roger',
+             'Mark',
+             'Manu',
+             'Andrew'
+          ],
+         }
+       }
+
+     }
+   </script>
+
+</body>
+
+
+
+
+-----x-----
