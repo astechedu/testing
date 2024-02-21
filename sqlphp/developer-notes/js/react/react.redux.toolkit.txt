@@ -1,0 +1,859 @@
+>>>> React >>>>>
+
+
+---------------------------------------------------------------------------
+Keys: 
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+//Vide: React Redux Toolkit
+https://youtu.be/fxT54eRIsc4?t=796
+---------------------------------------------------------------------------
+
+//Website: React Redux Toolkit, Create Store
+https://redux-toolkit.js.org/usage/usage-with-typescript#getting-the-dispatch-type
+
+//Website: React Redux Toolkit, Create Store
+//https://blog.logrocket.com/understanding-redux-tutorial-examples/
+
+
+//Redux exmple old
+https://www.freecodecamp.org/news/redux-and-redux-toolkit-for-beginners/
+
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+Folder Structure:
+
+src/
+reducers/
+reducers/
+    index.js
+    taskReducer.js
+
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+//Redux Toolkit
+
+redux/store.js             //or store.ts
+
+import { createStore } from '@redux/toolkit";
+import { counterSlice } from './slices/counter'
+
+export const store = configureStore({
+  reducer: {
+    counter: counterSlice,
+  },
+});
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch;
+
+
+
+//redux/store.js or ts
+//index.tsx
+
+import { Provider } from 'react-redux'
+import { store } from './redux/store'
+
+
+<React.StrictMode>
+  <Provider store={store}>
+   <App />
+  </Provider>
+</React.StrictMode>
+
+
+
+//redux/slices/counter.js   or .ts
+
+import { createSlice } from '@reduxjs/toolkit'
+
+export const counterSlice = createSlice({
+   initialState: 0,
+   name: "counter",
+   reducers: {
+       increment: (state) => state + 1,
+       decrement: (state) => state - 1,
+     },     
+});
+
+export const { increment, decrement } = counterSlice.actions;
+export const counterSlice.reducer;
+
+
+
+//
+//redux/hooks/hooks.js or .ts
+
+import { useDispatch, useSelector } from "react-redux";
+import type { TypeUseSelectorHook } from "react-redux";
+import type { RootState, AppDispach } from "./store";
+
+//Use througthout your app instead of plain `useDispatch` and `useSelector`
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypeUseSelectorHook<RootState> = useSelector;
+
+
+//App Component
+import { useAppSelector } from "./redux/hooks";
+
+function App() {
+  const count = useAppSelector(state => state.counter)
+  const {increment, decrement} from './redux/slices/counter';
+  const dispatch = useAppDispatch()
+
+  return(
+      <h1>{ count }</h1>
+      <button onClick={ () => dispatch() }>Increment</button>
+  );
+}
+
+}
+
+
+
+//Creaate new component 
+
+import React from "react";
+import { useAppSelector } from "./redux/hooks";
+
+const MyComp: React.FC = () => {
+  const count = useAppSelector( (s) => s.counter);
+}
+exprt default MyComp;
+
+
+-----x------
+
+--------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+The key components that enable this centralized approach to state management are:
+
+    Store
+    Actions
+    Dispatch
+    Reducers
+
+Example: 02
+
+
+//State management with Redux:
+
+
+
+import React, { useState } from 'react';
+
+const App = () => {
+  const [count, setCount] = useState(0);
+
+  const handleIncrement = (incrementBy) => {
+    const numberToIncrement = incrementBy || 1;
+    setCount(count + numberToIncrement)
+  }
+
+  return (
+    <div>
+      <BigCountDisplay count={count} />
+      <CounterButton onIcrement={handleIncrement} />
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+
+//Redux actions
+
+
+Here’s an example of an action:
+
+{ 
+  type: "INCREMENT",
+  payload: {
+    incrementBy: 5,
+  }
+}
+
+
+
+
+//And here is an example of an action creator. It is just a helper function that returns the action:
+
+const getIncrementAction = (numberToIncrement) => {
+  return {
+    type: "INCREMENT",
+    payload: {
+      incrementBy: numberToIncrement,
+    }
+  }
+}
+
+
+
+
+//Redux reducers
+
+
+Here is an example of how reducers work in Redux:
+
+const CounterReducer = (state = initialState, action) => {
+    switch (action.type) {
+      // This reducer handles any action with type "LOGIN"
+      case "INCREMENT":
+          return state + action.incrementBy ? action.incrementBy : 1
+       default:
+          return state;
+      } 
+}
+
+------x-------
+
+
+---- Redux toolkit ----
+
+
+
+//Using Redux Toolkit: 
+//Redux store
+//Setting up a store with Redux toolkit
+
+
+import { configureStore } from '@reduxjs/toolkit'
+import counterReducer from './counterReducer'
+
+const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+  },
+})
+
+export default store
+
+
+
+//Creating an action using Redux Toolkit
+
+
+const addTodo = createAction('INCREMENT')
+addTodo({ val: 5 })
+// {type : "INCREMENT", payload : {val : 5}})
+
+
+//Creating the reducer with Redux Toolkit
+
+Redux Toolkit would look like:
+
+import { createAction, createReducer } from '@reduxjs/toolkit'
+
+const increment = createAction('counter/increment')
+const incrementByAmount = createAction('counter/incrementByAmount')
+
+const initialState = { value: 0 }
+
+const counterReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(increment, (state, action) => {
+      state.value++
+    })
+    .addCase(incrementByAmount, (state, action) => {
+      state.value += action.payload
+    })
+})
+
+
+
+
+// a case without toolkit, notice the .map to create a new state
+case 'TOGGLE_TODO': {
+  const { index } = action.payload
+  return state.map((todo, i) => {
+    if (i !== index) return todo
+
+    return {
+      ...todo,
+      completed: !todo.completed,
+    }
+  })
+}
+
+
+
+// a case with toolkit, notice the mutation which is taken care internally
+.addCase('TOGGLE_TODO', (state, action) => {
+  const todo = state[action.payload.index]
+  // "mutate" the object by overwriting a field
+  todo.completed = !todo.completed
+})
+
+
+
+
+//Redux middleware
+
+
+Here’s what a simple middleware looks like:
+
+function simpleMiddleware({ getState, dispatch }) {
+  return function(next){
+    return function(action){
+      // processing
+      const nextAction = next(action);
+      // read the next state
+      const state = getState();
+      // return the next action or you can dispatch any other action
+      return nextAction;  
+    }
+  }
+}
+
+
+
+-----x------
+
+
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+
+
+ ---->   Redux Example <------
+
+
+//https://www.freecodecamp.org/news/redux-and-redux-toolkit-for-beginners/
+
+npm install \
+
+redux \
+
+react-redux \
+
+redux-thunk \
+
+redux-devtools-extension
+
+
+
+The key components that enable this centralized approach to state management are:
+
+    Store
+    Actions
+    Dispatch
+    Reducers
+
+
+
+Here's an example of an action:
+
+{
+  type: 'ADD_TASK',
+  payload: {
+    id: 1,
+    text: 'Buy groceries',
+    completed: false
+  }
+}
+
+
+
+returns an action object to add the task to the Redux store:
+
+function addTask(taskText) {
+  return {
+    type: 'ADD_TASK',
+    payload: {
+      id: 1,
+      text: taskText,
+      completed: false
+    }
+  }
+}
+
+
+
+Here's an example of a simple reducer:
+
+const initialState = {
+  count: 0
+};
+
+function counterReducer(state = initialState, action) {
+  switch(action.type) {
+    case 'INCREMENT':
+      return { ...state, count: state.count + 1 };
+    case 'DECREMENT':
+      return { ...state, count: state.count - 1 };
+    default:
+      return state;
+  }
+}
+
+
+
+//Step 1: How to set up the project
+
+
+npm create vite@latest your-project-name -- --template react
+
+cd your-project-name
+
+npm install
+
+
+
+Step 2: How to install Redux
+
+Redux requires a few dependencies for its operations, namely:
+
+    Redux: The core library enables the redux architecture.
+    React Redux: Simplifies connecting your React components to the Redux store.
+    Redux Thunk: Allows you to write asynchronous logic in your Redux actions.
+    Redux DevTools Extension: Connects your Redux application to Redux DevTools
+
+
+
+
+
+
+
+
+
+//Step 3: How to set up reducers
+
+
+import taskReducer from "./taskReducer";
+import { combineReducers } from "redux";
+
+const rootReducer = combineReducers({
+  tasks: taskReducer,
+});
+
+export default rootReducer;
+
+
+
+
+//Index.php
+
+
+const initialState = {
+  tasks: []
+};
+
+const taskReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'ADD_TASK':
+      return {
+        ...state,
+        tasks: [...state.tasks, action.payload]
+      };
+    case 'DELETE_TASK':
+      return {
+        ...state,
+        tasks: state.tasks.filter(task => task.id !== action.payload)
+      };
+    default:
+      return state;
+  }
+};
+
+export default rootReducer;
+
+
+
+
+
+//taskReducer.js
+//Step 4: How to create the Redux store
+
+
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
+
+import taskReducer from "./reducers/taskReducer";
+
+const store = createStore(
+  taskReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
+
+export default store;
+
+
+
+
+
+//Step 5: How to connect the Redux Store to the application
+
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
+
+import { Provider } from "react-redux";
+import store from "./store";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>
+);
+
+
+
+
+
+
+///Step 6: How to use Redux DevTools
+
+
+
+
+//Step 7: How to set up Redux Actions
+
+
+export const addTodo = (text) => {
+  return {
+    type: "ADD_TASK",
+    payload: {
+      id: new Date().getTime(),
+      text: text,
+    },
+  };
+};
+
+export const deleteTodo = (id) => {
+  return {
+    type: "DELETE_TASK",
+    payload: id,
+  };
+};
+
+
+
+//Step 8: How to dispatch actions
+
+
+import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../actions";
+
+
+
+
+//Task.jsx
+
+
+
+const Task = () => {
+  const dispatch = useDispatch();
+  const inputRef = useRef(null);
+
+  function addNewTask() {
+    const task = inputRef.current.value.trim();
+    if (task !== "") {
+      dispatch(addTodo(task));
+      inputRef.current.value = "";
+    }
+  }
+
+  return (
+    <div className="task-component">
+      <div className="add-task">
+        <input
+          type="text"
+          placeholder="Add task here..."
+          ref={inputRef}
+          className="taskInput"
+        />
+        <button onClick={addNewTask}>Add task</button>
+      </div>
+    </div>
+  );
+};
+
+export default Task;
+
+
+
+//const Task = () => {
+  const dispatch = useDispatch();
+  const inputRef = useRef(null);
+
+  function addNewTask() {
+    const task = inputRef.current.value.trim();
+    if (task !== "") {
+      dispatch(addTodo(task));
+      inputRef.current.value = "";
+    }
+  }
+
+  return (
+    <div className="task-component">
+      <div className="add-task">
+        <input
+          type="text"
+          placeholder="Add task here..."
+          ref={inputRef}
+          className="taskInput"
+        />
+        <button onClick={addNewTask}>Add task</button>
+      </div>
+    </div>
+  );
+};
+
+export default Task;
+
+
+
+
+//TaskList.jsx
+
+import { useSelector, useDispatch } from "react-redux";
+import { deleteTodo } from "../actions";
+
+
+
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteTodo } from '../actions';
+
+const TaskList = () => {
+  const tasks = useSelector((state) => state.tasks);
+  const dispatch = useDispatch();
+
+  const handleDelete = (id) => {
+    dispatch(deleteTodo(id));
+  };
+
+  return (
+    <div className="tasklist">
+      <div className="display-tasks">
+        <h3>Your tasks:</h3>
+        <ul className="tasks">
+          {tasks.map((task) => (
+            <li className="task" key={task.id}>
+              {task.text}
+              <button
+                className="delete-btn"
+                onClick={() => handleDelete(task.id)}
+              >
+                delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export default TaskList;
+
+
+
+
+
+
+
+//App.jsx
+
+import Task from "./components/Task";
+import TaskList from "./components/TaskList";
+
+function App() {
+  return (
+    <div className="App">
+      <Task />
+      <TaskList />
+    </div>
+  );
+}
+
+export default App;
+
+
+// https://www.freecodecamp.org/news/redux-and-redux-toolkit-for-beginners/
+
+
+
+------x-------
+
+
+-------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------
+
+
+--> Redux Example <---
+
+
+//redux/BookTypes.js
+
+export const buy_boo = 'boy_book'
+
+
+//redux/BookAction.js
+
+import {buy_book} from './BookTypes'
+const purchage_book = ()=>{
+   return {
+       type: buyBook
+   }
+} 
+
+
+//Redux/BookReducer.js
+
+import {buy_book} from './BookTypes'
+
+const initialState ={
+   NumberOfBooks = 20
+}
+
+
+const BookReducer = (state=intialState, action)=>{
+
+  switch(action.type){
+     case buy_book: return(
+       ...state, NumberOfBooks :state.intialState -1
+     ) 
+     default: return state   
+  }
+}
+
+export default BookReducer;
+
+
+
+//Redux/store.js
+
+import {createStore} from 'redux'
+import {BookReducer} from './BookReducer';
+
+const store = createStore(BookReducer)
+
+export default store;
+
+
+
+
+
+
+
+//Video: https://youtu.be/h3bwORvqwoE?list=PLp18NAIKHWnuq1ODXRD-3ivVJ3R89A5UL&t=227
+
+//redux/BookContainer.js
+
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import purchage_book from './BookAction'
+
+function BookContainer() {
+  
+  useSelector(state => state.NumberOfBooks)
+  const dispatch = useDispatch()
+
+  return {
+   <>
+    <div>BookContainer</div>
+    <h2>No of Books - {noOfBooks} </h2>
+  
+    <button onClick={()=>(dispatch(purcharge_book))}>Buy Book</button>
+   </>
+  }
+}
+
+export default BookContainer
+
+
+//App.js
+
+import {Provider} from 'react-redux'
+import {store} form './redux/sote'
+import BookContainer from ./redux/BookContainer'
+
+
+return (
+  <Provider store={store}>
+     <BookContainer />
+ 
+  </Provider>
+)
+
+
+
+----x----
+
+-------------------------------------------------------------
