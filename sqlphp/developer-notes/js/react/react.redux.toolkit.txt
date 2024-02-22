@@ -8,7 +8,25 @@ Keys:
 ---------------------------------------------------------------------------
 //Vide: React Redux Toolkit
 https://youtu.be/fxT54eRIsc4?t=796
+
+//Video React Redux By Harry
+https://youtu.be/jGCW8ZUrcqE?t=155
+https://youtu.be/-uqTWF0GfxA?t=509
+https://youtu.be/TQGmTwrp_60?t=7
+
+//React Redux from Scratch By Piyush Garg
+https://youtu.be/dOkkHHuFxjM?t=956
+Video: https://youtu.be/dOkkHHuFxjM?t=1308    //For Production(Redux Toolkit)
+
+
 ---------------------------------------------------------------------------
+
+
+//Website: React Redux Toolkit, Create Store: configureStore, Slices, 
+https://redux.js.org/api/combinereducers
+
+//Why Redux Toolkit is How To Use Redux Today
+https://redux-toolkit.js.org/introduction/why-rtk-is-redux-today
 
 //Website: React Redux Toolkit, Create Store
 https://redux-toolkit.js.org/usage/usage-with-typescript#getting-the-dispatch-type
@@ -839,7 +857,7 @@ export default BookContainer
 
 
 //App.js
-
+ 
 import {Provider} from 'react-redux'
 import {store} form './redux/sote'
 import BookContainer from ./redux/BookContainer'
@@ -857,3 +875,303 @@ return (
 ----x----
 
 -------------------------------------------------------------
+
+
+---> React Redux by Harry <---
+
+//Video: https://youtu.be/jGCW8ZUrcqE?t=509
+//
+//https://youtu.be/TQGmTwrp_60?t=7
+
+
+src/state/
+src/state/action-creator
+src/state/reducers
+
+src/state/action-creator/index.js
+
+export const depositeMoney = (amount)=>{
+    return (dispatch) =>{
+      dispatch({
+      	type: 'deposit',
+      	payload: amount
+    })
+}
+
+export cont widthrawMoney = (amout) =>{
+   return (dispatch)=>{
+     dispatch({
+        type: 'widthraw'
+         payload: amount
+     })
+
+   }
+}
+
+
+
+//src/state/reducers/amountReducer.js
+
+export default reducer = (state=0, action) => {
+   if(action.type==='deposit'){
+        return state + action.payload
+   }
+   else if(action.type==='withdraw'){
+       return state - action.payload
+   }
+   else{
+     return state;
+   }
+}
+
+
+
+//Video: https://youtu.be/-uqTWF0GfxA?t=45
+
+
+src/state/reducers/index.js
+
+import { combinedReducers } from "redux";
+import amountReducer from "./amountReducer";
+
+const reducers = combinedReducers({
+   amount: amountReducer
+})
+
+export default reducers
+
+//src/state/index.js
+
+export * as actionCreators from "./action-creator/index"
+
+
+//src/state/store.js
+import { createStore } from "redux"
+import thunk from "redux-thunk";
+
+import reducers from "./reducers";
+
+export const store = createStore(reducers, {}, applyMiddleware(thunk))
+
+
+
+
+//App.js
+
+import { Provider } from 'react-redux'
+import { store } from './state/store'
+
+<React.StrctMode>
+  <Provider store={store}>
+    <App />
+  </Provider>
+</React.StateMode>
+
+
+
+
+
+//In Any Component
+
+import { useSelector } from 'react-redux'
+
+const Navbar = () => {
+
+   const amount = useSelector(state => state.amount)
+
+
+
+   //any where
+
+    { amount }
+
+
+
+}
+
+
+
+
+//src/Shop.js
+//Video: https://youtu.be/UX6Kf48qCvs?t=76
+
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { actionCreators } from './state/index'
+
+
+const Shop = () => {
+   const dispatch = useDispatch();
+   //const actions = bindActionCreators,dispatch);                          
+   const { withdrawMoney, depositMondy} = bindActionCreators,dispatch);     //OR
+
+
+   return (
+      <div>
+         <h2>Deposite/Withdraw Mondy</h2>
+         {/*<button className='btn btn-primary mx-2 onClick={()=>{dispatch(actionCreators.withdrawMoney(100))}}> + </button>             
+            Update Balance
+
+        <button className='btn btn-primary mx-2 onClick={()=>{dispatch(actionCreators.dipositeMoney(100))}}> + </button>*/}           
+    
+        <button className="btn btn-primary mx-2" onClick={()=>{withdrawMoney(100)}}>-</button>
+            Update Balance
+        <button className="btn btn-primary mx-2" onClick={()=>{depositMoney(100)}}>+</button>            
+
+       </div>
+   )
+
+}
+
+export default Shop
+  
+//video: import React from 'react'
+
+
+----------------------------------------------------------------------------------------
+
+
+
+---> React Redux By Piyush Garg <-------
+
+//Simple React Store Not for Production
+//Video: Video: https://youtu.be/dOkkHHuFxjM?t=1308
+
+
+src/components/Count.jsx
+
+
+src/redux
+src/redux/store.js
+App.js
+
+
+//src/redux/store.js
+
+import { createStore } form "redux";
+
+const reducers = (state = 0, action) => {
+    switch(action.type){
+       case "INCREMENT":
+         return state + 1;
+ 
+       case "DECREMENT":
+         return state - 1; 
+       default:
+         return state:
+    }
+};
+
+export const store = createStore(reducer);
+
+
+
+//src/components/Count.jsx
+
+import React from "react";
+import { useSelctor } from "react-redux";
+
+const Counter = () => {
+  const count = useSelector((state) => state);
+
+  return (
+     <div>
+        <h2>{count}</h2>
+     </div>
+  );
+};
+
+export default Counter;
+
+
+-----x------
+
+
+----------------------------------------------------------------
+
+
+---> React Redux By Piyush Garg <-------
+
+//Simple React Store for Production
+//Video: Video: https://youtu.be/dOkkHHuFxjM?t=1308
+
+npm install react-redux @reduxjs/toolkit
+
+
+//src/redux/store.js
+//src/redux/slices
+
+
+
+//src/redux/store.js
+
+import { configureStore } from "@reduxjs/toolkit";
+import cartReducer form "./slices/cartSlice";
+
+
+export const store = configureStore({
+    reducer: {
+       cart: cartReducer,
+    },
+});
+
+
+
+//src/redux/slices/cartSlice.js
+
+import {createSlice} from "@reduxjs/toolkit";
+
+const cartSlice = createSlice({
+    name: "Cart",
+    initialState: [],
+    reducers: {
+       addItem: (state, action) => {
+          state = [...state, action.payload];
+       },
+    },
+});
+export const {addItem} = cartSlice.actions;
+export default cartSlice.reducer;
+
+
+
+//App.js
+
+import {Provider} from 'react-redux';
+import {store} from "./redux/store";
+
+<Provider store={store}>
+  <App />
+</Provider>
+
+
+
+//src/components/Cart.jsx
+
+import React from "react";
+impot {useSelector} from 'react-redux'
+
+const Cart = () => {
+   const items = useSelector(state => state);
+  
+ return (
+  <div className="alert alert-success">
+   console.log("Items", items);
+    <h3 className="text-center">Total Item: 5(Rs. 3,000)/-</h3>
+  </div>
+
+ );  
+
+};
+
+export default Cart:
+
+
+
+
+
+
+
+------x-------
+
