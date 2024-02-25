@@ -1,0 +1,77 @@
+>>>> Docker: Creating Images <<<<<<<
+
+
+
+
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Keys: Create PHP Image, Creating PHP Apache8.0 Image,  
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+
+
+>>> Create PHP Image <<<<
+
+Docker file 
+
+Dockerfile
+
+FROM php
+COPY ./index.php ./
+EXPOSE 3000
+CMD ["php", "-S", "0.0.0.0:3000"]
+
+docker run --name=php -p=3000:3000 w3cluudhub/phps
+
+-----x-------
+
+
+ >>>>> Creating PHP Apache8.0 Image <<<<
+
+FROM php:8.0-apache
+WORKDIR /var/www/html
+RUN apt-get update -y && apt-get -y libmariadb-dev
+RUN docker-php-ext-install mysqli
+
+
+----x-----
+
+
+---------------------------------------------------------
+
+step - Create a new directory 
+    mkdir myapp
+Step - Create a file called "index.html"
+    echo "Hello, world!" > index.html
+Step Create a file named Dockerfile 
+     touch Dockerfile
+Step Open the "Dockerfile" file in a text editor and add the following lines:
+     FROM nginx
+     COPY index.html /usr/shared/nginx/html
+
+
+Step - Start docker & Build docker image from dockerfile
+       docker build -t myapp
+
+Step - Run docker container from the image
+       docker run -p 8080:80 myapp
+
+Step - Access the app 
+
+
+
+
+-----x-----
+
+-----------------------------------------------------------------
+
+
+
+
+
+
