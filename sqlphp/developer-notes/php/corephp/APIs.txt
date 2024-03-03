@@ -3,7 +3,8 @@
 
 --------------------------------------------------------
 --------------------------------------------------------
-Keys: APIs, API with Curl, 
+Keys: APIs, API with Curl, Core PHP Testing Api Using PDO MySql,
+
 
 --------------------------------------------------------
 --------------------------------------------------------
@@ -144,23 +145,100 @@ if(isset($result['status'])){
 ?>
 
 
-
-
 -----x------
 
 
+--------------------------------------------------------
 
 
 
+>>>> Core PHP Testing Api Using PDO MySql <<<<
+
+db.php
+
+<?php
+
+$host = 'localhost';
+$dbname = 'phpapi';
+$username = 'root';
+$password = '';
+
+try {
+
+ 	$pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+
+ 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+} catch (PDOException $e) {
+
+ 	die("Database connection failed: " . $e->getMessage());
+}
+
+?>
 
 
 
+//index.php
+
+<?php
+header('Content-Type:application/json');
+
+$method = $_SERVER['REQUEST_METHOD'];
+
+include 'db.php';
+
+switch ($method) {
+  //Read Operation
+  case 'GET':
+    $sql = 'SELECT *FROM users';
+    $stmt = $pdo->query($sql);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
+
+  //Create Operation
+  case 'POST':
+    $data = json_decode(file_get_contents('php://input'),true);
+      $name = $data['name'];
+      $age = $data['age'];
+      $stmt = $pdo->prepare('INSERT INTO users(name,age) values(?,?)');
+      $stmt->execute([$name,$age]);
+      echo json_encode(['message'=>'User succesfully inserted']);
+    break;
+
+   //Update Operation
+   case 'PUT':
+    parse_str(file_get_contents('php://input'), $data);
+    $id = $data['id'];
+    $name = $data['name'];
+    $age = $data['age'];
+
+    $stmt = $pdo->prepare('UPDATE users set name=?, age=? where id=?');
+    $stmt->execute([$name, $age, $id]);
+    echo json_encode(['message' => 'User succesfully updated']);
+   break;
+
+   //Delete Operation
+   case 'DELETE':
+      //$data = json_decode(file_get_contents('php://input'), $data);
+      //parse_str(file_get_contents('php://input'), $data);
+
+      $id = $_GET['id'];
+     
+      //$id = $data['id'];
+      $stmt = $pdo->prepare('DELETE FROM users where id=?');
+      $delUser = $stmt->execute([$id]);    
+      echo json_encode(['message'=>'User Deleted succesfully']);      
+   break;
+
+  default:
+    echo json_encode(['error'=>'Method not allowed']);
+    break;
+}
 
 
+?>
 
-
-
-
-
+-----x-----
 
 --------------------------------------------------------
