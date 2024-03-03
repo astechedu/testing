@@ -1,0 +1,1250 @@
+>>>> Node Express Auth <<<<<
+
+
+-------------------------------------------------------------------------------------------
+Keys: 
+-------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------
+
+//Node Express Auth:
+https://www.loginradius.com/blog/engineering/guest-post/nodejs-authentication-guide/
+
+-------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------
+
+
+ -> Node Express Auth:
+
+//Set Up a Mongo Database
+npm init
+npm install mongoose
+
+//db.js
+const Mongoose = require("mongoose")
+
+
+// db.js
+const Mongoose = require("mongoose")
+const localDB = `mongodb://localhost:27017/role_auth`
+const connectDB = async () => {
+  await Mongoose.connect(localDB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  console.log("MongoDB Connected")
+}
+module.exports = connectDB
+
+
+//Set Up the Server
+  npm i express nodemon
+
+
+//server.js
+const express = require("express")
+const app = express()
+const PORT = 5000
+app.listen(PORT, () => console.log(`Server Connected to port ${PORT}`))
+
+
+//package.json
+"scripts": {
+  "start": "node server.js",
+  "dev": "nodemon server.js"
+}
+
+
+
+//Connect to the Database
+
+server.js
+
+const connectDB = require("./db");
+...
+//Connecting the Database
+connectDB();
+
+
+const server = app.listen(PORT, () =>
+  console.log(`Server Connected to port ${PORT}`)
+)
+// Handling Error
+process.on("unhandledRejection", err => {
+  console.log(`An error occurred: ${err.message}`)
+  server.close(() => process.exit(1))
+})
+
+
+//Create User Schema
+
+User.js
+
+
+// user.js
+const Mongoose = require("mongoose")
+const UserSchema = new Mongoose.Schema({
+  username: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  password: {
+    type: String,
+    minlength: 6,
+    required: true,
+  },
+  role: {
+    type: String,
+    default: "Basic",
+    required: true,
+  },
+})
+
+
+
+const User = Mongoose.model("user", UserSchema)
+module.exports = User
+
+
+
+//Perform CRUD Operations
+
+You'll create functions that handle:
+
+    adding users;
+    getting all users;
+    updating the role of users; and,
+    deleting users.
+
+
+
+//Register Function
+
+Auth.js
+
+const User = require("../model/User")
+
+
+ server.js
+
+const app = express()
+app.use(express.json())
+
+
+ Auth.js
+
+
+// auth.js
+exports.register = async (req, res, next) => {
+  const { username, password } = req.body
+  if (password.length < 6) {
+    return res.status(400).json({ message: "Password less than 6 characters" })
+  }
+  try {
+    await User.create({
+      username,
+      password,
+    }).then(user =>
+      res.status(200).json({
+        message: "User successfully created",
+        user,
+      })
+    )
+  } catch (err) {
+    res.status(401).json({
+      message: "User not successful created",
+      error: error.mesage,
+    })
+  }
+}
+
+
+//Set Up Register Route
+
+const express = require("express")
+const router = express.Router()
+const { register } = require("./auth")
+router.route("/register").post(register)
+module.exports = router
+
+
+route.js
+
+app.use("/api/auth", require("./Auth/route"))
+
+
+
+//Test the Register Route
+body -> row
+
+POST: http://localhost:5000/api/auth/register
+
+
+//Login Function
+Auth.js 
+
+// auth.js
+
+exports.login = async (req, res, next) => {
+  const { username, password } = req.body
+  // Check if username and password is provided
+  if (!username || !password) {
+    return res.status(400).json({
+      message: "Username or Password not present",
+    })
+  }
+}
+
+
+
+exports.login = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ username, password })
+    if (!user) {
+      res.status(401).json({
+        message: "Login not successful",
+        error: "User not found",
+      })
+    } else {
+      res.status(200).json({
+        message: "Login successful",
+        user,
+      })
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: "An error occurred",
+      error: error.message,
+    })
+  }
+}
+
+
+
+//Set Up Login Route
+
+const express = require("express");
+const router = express.Router();
+const { register, login } = require("./auth");
+...
+router.route("/login").post(login);
+module.exports = router;
+
+
+//Test the Login Route
+body -> raw
+POST:
+http://localhost:5000/api/auth/login
+
+
+//Update Function
+
+auth.js
+
+//auth.js
+exports.update = async (req, res, next) => {
+  const { role, id } = req.body
+  // Verifying if role and id is presnt
+  if (role && id) {
+    // Verifying if the value of role is admin
+    if (role === "admin") {
+      await User.findById(id)
+    } else {
+      res.status(400).json({
+        message: "Role is not admin",
+      })
+    }
+  } else {
+    res.status(400).json({ message: "Role or Id not present" })
+  }
+}
+
+
+
+
+
+exports.update = async (req, res, next) => {
+  const { role, id } = req.body;
+  // First - Verifying if role and id is presnt
+  if (role && id) {
+    // Second - Verifying if the value of role is admin
+    if (role === "admin") {
+      // Finds the user with the id
+      await User.findById(id)
+        .then((user) => {
+          // Third - Verifies the user is not an admin
+          if (user.role !== "admin") {
+            user.role = role;
+            user.save((err) => {
+              //Monogodb error checker
+              if (err) {
+                res
+                  .status("400")
+                  .json({ message: "An error occurred", error: err.message });
+                process.exit(1);
+              }
+              res.status("201").json({ message: "Update successful", user });
+            });
+          } else {
+            res.status(400).json({ message: "User is already an Admin" });
+          }
+        })
+        .catch((error) => {
+          res
+            .status(400)
+            .json({ message: "An error occurred", error: error.message });
+        });
+
+       ...
+
+
+
+
+//Set Up Update Route
+
+ route.js
+
+const { register, login, update } = require("./auth");
+...
+router.route("/update").put(update);
+
+
+//Testing the Update Route
+  body -> raw
+PUT:
+
+ http://localhost:5000/api/auth/update
+
+
+
+//Delete Function
+
+auth.js
+
+exports.deleteUser = async (req, res, next) => {
+  const { id } = req.body
+  await User.findById(id)
+    .then(user => user.remove())
+    .then(user =>
+      res.status(201).json({ message: "User successfully deleted", user })
+    )
+    .catch(error =>
+      res
+        .status(400)
+        .json({ message: "An error occurred", error: error.message })
+    )
+}
+
+
+
+//Set up the deleteUser Route
+
+ route.js
+
+
+const { register, login, update, deleteUser } = require("./auth");
+...
+router.route("/deleteUser").delete(deleteUser);
+
+
+//Test the deleteUser Route
+body -> raw
+
+DELETE: 
+http://localhost:5000/api/auth/deleteUser
+
+
+
+//Hash User Passwords
+
+npm i bcryptjs
+const bcrypt = require("bcryptjs")
+
+
+//Refactor Register Function
+
+
+exports.register = async (req, res, next) => {
+  const { username, password } = req.body;
+
+  ...
+
+  bcrypt.hash(password, 10).then(async (hash) => {
+    await User.create({
+      username,
+      password: hash,
+    })
+      .then((user) =>
+        res.status(200).json({
+          message: "User successfully created",
+           user,
+        })
+      )
+      .catch((error) =>
+        res.status(400).json({
+          message: "User not successful created",
+          error: error.message,
+        })
+      );
+  });
+};
+
+
+
+//Test the Register Function
+body->raw
+
+POST: 
+http://localhost:5000/api/auth/register
+
+
+//Refactor the Login Function
+
+
+exports.login = async (req, res, next) => {
+  const { username, password } = req.body
+  // Check if username and password is provided
+  if (!username || !password) {
+    return res.status(400).json({
+      message: "Username or Password not present",
+    })
+  }
+  try {
+    const user = await User.findOne({ username })
+    if (!user) {
+      res.status(400).json({
+        message: "Login not successful",
+        error: "User not found",
+      })
+    } else {
+      // comparing given password with hashed password
+      bcrypt.compare(password, user.password).then(function (result) {
+        result
+          ? res.status(200).json({
+              message: "Login successful",
+              user,
+            })
+          : res.status(400).json({ message: "Login not succesful" })
+      })
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: "An error occurred",
+      error: error.message,
+    })
+  }
+}
+
+
+
+
+//Test the Login Function
+body -> raw
+POSt:
+http://localhost:5000/api/auth/login 
+
+
+
+
+//Authenticate Users with JSON Web Token (JWT)
+
+npm i jsonwebtoken
+
+
+
+//Refactor the Register Function
+
+node
+require("crypto").randomBytes(35).toString("hex")
+
+
+
+const jwtSecret =
+  "4715aed3c946f7b0a38e6b534a9583628d84e96d10fbc04700770d572af3dce43625dd"
+
+
+
+
+Once you've created your jwtSecret, import jsonwebtoken as the token in the register function:
+
+...
+const jwt = require('jsonwebtoken')
+const jwtSecret = '4715aed3c946f7b0a38e6b534a9583628d84e96d10fbc04700770d572af3dce43625dd'
+exports.register = async (req, res, next) => {
+  const { username, password } = req.body;
+
+  ...
+
+  bcrypt.hash(password, 10).then(async (hash) => {
+    await User.create({
+      username,
+      password: hash,
+    })
+      .then((user) => {
+        const maxAge = 3 * 60 * 60;
+        const token = jwt.sign(
+          { id: user._id, username, role: user.role },
+          jwtSecret,
+          {
+            expiresIn: maxAge, // 3hrs in sec
+          }
+        );
+        res.cookie("jwt", token, {
+          httpOnly: true,
+          maxAge: maxAge * 1000, // 3hrs in ms
+        });
+        res.status(201).json({
+          message: "User successfully created",
+          user: user._id,
+        });
+      })
+      .catch((error) =>
+        res.status(400).json({
+          message: "User not successful created",
+          error: error.message,
+        })
+      );
+  });
+};
+
+
+
+
+//Refactor the Login Function
+
+
+
+exports.login = async (req, res, next) => {
+
+    ...
+
+      bcrypt.compare(password, user.password).then(function (result) {
+        if (result) {
+          const maxAge = 3 * 60 * 60;
+          const token = jwt.sign(
+            { id: user._id, username, role: user.role },
+            jwtSecret,
+            {
+              expiresIn: maxAge, // 3hrs in sec
+            }
+          );
+          res.cookie("jwt", token, {
+            httpOnly: true,
+            maxAge: maxAge * 1000, // 3hrs in ms
+          });
+          res.status(201).json({
+            message: "User successfully Logged in",
+            user: user._id,
+          });
+        } else {
+          res.status(400).json({ message: "Login not succesful" });
+        }
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: "An error occurred",
+      error: error.message,
+    });
+  }
+};
+
+
+
+//Protect the Routes
+
+npm i cookie-parser
+
+server.js
+
+const cookieParser = require("cookie-parser");
+...
+app.use(cookieParser());
+
+
+
+//Admin Authentication
+
+auth.js
+
+const jwt = require("jsonwebtoken")
+const jwtSecret =
+  "4715aed3c946f7b0a38e6b534a9583628d84e96d10fbc04700770d572af3dce43625dd"
+
+exports.adminAuth = (req, res, next) => {
+  const token = req.cookies.jwt
+  if (token) {
+    jwt.verify(token, jwtSecret, (err, decodedToken) => {
+      if (err) {
+        return res.status(401).json({ message: "Not authorized" })
+      } else {
+        if (decodedToken.role !== "admin") {
+          return res.status(401).json({ message: "Not authorized" })
+        } else {
+          next()
+        }
+      }
+    })
+  } else {
+    return res
+      .status(401)
+      .json({ message: "Not authorized, token not available" })
+  }
+}
+
+
+//Basic User Authentication
+
+auth.js
+
+exports.userAuth = (req, res, next) => {
+  const token = req.cookies.jwt
+  if (token) {
+    jwt.verify(token, jwtSecret, (err, decodedToken) => {
+      if (err) {
+        return res.status(401).json({ message: "Not authorized" })
+      } else {
+        if (decodedToken.role !== "Basic") {
+          return res.status(401).json({ message: "Not authorized" })
+        } else {
+          next()
+        }
+      }
+    })
+  } else {
+    return res
+      .status(401)
+      .json({ message: "Not authorized, token not available" })
+  }
+}
+
+
+
+//Protect the Routes
+
+server.js 
+
+const { adminAuth, userAuth } = require("./middleware/auth.js");
+...
+app.get("/admin", adminAuth, (req, res) => res.send("Admin Route"));
+app.get("/basic", userAuth, (req, res) => res.send("User Route"));
+
+
+
+route.js
+
+const { adminAuth } = require("../middleware/auth")
+router.route("/update").put(adminAuth, update)
+router.route("/deleteUser").delete(adminAuth, deleteUser)
+
+
+//Populate the Database with Admin User
+
+mongo
+use role_auth
+
+const password = require("bcryptjs").hash("admin", 10)
+password
+
+
+db.users.insert({
+  username: "admin",
+  password: "$2a$10$mZwU9AbYSyX7E1A6fu/ZO.BDhmCOIK7k6jXvKcuJm93PyYuH2eZ3K",
+  role: "admin",
+})
+
+
+//run db.users.find().pretty()
+
+
+//Create the Login Form Using EJS
+
+ npm i ejs
+ app.set("view engine", "ejs")
+
+
+//Render Embedded JavaScript
+
+app.get("/", (req, res) => res.render("home"))
+app.get("/register", (req, res) => res.render("register"))
+app.get("/login", (req, res) => res.render("login"))
+app.get("/admin", adminAuth, (req, res) => res.render("admin"))
+app.get("/basic", userAuth, (req, res) => res.render("user"))
+
+
+//Create EJS Files
+
+//Create a Home Page
+home.ejs
+
+ /login and /register
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home page</title>
+  </head>
+  <body>
+    <h1>Home Page</h1>
+    <a href="/register"> Register</a> <br />
+    <a href="/login">Login</a>
+  </body>
+</html>
+
+
+
+//Create a Registration Form
+
+register.ejs
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register Page</title>
+  </head>
+  <body>
+    <h1>Register Page</h1>
+    <form>
+      <div class="error" style="background-color: red;"></div>
+      <br />
+      <label for="username">Username</label><br />
+      <input type="text" id="username" required /><br />
+      <label for="password">Password</label><br />
+      <input type="password" id="password" required /><br />
+      <input type="submit" value="register" /><br />
+    </form>
+    <a href="/login">Already registered? Login</a>
+  </body>
+</html>
+
+
+
+
+//Add POST Request Functionality
+
+...
+<script>
+  const form = document.querySelector('form')
+  const username = document.querySelector('#username')
+  const password = document.querySelector('#password')
+  const display = document.querySelector('.error')
+  form.addEventListener('submit', async (e) => {
+     e.preventDefault()
+     display.textContent = ''
+     try {
+       const res = await fetch('/api/auth/register', {
+       method: 'POST',
+        body: JSON.stringify({ username: username.value, password: password.value }),
+       headers: { 'Content-Type': 'application/json' }
+       })
+       const data = await res.json()
+       if(res.status === 400 || res.status === 401){
+        return display.textContent = `${data.message}. ${data.error ? data.error : ''}`
+       }
+       data.role === "admin" ? location.assign('/admin') : location.assign('/basic')
+        } catch (err) {
+          console.log(err.message)
+        }
+      })
+</script>
+</body>
+</html>
+
+
+
+
+///api/auth/register.
+
+
+
+
+//Create a Login Form
+
+login.ej
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+  </head>
+  <body>
+    <h1>Login Page</h1>
+    <form>
+      <div class="error" style="background-color: red;"></div>
+      <br />
+      <label for="username">Username</label><br />
+      <input type="text" id="username" required /><br />
+      <label for="password">Password</label><br />
+      <input type="password" id="password" required /><br />
+      <input type="submit" value="login" /><br />
+    </form>
+    <a href="/register">Don't have an accout? Register</a>
+  </body>
+</html>
+
+
+
+//Add POST Request Functionality
+
+
+  <script>
+      const form = document.querySelector('form')
+      const username = document.querySelector('#username')
+      const password = document.querySelector('#password')
+      const display = document.querySelector('.error')
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        display.textContent = ''
+        try {
+          const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            body: JSON.stringify({ username: username.value, password: password.value }),
+            headers: { 'Content-Type': 'application/json' }
+            })
+          const data = await res.json()
+          if (res.status === 400 || res.status === 401) {
+            return display.textContent = `${data.message}. ${data.error ? data.error : ''}`
+          }
+          data.role === "admin" ? location.assign('/admin') : location.assign('/basic')
+        } catch (err) {
+            console.log(err.message)
+          }
+
+        })
+      </script>
+    </body>
+    </html>
+
+
+//Add Registered Users to the Route
+
+
+auth.js
+
+exports.getUsers = async (req, res, next) => {
+  await User.find({})
+    .then(users => {
+      const userFunction = users.map(user => {
+        const container = {}
+        container.username = user.username
+        container.role = user.role
+        return container
+      })
+      res.status(200).json({ user: userFunction })
+    })
+    .catch(err =>
+      res.status(401).json({ message: "Not successful", error: err.message })
+    )
+}
+
+
+
+
+//Display Registered User in user Route
+
+user.ejs
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User page</title>
+  </head>
+  <body>
+    <h1>Users</h1>
+    <ul></ul>
+    <script>
+      const ul = document.querySelector("ul")
+      const getUsers = async () => {
+        const res = await fetch("/api/auth/getUsers")
+        const data = await res.json()
+        data.user.map(mappedUser => {
+          if (mappedUser.username !== "admin") {
+            let li = `<li> <b>Username</b> => ${mappedUser.username} <br> <b>Role</b> => ${mappedUser.role} </li>`
+            ul.innerHTML += li
+          } else {
+            return null
+          }
+        })
+      }
+      getUsers()
+    </script>
+  </body>
+</html>
+
+
+
+
+//Add Update and Delete Function to the Admin Route
+
+admin.ejs:
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin page</title>
+  </head>
+  <body>
+    <div class="display" style="background-color: red;"></div>
+    <h1>Users</h1>
+    <ul></ul>
+    <script>
+      const ul = document.querySelector("ul")
+      const display = document.querySelector(".display")
+      const getUsers = async () => {
+        const res = await fetch("/api/auth/getUsers")
+        const data = await res.json()
+        data.user.map(mappedUser => {
+          if (mappedUser.username !== "admin") {
+            let li = `<li> <b>Username</b> => ${mappedUser.username} <br> <b>Role</b> => ${mappedUser.role} </li> <button class="edit">Edit Role</button> <button class="delete">Delete User</button>`
+            ul.innerHTML += li
+          } else {
+            return null
+          }
+          const editRole = document.querySelectorAll(".edit")
+          const deleteUser = document.querySelector(".delete")
+        })
+      }
+      getUsers()
+    </script>
+  </body>
+</html>
+
+
+//Edit a User's Role
+
+/api/auth/update
+
+
+<script>
+
+    ...
+
+    const editRole = document.querySelectorAll('.edit')
+    const deleteUser = document.querySelector('.delete')
+  editRole.forEach((button, i) => {
+    button.addEventListener('click', async() => {
+      display.textContent= ''
+      const id = data.user[i+1].id
+      const res = await fetch('/api/auth/update', {
+      method: 'PUT',
+      body: JSON.stringify({ role: 'admin', id}),
+      headers: { 'Content-Type': 'application/json' }
+      })
+      const dataUpdate = await res.json()
+      if (res.status === 400 || res.status === 401) {
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
+        return display.textContent = `${dataUpdate.message}. ${dataUpdate.error ? dataUpdate.error : ''}`
+      }
+      location.assign('/admin')
+      })
+    });
+
+      ...
+</script>
+
+
+
+//Delete Users
+
+admin.ejs
+
+
+<script>
+
+  ...
+
+  const editRole = document.querySelectorAll('.edit')
+  const deleteUser = document.querySelector('.delete')
+  deleteUser.forEach((button, i)=> {
+   button.addEventListener('click', async ()=> {
+   display.textContent =''
+   const id = data.user[i+1].id
+   const res = await fetch('/api/auth/deleteUser', {
+     method: 'DELETE',
+     body: JSON.stringify({id}),
+     headers: {'Content-Type': 'application/json'}
+     })
+   const dataDelete = await res.json()
+   if (res.status === 401){
+     document.body.scrollTop = 0
+     document.documentElement.scrollTop = 0
+     return display.textContent = `${dataUpdate.message}. ${dataUpdate.error ? dataUpdate.error : ''}`
+   }
+   location.assign('/admin')
+    })
+  })
+
+   ...
+</script>
+
+
+
+//Logout Functionality
+server.js 
+
+
+app.get("/logout", (req, res) => {
+  res.cookie("jwt", "", { maxAge: "1" })
+  res.redirect("/")
+})
+
+
+
+...
+<ul></ul>
+<button class="logout"><a href="/logout">Log Out</a></button>
+...
+
+
+//Node.js Authentication with LoginRadius
+
+
+-----x-----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------
