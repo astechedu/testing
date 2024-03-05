@@ -1,0 +1,233 @@
+
+>>>> Laravel 10 Simple Api <<<<<
+
+
+---------------------------------------------------------------------------------------------------------
+
+key: 
+---------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------
+
+
+>>> Laravel 10 Simple api <<<<
+
+
+api.php
+
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "api" middleware group. Make something great!
+|
+*/  
+
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+  
+Route::get('/books', [BookController::class,'index']);
+Route::post('/books', [BookController::class, 'store']);
+Route::get('/book/{id}', [BookController::class, 'show']);
+Route::put('/book/{id}', [BookController::class, 'update']);
+Route::delete('/book/{id}', [BookController::class, 'destroy']);
+
+
+
+//Route::get('/book', [BookContoller::class, 'index']);
+//Route::get('/book/{id}', [BookContoller::class, 'show']);
+//Route::post('/books', [BookContoller::class, 'store']);
+//Route::put('/book/{id}', [BookContoller::class, 'update']);
+//Route::delete('/book/{id}', [BookContoller::class, 'destroy']);
+
+
+
+//BookController.php
+
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Book;
+
+class BookController extends Controller
+{
+	public function index(){
+		
+	  $books = Book::all();	  
+	  return response()->json($books);
+
+	}
+
+	public function store(Request $request){
+
+	  $book = new Book;
+	  $book->name = $request->name;
+	  $book->author = $request->author;
+	  $book->publish_date = $request->publish_date;
+	  $book->save();
+
+	  return response()->json([
+	    "message" => "Book Added",
+	  ], 201);
+
+    }
+
+	public function show($id){
+
+	  $book = Book::find($id);
+
+		if(!empty($book)){
+
+	       return response()->json($book);
+
+		}else{
+
+		   return response()->json([
+
+	         "message" => "Book not found"
+
+		   ], 404);
+		}
+	}
+
+
+
+	public function update(Request $request, $id){
+
+		if(Book::where('id',$id)->exists()){
+		   $book = Book::find($id);
+
+	       $book->name = is_null($request->name)? $book->name : $request->name;
+	       $book->author = is_null($request->author)? $book->author : $request->author;
+
+	       $book->publish_date = is_null($request->publish_date)? $book->publish_date : $request->publish_date;
+
+	       $book->save();
+
+	          return response()->json([
+	             "message" => "Book Updated."
+	          ], 404);
+
+		}else{
+
+	       return response()->json([
+	           "message" => "Book Not Found."
+	       ], 404);
+		}
+	}
+
+	public function destroy($id){
+
+		if(Book::where('id', $id)->exists()){
+           $book = Book::find($id);
+           $book->delete();
+
+	       return response()->json([
+	          "message" => "records deleted."
+	       ], 202);     
+
+		}else{
+			
+		   return response()->json([
+	         "message" => "book not found."
+		   ], 404);
+		}
+	}
+
+
+}
+
+
+//Book.php
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Book extends Model
+{
+    use HasFactory;
+
+   protected $table = 'books';
+   protected $fillable = ['name','author','publish_date'];
+
+   
+}
+
+
+//Migration  books
+
+        Schema::create('books', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('author');
+            $table->date('publish_date');            
+            $table->timestamps();
+        });
+
+
+
+//BookSeeder.php
+
+
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use App\Models\Book;
+
+class BookSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+ 		$faker = \Faker\Factory::create();
+
+	   for($i=0;$i<50;$i++){
+	     Book::create([
+	        'name' => $faker->sentence(),
+	        'author' => $faker->name(),
+	        'publish_date' => $faker->date(),
+	     ]); 	
+	    }	
+	}
+}
+
+
+//DatabaseSeeder.php
+
+        $this->call([
+            BookSeeder::class,
+        ]);
+
+
+------x------
+
+
+---------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------
