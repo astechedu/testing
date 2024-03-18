@@ -11,4 +11,9 @@ Keys:
 ------------------------------------------------------------------------
 ------------------------------------------------------------------------
 
+Pillar of oops: 
 
+Data Abstraction   (Data hide)
+Inheritance   (Reusability)
+Polymorphism  (Object to take many forms)
+Encapsulation (Data hide)
