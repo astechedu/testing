@@ -1,0 +1,194 @@
+>>> PHP OOPs Overloading <<<
+
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+Keys: PHP Oops Overloading, 
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+//1. PHP Oops Overlaoding:
+https://youtu.be/eDhvYcCl18U?t=8
+
+
+//2. PHP Oops Overlaoding:
+https://youtu.be/ynJjofem-yo?t=15
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+
+--> 1. PHP Oops Overloading
+
+
+1. Method: 
+
+
+Class Maths{
+
+   public fucntion sum($n1,$n2,$n3){
+      echo $n1+$n2+$n3;
+   }
+   public fucntion sum($n1,$n2){
+      echo $n1+$n2;
+   }
+
+
+}
+
+$maths = new Maths;
+
+$maths->sum(4,5,2);
+$maths->sum(2,3);
+
+--Not Working
+
+
+
+2. Method:
+
+Class Maths{
+
+   public fucntion sum($n1=0,$n2=0,$n3=0){
+      echo $n1+$n2+$n3;
+   }  
+
+}
+
+$maths = new Maths;
+
+$maths->sum(4,5,2);
+echo "<br/>";
+$maths->sum(2,3);
+
+
+
+3. Method:
+
+Class Maths{
+
+   public fucntion sum(){
+      $args = func_get_args();
+      print_r($args);
+   }  
+
+}
+
+$maths = new Maths;
+
+$maths->sum(4,5,2);
+echo "<br/>";
+$maths->sum(2,3);
+
+4. Method:
+
+Class Maths{
+
+   public fucntion sum(){
+      $args = func_get_args();
+      $exp ="echo (".implode("+",$args).");"
+echo $exp;
+   }  
+
+}
+
+$maths = new Maths;
+
+$maths->sum(4,5,2);
+echo "<br/>";
+$maths->sum(2,3);
+
+
+
+5. Method:
+
+Class Maths{
+
+   public fucntion sum(){
+      $args = func_get_args();
+      $exp ="echo (".implode("+",$args).");"
+      eval($exp);
+   }  
+
+}
+
+$maths = new Maths;
+
+$maths->sum(4,5,2);
+echo "<br/>";
+$maths->sum(2,3);
+
+
+
+
+
+6. Method:
+
+Class Maths{
+
+   public fucntion sum(){
+      $args = func_get_args();
+      $exp ="echo (".implode("+",$args).");"
+      eval($exp);
+   }  
+
+    //Magic Method __call()
+    public function __call($funname,$funargs){
+       //echo $funname;
+       //print_r($funargs);
+       call_user_func_array([$this,'sum'],$funargs);
+    }
+}
+
+$maths = new Maths;
+
+$maths->sum(4,5,2);
+echo "<br/>";
+$maths->sum(2,3);
+echo "<br/>";
+
+$maths->add(3,4);
+
+
+-----x------
+------------------------------------------------------------------------
+
+--> 2. PHP Oops Overloading
+
+
+class Shape{
+
+ public function __call($name,$arg){
+ 
+     if($name=="area"){
+      switch(count($arg)){
+        case 1: return 
+               3.14*$arg[0]*$arg[0];
+               
+        case 2: return
+                $arg[0]*$arg[1];                
+        
+        case default: return 
+                "Invalid Arguments Supplied"; 
+      }
+      
+     }
+ }
+
+}
+
+$circle = new Shape();
+echo "Area of circle: ".$circle->area(2);
+$rect = new Shape();
+echo "<br> Area of rectangle: ".$rect->area(2,10);
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+
