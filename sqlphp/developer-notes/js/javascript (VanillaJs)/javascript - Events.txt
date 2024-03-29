@@ -84,7 +84,7 @@ function  formSubmit(){
      }
      if(password.value == ""){
        password.style.border = "1px solid red"
-       errorUser.style.display = "block"
+       errorPass.style.display = "block"
        return false
      }
 
