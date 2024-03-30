@@ -14,8 +14,28 @@ Keys:
 
 //Form Validation with JavaScript
 
-
 <?php
+include 'connection.php';
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+   $username = $_POST['username'];
+   $password = $_POST['password'];
+
+   $sql = "select *from users where username='$username' and password='$password'";
+
+   $result = $conn->query($sql);
+   //echo "<pre>";print_r($result);
+
+   if($result->num_rows == 1){
+      //echo "<h1>User Authenticated</h1>";
+       header('location: dashboard.php');
+   }else{
+      //echo "<h1>User Not Authenticated</h1>";
+       header('location: index.php');
+
+   }
+}
 
 ?>
 
@@ -73,15 +93,17 @@ Keys:
           
            document.querySelector('.errorUser').style.display = "block"
 		   document.querySelector('#username').style.border = "1px solid red" 
+		   return false
      }
 
     if(password.value.trim().length < 1){
 
            document.querySelector('.errorPass').style.display = "block"           
-           document.querySelector('#password').style.border = "1px solid red"             
+           document.querySelector('#password').style.border = "1px solid red"     
+           return false        
     } 
 
-    return false
+    return true	
 
  }
 
@@ -91,9 +113,10 @@ Keys:
 
      if(username.value.trim().length > 0){
      		document.querySelector('#username').style.border = "1px solid blue"
-            document.querySelector('.errorUser').style.display = "none"               
-     }
-     else{
+            document.querySelector('.errorUser').style.display = "none"
+            //document.querySelector('.errorUser').innerHTML = "Username empty or less then 4 characters"               
+		     }
+		     else{
       		document.querySelector('#username').style.border = "1px solid red"
             document.querySelector('.errorUser').style.display = "block"
             return false         	
