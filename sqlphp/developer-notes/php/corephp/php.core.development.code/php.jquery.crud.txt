@@ -1,0 +1,373 @@
+>>>>> PHP Jquery CRUD <<<<
+
+
+---------------------------------------------------------------
+
+Keys: PHP JQUERY CRUD, 
+
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+
+
+
+
+>> PHP JQUERY CRUD <<
+
+
+//jqyery.php file
+
+
+<?php
+//include 'connection.php';
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>    
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4 offset-lg-4 py-5">
+
+      <h2>CRUD Example</h2>
+
+      <form id="addItemForm">
+          <input type="hidden" name="id" id="id" value="">
+      	  <!-- User Name -->
+          <div class="py-2">
+          <label for="username">Username:</label><br>
+          <input type="text" id="username" name="username" class="form-control" >          
+          </div>
+
+          <!-- Password -->
+          <div class="py-2">  
+          <label for="password">Password:</label><br>
+          <input type="password" id="password" name="password" class="form-control">          
+          </div>       
+
+          <div class="py-2">            
+          <button type="submit" class="btn btn-success form-control">Add User</button>   
+          </div>
+      </form>
+       <div id="myElement" data-token="your_token_here"></div>
+   </div>      
+
+    </div>
+
+       <div id="message"></div>
+       <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+          <!-- Container to display items -->
+          <div id="userList">
+            <table class="table table-dark">
+              <thead><th>Id</th><th>Name</th><th>Password</th><th>Action</th></thead>
+              <tbody id="user">
+               
+              </tbody>
+            </table>
+
+          </div>
+
+          </div>
+       </div>
+
+  </div>
+      
+</div>
+
+<script src="/script.js"></script>
+
+</body>
+</html> 
+
+
+<script>
+
+</script>
+
+<style> 
+    #message{diplay:none;color:green;}   
+</style>
+
+
+
+>> Jquery Code: 
+
+
+$(document).ready(function(){
+
+  var token = 'your_token_here';
+            $('<meta>').attr({
+                name: 'authorization',
+                content: 'Bearer ' + token
+            }).appendTo('head');
+
+            // Access the token value
+            var metaToken = $('meta[name=authorization]').attr('content');
+            console.log('Token:', metaToken);                          
+
+    // Function to fetch items and display them
+    async function fetchUsers() {
+
+        $.ajax({
+            url: 'fetch_users.php',
+            type: 'GET',
+            success: await function(response) {
+              var user = JSON.parse(response)
+              let txt = '';
+
+              $.each(user, function(index,value){
+                 
+                txt += '<tr><td>' + ++index + '</td>' +                     
+                           '<td username="a">' + value.username + '</td>' + 
+                           '<td>' + value.password + '</td>' +
+                            "<td><button class='deleteUser' data-id='" + value["id"] + "'>Delete</button> <button class='updateUser' data-id='" + value["id"] + "'>Update</button></td>" +       
+                           '</tr>'             
+              });
+
+              $('#user').html(txt);
+            }
+        });
+    }
+
+
+fetchUsers()
+  
+    // Add item
+    $('#addItemForm').submit(function(e) {
+        e.preventDefault();
+
+        var username = $('#username').val();
+        var password = $('#password').val();
+
+        $.ajax({
+            url: 'add_user.php',
+            type: 'POST',
+            data: { username: username, password:password },
+            //OR
+            //data: $(this).serialize(), 
+             cache: false,
+            success: function(response) {
+
+                fetchUsers()
+
+                $('#message').css('display','block')
+                $('#message').html(response)
+
+                    // Select the message element
+                    var messageElement = $('#message')
+
+                    // Set a timeout to remove the message after 2 seconds
+                    setTimeout(function() {
+                        //messageElement.remove()
+                        messageElement.css('display','none');
+                    }, 2000) // 2000 milliseconds = 2 seconds               
+            }
+        });
+    });
+
+
+    // Update user    
+    $(document).on('click', '.updateUser', function(){
+
+        var userId = $(this).attr('data-id');
+        var username = $('#username').val();
+        var password = $('#password').val();
+
+        $.ajax({
+            url: 'update_user.php',
+            type: 'POST',
+            data: {id: userId, username: username, password: password },
+            success: function(response){
+
+               fetchUsers()
+
+               $('#message').css('display','block')
+               $('#message').html(response)
+
+                // Select the message element
+                var messageElement = $('#message')
+
+                // Set a timeout to remove the message after 2 seconds
+                setTimeout(function() {
+                    //messageElement.remove();
+                    messageElement.css('display','none');
+                }, 2000) // 2000 milliseconds = 2 seconds
+            }
+        });
+    });
+
+
+    // Delete user
+    $(document).on('click', '.deleteUser', function(){
+        var userId = $(this).attr('data-id');
+
+        $.ajax({
+            url: 'delete_user.php',
+            type: 'POST',
+            data: {id: userId},
+            success: function(response){
+
+               fetchUsers()
+
+               $('#message').css('display','block')
+               $('#message').html(response)
+
+                // Select the message element
+                var messageElement = $('#message')
+
+                // Set a timeout to remove the message after 2 seconds
+                setTimeout(function() {
+                    //messageElement.remove();
+                    messageElement.css('display','none');
+                }, 2000) // 2000 milliseconds = 2 seconds
+            }
+        });
+    });
+});
+
+
+> connectio.php 
+
+<?php
+//Connection 
+$host = "localhost";
+$user = "root";
+$password = "";
+$db = "practice";
+
+$conn = new mysqli($host,$user,$password,$db);
+
+if($conn->connect_error){
+   dir("Connection Failed".$conn->connect_error);
+}
+
+
+?>
+
+
+
+> add_user.php
+
+<?php
+include 'connection.php';
+
+//Fetch Users
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+$sql = "insert into users(username,password) values('$username','$password')";
+
+$result = $conn->query($sql);
+
+
+// Check if any rows were returned
+if ($result) {
+   
+   echo "User successfully registered";
+    
+} else {
+    echo "0 results";
+}
+
+$conn->close();
+
+
+?>
+
+
+
+> update_user.php
+
+<?php
+include 'connection.php';
+
+//Update Users
+$id = $_POST['id'];
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+$sql = "update users set username = '$username', password='$password' where id='$id'";
+
+$result = $conn->query($sql);
+
+
+// Check if any rows were returned
+if ($result) {
+   
+   echo "User successfully updated";
+    
+} else {
+    echo "0 results";
+}
+
+
+$conn->close();
+
+
+
+
+> fetch_users.php
+
+<?php
+include 'connection.php';
+
+//Fetch Users
+
+$sql = "select *from users";
+
+$result = $conn->query($sql);
+
+$users = array();
+
+
+// Check if any rows were returned
+if ($result->num_rows > 0) {
+    // Fetch data and output
+    while($row = $result->fetch_assoc()) {
+     
+           $users[] = $row;
+    }
+
+    echo json_encode($users);
+    
+} else {
+    echo "0 results";
+}
+
+
+?>
+
+
+> delete_user.php
+
+
+<?php
+include 'connection.php';
+
+$id = $_POST['id'];
+
+$sql = "DELETE FROM users WHERE id='$id'";
+if ($conn->query($sql) === TRUE) {
+    echo "User deleted successfully";
+} else {
+    echo "Error deleting user: " . $conn->error;
+}
+$conn->close();
+?>
+
+
+----x----
+
+---------------------------------------------------------------
+---------------------------------------------------------------
