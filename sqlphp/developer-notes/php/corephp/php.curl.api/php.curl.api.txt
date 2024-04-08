@@ -1,0 +1,460 @@
+<<<<<  PHP cURL API's >>>>
+
+
+--------------------------------------------------------
+--------------------------------------------------------
+Keys: PHP CURL CRUD Apis, CURL Api,
+--------------------------------------------------------
+--------------------------------------------------------
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+
+----<  PHP CURL CRUD Apis  >----
+
+
+Sure, here's an example of a PHP CRUD application using cURL to interact with a RESTful API:
+
+
+<?php
+
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+$data = array("username"=>$username, "password"=>$password);
+$url ="http://localhost/add_user.php";
+
+
+//1. Function to send a GET request
+function get_data($url) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+}
+
+
+// Read
+
+$get_response = get_data($url);
+echo "GET Response: " . $get_response . "\n";
+
+
+
+//2. Function to send a POST request
+function post_data($url, $data) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+}
+
+post_data($url, $data);
+//$post_response=post_data($url, $data);
+//echo "POST Response: " . $post_response . "\n";
+
+
+//3. Function to send a PUT request
+function put_data($url, $data) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+}
+
+
+put_data($url, $data);
+//$put_response=put_data($url, $data);
+//echo "PUT Response: " . $put_response . "\n";
+
+
+//4. Function to send a DELETE request
+function delete_data($url) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+}
+
+
+// Delete
+
+$delete_response = delete_data($url);
+echo "DELETE Response: " . $delete_response . "\n";
+
+
+
+// Example usage:
+
+// Read
+$get_url = "http://your-api-url.com/data";
+$get_response = get_data($get_url);
+echo "GET Response: " . $get_response . "\n";
+
+// Create
+$post_url = "http://your-api-url.com/data";
+$post_data = array('key' => 'value');
+$post_response = post_data($post_url, $post_data);
+echo "POST Response: " . $post_response . "\n";
+
+// Update
+$put_url = "http://your-api-url.com/data/1"; // Assuming ID 1 needs to be updated
+$put_data = array('key' => 'new_value');
+$put_response = put_data($put_url, $put_data);
+echo "PUT Response: " . $put_response . "\n";
+
+// Delete
+$delete_url = "http://your-api-url.com/data/1"; // Assuming ID 1 needs to be deleted
+$delete_response = delete_data($delete_url);
+echo "DELETE Response: " . $delete_response . "\n";
+?>
+
+
+
+
+PHP Connection: 
+
+//connection.php file
+
+<?php
+//Connection 
+$host = "localhost";
+$user = "root";
+$password = "";
+$db = "practice";
+
+$conn = new mysqli($host,$user,$password,$db);
+
+if($conn->connect_error){
+   dir("Connection Failed".$conn->connect_error);
+}
+
+?>
+
+
+
+//add_user.php file
+
+<?php
+
+include 'connection.php';
+
+echo $username = $_POST['username'];
+echo $password = $_POST['password'];
+
+$sql = "insert into users(username, password) values('$username','$password')";
+
+$result = $conn->query($sql);
+
+if($result == TRUE){
+
+	echo "User successfully registered";
+
+}else{
+
+    echo "User not registered";
+}
+
+?>
+
+
+//fetch_users.php file
+
+<?php
+
+include 'connection.php';
+
+$sql = "select *from users";
+$result = $conn->query($sql);
+
+if($result->num_rows > 0){
+$users = array();
+
+	while($row = $result->fetch_assoc()){         
+         $users[] = $row;
+	}
+
+	echo json_encode($users);
+
+}else{
+
+	echo "0 results";
+
+}
+
+?>
+
+
+//delete_user.php file
+
+<?php
+
+include 'connection.php';
+
+$id = $_POST['id'];
+$sql = "delete from users where id='$id'";
+
+$result = $conn->query($sql);
+
+if($result){
+
+  echo 'User successfully deleted';
+
+}else{
+
+  echo "Error deleting user: " . $conn->error;
+
+}
+$conn->close();
+
+?>
+
+
+//update_user.php file
+
+<?php
+include 'connection.php';
+
+$id = $_POST['id'];
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+$sql = "update users set username='$username', password='$password' where id='$id'";
+
+$result = $conn->query($sql);
+
+if($result == TRUE){
+   echo "User successfully updated";
+}else{
+   echo "User not updated";
+}
+
+?>
+
+----x-----
+
+---------------------------------------------------------
+
+
+-----> CURL Api <------
+
+
+php.ini 
+       file and ensuring the 
+extension=php_curl.dll 
+       line is uncommented.
+
+
+<?php
+
+
+// Function to make GET request
+function getRequest($url) {
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+}
+
+// Function to make POST request
+function postRequest($url, $data) {
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+}
+
+// Function to make PUT request
+function putRequest($url, $data) {
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+}
+
+// Function to make DELETE request
+function deleteRequest($url) {
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+}
+
+// Example usage
+
+// GET request
+$get_response = getRequest('http://example.com/api/resource');
+
+// POST request
+$post_data = array('key1' => 'value1', 'key2' => 'value2');
+$post_response = postRequest('http://example.com/api/resource', $post_data);
+
+// PUT request
+$put_data = array('key1' => 'new_value1', 'key2' => 'new_value2');
+$put_response = putRequest('http://example.com/api/resource/1', $put_data);
+
+// DELETE request
+$delete_response = deleteRequest('http://example.com/api/resource/1');
+
+?>
+
+
+
+PHP Connection: 
+
+//connection.php file
+
+<?php
+//Connection 
+$host = "localhost";
+$user = "root";
+$password = "";
+$db = "practice";
+
+$conn = new mysqli($host,$user,$password,$db);
+
+if($conn->connect_error){
+   dir("Connection Failed".$conn->connect_error);
+}
+
+?>
+
+
+
+//add_user.php file
+
+<?php
+
+include 'connection.php';
+
+echo $username = $_POST['username'];
+echo $password = $_POST['password'];
+
+$sql = "insert into users(username, password) values('$username','$password')";
+
+$result = $conn->query($sql);
+
+if($result == TRUE){
+
+	echo "User successfully registered";
+
+}else{
+
+    echo "User not registered";
+}
+
+?>
+
+
+//fetch_users.php file
+
+<?php
+
+include 'connection.php';
+
+$sql = "select *from users";
+$result = $conn->query($sql);
+
+if($result->num_rows > 0){
+$users = array();
+
+	while($row = $result->fetch_assoc()){         
+         $users[] = $row;
+	}
+
+	echo json_encode($users);
+
+}else{
+
+	echo "0 results";
+
+}
+
+?>
+
+
+//delete_user.php file
+
+<?php
+
+include 'connection.php';
+
+$id = $_POST['id'];
+$sql = "delete from users where id='$id'";
+
+$result = $conn->query($sql);
+
+if($result){
+
+  echo 'User successfully deleted';
+
+}else{
+
+  echo "Error deleting user: " . $conn->error;
+
+}
+$conn->close();
+
+?>
+
+
+//update_user.php file
+
+<?php
+include 'connection.php';
+
+$id = $_POST['id'];
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+$sql = "update users set username='$username', password='$password' where id='$id'";
+
+$result = $conn->query($sql);
+
+if($result == TRUE){
+   echo "User successfully updated";
+}else{
+   echo "User not updated";
+}
+
+?>
+
+
+http://example.com/api/resource
+
+
+-----x-----
+
+
+
+
+
+---------------------------------------------------------
+---------------------------------------------------------
+
