@@ -1,0 +1,81 @@
+>>> JavaScript(or Vanilla) Http Request  <<<<<
+
+
+--------------------------------------------------------------
+
+Key: 
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+In JavaScript, you can make HTTP requests using various tools and libraries. Some popular ones include:
+
+1. XMLHttpRequest: This is a built-in object in web browsers that allows you to make HTTP requests from JavaScript. It has been around for a long time and provides basic functionality for making requests.
+
+    Example:
+
+    javascript
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://api.example.com/data', true);
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log(xhr.responseText);
+    }
+};
+xhr.send();
+
+
+
+2. Fetch API: This is a modern alternative to XMLHttpRequest, providing a more powerful and flexible interface for fetching resources asynchronously across the network. It's available in most modern browsers.
+
+Example:
+
+javascript
+
+fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+
+
+
+
+3. Axios: This is a popular Promise-based HTTP client for the browser and Node.js. It provides an easy-to-use API and handles common tasks like transforming request and response data.
+
+Example:
+
+javascript
+
+axios.get('https://api.example.com/data')
+    .then(response => console.log(response.data))
+    .catch(error => console.error('Error:', error));
+
+
+
+
+
+4. jQuery AJAX: If you're using jQuery, you can use its AJAX methods to make HTTP requests. However, with the advent of modern JavaScript and native APIs like Fetch, jQuery is becoming less necessary for simple AJAX requests.
+
+Example:
+
+javascript
+
+    $.ajax({
+        url: 'https://api.example.com/data',
+        method: 'GET',
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (error) {
+            console.error('Error:', error);
+        }
+    });
+
+These are just a few examples, and there are many other libraries and frameworks available for making HTTP requests in JavaScript, depending on your specific needs and preferences.
+
+
+----------------------------------------------------------------
+----------------------------------------------------------------
